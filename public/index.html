@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TisDif e-Card</title>
+    <!-- css links -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+  </head>
+  <body>
+    <!-- Nav Bar -->
+    <header>
+      <a href="index.html" class="LOGO"><img src="ui\homepage\LOGO-T.png" /></a>
+
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <nav class="navbar" id="navbar">
+        <li><a id="scrollToIphones">iPhones</a></li>
+        <li><a id="scrollToAirPods">AirPods</a></li>
+        <li><a id="scrollToGiftCards">GiftCards</a></li>
+        <li><a id="scrollToAccessories">Accessories</a></li>
+        <li><a href="">Contact</a></li>
+        <a href="login_page.html" class="LOGOlogin"
+          ><img src="ui\homepage\login-avatar.png"
+        /></a>
+      </nav>
+    </header>
+
+    <div class="slides">
+      <img src="ui/15ProMax.jpg" class="slide" id="slideOne" />
+      <img src="ui/AirPods4.jpg" class="slide" id="slideTwo" />
+      <img src="ui/apple_giftcard.jpg" class="slide" id="slideThree" />
+      <img src="ui/MagSafe.webp" class="slide" id="slideFour" />
+      <img src="ui/charger.webp" class="slide" id="slideFive" />
+    </div>
+
+    <div class="dot-container">
+      <span class="dot" onclick="one()"></span>
+      <span class="dot" onclick="two()"></span>
+      <span class="dot" onclick="three()"></span>
+      <span class="dot" onclick="four()"></span>
+      <span class="dot" onclick="five()"></span>
+    </div>
+
+    <!-- iPhones -->
+
+    <section class="categories" id="iPhones">
+      <div class="heading">
+        <h1>Browse iPhones</h1>
+      </div>
+
+      <div class="categories-container">
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/15/15.jpg" alt="iPhone 15" />
+          <a href="product.html?id=001"><h3>iPhone 15</h3></a>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/15/15Plus.jpg" alt="iPhone 15 Plus" />
+          <a href="product.html?id=002"><h3>iPhone 15 Plus</h3></a>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/14/14.jpg" alt="iPhone 15" />
+          <a href="product.html?id=003"><h3>iPhone 14</h3></a>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/14/14Plus.jpg" alt="iPhone 15 Plus" />
+          <h3>iPhone 14 Plus</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sounds -->
+
+    <section class="categories" id="AirPods">
+      <div class="heading">
+        <h1>Sound Essentials</h1>
+      </div>
+
+      <div class="categories-container">
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/AirPods_Pro_2/AirPodsPro2.jpg"
+            alt="AirPods Pro 2"
+          />
+          <h3>AirPods Pro 2</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/AirPods_4/AirPods4.jpg" alt="AirPods 4" />
+          <h3>AirPods 4</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/AirPods_Max/purple.jpg" alt="AirPods Max" />
+          <h3>AirPods Max</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/homepod/black.png" alt="HomePod" />
+          <h3>HomePod</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/homepod_mini/blue.jpg" alt="HomePod mini" />
+          <h3>HomePod mini</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- iTunes Gift Card -->
+
+    <section class="categories" id="GiftCards">
+      <div class="heading">
+        <h1>iTunes Gift Card</h1>
+      </div>
+
+      <div class="categories-container">
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/5.png" alt="iTunes $5" />
+          <h3>iTunes Gift Card 5$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/10.png" alt="iTunes $10" />
+          <h3>iTunes Gift Card 10$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/15.png" alt="iTunes $15" />
+          <h3>iTunes Gift Card 15$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/20.png" alt="iTunes $20" />
+          <h3>iTunes Gift Card 20$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/25.png" alt="iTunes $25" />
+          <h3>iTunes Gift Card 25$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/30.png" alt="iTunes $30" />
+          <h3>iTunes Gift Card 30$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/50.png" alt="iTunes $50" />
+          <h3>iTunes Gift Card 50$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/75.png" alt="iTunes $75" />
+          <h3>iTunes Gift Card 75$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card itunes">
+          <div class="save-tag">SAVE 11%</div>
+          <img src="Products/GiftCards/100.png" alt="iTunes $100" />
+          <h3>iTunes Gift Card 100$</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessories -->
+
+    <section class="categories" id="Accessories">
+      <div class="heading">
+        <h1>Browse Charger & Accessories</h1>
+      </div>
+
+      <div class="categories-container">
+        <div class="product-card">
+          <div class="save-tag">SAVE 15%</div>
+          <img
+            src="Products/accessories/20WUSB-CPowerAdapter.jpg"
+            alt="20W USB-C Power Adapter"
+          />
+          <h3>20W USB-C Power Adapter</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/30WUSB-CPowerAdapter.jpg"
+            alt="30W USB-C Power Adapter"
+          />
+          <h3>30W USB-C Power Adapter</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/35WDualUSB-CPortCompactPowerAdapter.jpg"
+            alt="35W Dual USB-C Port Compact Power Adapter"
+          />
+          <h3>35W Dual USB-C Port Compact Power Adapter</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/MagSafeCharger(1m).jpg"
+            alt="MagSafe Charger (1 m)"
+          />
+          <h3>MagSafe Charger (1 m)</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+        <div class="product-card">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/240WUSB-CChargeCable(2m).jpg"
+            alt="240W USB-C Charge Cable (2 m)"
+          />
+          <h3>240W USB-C Charge Cable (2 m)</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/USB-CtoLightningAdapter.jpg"
+            alt="USB-C to Lightning Adapter"
+          />
+          <h3>USB-C to Lightning Adapter</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/USB-CDigitalAVMultiportAdapter.jpg"
+            alt="USB-C Digital AV Multiport Adapter"
+          />
+          <h3>USB-C Digital AV Multiport Adapter</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+
+        <div class="product-card out-of-stock">
+          <div class="save-tag">SAVE 11%</div>
+          <img
+            src="Products/accessories/Thunderbolt4(USB‑C)ProCable(1m).jpg"
+            alt="Thunderbolt 4 (USB‑C) Pro Cable (1 m)"
+          />
+          <h3>Thunderbolt 4 (USB‑C) Pro Cable (1 m)</h3>
+          <div class="stock-out">Stock Out</div>
+          <p class="price">৳24999 <span class="old-price">৳28000</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+
+    <script src="./scripts/index.js"></script>
+  </body>
+</html>

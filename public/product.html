@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Nav Bar -->
+    <header>
+      <a href="index.html" class="LOGO"><img src="LOGO-T.png" /></a>
+
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <nav class="navbar" id="navbar">
+        <li><a id="scrollToIphones">iPhones</a></li>
+        <li><a id="scrollToAirPods">AirPods</a></li>
+        <li><a id="scrollToGiftCards">Gift Cards</a></li>
+        <li><a id="scrollToAccessories">Accessories</a></li>
+        <li><a href="product.html">Contact</a></li>
+        <li><a href="#">Account</a></li>
+      </nav>
+    </header>
+
+    <main>
+      <div class="product-container">
+        <div class="product-image">
+          <img id="product-image" alt="Product" />
+        </div>
+        <div class="product-details">
+          <h1 id="product-name">Loading...</h1>
+          <p class="price" id="product-price"></p>
+          <p class="regular-price" id="product-regular-price"></p>
+          <p class="warranty" id="product-warranty"></p>
+          <p class="status" id="product-status"></p>
+          <p class="booking-money" id="product-booking-money"></p>
+
+          <div class="actions">
+            <a href="#" class="btn">Add to Cart</a>
+            <a href="#" class="btn buy-now">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Fetch the product ID from the URL
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id");
+
+      if (productId) {
+        // Fetch product details from the backend
+        fetch(`/product/${productId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Product not found");
+            }
+            return response.json();
+          })
+          .then((product) => {
+            // Populate the template with product data
+            document.getElementById("product-name").textContent = product.name;
+            document.getElementById(
+              "product-price"
+            ).textContent = `৳${product.price}`;
+            document.getElementById(
+              "product-regular-price"
+            ).textContent = `Regular Price: ৳${product.regularPrice}`;
+            document.getElementById(
+              "product-warranty"
+            ).textContent = `Warranty: ${product.warranty}`;
+            document.getElementById(
+              "product-status"
+            ).textContent = `Status: ${product.status}`;
+            document.getElementById(
+              "product-booking-money"
+            ).textContent = `Booking Money: ৳${product.bookingMoney}`;
+            document.getElementById(
+              "product-image"
+            ).src = `images/${product.image}`;
+          })
+          .catch((error) => {
+            console.error("Error fetching product:", error);
+            document.body.innerHTML = "<h1>Product Not Found</h1>";
+          });
+      } else {
+        document.body.innerHTML = "<h1>Invalid Product ID</h1>";
+      }
+    </script>
+  </body>
+</html>

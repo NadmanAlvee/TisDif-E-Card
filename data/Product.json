@@ -1,0 +1,23 @@
+[
+    {
+      "id": "001",
+      "name": "iPhone 15",
+      "price": "91,999",
+      "regularPrice": "103,039",
+      "warranty": "7 Days",
+      "status": "In Stock",
+      "bookingMoney": "18,000",
+      "image": "Products/15/15.jpg"
+    },
+    {
+      "id": "002",
+      "name": "iPhone 15 Plus",
+      "price": "15,499",
+      "regularPrice": "20,000",
+      "warranty": "1 Year",
+      "status": "Out of Stock",
+      "bookingMoney": "3,000",
+      "image": "product2.jpg"
+    }
+  ]
+  
