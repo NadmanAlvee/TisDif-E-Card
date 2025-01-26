@@ -1,0 +1,130 @@
+/* General Styles */
+.product-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Product Images */
+.product-images {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+.product-images img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* Maintain consistent ratio for images */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  object-fit: cover; /* Ensure proper fit for different formats */
+}
+
+/* Image Thumbnails */
+.image-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.image-thumbnails img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  object-fit: cover; /* Fix ratio issue between webp and jpeg */
+}
+
+.image-thumbnails img:hover {
+  border-color: #007bff;
+}
+
+/* Product Info */
+.product-info {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .product-images,
+  .product-info {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+}
+
+/* Related Products */
+.related-products-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.related-product {
+  background: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  min-width: 150px;
+  flex-shrink: 0;
+  width: 200px;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.related-product img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+  .product-images,
+  .product-info {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .related-products-container {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .related-product {
+    width: 150px;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product-main {
+    flex-direction: column;
+  }
+
+  .product-images,
+  .product-info {
+    max-width: 100%;
+  }
+
+  .image-thumbnails img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .related-product {
+    width: 120px; /* Even smaller on phones */
+    aspect-ratio: 4 / 3;
+  }
+}

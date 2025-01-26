@@ -5,7 +5,6 @@ const connectDB = require('./MongooseConfig');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 const session = require('express-session');
-
 dotenv.config();
 
 const app = express();
@@ -15,8 +14,8 @@ const PORT = process.env.DEV_PORT;
 connectDB();
 
 // Middleware
-app.use(express.json()); // For parsing JSON bodies
-app.use(express.urlencoded({ extended: true })); // For parsing form data
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Session Middleware
 app.use(
@@ -40,8 +39,8 @@ app.get('/login_page', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/login_page.html'));
 });
 
-app.get('/product', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/product.html'));
+app.get('/product-details', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/product-details.html'));
 });
 
 // API Routes

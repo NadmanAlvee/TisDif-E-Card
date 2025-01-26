@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link rel="stylesheet" href="./css/products.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Product Details</h1>
+    </header>
+    <main class="product-details">
+      <!-- Product Information -->
+      <div class="product-main">
+        <div class="product-images">
+          <img id="main-image" src="/images/placeholder.png" alt="Product" />
+          <div class="image-thumbnails" id="image-thumbnails">
+            <!-- Thumbnails will be inserted here -->
+          </div>
+        </div>
+        <div class="product-info">
+          <h2 id="product-name">Product Name</h2>
+          <p id="product-description">Product Description</p>
+          <p id="product-price">Price: $0</p>
+          <p id="product-stock">Stock: 0</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Related Products -->
+      <div class="related-products">
+        <h3>Related Products</h3>
+        <div id="related-products-container" class="related-products-container">
+          <!-- Related Products will be dynamically displayed -->
+        </div>
+      </div>
+    </main>
+    <script src="./scripts/product-details.js"></script>
+  </body>
+</html>

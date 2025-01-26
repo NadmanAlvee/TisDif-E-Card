@@ -13,6 +13,30 @@ const Charger = document.getElementById("scrollToAccessories");
 const hamburger = document.getElementById("hamburger");
 const navbar = document.getElementById("navbar");
 
+async function fetchProductDetails() {
+    try {
+        const response = await fetch(`/api/products/${productId}`); // Use the `_id` from the database.
+        const product = await response.json();
+        
+        // Update the UI with fetched product details
+        productName.textContent = product.name;
+        productDescription.textContent = product.description;
+        productPrice.textContent = `Price: ৳${product.price}`;
+        productStock.textContent = `Stock: ${product.stock}`;
+        mainImage.src = product.image[0] || '/images/placeholder.png';
+
+        // Generate thumbnails
+        imageThumbnails.innerHTML = product.image
+            .map(img => `<img src="${img}" class="thumbnail" onclick="changeImage('${img}')">`)
+            .join('');
+
+        // Fetch related products based on the category
+        fetchRelatedProducts(product.category);
+    } catch (error) {
+        console.error('Error fetching product details:', error);
+    }
+}
+
 iPhone.addEventListener("click", () => {
     navbar.classList.toggle("active");
 });

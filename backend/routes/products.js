@@ -4,18 +4,11 @@ const authGuard = require('../middlewares/auth');
 const router = express.Router();
 
 // 1. Create a new product
-router.post('/', authGuard, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name, price, description, image, category, stock } = req.body;
 
-        const newProduct = new Product({
-            name,
-            price,
-            description,
-            image,
-            category,
-            stock,
-        });
+        const newProduct = new Product({...req.body});
 
         await newProduct.save();
         res.status(201).json({ message: 'Product created successfully', product: newProduct });
@@ -25,7 +18,7 @@ router.post('/', authGuard, async (req, res) => {
 });
 
 // 2. Get all products
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const products = await Product.find();
         res.status(200).json(products);
@@ -35,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 // 3. Get a single product by ID
-router.get('/:id', authGuard, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
