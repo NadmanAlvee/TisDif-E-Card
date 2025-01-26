@@ -17,10 +17,10 @@ async function fetchProductDetails() {
 
         // Update the UI with fetched product details
         productName.textContent = product.name;
-        productDescription.textContent = product.description;
+        // productDescription.textContent = product.description;
         productPrice.textContent = `Price: ৳${product.price}`;
         productStock.textContent = `Stock: ${product.stock}`;
-        mainImage.src = product.image[0] || '/images/placeholder.png';
+        mainImage.src = product.image[0] || '/images/placeholder.jpg';
 
         // Generate thumbnails
         imageThumbnails.innerHTML = product.image
@@ -33,7 +33,6 @@ async function fetchProductDetails() {
         console.error('Error fetching product details:', error);
     }
 }
-
 
 // Change main image on thumbnail click
 function changeImage(src) {

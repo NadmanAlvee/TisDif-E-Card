@@ -1,19 +1,33 @@
-/* General Styles */
+:root {
+  --text-color: #1d1d1d;
+  --background-color: #fff;
+}
+
 .product-main {
+  margin: auto;
+  position: relative;
+  margin-top: 90px;
+  margin-bottom: 0px;
+  /* box-shadow: 0 8px 11px rgb(14 55 54 / 15%); */
+  align-items: center;
+  text-align: center;
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
 }
 
 /* Product Images */
 .product-images {
+  /* box-shadow: 0 8px 11px rgb(14 55 54 / 15%); */
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 20px;
   flex: 1 1 100%;
-  max-width: 100%;
 }
 
 .product-images img {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
   aspect-ratio: 4 / 3; /* Maintain consistent ratio for images */
   border: 1px solid #ddd;
@@ -24,9 +38,12 @@
 
 /* Image Thumbnails */
 .image-thumbnails {
+  align-items: center;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  justify-content: center;
 }
 
 .image-thumbnails img {
@@ -58,6 +75,9 @@
 
 /* Related Products */
 .related-products-container {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
   display: flex;
   gap: 15px;
   overflow-x: auto;
@@ -65,26 +85,31 @@
 }
 
 .related-product {
-  background: #f9f9f9;
-  padding: 10px;
+  background-color: var(--background-color);
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
+  width: 250px;
+  padding: 15px;
   text-align: center;
-  min-width: 150px;
-  flex-shrink: 0;
-  width: 200px;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+  aspect-ratio: 4 / 3;
 }
 
+.related-products h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
 .related-product img {
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  width: 80%;
+  height: 160px;
   object-fit: cover;
-  margin-bottom: 8px;
+  object-position: center;
+  aspect-ratio: 4 / 3;
 }
 
 /* Responsive Adjustments */

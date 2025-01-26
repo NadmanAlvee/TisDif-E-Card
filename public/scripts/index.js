@@ -13,29 +13,35 @@ const Charger = document.getElementById("scrollToAccessories");
 const hamburger = document.getElementById("hamburger");
 const navbar = document.getElementById("navbar");
 
-async function fetchProductDetails() {
+async function displayProductCard() {
     try {
-        const response = await fetch(`/api/products/${productId}`); // Use the `_id` from the database.
+      const productCards = document.querySelectorAll('.product-card');  // Get all product cards
+  
+      // Iterate over each card
+      for (let card of productCards) {
+        const productId = card.getAttribute('data-id');  // Get unique ID from data-id
+        const productName = card.querySelector('.product-name');  // Get product name element
+        const productPrice = card.querySelector('.product-price');  // Get product price element
+        const mainImage = card.querySelector('.main-image');  // Get main image element
+        const Save = card.querySelector('.save-tag');
+  
+        // Fetch product data by productId (you can change the productId dynamically for each card)
+        const response = await fetch(`/api/products/${productId}`);
         const product = await response.json();
-        
-        // Update the UI with fetched product details
+  
+        // Update product details dynamically
         productName.textContent = product.name;
-        productDescription.textContent = product.description;
+        Save.textContent = `SAVE: ${product.saveTag}%`;
         productPrice.textContent = `Price: ৳${product.price}`;
-        productStock.textContent = `Stock: ${product.stock}`;
-        mainImage.src = product.image[0] || '/images/placeholder.png';
-
-        // Generate thumbnails
-        imageThumbnails.innerHTML = product.image
-            .map(img => `<img src="${img}" class="thumbnail" onclick="changeImage('${img}')">`)
-            .join('');
-
-        // Fetch related products based on the category
-        fetchRelatedProducts(product.category);
+        mainImage.src = product.image[Math.ceil(Math.random()*2)] || '/images/placeholder.jpg' // Set main image or default image
+        
+      }
     } catch (error) {
-        console.error('Error fetching product details:', error);
+      console.error('Error fetching product details:', error);
     }
-}
+}  
+displayProductCard();
+  
 
 iPhone.addEventListener("click", () => {
     navbar.classList.toggle("active");

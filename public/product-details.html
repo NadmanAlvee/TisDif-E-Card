@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details</title>
     <link rel="stylesheet" href="./css/products.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
+    <!-- Nav Bar -->
     <header>
-      <h1>Product Details</h1>
+      <a href="index.html" class="LOGO"><img src="ui\homepage\LOGO-T.png" /></a>
+
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <nav class="navbar" id="navbar">
+        <li><a id="scrollToIphones">iPhones</a></li>
+        <li><a id="scrollToAirPods">AirPods</a></li>
+        <li><a id="scrollToGiftCards">GiftCards</a></li>
+        <li><a id="scrollToAccessories">Accessories</a></li>
+        <li><a href="">Contact</a></li>
+        <a href="login_page.html" class="LOGOlogin"
+          ><img src="ui\homepage\login-avatar.png"
+        /></a>
+      </nav>
     </header>
+
     <main class="product-details">
       <!-- Product Information -->
       <div class="product-main">
@@ -19,13 +39,14 @@
             <!-- Thumbnails will be inserted here -->
           </div>
         </div>
-        <div class="product-info">
-          <h2 id="product-name">Product Name</h2>
-          <p id="product-description">Product Description</p>
-          <p id="product-price">Price: $0</p>
-          <p id="product-stock">Stock: 0</p>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
+      </div>
+
+      <div class="product-info">
+        <h2 id="product-name">Product Name</h2>
+        <p id="product-description">Product Description</p>
+        <p id="product-price">Price: $0</p>
+        <p id="product-stock">Stock: 0</p>
+        <button class="add-to-cart">Add to Cart</button>
       </div>
 
       <!-- Related Products -->
@@ -36,6 +57,7 @@
         </div>
       </div>
     </main>
+    <script src="./scripts/index.js"></script>
     <script src="./scripts/product-details.js"></script>
   </body>
 </html>
