@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TisDif e-Card</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- Nav Bar -->
+  <header>
+    <a href="/" class="LOGO"><img
+            src="/ui/homepage/LOGO-T.png" /></a>
+    <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <nav class="navbar" id="navbar">
+        <li><a id="scrollToIphones">iPhones</a></li>
+        <li><a id="scrollToAirPods">AirPods</a></li>
+        <li><a id="scrollToGiftCards">GiftCards</a></li>
+        <li><a id="scrollToAccessories">Accessories</a></li>
+        <li><a href="">Contact</a></li>
+
+        <!-- User Profile Dropdown -->
+        <div class="user-menu">
+            <% if (Object.keys(loggedInUser).length > 0) { %>
+                <a onclick="toggleMenu()"><%= loggedInUser.username %> | Logout</a>
+            <% } else { %>
+                <a onclick="toggleMenu()">Account | Login</a>
+            <% } %>
+            <div class="menu-dropdown" id="menuDropdown">
+                <% if (Object.keys(loggedInUser).length > 0) { %>
+                    <div id="user-info">
+                        <p><%= loggedInUser.username %></p>
+                        <p><%= loggedInUser.email %></p>
+                    </div>
+                    <button id="logout-button" onclick="logout()">Logout</button>
+                <% } else { %>
+                    <button id="login-button" onclick="window.location.href='/login'">Login</button>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+  </header>

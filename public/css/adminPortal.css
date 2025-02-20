@@ -1,0 +1,102 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+/* Left Section - Add Product */
+#addNewProd {
+    width: 30%;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+#addNewProd h2 {
+    margin-bottom: 20px;
+}
+
+/* Right Section - Product List */
+#ProdList {
+    margin-left: 30%; /* Leave space for the left div */
+    width: 70%;
+    height: 100vh;
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.stock-input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+}
+
+/* Save Button */
+.save-btn {
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 8px 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.save-btn:hover {
+    background: #218838;
+}
+
+/* Form */
+input[type="text"], 
+input[type="number"], 
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #2980b9;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #1f6692;
+}

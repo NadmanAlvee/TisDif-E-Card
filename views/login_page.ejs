@@ -1,0 +1,89 @@
+<%- include('./partials/headerExt.ejs') %>
+
+    <div class="wrapper">
+      <!-- Login Form -->
+      <form id="loginForm"
+            action="/login"
+            method="post"
+        >
+        <h1>Login</h1>
+
+        <div class="input-box">
+          <input type="text" name="userid" placeholder="Enter your email or mobile" required />
+          <i class="bx bxs-user"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="password" placeholder="Enter your password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="register-link">
+          <p>Don’t have an account? 
+            <a href="#" onclick="toggleForm(true); return false;">Register Now</a>
+          </p>
+        </div>
+      </form>
+
+      <!-- Registration Form -->
+      <form id="registerForm"
+            action="/login/register"
+            method="post"
+            style="display: none;"
+        >
+        <h1>Register</h1>
+
+        <div class="input-box">
+          <input type="text" name="username" placeholder="Enter your username" required />
+          <i class="bx bxs-phone"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="text" name="mobile" placeholder="Enter your mobile number" required />
+          <i class="bx bxs-phone"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="email" name="email" placeholder="Enter your email" required />
+          <i class="bx bxs-envelope"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="new_password" placeholder="Enter your password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="confirm_password" placeholder="Confirm your password" required />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <div class="register-link">
+          <p>Already have an account? 
+            <a href="#" onclick="toggleForm(false); return false;">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+    <link rel="stylesheet" href="/css/login.css" />
+    <script src="/scripts/index.js"></script>
+    <script>
+      function toggleForm(showRegister) {
+        let loginForm = document.getElementById("loginForm");
+        let registerForm = document.getElementById("registerForm");
+
+        if (showRegister) {
+          loginForm.style.display = "none";
+          registerForm.style.display = "block";
+        } else {
+          loginForm.style.display = "block";
+          registerForm.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

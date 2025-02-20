@@ -1,0 +1,51 @@
+<%- include('./partials/headerExt.ejs') %>
+
+  <main class="product-details">
+    
+    <div class="product-main">
+      <div class="product-images">
+        <img id="main-image" src="<%= product.image[0] || '/images/placeholder.png' %>" alt="Product Image">
+        <div class="image-thumbnails">
+          <% product.image.forEach(image => { %>
+            <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
+          <% }) %>
+        </div>
+      </div>
+    
+      <div class="product-info">
+        <h2 id="product-name"><%= product.name %></h2>
+         <div id="configs">
+          <p id="product-price">Price: ৳<%= product.price %></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Related Products -->
+    <div class="related-products">
+      <h3>Related Products</h3>
+      <div class="related-products-container">
+        <% relatedProducts.forEach(related => { %>
+          <div class="related-product-card">
+            <a href="/product/<%= related._id %>">
+              <img src="<%= related.image[0] || '/images/placeholder.png' %>" alt="<%= related.name %>">
+              <p><%= related.name %></p>
+              <p>Price: ৳<%= related.price %></p>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </main>
+<link rel="stylesheet" href="/css/productDetails.css" />
+<script>
+  function updateMainImage(thumbnail) {
+    document.getElementById("main-image").src = thumbnail.src;
+  }
+  function getLogin() {
+      window.location.href = "http://localhost:3000/login";
+  }
+</script>
+</body>
+</html>
