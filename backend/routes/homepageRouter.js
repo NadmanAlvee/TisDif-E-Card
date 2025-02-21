@@ -14,7 +14,6 @@ router.get("/", async (req, res) => {
 		// Pass products to the EJS view
 		res.render("index.ejs", {
 			products: products,
-			loggedInUser: res.locals.loggedInUser || {},
 		});
 	} catch (error) {
 		console.error("Error fetching products:", error);

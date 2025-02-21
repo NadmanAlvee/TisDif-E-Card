@@ -421,11 +421,21 @@ footer {
   color: gray;
 }
 
-#user-info p{
-  
+#user-info p,#user-info {
   padding: 12px 15px;
   background-color: var(--text-color);
   color: var(--background-color);
+}
+
+#user-info a{
+  padding: 12px 15px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+#user-info a:hover{
+  color: #ff3b30;
+  transition: 0.5s;
 }
 
 .user-menu {

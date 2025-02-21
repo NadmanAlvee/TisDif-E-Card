@@ -35,6 +35,9 @@
                     <div id="user-info">
                         <p><%= loggedInUser.username %></p>
                         <p><%= loggedInUser.email %></p>
+                        <% if (loggedInUser.role == "admin"){ %>
+                            <br><a href="/admin" target="_blank">Manage Products</a>
+                        <% } %>
                     </div>
                     <button id="logout-button" onclick="logout()">Logout</button>
                 <% } else { %>

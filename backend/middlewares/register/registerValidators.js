@@ -51,7 +51,10 @@ const doRegisterValidationHandler = (req, res, next) => {
 	if (Object.keys(mappedErrors).length === 0) {
 		next();
 	} else {
-		res.status(400).json({ errors: mappedErrors });
+		console.log(errors);
+		res.render("login_page.ejs", {
+			errors: mappedErrors,
+		});
 	}
 };
 

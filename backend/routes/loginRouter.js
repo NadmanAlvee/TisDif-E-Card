@@ -22,14 +22,21 @@ const {
 const router = express.Router();
 
 // login page
-router.get("/", checkLogin, getLogin);
+router.get("/", sessionInfo, checkLogin, getLogin);
 
 // process login
-router.post("/", doLoginValidators, doLoginValidationHandler, login);
+router.post(
+	"/",
+	sessionInfo,
+	doLoginValidators,
+	doLoginValidationHandler,
+	login
+);
 
 // register new user
 router.post(
 	"/register",
+	sessionInfo,
 	doRegisterValidators,
 	doRegisterValidationHandler,
 	register

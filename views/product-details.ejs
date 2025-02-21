@@ -14,11 +14,16 @@
     
       <div class="product-info">
         <h2 id="product-name"><%= product.name %></h2>
-         <div id="configs">
-          <p id="product-price">Price: ৳<%= product.price %></p>
-          <button class="add-to-cart">Add to Cart</button>
+        <div id="configs">
+            <p id="product-price">Price: ৳<span id="total-price"><%= product.price.toFixed(2) %></span></p>
+            <div class="quantity-selector">
+                <button id="decrease-qty">-</button>
+                <span id="quantity">1</span>
+                <button id="increase-qty">+</button>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
         </div>
-      </div>
+    </div>
     </div>
     
 
@@ -31,7 +36,7 @@
             <a href="/product/<%= related._id %>">
               <img src="<%= related.image[0] || '/images/placeholder.png' %>" alt="<%= related.name %>">
               <p><%= related.name %></p>
-              <p>Price: ৳<%= related.price %></p>
+              <p>Price: ৳<%= related.price.toFixed(2) %></p>
             </a>
           </div>
         <% }) %>
@@ -39,7 +44,35 @@
     </div>
   </main>
 <link rel="stylesheet" href="/css/productDetails.css" />
+<script src="/scripts/index.js"></script>
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const pricePerUnit = "<%= product.price %>";
+    const quantityEl = document.getElementById("quantity");
+    const totalPriceEl = document.getElementById("total-price");
+    const decreaseBtn = document.getElementById("decrease-qty");
+    const increaseBtn = document.getElementById("increase-qty");
+
+    let quantity = 1;
+
+    function updatePrice() {
+        totalPriceEl.textContent = (pricePerUnit * quantity).toFixed(2);
+    }
+
+    increaseBtn.addEventListener("click", function () {
+        quantity++;
+        quantityEl.textContent = quantity;
+        updatePrice();
+    });
+
+    decreaseBtn.addEventListener("click", function () {
+        if (quantity > 1) {
+            quantity--;
+            quantityEl.textContent = quantity;
+            updatePrice();
+        }
+    });
+  });
   function updateMainImage(thumbnail) {
     document.getElementById("main-image").src = thumbnail.src;
   }

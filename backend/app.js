@@ -38,15 +38,15 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Frontend Routes
-app.use("/", checkLogin, homepageRouter);
+app.use("/", sessionInfo, checkLogin, homepageRouter);
 
-app.use("/login", redirectLoggedIn, loginRouter);
+app.use("/login", sessionInfo, redirectLoggedIn, loginRouter);
 
 app.use("/logout", logout);
 
 app.use("/admin", sessionInfo, checkLogin, authGuard, adminRouter);
 
-app.use("/product", sessionInfo, productPageRouter);
+app.use("/product", sessionInfo, checkLogin, productPageRouter);
 
 // Error handling
 app.use(notFoundHandler); // 404
