@@ -4,28 +4,27 @@
     
     <div class="product-main">
       <div class="product-images">
-        <img id="main-image" src="<%= product.image[0] || '/images/placeholder.png' %>" alt="Product Image">
+        <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.jpg' %>" alt="Product Image">
+        
         <div class="image-thumbnails">
-          <% product.image.forEach(image => { %>
-            <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
-          <% }) %>
-        </div>
+          <% if (Array.isArray(product.image) && product.image.length > 0 && product.image != "") { %>
+            <% product.image.forEach(image => { %>
+              <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
+            <% }) %>
+          <% } else { %>
+            <img class="thumbnail" src="/images/placeholder.jpg">
+          <% } %>
+        </div>          
       </div>
     
-      <div class="product-info">
-        <h2 id="product-name"><%= product.name %></h2>
-        <div id="configs">
-            <p id="product-price">Price: ৳<span id="total-price"><%= product.price.toFixed(2) %></span></p>
-            <div class="quantity-selector">
-                <button id="decrease-qty">-</button>
-                <span id="quantity">1</span>
-                <button id="increase-qty">+</button>
-            </div>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
+      <% if (product.category == 'giftcards') { %>
+        <%- include('./partials/giftcards.ejs') %>
+      <% } else if (product.category == 'iphones') { %>
+        <%- include('./partials/iphones.ejs') %>
+      <% } else if (product.category == 'accessories') { %>
+        <%- include('./partials/accessories.ejs') %>
+      <% } %>
     </div>
-    </div>
-    
 
     <!-- Related Products -->
     <div class="related-products">
@@ -34,7 +33,7 @@
         <% relatedProducts.forEach(related => { %>
           <div class="related-product-card">
             <a href="/product/<%= related._id %>">
-              <img src="<%= related.image[0] || '/images/placeholder.png' %>" alt="<%= related.name %>">
+              <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.jpg' %>" alt="<%= related.name %>">
               <p><%= related.name %></p>
               <p>Price: ৳<%= related.price.toFixed(2) %></p>
             </a>
@@ -77,7 +76,7 @@
     document.getElementById("main-image").src = thumbnail.src;
   }
   function getLogin() {
-      window.location.href = "http://localhost:3000/login";
+      window.location.href = "/login";
   }
 </script>
 </body>

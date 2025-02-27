@@ -1,5 +1,5 @@
 // External imports
-const bcrypt = require("bcryptjs"); // Ensure bcryptjs is installed
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 

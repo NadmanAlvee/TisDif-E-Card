@@ -1,0 +1,21 @@
+<a href="/product/<%= product._id %>">
+    <div class="product-card" data-id="<%= product._id %>">
+        
+        <% if (product.saveTag > 0) { %>
+            <div class="save-tag">Save <%= product.saveTag %>%</div>
+        <% } %>
+
+        <img class="main-image" src="<%= (product.image && product.image.length && product.image[0]) ? product.image[0] : '/images/placeholder.jpg' %>"
+            alt="<%= product.name %>" />
+        
+        <h3 class="product-name"><%= product.name %></h3>
+        
+        <% if (product.stock > 0) { %>
+            <div class="in-stock">In Stock: <%= product.stock %></div>
+        <% } else { %>
+            <div class="stock-out">Stock Out</div>
+        <% } %>
+
+        <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
+    </div>
+</a>

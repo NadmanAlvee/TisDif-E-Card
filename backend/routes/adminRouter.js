@@ -17,18 +17,24 @@ router.post("/add-product", async (req, res) => {
 	try {
 		const { name, price, description, image, category, stock, saveTag } =
 			req.body;
+
+		// Convert image string into an array
+		const imageArray = image.split(",").map((img) => img.trim());
+
 		const newProduct = new Product({
 			name,
 			price,
 			description,
-			image,
+			image: imageArray, // Ensure it's stored as an array
 			category,
 			stock,
 			saveTag,
 		});
+
 		await newProduct.save();
 		res.redirect("/admin"); // Refresh the product list
 	} catch (err) {
+		console.error(err);
 		res.status(500).send("Error adding product");
 	}
 });

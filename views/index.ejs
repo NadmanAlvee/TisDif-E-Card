@@ -15,142 +15,30 @@
         <span class="dot" onclick="five()"></span>
     </div>
 
-    <!-- iPhones -->
-    <section class="categories" id="iPhones">
-        <div class="heading">
-            <h1>Browse iPhones</h1>
-        </div>
+    <!-- Product Cards -->
+    <% const categories = ["iphones", "giftcards", "accessories"]; %>
 
-        <div class="categories-container">
-            <% products.forEach((product) => { if (product.category == "iphones"){ %>
-                <a href="/product/<%= product._id %>">
-                    <div class="product-card" data-id="<%= product._id %>">
-                        
-                        <% if (product.saveTag > 0) { %>
-                            <div class="save-tag">Save <%= product.saveTag %>%</div>
-                        <% } %>
+    <% categories.forEach(category => { %>
+        <section class="categories" id="<%= category %>">
+            <div class="heading">
+                <h2>Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
+            </div>
 
-                        <img class="main-image" src="<%= product.image.length ? product.image[0] : '/images/placeholder.jpg' %>" 
-                            alt="<%= product.name %>" />
-                        
-                        <h3 class="product-name"><%= product.name %></h3>
-                        
-                        <% if (product.stock > 0) { %>
-                            <div class="in-stock">In Stock: <%= product.stock %></div>
-                        <% } else { %>
-                            <div class="stock-out">Stock Out</div>
-                        <% } %>
+            <div class="categories-container">
+                <% products.forEach(product => { 
+                    if (product.category === category) { %>
+                        <%- include('partials/homepage/product-card', { product }) %>
+                <% }}) %>
+            </div>
+        </section>
+    <% }) %>
 
-                        <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
-                    </div>
-                </a>
-            <% }}) %>
-        </div>
-    </section>
-    <!-- Airpods -->
-    <section class="categories" id="AirPods">
-        <div class="heading">
-            <h1>Browse Airpods</h1>
-        </div>
-
-        <div class="categories-container">
-            <% products.forEach((product) => { if (product.category == "airpods"){ %>
-                <a href="/product/<%= product._id %>">
-                    <div class="product-card" data-id="<%= product._id %>">
-                        
-                        <!-- Save Tag -->
-                        <% if (product.saveTag > 0) { %>
-                            <div class="save-tag">Save <%= product.saveTag %>%</div>
-                        <% } %>
-
-                        <img class="main-image" src="<%= product.image.length ? product.image[0] : '/images/placeholder.jpg' %>" 
-                            alt="<%= product.name %>" />
-                        
-                        <h3 class="product-name"><%= product.name %></h3>
-                        
-                        <% if (product.stock > 0) { %>
-                            <div class="in-stock">In Stock: <%= product.stock %></div>
-                        <% } else { %>
-                            <div class="stock-out">Stock Out</div>
-                        <% } %>
-
-                        <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
-                    </div>
-                </a>
-            <% }}) %>
-        </div>
-    </section>
-    <!-- iTunes Gift Card -->
-    <section class="categories" id="GiftCards">
-        <div class="heading">
-            <h1>Browse Gift Cards</h1>
-        </div>
-
-        <div class="categories-container">
-            <% products.forEach((product) => { if (product.category == "giftcards"){ %>
-                <a href="/product/<%= product._id %>">
-                    <div class="product-card" data-id="<%= product._id %>">
-                        
-                        <!-- Save Tag -->
-                        <% if (product.saveTag > 0) { %>
-                            <div class="save-tag">Save <%= product.saveTag %>%</div>
-                        <% } %>
-
-                        <img class="main-image" src="<%= product.image.length ? product.image[0] : '/images/placeholder.jpg' %>" 
-                            alt="<%= product.name %>" />
-                        
-                        <h3 class="product-name"><%= product.name %></h3>
-                        
-                        <% if (product.stock > 0) { %>
-                            <div class="in-stock">In Stock: <%= product.stock %></div>
-                        <% } else { %>
-                            <div class="stock-out">Stock Out</div>
-                        <% } %>
-
-                        <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
-                    </div>
-                </a>
-            <% }}) %>
-        </div>
-    </section>
-    <!-- Accessories -->
-    <section class="categories" id="Accessories">
-        <div class="heading">
-            <h1>Browse Accessories</h1>
-        </div>
-
-        <div class="categories-container">
-            <% products.forEach((product) => { if (product.category == "accessories"){ %>
-                <a href="/product/<%= product._id %>">
-                    <div class="product-card" data-id="<%= product._id %>">
-                        
-                        <% if (product.saveTag > 0) { %>
-                            <div class="save-tag">Save <%= product.saveTag %>%</div>
-                        <% } %>
-
-                        <img class="main-image" src="<%= product.image.length ? product.image[0] : '/images/placeholder.jpg' %>" 
-                            alt="<%= product.name %>" />
-                        
-                        <h3 class="product-name"><%= product.name %></h3>
-                        
-                        <% if (product.stock > 0) { %>
-                            <div class="in-stock">In Stock: <%= product.stock %></div>
-                        <% } else { %>
-                            <div class="stock-out">Stock Out</div>
-                        <% } %>
-
-                        <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
-                    </div>
-                </a>
-            <% }}) %>
-        </div>
-    </section>
     <!-- Footer Section -->
     <!-- Scripts -->
     <script src="/scripts/index.js"></script>
     <script>
         function getLogin() {
-            window.location.href = "http://localhost:3000/login";
+            window.location.href = "/login";
         }
     </script>
 </body>

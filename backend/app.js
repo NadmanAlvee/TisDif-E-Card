@@ -24,7 +24,7 @@ const adminRouter = require("./routes/adminRouter");
 const logout = require("./controller/logoutController");
 
 const app = express();
-const PORT = process.env.DEV_PORT || 5000;
+const PORT = process.env.PROD_PORT || 3000;
 
 // Connect to MongoDB
 connectDB();

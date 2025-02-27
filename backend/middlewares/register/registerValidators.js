@@ -22,7 +22,7 @@ const doRegisterValidators = [
 			}
 		}),
 	check("mobile")
-		.isMobilePhone("bn-BD", { strictMode: true })
+		.isMobilePhone()
 		.withMessage("Must be a valid Bangladeshi Mobile Number")
 		.trim()
 		.custom(async (value) => {

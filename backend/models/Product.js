@@ -18,8 +18,7 @@ const ProductSchema = new mongoose.Schema({
 	category: {
 		type: String,
 		required: true,
-		enums: ["iphones", "airpods", "giftcards", "accessories"],
-		default: "iphones",
+		enums: ["iphones", "giftcards", "accessories"],
 	},
 	stock: {
 		type: Number,

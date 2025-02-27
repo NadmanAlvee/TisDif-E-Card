@@ -7,7 +7,6 @@ const slideFive = document.getElementById("slideFive");
 const dots = document.querySelectorAll(".dot");
 
 const iPhone = document.getElementById("scrollToIphones");
-const AirPod = document.getElementById("scrollToAirPods");
 const iTunes = document.getElementById("scrollToGiftCards");
 const Charger = document.getElementById("scrollToAccessories");
 const hamburger = document.getElementById("hamburger");
@@ -32,9 +31,6 @@ async function logout() {
 }
 
 iPhone.addEventListener("click", () => {
-	navbar.classList.toggle("active");
-});
-AirPod.addEventListener("click", () => {
 	navbar.classList.toggle("active");
 });
 iTunes.addEventListener("click", () => {
@@ -121,37 +117,6 @@ slideOne.addEventListener("click", function (event) {
 	const navbarHeight = document.querySelector("header").offsetHeight;
 	const elementPosition = targetSection.getBoundingClientRect().top;
 	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-	window.scrollTo({
-		top: offsetPosition,
-		behavior: "smooth",
-	});
-});
-
-// Scroll to airPud
-
-document
-	.getElementById("scrollToAirPods")
-	.addEventListener("click", function (event) {
-		event.preventDefault();
-		const targetSection = document.getElementById("AirPods");
-
-		const navbarHeight = document.querySelector("header").offsetHeight;
-		const elementPosition = targetSection.getBoundingClientRect().top;
-		const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-		window.scrollTo({
-			top: offsetPosition,
-			behavior: "smooth",
-		});
-	});
-slideTwo.addEventListener("click", function (event) {
-	event.preventDefault();
-	const targetSection = document.getElementById("AirPods");
-
-	const navbarHeight = document.querySelector("header").offsetHeight;
-	const elementPosition = targetSection.getBoundingClientRect().top;
-	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
 	window.scrollTo({
 		top: offsetPosition,
 		behavior: "smooth",
