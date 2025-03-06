@@ -101,18 +101,31 @@ body {
 
 #configs {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 15px;
   margin-top: auto;
   padding-top: 10px;
   height: 100%;
 }
 
+.in-stock {
+  font-weight: bolder;
+  color: green;
+}
+
+.out-of-stock {
+  font-weight: bolder;
+  color: red;
+}
+
 #product-price {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 15px;
   color: #333;
   margin: 0;
+}
+
+#total-price{
+  font-weight: bold;
 }
 
 #product-name {
@@ -136,6 +149,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  max-width: calc(33.33% - 16px);
   transition: background 0.3s;
 }
 

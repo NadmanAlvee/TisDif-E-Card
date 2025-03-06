@@ -35,7 +35,7 @@
             <a href="/product/<%= related._id %>">
               <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.jpg' %>" alt="<%= related.name %>">
               <p><%= related.name %></p>
-              <p>Price: ৳<%= related.price.toFixed(2) %></p>
+              <p>Price: <%= related.price.toFixed(2) %> BDT</p>
             </a>
           </div>
         <% }) %>
@@ -55,7 +55,7 @@
     let quantity = 1;
 
     function updatePrice() {
-        totalPriceEl.textContent = (pricePerUnit * quantity).toFixed(2);
+        totalPriceEl.textContent = `${(pricePerUnit * quantity).toFixed(2)} BDT`;
     }
 
     increaseBtn.addEventListener("click", function () {

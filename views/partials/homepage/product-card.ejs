@@ -9,12 +9,6 @@
             alt="<%= product.name %>" />
         
         <h3 class="product-name"><%= product.name %></h3>
-        
-        <% if (product.stock > 0) { %>
-            <div class="in-stock">In Stock: <%= product.stock %></div>
-        <% } else { %>
-            <div class="stock-out">Stock Out</div>
-        <% } %>
 
         <p class="product-price">৳<%= product.price.toFixed(2).toLocaleString() %></p>
     </div>

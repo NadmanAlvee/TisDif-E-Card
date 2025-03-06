@@ -102,7 +102,7 @@ document
 	.getElementById("scrollToIphones")
 	.addEventListener("click", function (event) {
 		event.preventDefault();
-		const targetSection = document.getElementById("iPhones");
+		const targetSection = document.getElementById("iphones");
 		const navbarHeight = document.querySelector("header").offsetHeight;
 		const elementPosition = targetSection.getBoundingClientRect().top;
 		const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -113,7 +113,7 @@ document
 	});
 slideOne.addEventListener("click", function (event) {
 	event.preventDefault();
-	const targetSection = document.getElementById("iPhones");
+	const targetSection = document.getElementById("iphones");
 	const navbarHeight = document.querySelector("header").offsetHeight;
 	const elementPosition = targetSection.getBoundingClientRect().top;
 	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -129,7 +129,7 @@ document
 	.getElementById("scrollToAccessories")
 	.addEventListener("click", function (event) {
 		event.preventDefault();
-		const targetSection = document.getElementById("Accessories");
+		const targetSection = document.getElementById("accessories");
 		const navbarHeight = document.querySelector("header").offsetHeight;
 		const elementPosition = targetSection.getBoundingClientRect().top;
 		const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -140,7 +140,7 @@ document
 	});
 slideFour.addEventListener("click", function (event) {
 	event.preventDefault();
-	const targetSection = document.getElementById("Accessories");
+	const targetSection = document.getElementById("accessories");
 	const navbarHeight = document.querySelector("header").offsetHeight;
 	const elementPosition = targetSection.getBoundingClientRect().top;
 	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -151,7 +151,7 @@ slideFour.addEventListener("click", function (event) {
 });
 slideFive.addEventListener("click", function (event) {
 	event.preventDefault();
-	const targetSection = document.getElementById("Accessories");
+	const targetSection = document.getElementById("accessories");
 	const navbarHeight = document.querySelector("header").offsetHeight;
 	const elementPosition = targetSection.getBoundingClientRect().top;
 	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -167,7 +167,7 @@ document
 	.getElementById("scrollToGiftCards")
 	.addEventListener("click", function (event) {
 		event.preventDefault();
-		const targetSection = document.getElementById("GiftCards");
+		const targetSection = document.getElementById("giftcards");
 
 		const navbarHeight = document.querySelector("header").offsetHeight;
 		const elementPosition = targetSection.getBoundingClientRect().top;
@@ -180,7 +180,7 @@ document
 	});
 slideThree.addEventListener("click", function (event) {
 	event.preventDefault();
-	const targetSection = document.getElementById("GiftCards");
+	const targetSection = document.getElementById("giftcards");
 
 	const navbarHeight = document.querySelector("header").offsetHeight;
 	const elementPosition = targetSection.getBoundingClientRect().top;
@@ -193,7 +193,6 @@ slideThree.addEventListener("click", function (event) {
 });
 
 // Hamburgerr
-
 hamburger.addEventListener("click", () => {
 	hamburger.classList.toggle("active");
 	navbar.classList.toggle("active");

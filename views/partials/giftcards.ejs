@@ -1,7 +1,13 @@
 <div class="product-info">
     <h2 id="product-name"><%= product.name %></h2>
     <div id="configs">
-        <p id="product-price">Price: ৳<span id="total-price"><%= product.price.toFixed(2) %></span></p>
+        <p>Status: <% if (product.stock > 0){ %>
+            <span class="in-stock">In Stock</span>
+            <% } else { %>
+            <span class="out-of-stock">Out Of Stock</span>
+            <% } %>
+        </p>
+        <p id="product-price">Price: <span id="total-price"><%= product.price.toFixed(2) %> BDT</span></p>
         <div class="quantity-selector">
             <button id="decrease-qty">-</button>
             <span id="quantity">1</span>
