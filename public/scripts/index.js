@@ -9,26 +9,6 @@ const dots = document.querySelectorAll(".dot");
 const iPhone = document.getElementById("scrollToIphones");
 const iTunes = document.getElementById("scrollToGiftCards");
 const Charger = document.getElementById("scrollToAccessories");
-const hamburger = document.getElementById("hamburger");
-const navbar = document.getElementById("navbar");
-
-function toggleMenu() {
-	document.getElementById("menuDropdown").classList.toggle("active");
-}
-
-async function logout() {
-	try {
-		const response = await fetch("/logout", { method: "POST" });
-
-		if (response.ok) {
-			window.location.reload(); // Reload page after logout
-		} else {
-			console.error("Logout failed");
-		}
-	} catch (error) {
-		console.error("Error logging out:", error);
-	}
-}
 
 iPhone.addEventListener("click", () => {
 	navbar.classList.toggle("active");
@@ -97,7 +77,6 @@ function five() {
 }
 
 // Scroll to iPun
-
 document
 	.getElementById("scrollToIphones")
 	.addEventListener("click", function (event) {
@@ -111,20 +90,8 @@ document
 			behavior: "smooth",
 		});
 	});
-slideOne.addEventListener("click", function (event) {
-	event.preventDefault();
-	const targetSection = document.getElementById("iphones");
-	const navbarHeight = document.querySelector("header").offsetHeight;
-	const elementPosition = targetSection.getBoundingClientRect().top;
-	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-	window.scrollTo({
-		top: offsetPosition,
-		behavior: "smooth",
-	});
-});
 
 // Scroll to Charger
-
 document
 	.getElementById("scrollToAccessories")
 	.addEventListener("click", function (event) {
@@ -138,31 +105,8 @@ document
 			behavior: "smooth",
 		});
 	});
-slideFour.addEventListener("click", function (event) {
-	event.preventDefault();
-	const targetSection = document.getElementById("accessories");
-	const navbarHeight = document.querySelector("header").offsetHeight;
-	const elementPosition = targetSection.getBoundingClientRect().top;
-	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-	window.scrollTo({
-		top: offsetPosition,
-		behavior: "smooth",
-	});
-});
-slideFive.addEventListener("click", function (event) {
-	event.preventDefault();
-	const targetSection = document.getElementById("accessories");
-	const navbarHeight = document.querySelector("header").offsetHeight;
-	const elementPosition = targetSection.getBoundingClientRect().top;
-	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-	window.scrollTo({
-		top: offsetPosition,
-		behavior: "smooth",
-	});
-});
 
 // iTunes Cards
-
 document
 	.getElementById("scrollToGiftCards")
 	.addEventListener("click", function (event) {
@@ -178,22 +122,3 @@ document
 			behavior: "smooth",
 		});
 	});
-slideThree.addEventListener("click", function (event) {
-	event.preventDefault();
-	const targetSection = document.getElementById("giftcards");
-
-	const navbarHeight = document.querySelector("header").offsetHeight;
-	const elementPosition = targetSection.getBoundingClientRect().top;
-	const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-	window.scrollTo({
-		top: offsetPosition,
-		behavior: "smooth",
-	});
-});
-
-// Hamburgerr
-hamburger.addEventListener("click", () => {
-	hamburger.classList.toggle("active");
-	navbar.classList.toggle("active");
-});

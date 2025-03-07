@@ -9,15 +9,13 @@
 body {
     display: flex;
     height: 100vh;
-    background: #f4f4f4;
-    margin: 0;
 }
 
 /* Left Section - Add Product */
 #addNewProd {
     width: 30%;
-    position: fixed;
-    left: 0;
+    position: absolute;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     padding: 20px;
@@ -34,11 +32,13 @@ body {
 
 /* Right Section - Product List */
 #ProdList {
-    margin-left: 30%; /* Leave space for the left div */
+    margin-left: 30%;
     width: 70%;
     height: 100vh;
     overflow-y: scroll;
     padding: 20px;
+    position: relative;
+    top: 10%;
 }
 
 .product-container {

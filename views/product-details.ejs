@@ -3,19 +3,18 @@
   <main class="product-details">
     
     <div class="product-main">
-      <div class="product-images">
-        <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.jpg' %>" alt="Product Image">
-        
-        <div class="image-thumbnails">
-          <% if (Array.isArray(product.image) && product.image.length > 0 && product.image != "") { %>
-            <% product.image.forEach(image => { %>
-              <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
-            <% }) %>
-          <% } else { %>
-            <img class="thumbnail" src="/images/placeholder.jpg">
-          <% } %>
-        </div>          
-      </div>
+        <div class="product-images">
+          <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.jpg' %>" alt="Product Image">
+          <div class="image-thumbnails">
+            <% if (Array.isArray(product.image) && product.image.length > 0 && product.image != "") { %>
+              <% product.image.forEach(image => { %>
+                <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
+              <% }) %>
+            <% } else { %>
+              <img class="thumbnail" src="/images/placeholder.jpg">
+            <% } %>
+          </div>
+        </div>
     
       <% if (product.category == 'giftcards') { %>
         <%- include('./partials/giftcards.ejs') %>
@@ -43,35 +42,31 @@
     </div>
   </main>
 <link rel="stylesheet" href="/css/productDetails.css" />
-<script src="/scripts/index.js"></script>
+<script src="/scripts/header.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const pricePerUnit = "<%= product.price %>";
-    const quantityEl = document.getElementById("quantity");
-    const totalPriceEl = document.getElementById("total-price");
-    const decreaseBtn = document.getElementById("decrease-qty");
-    const increaseBtn = document.getElementById("increase-qty");
+    // Retrieve product price from the data attribute
+    const productElement = document.querySelector(".product-info");
+    const productPrice = parseFloat(productElement.getAttribute("data-price")) || 1; // Fallback to 1 if undefined
 
-    let quantity = 1;
+    const priceButtons = document.querySelectorAll(".price-btn");
+    const totalPrice = document.getElementById("total-price");
 
-    function updatePrice() {
-        totalPriceEl.textContent = `${(pricePerUnit * quantity).toFixed(2)} BDT`;
-    }
+    priceButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            // Remove the active class from all buttons
+            priceButtons.forEach(btn => btn.classList.remove("active"));
 
-    increaseBtn.addEventListener("click", function () {
-        quantity++;
-        quantityEl.textContent = quantity;
-        updatePrice();
-    });
+            // Add active class to the clicked button
+            this.classList.add("active");
 
-    decreaseBtn.addEventListener("click", function () {
-        if (quantity > 1) {
-            quantity--;
-            quantityEl.textContent = quantity;
-            updatePrice();
-        }
+            // Get the selected price from the button and multiply by product price
+            const selectedPrice = parseFloat(this.getAttribute("data-price")) || 0;
+            totalPrice.textContent = (selectedPrice * productPrice).toFixed(2) + " BDT";
+        });
     });
   });
+
   function updateMainImage(thumbnail) {
     document.getElementById("main-image").src = thumbnail.src;
   }

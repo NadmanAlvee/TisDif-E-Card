@@ -1,4 +1,4 @@
-<div class="product-info">
+<div class="product-info" data-price="<%= product.price %>">
     <h2 id="product-name"><%= product.name %></h2>
     <div id="configs">
         <p>Status: <% if (product.stock > 0){ %>
@@ -7,12 +7,20 @@
             <span class="out-of-stock">Out Of Stock</span>
             <% } %>
         </p>
-        <p id="product-price">Price: <span id="total-price"><%= product.price.toFixed(2) %> BDT</span></p>
-        <div class="quantity-selector">
-            <button id="decrease-qty">-</button>
-            <span id="quantity">1</span>
-            <button id="increase-qty">+</button>
+
+        <% if (product.varient == "usd"){ %>
+            <%- include('./giftcardVarients/usd.ejs') %>
+        <% } else if (product.varient == "inr") { %>
+            <%- include('./giftcardVarients/inr.ejs') %>
+        <% } else if (product.varient == "aud") { %>
+            <%- include('./giftcardVarients/aud.ejs') %>
+        <% } %>
+
+        <p id="selected-price">Total Amount: <span id="total-price">0.00 BDT</span></p>
+        <div>
+            <button class="add-to-cart">🧺 ADD TO CART</button>
+            <button class="buy-now add-to-cart">🛒 Buy Now</button>
         </div>
-        <button class="add-to-cart">Add to Cart</button>
+       
     </div>
 </div>

@@ -10,6 +10,10 @@ const ProductSchema = new mongoose.Schema({
 		required: true,
 		default: 0,
 	},
+	varient: {
+		type: String,
+		default: "",
+	},
 	description: {
 		type: String,
 		default: "",

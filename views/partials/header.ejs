@@ -25,15 +25,15 @@
         <!-- User Profile Dropdown -->
         <div class="user-menu">
             <% if (Object.keys(loggedInUser).length > 0) { %>
-                <a onclick="toggleMenu()"><%= loggedInUser.username %> | Logout</a>
+                <a onclick="toggleMenu()">Account</a>
             <% } else { %>
-                <a onclick="toggleMenu()">Account | Login</a>
+                <a onclick="toggleMenu()">Login</a>
             <% } %>
             <div class="menu-dropdown" id="menuDropdown">
                 <% if (Object.keys(loggedInUser).length > 0) { %>
                     <div id="user-info">
-                        <p><%= loggedInUser.username %></p>
-                        <p><%= loggedInUser.email %></p>
+                        <p>username:<br><%= loggedInUser.username %></p>
+                        <p>email:<br><%= loggedInUser.email %></p>
                         <% if (loggedInUser.role == "admin"){ %>
                             <br><a href="/admin" target="_blank">Manage Products</a>
                         <% } %>

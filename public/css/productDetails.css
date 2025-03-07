@@ -1,6 +1,8 @@
 :root {
   --text-color: #1d1d1d;
   --background-color: #fff;
+  --background-color-2: rgb(245, 245, 247);
+  --background-color-3: rgb(177, 177, 177);
   --primary-color: #d40000;
 }
 
@@ -41,7 +43,7 @@ body {
 
 #main-image {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   height: auto;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -56,8 +58,8 @@ body {
 }
 
 .thumbnail {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: auto;
   border: 1px solid #ddd;
   border-radius: 4px;
   cursor: pointer;
@@ -191,6 +193,8 @@ body {
 
 .related-product-card a {
   text-decoration: none;
+  font-size: small;
+  font-weight: bold;
   color: var(--text-color);
 }
 
@@ -202,8 +206,50 @@ body {
   border-radius: 4px;
 }
 
+.price-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.price-btn {
+    background-color: white;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.price-btn:hover, .price-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-to-cart {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
+  #configs{
+    align-items: center;
+  }
+  
   .product-main {
     flex-direction: column;
     align-items: center;
@@ -224,6 +270,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  #configs{
+    align-items: center;
+  }
   .image-thumbnails img {
     width: 50px;
     height: 50px;

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
-    <link rel="stylesheet" href="./css/adminPortal.css">
-</head>
-<body>
+<%- include('./partials/headerExt.ejs') %>
 
     <!-- Add New Product Form -->
     <div id="addNewProd">
@@ -18,6 +10,9 @@
             <label for="price">Product Price: </label><br>
             <input type="number" id="price" name="price" placeholder="Price" required><br>
 
+            <label for="varient">Product Varient: </label><br>
+            <input type="text" id="varient" name="varient" placeholder="Varient"><br>
+
             <label for="description">Product Description: </label><br>
             <input type="text" id="description" name="description" placeholder="Description"><br>
     
@@ -25,7 +20,7 @@
             <input type="text" id="image" name="image" placeholder="Enter multiple images links, separated by commas"><br>
     
             <label for="category">Product Category: </label><br>
-            <input type="text" id="category" name="category" placeholder="Category (iphones, airpods, giftcards, accessories)" required><br>
+            <input type="text" id="category" name="category" placeholder="Category (iphones/giftcards/accessories)" required><br>
     
             <label for="stock">Product Stock: </label><br>
             <input type="number" id="stock" name="stock" placeholder="Stock"><br>
@@ -59,8 +54,8 @@
     </div>
 
     <!-- Font Awesome Script -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" href="./css/adminPortal.css">
+    <script src="/scripts/header.js"></script>
     <script>
         function updateStock(productId) {
             const stockValue = document.getElementById(`stock-${productId}`).value;
