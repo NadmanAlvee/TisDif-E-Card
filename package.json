@@ -15,6 +15,6 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon ./backend/app.js",
-    "production": "cross-env NODE_ENV=production nodemon ./to-do-app/main.js"
+    "production": "cross-env NODE_ENV=production nodemon ./backend/main.js"
   }
 }
