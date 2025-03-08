@@ -54,5 +54,5 @@ app.use(errorHandler); // common
 
 // Start the Server
 app.listen(PORT, () => {
-	console.log(`Server running on http://tisdifecard.com:${PORT}`);
+	console.log(`Server running on http://tisdifecard.com`);
 });
