@@ -28,19 +28,19 @@
     <div class="account-container">
         <!-- Cart icon -->
         <a href="/cart" class="cart-icon">
-            <img src="/ui/icons/cart-shopping-light.svg" alt="Cart">
-            <% if (cartItems.length === 0) { %>
-                <span class="cart-badge"><% cartItems.length %></span>
+            <img src="/ui/icons/cart-shopping-light.svg" alt="Cart" id="cartIcon">
+            <% if (cartItems.length > 0) { %>
+                <span class="cart-badge"><%= cartItems.length %></span>
             <% } else { %>
                 <span class="cart-badge">0</span>
-            <$ } %>
+            <% } %>
         </a>
 
         <!-- Profile Icon -->
-        <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)">
+        <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)" id="profileLink">
             <!-- Profile Icon -->
-            <a class="profile-icon">
-                <img src="/ui/icons/circle-user-regular.svg" alt="Account">
+            <a class="profile-icon" id="profile">
+                <img src="/ui/icons/circle-user-regular.svg" alt="Account"  id="profileIcon">
             </a>
             <!-- User Profile Dropdown -->
             <div class="menu-dropdown" id="menuDropdown">
