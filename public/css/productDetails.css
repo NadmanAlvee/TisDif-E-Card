@@ -267,6 +267,17 @@ body {
   .related-products-container {
     justify-content: center;
   }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 10px;
+  }
+
+  .add-to-cart {
+    max-width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {

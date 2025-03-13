@@ -266,6 +266,7 @@ header {
       flex-direction: row;
       justify-content: space-around;
       gap: 20px;
+      box-shadow: 0 10px 15px black;
     }
 
   }
