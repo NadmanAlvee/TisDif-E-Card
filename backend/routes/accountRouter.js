@@ -9,10 +9,11 @@ const router = express.Router();
 router.get("/", checkLogin, async (req, res) => {
 	try {
 		const user = res.locals.loggedInUser;
+		const userId = res.locals.loggedInUser._id;
 
-		const cartItems = await Cart.find(user._id);
+		const cartItems = await Cart.find({ userId }).populate("productId");
 		// Fetch the user's orders
-		const orders = await Order.find({ userId: user._id }).sort({
+		const orders = await Order.find({ userId }).sort({
 			createdAt: -1,
 		});
 		res.render("account", { user, orders, cartItems });

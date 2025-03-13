@@ -49,6 +49,7 @@
                     <div id="user-info">
                         <p>Username: <%= loggedInUser.username %></p>
                         <p>Email: <%= loggedInUser.email %></p>
+                        <a href="/account" target="_blank">My Account</a>
                         <% if (loggedInUser.role == "admin") { %>
                             <a href="/admin" target="_blank">Manage Products</a>
                         <% } %>
