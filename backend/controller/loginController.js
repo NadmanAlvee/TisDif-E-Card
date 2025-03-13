@@ -5,11 +5,15 @@ const createError = require("http-errors");
 
 // internalimports
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 
 // get login page
-function getLogin(req, res, next) {
+async function getLogin(req, res, next) {
+	const userId = res.locals.loggedInUser._id;
+	const cartItems = await Cart.find({ userId });
 	res.render("login_page.ejs", {
-		loggedInUser: res.locals.loggedInUser || {},
+		loggedInUser: res.locals.loggedInUser,
+		cartItems,
 	});
 }
 

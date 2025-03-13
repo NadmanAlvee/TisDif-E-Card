@@ -1,25 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product"); // Import your Mongoose Product model
+const Cart = require("../models/Cart");
 
 // Get all products
 router.get("/", async (req, res) => {
 	try {
+		const userId = res.locals.loggedInUser._id;
+		const cartItems = await Cart.find({ userId });
 		const products = await Product.find(); // Fetch all products
-		res.render("adminPortal", { products });
+		res.render("adminPortal", { products, cartItems });
 	} catch (err) {
 		res.status(500).send("Error fetching products");
 	}
 });
-
-const generateProductId = () => {
-	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	let productId = "";
-	for (let i = 0; i < 8; i++) {
-		productId += chars.charAt(Math.floor(Math.random() * chars.length));
-	}
-	return productId;
-};
 
 // Add a new product
 router.post("/add-product", async (req, res) => {
@@ -31,7 +25,6 @@ router.post("/add-product", async (req, res) => {
 
 		const newProduct = new Product({
 			name,
-			productId: generateProductId(), // Generate a unique product ID
 			price,
 			description,
 			image: imageArray,

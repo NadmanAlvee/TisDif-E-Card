@@ -9,7 +9,7 @@ router.get("/:id", async (req, res) => {
 		const { id } = req.params;
 		const product = await Product.findById(id);
 		const userId = res.locals.loggedInUser._id;
-		const cartItems = await Cart.find({ userId }).populate("productId");
+		const cartItems = await Cart.find({ userId });
 
 		if (!product) {
 			return res.status(404).render("404", { message: "Product not found" });

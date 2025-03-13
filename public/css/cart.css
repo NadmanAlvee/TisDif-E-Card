@@ -87,10 +87,14 @@
 .cart-total-section {
     text-align: right;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
 }
 
 .cart-total-text {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .cart-checkout-btn {

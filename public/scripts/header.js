@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const profileLink = document.getElementById("profileLink");
 
 	if (isMobile()) {
-		profile.setAttribute("href", "/cart"); // On mobile, go to /account
+		profile.setAttribute("href", "/account"); // On mobile, go to /account
 		profileLink.removeAttribute("onmouseover");
 		profileLink.removeAttribute("onmouseleave");
 	}

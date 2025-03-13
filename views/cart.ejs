@@ -39,7 +39,7 @@
                         </td>
                         <td><%= item.productId.price * item.selected_quantity %> BDT</td>
                         <td>
-                            <form action="/cart/delete/<%= item._id %>" method="POST">
+                            <form action="/cart/delete/<%= item.productId %>" method="POST">
                                 <button type="submit" class="cart-delete-btn">✖</button>
                             </form>
                         </td>
@@ -51,9 +51,8 @@
 
         <div class="cart-total-section">
             <p class="cart-total-text">Total: <strong><%= grand_total %> BDT</strong></p>
-            <a href="/checkout" class="cart-checkout-btn">Proceed to Checkout</a>
+            <a href="/checkout" class="cart-checkout-btn">Proceed to Checkout</a>    
         </div>
     <% } %>
 </div>
 
-<script src="/scripts/header.js"></script>

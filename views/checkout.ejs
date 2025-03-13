@@ -1,0 +1,64 @@
+<%- include('./partials/headerExt.ejs') %>
+<link rel="stylesheet" href="/css/checkout.css">
+
+<div class="checkout-container">
+    <!-- CUSTOMER INFORMATION -->
+    <div class="customer-info">
+        <h2>Customer Information</h2>
+        <form id="checkout-form" action="/checkout" method="POST">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" name="fullName" id="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" name="mobile" id="mobile" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" id="address" rows="3" required></textarea>
+            </div>
+
+            <!-- PAYMENT METHOD (Online Only) -->
+            <h2>Payment Method</h2>
+            <div class="payment-method">
+                <label>
+                    <input type="radio" name="paymentMethod" value="online" checked>
+                    Online Payment
+                </label>
+            </div>
+
+            <!-- DELIVERY METHOD (Home Delivery Only) -->
+            <h2>Delivery Method</h2>
+            <div class="delivery-method">
+                <label>
+                    <input type="radio" name="deliveryMethod" value="home" checked>
+                    Home Delivery
+                </label>
+            </div>
+
+            <!-- YOUR ORDER DIV -->
+            <h2>Your Order</h2>
+            <div class="order-summary">
+                <% let grandTotal = 0; %>
+                <ul>
+                    <% cartItems.forEach(item => { %>
+                        <% grandTotal += item.productId.price * item.selected_quantity; %>
+                        <li>
+                            <strong><%= item.productId.name %></strong> 
+                            - <%= item.selected_quantity %> x <%= item.productId.price %> BDT 
+                            = <%= item.productId.price * item.selected_quantity %> BDT
+                        </li>
+                    <% }); %>
+                </ul>
+                <p class="grand-total">Grand Total: <%= grandTotal %> BDT</p>
+            </div>
+
+            <button type="submit" class="confirm-order-btn">Confirm Order</button>
+        </form>
+    </div>
+</div>
+
+<script src="/scripts/checkout.js"></script>

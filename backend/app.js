@@ -24,6 +24,8 @@ const homepageRouter = require("./routes/homepageRouter");
 const loginRouter = require("./routes/loginRouter");
 const productPageRouter = require("./routes/productPageRouter");
 const adminRouter = require("./routes/adminRouter");
+const accountRouter = require("./routes/accountRouter");
+const checkoutRouter = require("./routes/checkoutRouter");
 const cartRouter = require("./routes/cartRouter");
 
 const app = express();
@@ -50,6 +52,10 @@ app.use("/logout", logout);
 app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 
 app.use("/product", sessionInfo, checkLogin, productPageRouter);
+
+app.use("/account", sessionInfo, checkLogin, accountRouter);
+
+app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
 
 app.use("/cart", sessionInfo, checkLogin, cartRouter);
 

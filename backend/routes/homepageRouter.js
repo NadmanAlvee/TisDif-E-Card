@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 	try {
 		const products = await Product.find(); // Fetch all products from the database
 		const userId = res.locals.loggedInUser._id;
-		const cartItems = await Cart.find({ userId }).populate("productId");
+		const cartItems = await Cart.find({ userId });
 
 		res.render("index.ejs", {
 			products: products,
