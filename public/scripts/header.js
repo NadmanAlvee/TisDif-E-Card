@@ -8,8 +8,17 @@ hamburger.addEventListener("click", () => {
 });
 
 // menu dropdown
-function toggleMenu() {
-	document.getElementById("menuDropdown").classList.toggle("active");
+function toggleMenu(show) {
+	const menu = document.getElementById("menuDropdown");
+	if (show) {
+		menu.classList.add("active");
+	} else {
+		menu.classList.remove("active");
+	}
+}
+
+function getLogin() {
+	window.location.href = "/login";
 }
 
 async function logout() {

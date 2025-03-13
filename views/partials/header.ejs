@@ -4,38 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TisDif e-Card</title>
+    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
 </head>
 <body>
   <!-- Nav Bar -->
   <header>
-    <a href="/" class="LOGO"><img
-            src="/ui/homepage/LOGO-T.png" /></a>
-    <div class="hamburger" id="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
+    <!-- Icon -->
+    <a href="/" class="LOGO">
+        <img src="/ui/icons/LOGO-T.png" />
+    </a>
+    
+    <!-- Navbar topics -->
     <nav class="navbar" id="navbar">
         <li><a id="scrollToIphones">iPhones</a></li>
         <li><a id="scrollToGiftCards">GiftCards</a></li>
         <li><a id="scrollToAccessories">Accessories</a></li>
         <li><a href="">Contact</a></li>
+    </nav>
 
-        <!-- User Profile Dropdown -->
-        <div class="user-menu">
-            <% if (Object.keys(loggedInUser).length > 0) { %>
-                <a onclick="toggleMenu()">Account</a>
+    <!-- Account Section -->
+    <div class="account-container">
+        <!-- Cart icon -->
+        <a href="/cart" class="cart-icon">
+            <img src="/ui/icons/cart-shopping-light.svg" alt="Cart">
+            <% if (cartItems.length === 0) { %>
+                <span class="cart-badge"><% cartItems.length %></span>
             <% } else { %>
-                <a onclick="toggleMenu()">Login</a>
-            <% } %>
+                <span class="cart-badge">0</span>
+            <$ } %>
+        </a>
+
+        <!-- Profile Icon -->
+        <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)">
+            <!-- Profile Icon -->
+            <a class="profile-icon">
+                <img src="/ui/icons/circle-user-regular.svg" alt="Account">
+            </a>
+            <!-- User Profile Dropdown -->
             <div class="menu-dropdown" id="menuDropdown">
                 <% if (Object.keys(loggedInUser).length > 0) { %>
                     <div id="user-info">
-                        <p>username:<br><%= loggedInUser.username %></p>
-                        <p>email:<br><%= loggedInUser.email %></p>
-                        <% if (loggedInUser.role == "admin"){ %>
-                            <br><a href="/admin" target="_blank">Manage Products</a>
+                        <p>Username: <%= loggedInUser.username %></p>
+                        <p>Email: <%= loggedInUser.email %></p>
+                        <% if (loggedInUser.role == "admin") { %>
+                            <a href="/admin" target="_blank">Manage Products</a>
                         <% } %>
                     </div>
                     <button id="logout-button" onclick="logout()">Logout</button>
@@ -44,5 +58,13 @@
                 <% } %>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
   </header>

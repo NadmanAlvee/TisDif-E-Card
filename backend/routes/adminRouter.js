@@ -12,27 +12,36 @@ router.get("/", async (req, res) => {
 	}
 });
 
+const generateProductId = () => {
+	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	let productId = "";
+	for (let i = 0; i < 8; i++) {
+		productId += chars.charAt(Math.floor(Math.random() * chars.length));
+	}
+	return productId;
+};
+
 // Add a new product
 router.post("/add-product", async (req, res) => {
 	try {
 		const { name, price, description, image, category, stock, saveTag } =
 			req.body;
 
-		// Convert image string into an array
 		const imageArray = image.split(",").map((img) => img.trim());
 
 		const newProduct = new Product({
 			name,
+			productId: generateProductId(), // Generate a unique product ID
 			price,
 			description,
-			image: imageArray, // Ensure it's stored as an array
+			image: imageArray,
 			category,
 			stock,
 			saveTag,
 		});
 
 		await newProduct.save();
-		res.redirect("/admin"); // Refresh the product list
+		res.redirect("/admin");
 	} catch (err) {
 		console.error(err);
 		res.status(500).send("Error adding product");

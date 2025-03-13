@@ -3,6 +3,7 @@ const express = require("express");
 
 // internal imports
 const Product = require("../models/Product");
+const Cart = require("../models/Cart");
 
 // configs
 const router = express.Router();
@@ -11,9 +12,12 @@ const router = express.Router();
 router.get("/", async (req, res) => {
 	try {
 		const products = await Product.find(); // Fetch all products from the database
-		// Pass products to the EJS view
+		const userId = res.locals.loggedInUser._id;
+		const cartItems = await Cart.find({ userId }).populate("productId");
+
 		res.render("index.ejs", {
 			products: products,
+			cartItems: cartItems,
 		});
 	} catch (error) {
 		console.error("Error fetching products:", error);

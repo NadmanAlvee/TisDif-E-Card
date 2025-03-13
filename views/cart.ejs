@@ -1,0 +1,59 @@
+<%- include('./partials/headerExt.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+
+<div class="cart-container">
+    <h2 class="cart-title">Shopping Cart <span class="cart-icon">🛒</span></h2>
+
+    <% if (cartItems.length === 0) { %>
+        <div class="cart-wrapper">
+            <div class="empty-cart">
+                <div class="cart-icon-wrapper">
+                    <img src="/ui/homepage/empty_cart.png" alt="Empty Cart Image">
+                </div>
+                <h2>Cart Empty!</h2>
+                <p>Your cart is starving—feed it something delicious! 🍕🛍️</p>
+            </div>
+        </div>            
+    <% } else { %>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let grand_total = 0; %>
+                <% cartItems.forEach(item => { %>
+                    <tr>
+                        <td> <img class="thumbnail-image" src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.jpg' %>"
+                            alt="<%= item.productId.name %>" /></td>
+                        <td><%= item.productId.name %></td>
+                        <td><%= item.productId.price %> BDT</td>
+                        <td>
+                            <span class="quantity"><%= item.selected_quantity %></span>
+                        </td>
+                        <td><%= item.productId.price * item.selected_quantity %> BDT</td>
+                        <td>
+                            <form action="/cart/delete/<%= item._id %>" method="POST">
+                                <button type="submit" class="cart-delete-btn">✖</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% grand_total += item.productId.price * item.selected_quantity; %>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <div class="cart-total-section">
+            <p class="cart-total-text">Total: <strong><%= grand_total %> BDT</strong></p>
+            <a href="/checkout" class="cart-checkout-btn">Proceed to Checkout</a>
+        </div>
+    <% } %>
+</div>
+
+<script src="/scripts/header.js"></script>

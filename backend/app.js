@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 dotenv.config();
 
 // internel imports
-const authGuard = require("./middlewares/auth");
+const checkAdmin = require("./middlewares/checkAdmin");
 const {
 	checkLogin,
 	redirectLoggedIn,
@@ -17,11 +17,14 @@ const {
 	errorHandler,
 	notFoundHandler,
 } = require("./middlewares/common/errorHandlers");
+const logout = require("./controller/logoutController");
+
+// routes
 const homepageRouter = require("./routes/homepageRouter");
 const loginRouter = require("./routes/loginRouter");
 const productPageRouter = require("./routes/productPageRouter");
 const adminRouter = require("./routes/adminRouter");
-const logout = require("./controller/logoutController");
+const cartRouter = require("./routes/cartRouter");
 
 const app = express();
 const PORT = process.env.PROD_PORT || 80;
@@ -44,9 +47,11 @@ app.use("/login", sessionInfo, redirectLoggedIn, loginRouter);
 
 app.use("/logout", logout);
 
-app.use("/admin", sessionInfo, checkLogin, authGuard, adminRouter);
+app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 
 app.use("/product", sessionInfo, checkLogin, productPageRouter);
+
+app.use("/cart", sessionInfo, checkLogin, cartRouter);
 
 // Error handling
 app.use(notFoundHandler); // 404

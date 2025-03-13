@@ -1,4 +1,4 @@
-const authGuard = (req, res, next) => {
+const checkAdmin = (req, res, next) => {
 	const { role } = res.locals.loggedInUser;
 	if (role == "admin") {
 		next();
@@ -7,4 +7,4 @@ const authGuard = (req, res, next) => {
 	}
 };
 
-module.exports = authGuard;
+module.exports = checkAdmin;
