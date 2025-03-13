@@ -14,8 +14,12 @@ router.get("/", async (req, res) => {
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId }).populate("productId");
 
-		// Render the checkout page with cart items
-		res.render("checkout", { cartItems });
+		if (cartItems.length > 0) {
+			// Render the checkout page with cart items
+			res.render("checkout", { cartItems });
+		} else {
+			res.redirect("/cart");
+		}
 	} catch (error) {
 		console.error("Error loading checkout page:", error);
 		res.status(500).send("Server Error");

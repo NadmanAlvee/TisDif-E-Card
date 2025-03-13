@@ -56,30 +56,22 @@ router.get("/", checkLogin, async (req, res) => {
 	}
 });
 
-// delete cart item
-router.delete("/:id", checkLogin, async (req, res) => {
+// POST /cart/:id/delete
+router.post("/:id/delete", checkLogin, async (req, res) => {
 	try {
-		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
-			return res.status(401).json({ message: "Unauthorized" });
-		}
-
 		const userId = res.locals.loggedInUser._id;
 		const cartId = req.params.id;
 
-		// Find the cart item
 		const cartItem = await Cart.findOne({ _id: cartId, userId });
-
 		if (!cartItem) {
 			return res.status(404).json({ message: "Cart item not found" });
 		}
 
-		// Delete the cart item
 		await Cart.deleteOne({ _id: cartId });
-
-		res.status(200).json({ message: "Item removed from cart" });
+		return res.redirect("/cart");
 	} catch (error) {
 		console.error("Error removing cart item:", error);
-		res.status(500).json({ message: "Internal server error" });
+		return res.status(500).json({ message: "Internal server error" });
 	}
 });
 

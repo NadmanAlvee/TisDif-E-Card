@@ -39,9 +39,9 @@
                         </td>
                         <td><%= item.productId.price * item.selected_quantity %> BDT</td>
                         <td>
-                            <form action="/cart/delete/<%= item.productId %>" method="POST">
+                            <form action="/cart/<%= item._id %>/delete" method="POST">
                                 <button type="submit" class="cart-delete-btn">✖</button>
-                            </form>
+                            </form>                              
                         </td>
                     </tr>
                     <% grand_total += item.productId.price * item.selected_quantity; %>
