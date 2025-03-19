@@ -1,4 +1,4 @@
-<%- include('./partials/headerExt.ejs') %>
+<%- include('./partials/headers/headerExt.ejs') %>
 <link rel="stylesheet" href="/css/cart.css">
 
 <div class="cart-container">
@@ -30,7 +30,7 @@
                 <% let grand_total = 0; %>
                 <% cartItems.forEach(item => { %>
                     <tr>
-                        <td> <img class="thumbnail-image" src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.jpg' %>"
+                        <td> <img class="thumbnail-image" src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
                             alt="<%= item.productId.name %>" /></td>
                         <td><%= item.productId.name %></td>
                         <td><%= item.productId.price %> BDT</td>

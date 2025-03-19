@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// Select buttons
 	const addToCartButtons = document.querySelectorAll(".add-to-cart");
+	const buyNowButtons = document.querySelectorAll(".buy-now");
 	const totalPriceElement = document.getElementById("total-price");
 	const priceButtons = document.querySelectorAll(".price-btn");
 
@@ -12,9 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			selectedQuantity = event.target.getAttribute("data-price"); // Set selected quantity
 		});
 	});
-
 	addToCartButtons.forEach((button) => {
-		button.addEventListener("click", async (event) => {
+		button.addEventListener("click", async function addToCart(event) {
 			const productId = event.target.getAttribute("data-id");
 			const total_price = parseFloat(
 				totalPriceElement.textContent.replace("BDT", "").trim()
@@ -44,12 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
 				if (response.ok) {
 					alert("Item added to cart!");
 				} else {
-					alert(data.message || "Error adding item to cart");
+					alert("Please log in first!");
+					window.location = "/login";
 				}
 			} catch (error) {
 				console.error("Error adding to cart:", error);
 				alert("Something went wrong!");
 			}
+		});
+	});
+	buyNowButtons.forEach((button) => {
+		button.addEventListener("click", (event) => {
+			window.location = "/cart";
 		});
 	});
 });

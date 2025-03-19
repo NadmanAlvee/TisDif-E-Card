@@ -7,8 +7,7 @@ app.notFoundHandler = (req, res, next) => {
 };
 
 app.errorHandler = (err, req, res, next) => {
-	res.locals.error =
-		process.env.NODE_ENV === "development" ? err : { message: err.message };
+	res.locals.error = { message: err.message };
 	res.redirect("/");
 };
 

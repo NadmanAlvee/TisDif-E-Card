@@ -7,10 +7,7 @@ dotenv.config();
 
 // internel imports
 const checkAdmin = require("./middlewares/checkAdmin");
-const {
-	checkLogin,
-	redirectLoggedIn,
-} = require("./middlewares/common/checkLogin");
+const { checkLogin } = require("./middlewares/common/checkLogin");
 const sessionInfo = require("./middlewares/common/sessionInfo");
 const connectDB = require("./MongooseConfig");
 const {
@@ -29,7 +26,7 @@ const checkoutRouter = require("./routes/checkoutRouter");
 const cartRouter = require("./routes/cartRouter");
 
 const app = express();
-const PORT = process.env.PROD_PORT || 80;
+const PORT = process.env.PORT || 80;
 
 // Connect to MongoDB
 connectDB();
@@ -45,7 +42,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // Frontend Routes
 app.use("/", sessionInfo, checkLogin, homepageRouter);
 
-app.use("/login", sessionInfo, redirectLoggedIn, loginRouter);
+app.use("/login", sessionInfo, loginRouter);
 
 app.use("/logout", logout);
 

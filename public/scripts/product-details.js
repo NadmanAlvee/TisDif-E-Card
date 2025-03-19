@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Retrieve product price from the data attribute
 	const productElement = document.querySelector(".product-info");
 	const productPrice =
-		parseFloat(productElement.getAttribute("data-price")) || 1; // Fallback to 1 if undefined
+		parseFloat(productElement.getAttribute("data-price")) || 1;
 
 	const priceButtons = document.querySelectorAll(".price-btn");
 	const totalPrice = document.getElementById("total-price");

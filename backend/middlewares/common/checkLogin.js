@@ -29,17 +29,4 @@ const checkLogin = async (req, res, next) => {
 	}
 };
 
-const redirectLoggedIn = function (req, res, next) {
-	let cookies =
-		req.signedCookies && Object.keys(req.signedCookies).length > 0
-			? req.signedCookies
-			: null;
-
-	if (!cookies) {
-		next();
-	} else {
-		res.redirect("/");
-	}
-};
-
-module.exports = { checkLogin, redirectLoggedIn };
+module.exports = { checkLogin };

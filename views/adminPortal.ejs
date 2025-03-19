@@ -1,4 +1,4 @@
-<%- include('./partials/headerExt.ejs') %>
+<%- include('./partials/headers/headerExt.ejs') %>
 
     <!-- Add New Product Form -->
     <div id="addNewProd">
@@ -55,7 +55,6 @@
 
     <!-- Font Awesome Script -->
     <link rel="stylesheet" href="./css/adminPortal.css">
-    <script src="/scripts/header.js"></script>
     <script>
         function updateStock(productId) {
             const stockValue = document.getElementById(`stock-${productId}`).value;
@@ -92,6 +91,5 @@
             }).catch(error => console.error('Error:', error));
         }
     </script>
-    <script src="/scripts/header.js"></script>
 </body>
 </html>

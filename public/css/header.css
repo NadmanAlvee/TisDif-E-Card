@@ -120,13 +120,13 @@ header {
 
 /* Menu Drop Down */
 .profile-container {
-  position: relative; /* Ensures the menu positions correctly */
+  position: relative;
   display: inline-block;
 }
 
 #user-info p,#user-info {
   padding: 12px 15px;
-  background-color: var(--background-color-3);
+  background-color: var(--background-color);
   color: var(--text-color);
   font-weight: 600;
   display: flex;
@@ -136,7 +136,7 @@ header {
   
 #user-info a{
     padding: 12px 15px;
-    background-color: var(--background-color-3);
+    background-color: var(--background-color);
     font-weight: bolder;
 }
   
@@ -150,7 +150,7 @@ header {
     position: absolute;
     right: 0;
     top: 100%;
-    background: var(--background-color-3);
+    background: var(--background-color);
     color: white;
     padding: 15px;
     border-radius: 8px;

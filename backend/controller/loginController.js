@@ -5,15 +5,11 @@ const createError = require("http-errors");
 
 // internalimports
 const User = require("../models/User");
-const Cart = require("../models/Cart");
 
 // get login page
 async function getLogin(req, res, next) {
-	const userId = res.locals.loggedInUser._id;
-	const cartItems = await Cart.find({ userId });
 	res.render("login_page.ejs", {
 		loggedInUser: res.locals.loggedInUser,
-		cartItems,
 	});
 }
 
@@ -65,7 +61,13 @@ async function login(req, res, next) {
 			throw createError("Login failed! Please try again.");
 		}
 	} catch (err) {
-		res.render("login_page.ejs");
+		res.render("login_page.ejs", {
+			errors: {
+				common: {
+					msg: err.message,
+				},
+			},
+		});
 	}
 }
 

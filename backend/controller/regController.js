@@ -65,7 +65,7 @@ async function register(req, res, next) {
 				user: userObject,
 			});
 		} else {
-			res.redirect(200, "/");
+			res.redirect("/");
 		}
 	} catch (err) {
 		console.error("Registration Error:", err.message);

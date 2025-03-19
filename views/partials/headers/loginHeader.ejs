@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TisDif e-Card</title>
+    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+</head>
+<body>
+  <!-- Nav Bar -->
+  <header>
+    <!-- Icon -->
+    <a href="/" class="LOGO">
+        <img src="/ui/icons/LOGO-T.png" />
+    </a>
+    
+    <!-- Navbar topics -->
+    <nav class="navbar" id="navbar">
+        <li><a id="scrollToIphones">iPhones</a></li>
+        <li><a id="scrollToGiftCards">GiftCards</a></li>
+        <li><a id="scrollToAccessories">Accessories</a></li>
+        <li><a href="">Contact</a></li>
+    </nav>
+
+    <!-- Account Section -->
+    <div class="account-container">
+        <!-- Cart icon -->
+        <a href="/cart" class="cart-icon">
+            <img src="/ui/icons/cart-shopping-light.svg" alt="Cart" id="cartIcon">
+        </a>
+
+        <!-- Profile Icon -->
+        <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)" id="profileLink">
+            <!-- Profile Icon -->
+            <a class="profile-icon" id="profile">
+                <img src="/ui/icons/circle-user-regular.svg" alt="Account"  id="profileIcon">
+            </a>
+            <!-- User Profile Dropdown -->
+            <div class="menu-dropdown" id="menuDropdown">
+                <% if (Object.keys(loggedInUser).length > 0) { %>
+                    <div id="user-info">
+                        <p>Username: <%= loggedInUser.username %></p>
+                        <p>Email: <%= loggedInUser.email %></p>
+                        <a href="/account" target="_blank">My Account</a>
+                        <% if (loggedInUser.role == "admin") { %>
+                            <a href="/admin" target="_blank">Manage Products</a>
+                        <% } %>
+                    </div>
+                    <button id="logout-button" onclick="logout()">Logout</button>
+                <% } else { %>
+                    <button id="login-button" onclick="window.location.href='/login'">Login</button>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+  </header>
+
+<script src="/scripts/header.js" defer></script>

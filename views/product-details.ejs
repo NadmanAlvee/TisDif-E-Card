@@ -1,4 +1,4 @@
-<%- include('./partials/headerExt.ejs') %>
+<%- include('./partials/headers/headerExt.ejs') %>
 
   <main class="product-details">
     
@@ -33,8 +33,12 @@
           <div class="related-product-card">
             <a href="/product/<%= related._id %>">
               <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.jpg' %>" alt="<%= related.name %>">
-              <p><%= related.name %></p>
-              <p>Price: <%= related.price.toFixed(2) %> BDT</p>
+              <p><%= related.name %></p>  
+              <% if (related.stock === 0) { %>
+                <p>Out Of Stock</p>
+              <% } else { %>
+                <p>Price: <%= related.price.toFixed(2) %> BDT</p>
+              <% } %>
             </a>
           </div>
         <% }) %>
@@ -42,7 +46,7 @@
     </div>
   </main>
 <link rel="stylesheet" href="/css/productDetails.css" />
-<script src="/scripts/addToCart.js"></script>
-<script src="/scripts/product-details.js"></script>
+<script src="/scripts/addToCart.js" defer></script>
+<script src="/scripts/product-details.js" defer></script>
 </body>
 </html>
