@@ -42,7 +42,7 @@
                                     </div>
                                     <% if (order.status.toLowerCase() === 'pending') { %>
                                         <div class="summary-cancel">
-                                        <form action="/orders/<%= order._id %>/items/<%= item._id %>/delete" method="POST">
+                                        <form action="/order/<%= order._id %>/items/<%= item._id %>/delete" method="POST">
                                             <button class="cancelBtn">Cancel Item</button>
                                         </form>
                                         </div>
