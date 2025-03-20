@@ -6,32 +6,26 @@ const checkLogin = async (req, res, next) => {
 		req.signedCookies && Object.keys(req.signedCookies).length > 0
 			? req.signedCookies
 			: null;
-	if (cookies != null) {
+
+	if (cookies) {
 		try {
 			const token = cookies[process.env.COOKIE_NAME];
 
-			// Verify JWT
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 			const user = await User.findOne({ email: decoded.email });
 
 			if (!user) {
-				res.clearCookie(process.env.COOKIE_NAME);
-				return res.redirect("/login");
+				return res.redirect("/");
 			}
 
 			res.locals.loggedInUser = { ...decoded, _id: user._id };
 
-			return next();
+			next();
 		} catch (err) {
-			res.clearCookie(process.env.COOKIE_NAME);
-			res.render("login_page.ejs", {
-				loggedInUser: res.locals.loggedInUser,
-			});
+			return res.redirect("/");
 		}
 	} else {
-		res.render("login_page.ejs", {
-			loggedInUser: res.locals.loggedInUser,
-		});
+		next();
 	}
 };
 

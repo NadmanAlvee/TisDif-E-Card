@@ -66,7 +66,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Frontend Routes
-app.use("/", sessionInfo, homepageRouter);
+app.use("/", sessionInfo, checkLogin, homepageRouter);
 
 app.use("/login", sessionInfo, loginRouter);
 
@@ -74,7 +74,7 @@ app.use("/logout", logout);
 
 app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 
-app.use("/product", sessionInfo, productPageRouter);
+app.use("/product", sessionInfo, checkLogin, productPageRouter);
 
 app.use("/account", sessionInfo, checkLogin, accountRouter);
 

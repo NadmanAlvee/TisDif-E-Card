@@ -7,6 +7,10 @@ const router = express.Router();
 
 router.get("/", checkLogin, async (req, res) => {
 	try {
+		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
+			return res.redirect("/login");
+		}
+
 		const user = res.locals.loggedInUser;
 		const userId = user._id;
 
@@ -19,7 +23,6 @@ router.get("/", checkLogin, async (req, res) => {
 			user,
 			orders,
 			cartItems,
-			errors: req.flash("errors"), // Get flash messages
 		});
 	} catch (error) {
 		console.error("Error fetching account details:", error);
