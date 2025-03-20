@@ -1,4 +1,12 @@
-<link rel="stylesheet" href="/css/admin/manageUsers.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TisDif e-Card</title>
+    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
+    <link rel="stylesheet" href="/css/admin/manageUsers.css">
+</head>
 <nav class="navbar">
     <li><a href="/">TisDifeCard</a></li>
     <li><a href="/admin">Manage Products</a></li>
@@ -15,6 +23,7 @@
 			<div class="order-details">
 				<p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
 				<p><strong>Email:</strong> <%= order.customerInfo.email %></p>
+				<p><strong>Phone:</strong> <%= order.customerInfo.mobile %></p>
 				<p><strong>Order Date:</strong> <%= order.orderDate.toLocaleDateString() %></p>
 				<p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
 				
