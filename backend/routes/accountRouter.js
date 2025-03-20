@@ -5,18 +5,22 @@ const { checkLogin } = require("../middlewares/common/checkLogin");
 
 const router = express.Router();
 
-// Account Page Route
 router.get("/", checkLogin, async (req, res) => {
 	try {
 		const user = res.locals.loggedInUser;
-		const userId = res.locals.loggedInUser._id;
+		const userId = user._id;
 
-		const cartItems = await Cart.find({ userId }).populate("productId");
-		// Fetch the user's orders
-		const orders = await Order.find({ userId }).sort({
-			createdAt: -1,
+		const [cartItems, orders] = await Promise.all([
+			Cart.find({ userId }).populate("productId"),
+			Order.find({ user: userId }).populate("items.product"),
+		]);
+
+		res.render("account", {
+			user,
+			orders,
+			cartItems,
+			errors: req.flash("errors"), // Get flash messages
 		});
-		res.render("account", { user, orders, cartItems });
 	} catch (error) {
 		console.error("Error fetching account details:", error);
 		res.status(500).send("Server Error");

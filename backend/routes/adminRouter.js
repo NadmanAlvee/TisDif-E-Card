@@ -1,17 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product"); // Import your Mongoose Product model
+const Product = require("../models/Product");
 const Cart = require("../models/Cart");
+const Order = require("../models/Order");
 
 // Get all products
 router.get("/", async (req, res) => {
 	try {
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId });
-		const products = await Product.find(); // Fetch all products
+		const products = await Product.find();
 		res.render("adminPortal", { products, cartItems });
 	} catch (err) {
 		res.status(500).send("Error fetching products");
+	}
+});
+
+// order route
+router.get("/orders", async (req, res) => {
+	try {
+		const orders = await Order.find().populate("user", "username email");
+
+		res.render("manageOrders", { orders });
+	} catch (error) {
+		console.error("Order fetch error:", error);
+		res.status(500).send("Error loading orders");
 	}
 });
 

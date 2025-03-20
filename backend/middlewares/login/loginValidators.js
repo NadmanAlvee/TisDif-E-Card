@@ -11,15 +11,11 @@ const doLoginValidators = [
 
 const doLoginValidationHandler = function (req, res, next) {
 	const errors = validationResult(req);
-	const mappedErrors = errors.mapped();
-	if (Object.keys(mappedErrors).length === 0) {
-		next();
-	} else {
-		console.log(errors);
-		res.render("login_page.ejs", {
-			errors: mappedErrors,
-		});
+	if (!errors.isEmpty()) {
+		req.flash("loginErrors", errors.mapped());
+		req.flash("loginData", req.body); // Preserve form data
 	}
+	next();
 };
 
 module.exports = {

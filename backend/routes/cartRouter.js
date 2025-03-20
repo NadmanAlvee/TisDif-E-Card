@@ -1,6 +1,5 @@
 const express = require("express");
 const Cart = require("../models/Cart");
-const Product = require("../models/Product");
 const { checkLogin } = require("../middlewares/common/checkLogin");
 
 const router = express.Router();
@@ -72,6 +71,38 @@ router.post("/:id/delete", checkLogin, async (req, res) => {
 	} catch (error) {
 		console.error("Error removing cart item:", error);
 		return res.status(500).json({ message: "Internal server error" });
+	}
+});
+
+// ➤ Checkout Route (keep existing routes unchanged)
+router.post("/checkout", checkLogin, async (req, res) => {
+	try {
+		const user = res.locals.loggedInUser;
+
+		// 1. Get user's cart items
+		const cartItems = await Cart.find({ userId: user._id }).populate(
+			"productId"
+		);
+
+		const totalAmount = cartItems.reduce(
+			(sum, item) => sum + item.productId.price * item.selected_quantity,
+			0
+		);
+
+		// 3. Create order using existing cart items
+		const order = new Order({
+			user: user._id,
+			cartItems: cartItems.map((item) => item._id), // Reference cart items
+			totalAmount,
+			paymentMethod: req.body.paymentMethod,
+		});
+
+		await order.save();
+
+		res.redirect("/order-confirmation");
+	} catch (error) {
+		console.error("Checkout error:", error);
+		res.status(500).send("Checkout failed");
 	}
 });
 

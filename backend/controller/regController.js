@@ -65,11 +65,11 @@ async function register(req, res, next) {
 				user: userObject,
 			});
 		} else {
-			res.redirect("/");
+			res.redirect("/account");
 		}
 	} catch (err) {
-		console.error("Registration Error:", err.message);
-		next(createError(500, "Internal Server Error"));
+		req.flash("registerErrors", { common: { msg: err.message } });
+		res.redirect("/login");
 	}
 }
 
