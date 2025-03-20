@@ -4,14 +4,14 @@
     
     <div class="product-main">
         <div class="product-images">
-          <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.jpg' %>" alt="Product Image">
+          <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
           <div class="image-thumbnails">
             <% if (Array.isArray(product.image) && product.image.length > 0 && product.image != "") { %>
               <% product.image.forEach(image => { %>
                 <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
               <% }) %>
             <% } else { %>
-              <img class="thumbnail" src="/images/placeholder.jpg">
+              <img class="thumbnail" src="/images/placeholder.webp">
             <% } %>
           </div>
         </div>
@@ -32,7 +32,7 @@
         <% relatedProducts.forEach(related => { %>
           <div class="related-product-card">
             <a href="/product/<%= related._id %>">
-              <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.jpg' %>" alt="<%= related.name %>">
+              <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.webp' %>" alt="<%= related.name %>">
               <p><%= related.name %></p>  
               <% if (related.stock === 0) { %>
                 <p>Out Of Stock</p>

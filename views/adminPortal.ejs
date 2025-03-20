@@ -17,10 +17,15 @@
             <input type="text" id="description" name="description" placeholder="Description"><br>
     
             <label for="image">Product Images: </label><br>
-            <input type="text" id="image" name="image" placeholder="Enter multiple images links, separated by commas"><br>
+            <input type="text" id="image" name="image" placeholder="Enter images links separated by commas (ex. /images/usdGC.webp,/images/inrGC.webp)"><br>
     
-            <label for="category">Product Category: </label><br>
-            <input type="text" id="category" name="category" placeholder="Category (iphones/giftcards/accessories)" required><br>
+            <label for="category">Product Category:</label><br>
+            <select id="category" name="category" required>
+                <option value="giftcards" selected>Gift Cards</option>
+                <option value="iphones">iPhones</option>
+                <option value="accessories">Accessories</option>
+            </select><br>
+
     
             <label for="stock">Product Stock: </label><br>
             <input type="number" id="stock" name="stock" placeholder="Stock"><br>
@@ -28,7 +33,7 @@
             <label for="saveTag">Save Tag: </label><br>
             <input type="number" id="saveTag" name="saveTag" placeholder="Save Tag"><br>
     
-            <button type="submit">Add Product</button>
+            <button class="save-btn" type="submit">Add Product</button>
         </form>
     </div>
     
