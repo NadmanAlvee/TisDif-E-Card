@@ -45,6 +45,7 @@
                         <a href="/account">My Account</a>
                         <% if (loggedInUser.role == "admin") { %>
                             <a href="/admin">Manage Products</a>
+                            <a href="/admin/users">Manage Users</a>
                         <% } %>
                     </div>
                     <button id="logout-button" onclick="logout()">Logout</button>

@@ -1,30 +1,39 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
-const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const User = require("../models/User");
 
 // Get all products
 router.get("/", async (req, res) => {
 	try {
-		const userId = res.locals.loggedInUser._id;
-		const cartItems = await Cart.find({ userId });
 		const products = await Product.find();
-		res.render("adminPortal", { products, cartItems });
+		res.render("adminPortal", { products });
 	} catch (err) {
 		res.status(500).send("Error fetching products");
 	}
 });
 
-// order route
-router.get("/orders", async (req, res) => {
+// users route
+router.get("/users", async (req, res) => {
 	try {
-		const orders = await Order.find().populate("user", "username email");
-
-		res.render("manageOrders", { orders });
+		const orders = await Order.find().populate("items.product").exec();
+		const users = await User.find();
+		res.render("manageUsers", { orders, users });
 	} catch (error) {
-		console.error("Order fetch error:", error);
 		res.status(500).send("Error loading orders");
+	}
+});
+
+// update order state
+router.put("/update-order-status/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { status } = req.body;
+		await Order.findByIdAndUpdate(id, { status });
+		res.status(200).json({ message: "Order status updated successfully" });
+	} catch (err) {
+		res.status(500).json({ message: "Error updating order status" });
 	}
 });
 

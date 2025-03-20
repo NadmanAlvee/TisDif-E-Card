@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/css/admin/manageUsers.css">
+<nav class="navbar">
+    <li><a href="/">TisDifeCard</a></li>
+    <li><a href="/admin">Manage Products</a></li>
+    <li><a href="/admin/users">Manage Users</a></li>
+</nav>
+
+<div class="container">
+	<h1>User and Order Management</h1>
+	
+	<div class="order-list">
+		<% orders.forEach(order => { %>
+		<div class="order-card">
+			<h3>Order #<%= order._id %></h3>
+			<div class="order-details">
+				<p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
+				<p><strong>Email:</strong> <%= order.customerInfo.email %></p>
+				<p><strong>Order Date:</strong> <%= order.orderDate.toLocaleDateString() %></p>
+				<p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
+				
+				<div class="items-list">
+					<% order.items.forEach(item => { %>
+					<div class="item">
+						<p><%= item.product.name %> (x<%= item.quantity %>)</p>
+						<p><%= item.price %> BDT each</p>
+					</div>
+					<% }); %>
+				</div>
+				
+				<div class="status-control">
+					<select class="status-select" data-order-id="<%= order._id %>">
+						<option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+						<option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %>>Processing</option>
+						<option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+						<option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<% }); %>
+	</div>
+</div>
+
+<script>
+	document.querySelectorAll('.status-select').forEach(select => {
+		select.addEventListener('change', async function() {
+			const orderId = this.dataset.orderId;
+			const newStatus = this.value;
+			
+			try {
+				const response = await fetch(`/admin/update-order-status/${orderId}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ status: newStatus }),
+				});
+				
+				if (!response.ok) throw new Error('Update failed');
+				alert('Order status updated successfully');
+			} catch (error) {
+				console.error(error);
+				alert('Error updating order status');
+			}
+		});
+	});
+</script>
