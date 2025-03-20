@@ -8,6 +8,7 @@ h3 {
     margin-bottom: 10px;
 }
 .profile {
+    position: relative;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -19,6 +20,29 @@ h3 {
 .profile p{
     padding: 5px;
 }
+
+.logout {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem 1rem;
+    border: 2px solid #6d0033;
+    border-radius: 20px;
+    color: #6d0033;
+    cursor: pointer;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    translate: -50% -50%;
+    font-weight: bolder;
+    background-color: rgba(207, 0, 0, 0.068);
+    max-width: 100%;
+    transition: 1s;
+}
+
+.logout:hover {
+    background-color: rgba(75, 16, 16, 0.342);
+}
+
 .order-card {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);

@@ -26,7 +26,7 @@ async function logout() {
 		const response = await fetch("/logout", { method: "POST" });
 
 		if (response.ok) {
-			window.location.reload(); // Reload page after logout
+			window.location.reload();
 		} else {
 			console.error("Logout failed");
 		}
