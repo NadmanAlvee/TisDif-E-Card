@@ -3,7 +3,7 @@ function sessionInfo(req, res, next) {
 	// Some static locals
 	res.locals.html = true;
 	res.locals.loggedInUser = {};
-
+	res.locals.errors = {};
 	res.locals.loginErrors = req.flash("loginErrors")[0] || {};
 	res.locals.loginData = req.flash("loginData")[0] || {};
 	res.locals.registerErrors = req.flash("registerErrors")[0] || {};

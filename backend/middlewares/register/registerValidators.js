@@ -23,7 +23,7 @@ const doRegisterValidators = [
 		}),
 	check("mobile")
 		.isMobilePhone()
-		.withMessage("Must be a valid Bangladeshi Mobile Number")
+		.withMessage("Must be a valid Mobile Number")
 		.trim()
 		.custom(async (value) => {
 			const user = await User.findOne({ mobile: value });
@@ -46,11 +46,16 @@ const doRegisterValidators = [
 
 const doRegisterValidationHandler = (req, res, next) => {
 	const errors = validationResult(req);
-	if (!errors.isEmpty()) {
-		req.flash("registerErrors", errors.mapped());
-		req.flash("registerData", req.body); // Preserve form data
+	const mappedErrors = errors.mapped();
+
+	if (Object.keys(mappedErrors).length === 0) {
+		next();
+	} else {
+		console.log(errors);
+		res.render("login_page.ejs", {
+			errors: mappedErrors,
+		});
 	}
-	next();
 };
 
 module.exports = {

@@ -1,95 +1,109 @@
-<%- include('./partials/headers/headerExt.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TisDif e-Card</title>
+    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
+    <link rel="stylesheet" href="./css/admin/adminPortal.css">
+</head>
+<nav class="navbar">
+    <li><a href="/">TisDifeCard</a></li>
+    <li><a href="/admin">Manage Products</a></li>
+    <li><a href="/admin/users">Manage Users</a></li>
+</nav>
+<!-- Add New Product Form -->
+<div id="addNewProd">
+    <h2>Add New Product</h2>
+    <form action="admin/add-product" method="POST">
+        <label for="name">Product Name: </label><br>
+        <input type="text" id="name" name="name" placeholder="Product Name" required><br>
 
-    <!-- Add New Product Form -->
-    <div id="addNewProd">
-        <h2>Add New Product</h2>
-        <form action="admin/add-product" method="POST">
-            <label for="name">Product Name: </label><br>
-            <input type="text" id="name" name="name" placeholder="Product Name" required><br>
-    
-            <label for="price">Product Price: </label><br>
-            <input type="number" id="price" name="price" placeholder="Price" required><br>
+        <label for="price">Product Price: </label><br>
+        <input type="number" id="price" name="price" placeholder="Price" required><br>
 
-            <label for="varient">Product Varient: </label><br>
-            <input type="text" id="varient" name="varient" placeholder="Varient"><br>
+        <label for="varient">Product Varient: </label><br>
+        <input type="text" id="varient" name="varient" placeholder="Varient"><br>
 
-            <label for="description">Product Description: </label><br>
-            <input type="text" id="description" name="description" placeholder="Description"><br>
-    
-            <label for="image">Product Images: </label><br>
-            <input type="text" id="image" name="image" placeholder="Enter multiple images links, separated by commas"><br>
-    
-            <label for="category">Product Category: </label><br>
-            <input type="text" id="category" name="category" placeholder="Category (iphones/giftcards/accessories)" required><br>
-    
-            <label for="stock">Product Stock: </label><br>
-            <input type="number" id="stock" name="stock" placeholder="Stock"><br>
-    
-            <label for="saveTag">Save Tag: </label><br>
-            <input type="number" id="saveTag" name="saveTag" placeholder="Save Tag"><br>
-    
-            <button type="submit">Add Product</button>
-        </form>
+        <label for="description">Product Description: </label><br>
+        <input type="text" id="description" name="description" placeholder="Description"><br>
+
+        <label for="image">Product Images: </label><br>
+        <input type="text" id="image" name="image" placeholder="Enter images links separated by commas (ex. /images/usdGC.webp,/images/inrGC.webp)"><br>
+
+        <label for="category">Product Category:</label><br>
+        <select id="category" name="category" required>
+            <option value="giftcards" selected>Gift Cards</option>
+            <option value="iphones">iPhones</option>
+            <option value="accessories">Accessories</option>
+        </select><br>
+
+
+        <label for="stock">Product Stock: </label><br>
+        <input type="number" id="stock" name="stock" placeholder="Stock"><br>
+
+        <label for="saveTag">Save Tag: </label><br>
+        <input type="number" id="saveTag" name="saveTag" placeholder="Save Tag"><br>
+
+        <button class="save-btn" type="submit">Add Product</button>
+    </form>
+</div>
+
+<!-- Product List Section -->
+<div id="ProdList">
+    <h2>Product List</h2>   
+    <div class="product-container">
+        <% products.forEach(product => { %>
+            <div class="product">
+                <h3><%= product.name %></h3>
+                <label for="price-<%= product._id %>">Price (bdt):</label>
+                <input type="number" class="price-input" id="price-<%= product._id %>" value="<%= product.price %>">
+                <label for="stock-<%= product._id %>">Stock:</label>
+                <input type="number" class="stock-input" id="stock-<%= product._id %>" value="<%= product.stock %>">
+                <button class="save-btn" onclick="updateStock('<%= product._id %>')">Save</button>
+                <!-- Delete button -->
+                <button class="delete-btn" onclick="deleteProduct('<%= product._id %>')">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        <% }) %>
     </div>
-    
-    <!-- Product List Section -->
-    <div id="ProdList">
-        <h2>Product List</h2>   
-        <div class="product-container">
-            <% products.forEach(product => { %>
-                <div class="product">
-                    <h3><%= product.name %></h3>
-                    <label for="price-<%= product._id %>">Price (bdt):</label>
-                    <input type="number" class="price-input" id="price-<%= product._id %>" value="<%= product.price %>">
-                    <label for="stock-<%= product._id %>">Stock:</label>
-                    <input type="number" class="stock-input" id="stock-<%= product._id %>" value="<%= product.stock %>">
-                    <button class="save-btn" onclick="updateStock('<%= product._id %>')">Save</button>
-                    <!-- Delete button -->
-                    <button class="delete-btn" onclick="deleteProduct('<%= product._id %>')">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
-                </div>
-            <% }) %>
-        </div>
-    </div>
+</div>
+<script>
+    function updateStock(productId) {
+        const stockValue = document.getElementById(`stock-${productId}`).value;
+        const priceValue = document.getElementById(`price-${productId}`).value;
 
-    <!-- Font Awesome Script -->
-    <link rel="stylesheet" href="./css/adminPortal.css">
-    <script>
-        function updateStock(productId) {
-            const stockValue = document.getElementById(`stock-${productId}`).value;
-            const priceValue = document.getElementById(`price-${productId}`).value;
+        fetch(`admin/update/${productId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                stock: stockValue,
+                price: priceValue
+            })
+        }).then(response => {
+            if (response.ok) {
+                alert('Stock updated successfully');
+                window.location.href = "/admin";  
+            } else {
+                alert('Error updating stock');
+            }
+        }).catch(error => console.error('Error:', error));
+    }
 
-            fetch(`admin/update/${productId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    stock: stockValue,
-                    price: priceValue
-                })
-            }).then(response => {
-                if (response.ok) {
-                    alert('Stock updated successfully');
-                    window.location.href = "/admin";  
-                } else {
-                    alert('Error updating stock');
-                }
-            }).catch(error => console.error('Error:', error));
-        }
-
-        function deleteProduct(productId) {
-            fetch(`admin/delete/${productId}`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    alert('Product deleted successfully');
-                    window.location.href = "/admin";  
-                } else {
-                    alert('Error deleting product');
-                }
-            }).catch(error => console.error('Error:', error));
-        }
-    </script>
+    function deleteProduct(productId) {
+        fetch(`admin/delete/${productId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                alert('Product deleted successfully');
+                window.location.href = "/admin";  
+            } else {
+                alert('Error deleting product');
+            }
+        }).catch(error => console.error('Error:', error));
+    }
+</script>
 </body>
 </html>

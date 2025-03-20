@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
 					window.location = "/login";
 				}
 			} catch (error) {
-				console.error("Error adding to cart:", error);
-				alert("Something went wrong!");
+				alert("Please log in first!");
+				window.location = "/login";
 			}
 		});
 	});

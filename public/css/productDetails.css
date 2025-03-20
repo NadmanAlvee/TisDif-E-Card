@@ -38,7 +38,6 @@ body {
   max-width: 300px;
   height: auto;
   border-radius: 8px;
-  border: 1px solid #ddd;
 }
 
 /* Thumbnails */
@@ -52,10 +51,8 @@ body {
 .thumbnail {
   width: 70px;
   height: auto;
-  border: 1px solid #ddd;
   border-radius: 4px;
   cursor: pointer;
-  transition: opacity 0.3s ease, border 0.3s ease;
   object-fit: cover;
 }
 
@@ -193,9 +190,13 @@ body {
 .related-product-card img {
   width: 100%;
   height: 160px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 4px;
+}
+
+.related-product-card p {
+  padding: 8px;
 }
 
 .price-options {

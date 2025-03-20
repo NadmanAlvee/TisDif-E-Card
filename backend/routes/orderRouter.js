@@ -60,8 +60,8 @@ router.post("/checkout", async (req, res) => {
 
 router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 	try {
-		const { orderId, itemId } = req.params;
 		const userId = res.locals.loggedInUser._id;
+		const { orderId, itemId } = req.params;
 
 		// 1. Verify order ownership
 		const order = await Order.findOne({
@@ -95,10 +95,22 @@ router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 		}
 		res.redirect("/account");
 	} catch (error) {
-		req.flash("errors", {
-			common: { err: error.msg },
+		const user = res.locals.loggedInUser;
+		const userId = res.locals.loggedInUser._id;
+		const [cartItems, orders] = await Promise.all([
+			Cart.find({ userId }).populate("productId"),
+			Order.find({ user: userId }).populate("items.product"),
+		]);
+		res.render("account", {
+			user,
+			orders,
+			cartItems,
+			errors: {
+				common: {
+					msg: err.message,
+				},
+			},
 		});
-		res.redirect("/account");
 	}
 });
 

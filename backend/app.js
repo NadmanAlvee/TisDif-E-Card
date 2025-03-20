@@ -34,17 +34,24 @@ const PORT = process.env.PORT || 80;
 // Connect to MongoDB
 connectDB();
 
-// Middleware
+// Session
 app.use(
 	session({
 		name: "tisdifecard",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
+		cookie: {
+			httpOnly: true,
+			secure: true,
+			sameSite: "lax",
+		},
 	})
 );
+
+// Middleware
 app.use(flash());
-// Middleware to pass flash messages to views
+
 app.use((req, res, next) => {
 	res.locals.success_msg = req.flash("success");
 	res.locals.error_msg = req.flash("error");
