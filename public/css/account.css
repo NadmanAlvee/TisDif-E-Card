@@ -65,22 +65,22 @@ font-size: 0.8rem;
 .order-status.pending {
 border: 2px solid hsl(45, 100%, 50%);
 color: hsl(45, 100%, 40%);
-background-color: hsl(45, 100%, 90%);
+background-color: hsl(45deg, 100%, 90% / 20%);
 }
 .order-status.processing {
 border: 2px solid hsl(45, 100%, 50%);
 color: hsl(45, 100%, 40%);
-background-color: hsl(45, 100%, 90%);
+background-color: hsl(45deg, 100%, 90% / 20%);
 }
 .order-status.shipped {
 border: 2px solid hsl(266, 100%, 50%);
 color: hsl(266, 100%, 40%);
-background-color: hsl(266, 100%, 90%);
+background-color: hsl(266, 100%, 90% / 20%);
 }
-.order-status.completed {
-border: 2px solid hsl(130, 100%, 50%);
-color: hsl(130, 100%, 40%);
-background-color: hsl(130, 100%, 90%);
+.order-status.delivered {
+border: 2px solid hsl(130, 100%, 20%);
+color: hsl(130, 100%, 20%);
+background-color: hsl(130deg 100% 90% / 20%);
 }
 .items-list {
 display: grid;
