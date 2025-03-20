@@ -38,7 +38,6 @@ body {
   max-width: 300px;
   height: auto;
   border-radius: 8px;
-  border: 1px solid #ddd;
 }
 
 /* Thumbnails */
@@ -52,7 +51,6 @@ body {
 .thumbnail {
   width: 70px;
   height: auto;
-  border: 1px solid #ddd;
   border-radius: 4px;
   cursor: pointer;
   transition: opacity 0.3s ease, border 0.3s ease;

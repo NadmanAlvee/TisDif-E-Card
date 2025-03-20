@@ -103,7 +103,7 @@ h3 {
 
 .item-info h4 {
     margin: 0 0 0.5rem 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 .variant {
@@ -128,12 +128,12 @@ h3 {
 }
 
 .summary-item span:first-child {
-    color: #666;
+    color: var(--text-color);
 }
 
 .summary-item span:last-child {
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
 }
 
 .no-orders {
