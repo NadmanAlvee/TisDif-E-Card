@@ -9,29 +9,21 @@
         <h1>Login</h1>
 
         <div class="input-box">
-          <input type="text" 
-                 name="userid" 
-                 value="<%= loginData.userid || '' %>" 
-                 placeholder="Enter your email or mobile" 
-                 required />
-          <% if(loginErrors.userid) { %>
-            <p class="error show"><%= loginErrors.userid.msg %></p>
+          <input type="text" name="userid" placeholder="Enter your email or mobile" required />
+          <% if(errors.userid) { %>
+            <p class="error show"><%= errors.userid.msg %></p>
           <% } %>
         </div>
 
         <div class="input-box">
-          <input type="password"
-                 name="password"
-                 value="<%= loginData.password || '' %>" 
-                 placeholder="Enter your password"
-                 required />
-          <% if(loginErrors.password) { %>
-            <p class="error show"><%= loginErrors.password.msg %></p>
+          <input type="password" name="password" placeholder="Enter your password" required />
+          <% if(errors.password) { %>
+            <p class="error show"><%= errors.password.msg %></p>
           <% } %>
         </div>
 
-        <% if(loginErrors.common) { %>
-          <p class="error show"><%= loginErrors.common.msg %></p>
+        <% if(errors.common) { %>
+          <p class="error show"><%= errors.common.msg %></p>
         <% } %>
 
         <button type="submit" class="btn">Login</button>
@@ -40,67 +32,47 @@
     <div class="wrapper">
       <!-- Registration Form -->
       <form id="registerForm"
-            action="/login/register"
-            method="post"
+      action="/login/register"
+      method="post"
         >
         <h1>Register</h1>
 
         <div class="input-box">
-          <input type="text"
-                 name="username"
-                 value="<%= registerData.username || '' %>"
-                 placeholder="Enter your username number"
-                 required />
-          <% if(registerErrors.username) { %>
-            <p class="error show"><%= registerErrors.username.msg %></p>
+          <input type="text" name="username" placeholder="Enter your username" required />
+          <% if(errors.username) { %>
+            <p class="error show"><%= errors.username.msg %></p>
           <% } %>
         </div>
 
         <div class="input-box">
-          <input type="text"
-                 name="mobile"
-                 value="<%= registerData.mobile || '' %>"
-                 placeholder="Enter your mobile number"
-                 required />
-          <% if(registerErrors.mobile) { %>
-            <p class="error show"><%= registerErrors.mobile.msg %></p>
+          <input type="text" name="mobile" placeholder="Enter your mobile number" required />
+          <% if(errors.mobile) { %>
+            <p class="error show"><%= errors.mobile.msg %></p>
           <% } %>
         </div>
 
         <div class="input-box">
-          <input type="email"
-                 name="email"
-                 value="<%= registerData.email || '' %>"
-                 placeholder="Enter your email"
-                 required />
-          <% if(registerErrors.email) { %>
-            <p class="error show"><%= registerErrors.email.msg %></p>
+          <input type="email" name="email" placeholder="Enter your email" required />
+          <% if(errors.email) { %>
+            <p class="error show"><%= errors.email.msg %></p>
           <% } %>
         </div>
 
         <div class="input-box">
-          <input type="password"
-                 name="new_password"
-                 value="<%= registerData.new_password || '' %>"
-                 placeholder="Enter a password"
-                 required />
-          <% if(registerErrors.new_password) { %>
-            <p class="error show"><%= registerErrors.new_password.msg %></p>
+          <input type="password" name="new_password" placeholder="Enter your password" required />
+          <% if(errors.new_password) { %>
+            <p class="error show"><%= errors.new_password.msg %></p>
           <% } %>
         </div>
 
         <div class="input-box">
-          <input type="password"
-                 name="confirm_password"
-                 value="<%= registerData.confirm_password || '' %>"
-                 placeholder="Confirm your password"
-                 required />
-          <% if(registerErrors.confirm_password) { %>
-            <p class="error show"><%= registerErrors.confirm_password.msg %></p>
+          <input type="password" name="confirm_password" placeholder="Confirm your password" required />
+          <% if(errors.confirm_password) { %>
+            <p class="error show"><%= errors.confirm_password.msg %></p>
           <% } %>
         </div>
-        <% if(registerErrors.common) { %>
-          <p class="error show"><%= registerErrors.common.msg %></p>
+        <% if(errors.common) { %>
+          <p class="error show"><%= errors.common.msg %></p>
         <% } %>
         <button type="submit" class="btn">Register</button>
 

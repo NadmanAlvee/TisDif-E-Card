@@ -34,17 +34,24 @@ const PORT = process.env.PORT || 80;
 // Connect to MongoDB
 connectDB();
 
-// Middleware
+// Session
 app.use(
 	session({
 		name: "tisdifecard",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
+		cookie: {
+			httpOnly: true,
+			secure: true,
+			sameSite: "lax",
+		},
 	})
 );
+
+// Middleware
 app.use(flash());
-// Middleware to pass flash messages to views
+
 app.use((req, res, next) => {
 	res.locals.success_msg = req.flash("success");
 	res.locals.error_msg = req.flash("error");
@@ -59,7 +66,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Frontend Routes
-app.use("/", sessionInfo, checkLogin, homepageRouter);
+app.use("/", sessionInfo, homepageRouter);
 
 app.use("/login", sessionInfo, loginRouter);
 
@@ -67,7 +74,7 @@ app.use("/logout", logout);
 
 app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 
-app.use("/product", sessionInfo, checkLogin, productPageRouter);
+app.use("/product", sessionInfo, productPageRouter);
 
 app.use("/account", sessionInfo, checkLogin, accountRouter);
 

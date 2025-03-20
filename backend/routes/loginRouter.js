@@ -13,13 +13,12 @@ const {
 	doRegisterValidators,
 } = require("../middlewares/register/registerValidators");
 const { register } = require("../controller/regController");
-const { checkLogin } = require("../middlewares/common/checkLogin");
 
 // configs
 const router = express.Router();
 
 // login page
-router.get("/", sessionInfo, checkLogin, getLogin);
+router.get("/", getLogin);
 
 // process login
 router.post(

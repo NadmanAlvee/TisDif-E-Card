@@ -13,13 +13,13 @@ async function register(req, res, next) {
 
 		// Validate required fields
 		if (!username || !email || !mobile || !new_password) {
-			return next(createError(400, "All fields are required"));
+			throw createError(400, "All fields are required");
 		}
 
 		// Check if user already exists
 		const existingUser = await User.findOne({ email });
 		if (existingUser) {
-			return next(createError(409, "User already exists"));
+			throw createError(409, "User already exists");
 		}
 
 		const salt = await bcrypt.genSalt(10);
@@ -56,7 +56,8 @@ async function register(req, res, next) {
 
 		// Save user in local session
 		res.locals.loggedInUser = userObject;
-		console.log(res.locals.loggedInUser);
+
+		console.log("New Register: \n" + res.locals.loggedInUser);
 
 		// Send response
 		if (req.headers?.accept?.includes("application/json")) {

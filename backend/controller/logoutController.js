@@ -4,7 +4,9 @@ const logout = (req, res, next) => {
 			console.error("Error destroying session:", err);
 			return next(err);
 		}
-		res.clearCookie(process.env.COOKIE_NAME);
+		res.clearCookie("tisdifecard"); // This is the session cookie
+		res.clearCookie(process.env.COOKIE_NAME); // JWT cookie
+
 		res.redirect("/");
 	});
 };
