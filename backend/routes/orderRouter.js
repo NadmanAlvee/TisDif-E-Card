@@ -2,84 +2,104 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
-const nodemailer = require("nodemailer");
+const User = require("../models/User");
+const createHttpError = require("http-errors");
 
 router.post("/checkout", async (req, res) => {
 	try {
 		const user = res.locals.loggedInUser;
 		if (!user) return res.redirect("/login");
 
+		// Get cart items
 		const cartItems = await Cart.find({ userId: user._id }).populate(
 			"productId"
 		);
 
-		if (cartItems.length === 0) return res.redirect("/cart");
+		// Create order items array
+		const orderItems = cartItems.map((item) => ({
+			product: item.productId._id,
+			quantity: item.selected_quantity,
+			price: item.productId.price,
+		}));
 
-		let totalPrice = 0;
-		const orderProducts = cartItems.map((item) => {
-			totalPrice += item.productId.price * item.selected_quantity;
-			return {
-				productId: item.productId._id,
-				quantity: item.selected_quantity,
-				price: item.productId.price,
-			};
+		// Calculate total
+		const totalAmount = cartItems.reduce(
+			(total, item) => total + item.productId.price * item.selected_quantity,
+			0
+		);
+
+		// Create order
+		const order = new Order({
+			user: user._id,
+			items: orderItems,
+			totalAmount,
+			paymentMethod: "Online Payment",
+			deliveryMethod: "Home Delivery",
+			customerInfo: {
+				fullName: req.body.fullName,
+				mobile: req.body.mobile,
+				email: req.body.email,
+				address: req.body.address,
+			},
 		});
 
-		// Create the order
-		const newOrder = new Order({
-			userId: user._id,
-			products: orderProducts,
-			totalPrice,
-			transactionCode: "PAYMENT_PENDING", // Replace with actual transaction details
-			status: "pending",
-		});
-		await newOrder.save();
-
-		// Clear cart
+		// Save order and clear cart
+		await order.save();
 		await Cart.deleteMany({ userId: user._id });
 
-		// Send confirmation email
-		await sendOrderEmail(user, newOrder, cartItems);
-
-		// Send WhatsApp notification (optional)
-		await sendWhatsAppMessage(user, newOrder);
-
-		res.redirect("/account");
+		// Update user with order history
+		await User.findByIdAndUpdate(user._id, {
+			$push: { orders: order._id },
+		});
+		res.redirect(`/account`);
 	} catch (error) {
-		console.error("Checkout error:", error);
-		res.status(500).send("Server Error");
+		console.error("Order error:", error);
+		res.status(500).send("Order processing failed");
 	}
 });
 
-// Send Email Function
-async function sendOrderEmail(user, order, cartItems) {
-	const transporter = nodemailer.createTransport({
-		service: "gmail",
-		auth: {
-			user: process.env.EMAIL, // Your email
-			pass: process.env.EMAIL_PASSWORD, // Your email password
-		},
-	});
+router.post("/:orderId/items/:itemId/delete", async (req, res) => {
+	try {
+		const { orderId, itemId } = req.params;
+		const userId = res.locals.loggedInUser._id;
 
-	const itemsList = cartItems
-		.map(
-			(item) =>
-				`<li>${item.productId.name} - ${item.selected_quantity} pcs</li>`
-		)
-		.join("");
+		// 1. Verify order ownership
+		const order = await Order.findOne({
+			_id: orderId,
+			user: userId,
+		});
 
-	const mailOptions = {
-		from: process.env.EMAIL,
-		to: user.email,
-		subject: "Order Confirmation",
-		html: `<h3>Thank you for your order, ${user.username}!</h3>
-               <p>Order ID: ${order._id}</p>
-               <p>Total: ${order.totalPrice} BDT</p>
-               <ul>${itemsList}</ul>
-               <p>We will notify you once your order is confirmed.</p>`,
-	};
+		if (!order) {
+			throw createHttpError("an error occured!");
+		}
 
-	await transporter.sendMail(mailOptions);
-}
+		// 2. Find the item to remove
+		const itemToRemove = order.items.find(
+			(item) => item._id.toString() === itemId
+		);
+
+		if (!itemToRemove) {
+			throw createHttpError("Item not found in order");
+		}
+
+		// 3. Remove the item and update total
+		await Order.findByIdAndUpdate(orderId, {
+			$pull: { items: { _id: itemId } },
+			$inc: { totalAmount: -(itemToRemove.quantity * itemToRemove.price) },
+		});
+
+		// 4. Check if order becomes empty
+		const updatedOrder = await Order.findById(orderId);
+		if (updatedOrder.items.length === 0) {
+			await Order.findByIdAndDelete(orderId);
+		}
+		res.redirect("/account");
+	} catch (error) {
+		req.flash("errors", {
+			common: { err: error.msg },
+		});
+		res.redirect("/account");
+	}
+});
 
 module.exports = router;

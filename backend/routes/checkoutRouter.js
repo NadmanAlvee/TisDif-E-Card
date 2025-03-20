@@ -1,44 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const Cart = require("../models/Cart");
+const Order = require("../models/Order");
+const User = require("../models/User");
 
-// GET /checkout - Render the checkout page
+// GET /checkout - Keep existing but add delivery method
 router.get("/", async (req, res) => {
 	try {
-		// Make sure user is logged in
-		if (!res.locals.loggedInUser) {
-			return res.redirect("/login");
-		}
+		if (!res.locals.loggedInUser) return res.redirect("/login");
 
-		// Fetch cart items
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId }).populate("productId");
 
-		if (cartItems.length > 0) {
-			// Render the checkout page with cart items
-			res.render("checkout", { cartItems });
-		} else {
-			res.redirect("/cart");
-		}
-	} catch (error) {
-		console.error("Error loading checkout page:", error);
-		res.status(500).send("Server Error");
-	}
-});
+		if (cartItems.length === 0) return res.redirect("/cart");
 
-// POST /checkout - Confirm the order
-router.post("/", async (req, res) => {
-	try {
-		if (!res.locals.loggedInUser) {
-			return res.redirect("/login");
-		}
-		// Example: console.log the form data
-		console.log("Checkout form data:", req.body);
-
-		// Redirect to account (or your confirmation page)
-		res.redirect("/account");
+		res.render("checkout", {
+			cartItems,
+			user: res.locals.loggedInUser, // Pre-fill user info
+		});
 	} catch (error) {
-		console.error("Error confirming order:", error);
+		console.error("Checkout error:", error);
 		res.status(500).send("Server Error");
 	}
 });

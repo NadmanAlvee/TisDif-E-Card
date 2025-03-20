@@ -49,25 +49,23 @@ async function login(req, res, next) {
 					maxAge: 86400000,
 					httpOnly: true,
 					signed: true,
+					secure: true,
+					sameSite: "lax",
 				});
+
 				// logged in user local identifier
 				res.locals.loggedInUser = userObject;
 				// render homepage
-				res.redirect("/");
+				res.redirect("/account");
 			} else {
-				throw createError("Login failed! Please try again.");
+				throw createError(401, "Login failed! Please try again.");
 			}
 		} else {
-			throw createError("Login failed! Please try again.");
+			throw createError(401, "Login failed! Please try again.");
 		}
 	} catch (err) {
-		res.render("login_page.ejs", {
-			errors: {
-				common: {
-					msg: err.message,
-				},
-			},
-		});
+		req.flash("loginErrors", { common: { msg: err.message } });
+		res.redirect("/login");
 	}
 }
 
