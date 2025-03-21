@@ -4,18 +4,7 @@
   <main class="product-details">
     
     <div class="product-main">
-        <div class="product-images">
-          <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
-          <div class="image-thumbnails">
-            <% if (Array.isArray(product.image) && product.image.length > 0 && product.image != "") { %>
-              <% product.image.forEach(image => { %>
-                <img class="thumbnail" src="<%= image %>" onclick="updateMainImage(this)">
-              <% }) %>
-            <% } else { %>
-              <img class="thumbnail" src="/images/placeholder.webp">
-            <% } %>
-          </div>
-        </div>
+      
     
       <% if (product.category == 'giftcards') { %>
         <%- include('./partials/giftcards.ejs') %>
@@ -24,27 +13,39 @@
       <% } else if (product.category == 'accessories') { %>
         <%- include('./partials/accessories.ejs') %>
       <% } %>
-    </div>
 
-    <!-- Related Products -->
-    <div class="related-products">
-      <h3>Related Products</h3>
-      <div class="related-products-container">
-        <% relatedProducts.forEach(related => { %>
-          <div class="related-product-card">
-            <a href="/product/<%= related._id %>">
-              <img src="<%= (related.image[0] && related.image[0].length > 0) ? related.image[0] : '/images/placeholder.webp' %>" alt="<%= related.name %>">
-              <p><%= related.name %></p>  
-              <% if (related.stock === 0) { %>
-                <p>Out Of Stock</p>
-              <% } else { %>
-                <p>Price: <%= related.price.toFixed(2) %> BDT</p>
-              <% } %>
-            </a>
-          </div>
-        <% }) %>
+      <div class="product-images">
+        <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
       </div>
     </div>
+
+    <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
+    if(RelatedProducts.length > 0) { %>
+      <section class="related-container">
+          <div class="related-text">
+            <h2>Browse</h2>
+            <h2>Similar</h2>
+            <h2>Products</h2>
+          </div>
+          <div class="related-product-card">
+            <% relatedProducts.forEach(related => { %>
+                <a href="/product/<%= related._id %>">
+                    <div class="related-card slide-in <%= related.stock === 0 ? 'out-of-stock' : '' %>">
+                        <img class="main-image"
+                            src="<%= (related.image && related.image.length && related.image[0]) ? related.image[0] : '/images/placeholder.webp' %>"
+                            alt="<%= related.name %>" />
+                        <h3 class="related-name"><%= related.name %></h3>
+                        <% if (related.stock === 0) { %>
+                            <p class="related-price">Out Of Stock</p>
+                        <% } else { %>
+                            <p class="related-price">from <%= related.price.toFixed(2).toLocaleString() %> BDT</p>
+                        <% } %>
+                    </div>
+                </a>  
+            <% }) %>
+          </div>
+      </section>
+    <% } %>
   </main>
 <script src="/scripts/addToCart.js" defer></script>
 <script src="/scripts/product-details.js" defer></script>

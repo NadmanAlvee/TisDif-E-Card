@@ -1,10 +1,14 @@
-/* General Container */
+body {
+background: linear-gradient(160deg, #ffffff00, #ffdbed6b, hsl(40deg 100% 50% / 20%));
+min-height: 100vh;
+}
 .cart-container {
 width: 100%;
 max-width: 1320px;
 margin: 100px auto;
 padding: 20px;
 }
+
 /* Title Styling */
 .cart-title {
 text-align: left;
@@ -12,10 +16,12 @@ font-size: 28px;
 font-weight: bold;
 margin-bottom: 20px;
 }
+
 /* Empty Cart Styling */
 .cart-wrapper {
 text-align: center;
 }
+
 .empty-cart {
 padding: 40px;
 border-radius: 12px;
@@ -24,34 +30,40 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 max-width: 500px;
 margin: 50px auto;
 }
+
 .cart-icon-wrapper img {
 width: 80px;
 margin-bottom: 10px;
 }
+
 /* Shopping Cart Table */
 .cart-table {
 font-size: 24px;
 width: 100%;
 border-collapse: collapse;
-background: #fff;
 border-radius: 10px;
 overflow: scroll;
 }
-.cart-table th, 
+
+.cart-table th,
 .cart-table td {
 padding: 12px;
 text-align: center;
 border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .cart-table th {
 font-weight: bold;
 }
+
 .thumbnail-image {
 max-height: 60px;
 }
+
 .quantity {
 font-weight: bold;
 }
+
 /* Delete Button */
 .cart-delete-btn {
 background: #ff4d4d;
@@ -62,9 +74,11 @@ border-radius: 5px;
 cursor: pointer;
 font-size: 14px;
 }
+
 .cart-delete-btn:hover {
 background: #d93636;
 }
+
 /* Cart Total */
 .cart-total-section {
 text-align: right;
@@ -74,9 +88,11 @@ align-items: center;
 justify-content: space-around;
 flex-direction: row;
 }
+
 .cart-total-text {
 font-size: 20px;
 }
+
 .cart-checkout-btn {
 display: inline-block;
 padding: 10px 20px;
@@ -86,6 +102,52 @@ font-size: 16px;
 border-radius: 5px;
 text-decoration: none;
 }
+
 .cart-checkout-btn:hover {
 background: #138496;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+.cart-container {
+margin: 20px auto;
+padding: 10px;
+}
+
+.cart-title {
+font-size: 24px;
+margin-bottom: 15px;
+}
+
+.empty-cart {
+padding: 20px;
+margin: 20px auto;
+}
+
+.cart-table {
+font-size: 16px;
+display: block;
+overflow-x: auto;
+white-space: nowrap;
+}
+
+.cart-table th,
+.cart-table td {
+padding: 8px;
+}
+
+.cart-total-section {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.cart-total-text {
+font-size: 18px;
+margin-bottom: 10px;
+}
+
+.cart-checkout-btn {
+font-size: 14px;
+padding: 8px 16px;
+}
 }

@@ -20,6 +20,25 @@ document.addEventListener("DOMContentLoaded", function () {
 			totalPrice.textContent = (selectedPrice * productPrice).toFixed(2);
 		});
 	});
+
+	// Slide in
+	const slideInCards = document.querySelectorAll(".related-card.slide-in");
+
+	const observerOptions = {
+		threshold: 0.3,
+	};
+
+	const observer = new IntersectionObserver((entries, obs) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("appear");
+				obs.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
+
+	// Observe each card
+	slideInCards.forEach((card) => observer.observe(card));
 });
 
 function updateMainImage(thumbnail) {

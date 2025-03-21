@@ -2,77 +2,82 @@
 <link rel="stylesheet" href="/css/checkout.css">
 
 <div class="checkout-container">
-    <!-- CUSTOMER INFORMATION -->
-    <div class="customer-info">
-        <h2>Customer Information</h2>
-        <form id="checkout-form" action="/order/checkout" method="POST">
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" name="fullName" id="fullName"
-                <% if (user.username) { %>
-                    value="<%= user.username %>"
-                <% } %>
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="mobile">Mobile Number</label>
-                <input type="text" name="mobile" id="mobile" 
-                <% if (user.mobile) { %>
-                    value="<%= user.mobile %>"
-                <% } %>
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email"
-                <% if (user.email) { %>
-                    value="<%= user.email %>"
-                <% } %>
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address</label>
-                <textarea name="address" id="address" rows="3" required></textarea>
-            </div>
-
-            <!-- Payment Method Section -->
-            <div class="payment-method-section">
-                <h2>Payment Method</h2>
-                <div class="payment-option">
-                  Online Payment
-                </div>
-            </div>
-
-            <!-- Delivery Method Section -->
-            <div class="delivery-method-section">
-                <h2>Delivery Method</h2>
-                <div class="delivery-option">
-                  Home Delivery
-                </div>
-            </div>
-
-            <!-- Order Summary -->
-            <div class="order-summary">
-                <% let grandTotal = 0; %>
-                <ul>
-                    <% cartItems.forEach(item => { %>
-                        <% const itemTotal = item.productId.price * item.selected_quantity %>
-                        <% grandTotal += itemTotal; %>
-                        <li>
-                            <strong><%= item.productId.name %></strong> 
-                            - <%= item.selected_quantity %> x 
-                            <%= item.productId.price.toLocaleString() %> BDT = 
-                            <%= itemTotal.toLocaleString() %> BDT
-                        </li>
-                    <% }); %>
-                </ul>
-                <p class="grand-total">Grand Total: <%= grandTotal.toLocaleString() %> BDT</p>
-            </div>
-
-            <button type="submit" class="confirm-order-btn">Confirm Order</button>
-        </form>
+  <!-- Left Column: Personal Information -->
+  <div class="left-container">
+    <div class="personal-info">
+      <h2>Customer Information</h2>
+      <form id="checkout-form" action="/order/checkout" method="POST">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" name="fullName" id="fullName"
+          <% if (user.username) { %>
+            value="<%= user.username %>"
+          <% } %>
+          >
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="text" name="mobile" id="mobile" 
+          <% if (user.mobile) { %>
+            value="<%= user.mobile %>"
+          <% } %>
+          >
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email"
+          <% if (user.email) { %>
+            value="<%= user.email %>"
+          <% } %>
+          >
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea name="address" id="address" rows="3" required></textarea>
+        </div>
+      </form>
     </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-container">
+    <!-- Top Section: Payment and Delivery -->
+    <div class="payment-delivery">
+      <div class="payment-method">
+        <h2>Payment Method</h2>
+        <div class="payment-option">
+          Online Payment
+        </div>
+      </div>
+      <div class="delivery-method">
+        <h2>Delivery Method</h2>
+        <div class="delivery-option">
+          Home Delivery
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Order Summary & Confirm -->
+    <div class="order-summary-section">
+      <div class="order-summary">
+        <% let grandTotal = 0; %>
+        <ul>
+          <% cartItems.forEach(item => { %>
+            <% const itemTotal = item.productId.price * item.selected_quantity %>
+            <% grandTotal += itemTotal; %>
+            <li>
+              <strong><%= item.productId.name %></strong> - 
+              <%= item.selected_quantity %> x 
+              <%= item.productId.price.toLocaleString() %> BDT = 
+              <%= itemTotal.toLocaleString() %> BDT
+            </li>
+          <% }); %>
+        </ul>
+        <p class="grand-total">Grand Total: <%= grandTotal.toLocaleString() %> BDT</p>
+      </div>
+      <!-- Note: The confirm button remains within the form.
+           You may need to adjust your form tags if you want the whole checkout to submit together -->
+      <button type="submit" form="checkout-form" class="confirm-order-btn">Confirm Order</button>
+    </div>
+  </div>
 </div>
