@@ -1,42 +1,189 @@
-/* homepage picture slides */
-.slides {
-margin: 90px auto 0;
-position: relative;
-height: 55vh;
-width: 100vh;
-overflow: hidden;
-box-shadow: 0 8px 11px rgb(14 55 54 / 15%);
-border-radius: 10px;
+:root {
+    --height: 7rem;
+    --text-color: hsla(0, 0%, 0%, 0.65);
+    --background-color: #fff;
+    --background-color-2: #8080802e;
 }
-.slide {
-width: 100%;
-height: 100%;
-position: absolute;
-transition: 2.5s;
-background: var(--background-color);
+body {
+    overflow-x: hidden;
+    background-color: none;
+}
+/* Slide up */
+.typewrapper {
+    margin-top: 70px;
+    position: relative;
+    color: var(--text-color);
+    padding: 3rem;
+}
+.typewrapper .slideup {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    display: flex;
+    font-size: 6rem;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.slideup h2{
+    width: fit-content;
+    font-size: 6rem;
+}
+
+.typewrapper .slideup ol {
+    list-style: none;
+    height: var(--height);
+    line-height: var(--height);
+    overflow: hidden;
+}
+.typewrapper .slideup ol li {
+    width: fit-content;
+    animation: slide-up 12s infinite;
+}
+.typewrapper .slideup ol li span {
+    font-weight: 600;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(20deg, red, magenta);
+    background-clip: text;
+    -webkit-background-clip: text;
+    white-space: nowrap;
+}
+@keyframes slide-up {
+    0%, 10% {
+        transform: translateY(0%);
+    }
+    15%, 25% {
+        transform: translateY(-100%);
+    }
+    30%, 40% {
+        transform: translateY(-200%);
+    }
+    45%, 55% {
+        transform: translateY(-300%);
+    }
+}
+/* Gradient Text Effect */
+.h1s {
+    overflow: hidden;
+}
+.h1 {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    line-height: 0.8;
+    white-space: nowrap;
+    font-size: 15rem;
+    position: relative;
+    background: linear-gradient(to right,
+    hsla(299, 100%, 70%, 0.70), hsla(255, 100%, 50%, 0.50), hsla(240, 100%, 50%, 0.60),
+    hsla(255, 100%, 50%, 0.50), hsla(299, 100%, 70%, 0.70)
+    );
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-gradient 4s linear infinite;
+}
+
+.p1 {
+    left: -10%;
+}
+.p2 {
+    text-align: center;
+}
+.p3 {
+    right: -30%;
+}
+.p4 {
+    left: 0;
+    margin-bottom: 2px;
+}
+@keyframes animate-gradient {
+    to {
+        background-position: 200%;
+    }
 }
 /* category container */
-.heading {
-padding: 20px;
-}
 .categories {
-max-width: 115vh;
-margin-left: auto;
-margin-right: auto;
+display: flex;
+flex-direction: row;
+column-gap: 20%;
+max-width: 100%;
+margin-top: 5%;
 padding: 10px;
+overflow: auto;
+background: var(--background-color-2);
+height: 93vh;
 }
+/* text div */
+.giftcard-wrapper .product-text ol {
+list-style: none;
+height: var(--height);
+line-height: var(--height);
+overflow: hidden;
+}
+.giftcard-wrapper .product-text ol li {
+width: fit-content;
+animation: slide-in 12s infinite;
+}
+.giftcard-wrapper .product-text ol li span {
+font-weight: 600;
+-webkit-text-fill-color: transparent;
+background: linear-gradient(20deg, rgb(45, 143, 0), rgb(217, 255, 0));
+background-clip: text;
+-webkit-background-clip: text;
+white-space: nowrap;
+font-size: 4rem;
+}
+.product-text {
+user-select: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+margin: 10px;
+}
+.product-text h2{
+-webkit-text-fill-color: transparent;
+background: linear-gradient(7deg,#7272723f, #00000080);
+background-clip: text;
+-webkit-background-clip: text;
+display: flex;
+font-size: 7rem;
+}
+@keyframes slide-in {
+    0%, 10% {
+        transform: translateY(0%);
+    }
+    15%, 25% {
+        transform: translateY(-100%);
+    }
+    30%, 40% {
+        transform: translateY(-200%);
+    }
+}
+/* category container */
 .categories-container {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 0.5rem;
-background-color: var(--background-color);
+display: flex;
+flex-direction: row;
+background-color: transparent;
 padding: 20px;
+column-gap: 7%;
+align-items: center;
+justify-content: flex-start;
 }
+
 /* product cards */
 .product-card {
-background-color: var(--background-color);
+user-select: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+background-color: var(--background-color-2);
 border: 1px solid #ddd;
-border-radius: 8px;
+border-radius: 30px;
 width: 250px;
 padding: 10px;
 text-align: center;
@@ -44,34 +191,50 @@ position: relative;
 margin-bottom: 25px;
 }
 .product-card img {
+border-radius: 20px;
 width: 100%;
-height: 200px;
 object-fit: contain;
 object-position: center;
 }
 .product-card h3 {
-font-size: 18px;
+font-size: 20px;
 margin: 10px 0;
 }
 .price {
 font-size: 18px;
 color: #333;
 }
-/* mobile */
-@media (max-width: 768px) {
-.slides {
-width: 100%;
-height: 25vh;
+.product-card.slide-in {
+opacity: 0;
+transform: translateX(100px);
+transition: transform 1.5s ease-out, opacity 1s ease-out;
 }
-.categories-container {
-grid-template-columns: repeat(2, 1fr);
-gap: 1rem;
+
+/* When we add the .appear class, animate to normal position */
+.product-card.slide-in.appear {
+opacity: 1;
+transform: translateX(0);
+}
+/* mobile */
+@media (max-width: 1280px) {
+.typewrapper .slideup {
+align-items: baseline;
+flex-direction: column;
+justify-content: flex-start;
+}
+.slideup h2{
+font-size: 4rem;
+}
+.typewrapper .slideup ol li {
+font-size: 4rem;
+}
+.categories {
+height: 95vh;
+overflow-x: auto;
+flex-direction: column;
 }
 .product-card {
 width: 100%;
 padding: 10px;
-}
-.product-card img {
-height: 150px;
 }
 }

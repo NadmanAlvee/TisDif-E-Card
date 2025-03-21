@@ -20,14 +20,16 @@
         <li><a href="/">iPhones</a></li>
         <li><a href="/">GiftCards</a></li>
         <li><a href="/">Accessories</a></li>
-        <li><a href="/">Contact</a></li>
+        <li><a href="">Contact</a></li>
+        <li><a href="/account">My Orders</a></li>
     </nav>
 
     <!-- Account Section -->
     <div class="account-container">
         <!-- Cart icon -->
         <a href="/cart" class="cart-icon">
-            <img src="/ui/icons/cart-shopping-light.svg" alt="Cart" id="cartIcon">
+            <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
+            Cart
             <% if (cartItems.length > 0) { %>
                 <span class="cart-badge"><%= cartItems.length %></span>
             <% } else { %>
@@ -38,8 +40,9 @@
         <!-- Profile Icon -->
         <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)" id="profileLink">
             <!-- Profile Icon -->
-            <a class="profile-icon" id="profile">
-                <img src="/ui/icons/circle-user-regular.svg" alt="Account"  id="profileIcon">
+            <a href="/account" class="profile-icon" id="profile">
+                <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
+                Profile
             </a>
             <!-- User Profile Dropdown -->
             <div class="menu-dropdown" id="menuDropdown">

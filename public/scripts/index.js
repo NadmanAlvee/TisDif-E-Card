@@ -1,30 +1,20 @@
-const slideOne = document.getElementById("slideOne");
-const slideTwo = document.getElementById("slideTwo");
-const slideThree = document.getElementById("slideThree");
+document.addEventListener("DOMContentLoaded", () => {
+	// Slide in
+	const slideInCards = document.querySelectorAll(".product-card.slide-in");
 
-const funcList = [one, two, three];
-let currentFunc = 1;
+	const observerOptions = {
+		threshold: 0.3,
+	};
 
-function callFunctions() {
-	funcList[currentFunc]();
-	currentFunc = (currentFunc + 1) % funcList.length;
-}
+	const observer = new IntersectionObserver((entries, obs) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("appear");
+				obs.unobserve(entry.target);
+			}
+		});
+	}, observerOptions);
 
-let myInterval = setInterval(callFunctions, 5000);
-
-function one() {
-	slideOne.style.left = "0%";
-	slideTwo.style.left = "100%";
-	slideThree.style.left = "200%";
-}
-function two() {
-	slideOne.style.left = "-100%";
-	slideTwo.style.left = "0%";
-	slideThree.style.left = "100%";
-}
-function three() {
-	slideOne.style.left = "-200%";
-	slideTwo.style.left = "-100%";
-	slideThree.style.left = "0%";
-}
-one();
+	// Observe each card
+	slideInCards.forEach((card) => observer.observe(card));
+});
