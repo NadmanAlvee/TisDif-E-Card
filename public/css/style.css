@@ -1,12 +1,16 @@
 :root {
-    --height: 7rem;
-    --text-color: hsla(0, 0%, 0%, 0.65);
-    --background-color: #fff;
-    --background-color-2: #8080802e;
+--height: clamp(5rem, 8vw, 7rem);
+--heading-font-size: clamp(2rem, 5vw + 1rem, 6rem);
+--child-font-size: clamp(1.8rem, 4vw + 1rem, 6rem);
+--heading-font-size-2: clamp(3rem, 6vw, 7rem);
+--child-font-size-2: clamp(1.5rem, 3vw + 1rem, 4rem);
+--text-color: hsla(0, 0%, 0%, 0.65);
+--background-color: #fff;
+--background-color-2: #8080802e;
 }
 body {
     overflow-x: hidden;
-    background-color: none;
+    background: none;
 }
 /* Slide up */
 .typewrapper {
@@ -21,7 +25,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     display: flex;
-    font-size: 6rem;
+    font-size: var(--child-font-size);
     align-items: center;
     justify-content: center;
     column-gap: 20px;
@@ -29,7 +33,7 @@ body {
 
 .slideup h2{
     width: fit-content;
-    font-size: 6rem;
+    font-size: var(--heading-font-size);
 }
 
 .typewrapper .slideup ol {
@@ -85,7 +89,7 @@ body {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: animate-gradient 4s linear infinite;
+    animation: animate-gradient 3s linear infinite;
 }
 
 .p1 {
@@ -115,7 +119,7 @@ max-width: 100%;
 margin-top: 5%;
 padding: 10px;
 overflow: auto;
-background: var(--background-color-2);
+background: linear-gradient(180deg, #ffffff00, #ffdbed6b, hsl(240deg 100% 50% / 21%));
 height: 93vh;
 }
 /* text div */
@@ -136,7 +140,7 @@ background: linear-gradient(20deg, rgb(45, 143, 0), rgb(217, 255, 0));
 background-clip: text;
 -webkit-background-clip: text;
 white-space: nowrap;
-font-size: 4rem;
+font-size: var(--child-font-size-2);
 }
 .product-text {
 user-select: none;
@@ -147,11 +151,11 @@ margin: 10px;
 }
 .product-text h2{
 -webkit-text-fill-color: transparent;
-background: linear-gradient(7deg,#7272723f, #00000080);
+background: linear-gradient(7deg, #7272723f, #000000);
 background-clip: text;
 -webkit-background-clip: text;
 display: flex;
-font-size: 7rem;
+font-size: var(--heading-font-size-2);
 }
 @keyframes slide-in {
     0%, 10% {
@@ -181,14 +185,16 @@ user-select: none;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
-background-color: var(--background-color-2);
-border: 1px solid #ddd;
+background-color: #80808026;
 border-radius: 30px;
 width: 250px;
 padding: 10px;
 text-align: center;
 position: relative;
 margin-bottom: 25px;
+}
+.slide-in:hover {
+box-shadow: 19px 31px 68px 0px rgb(255 0 235 / 29%);
 }
 .product-card img {
 border-radius: 20px;
@@ -197,7 +203,7 @@ object-fit: contain;
 object-position: center;
 }
 .product-card h3 {
-font-size: 20px;
+font-size: 15px;
 margin: 10px 0;
 }
 .price {
@@ -209,24 +215,16 @@ opacity: 0;
 transform: translateX(100px);
 transition: transform 1.5s ease-out, opacity 1s ease-out;
 }
-
-/* When we add the .appear class, animate to normal position */
 .product-card.slide-in.appear {
 opacity: 1;
 transform: translateX(0);
 }
-/* mobile */
+/* responsive */
 @media (max-width: 1280px) {
 .typewrapper .slideup {
 align-items: baseline;
 flex-direction: column;
 justify-content: flex-start;
-}
-.slideup h2{
-font-size: 4rem;
-}
-.typewrapper .slideup ol li {
-font-size: 4rem;
 }
 .categories {
 height: 95vh;
@@ -234,7 +232,23 @@ overflow-x: auto;
 flex-direction: column;
 }
 .product-card {
-width: 100%;
+overflow: auto;
+max-width: 150px;
 padding: 10px;
+}
+}
+@media (max-width: 880px) {
+:root {
+--heading-font-size: clamp(3rem, 6vw, 4rem);
+--child-font-size: clamp(2.9rem, 4.5vw, 3.5rem);
+}
+.typewrapper {
+padding: 1rem;
+}
+}
+@media (max-width: 373px) {
+:root {
+--heading-font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+--child-font-size: clamp(1.5rem, 4vw, 2rem);
 }
 }

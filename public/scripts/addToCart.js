@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				const data = await response.json();
 
 				if (response.ok) {
-					alert("Item added to cart!");
+					window.location.reload();
 				} else {
 					alert("Please log in first!");
 					window.location = "/login";
@@ -51,11 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				alert("Please log in first!");
 				window.location = "/login";
 			}
-		});
-	});
-	buyNowButtons.forEach((button) => {
-		button.addEventListener("click", (event) => {
-			window.location = "/cart";
 		});
 	});
 });
