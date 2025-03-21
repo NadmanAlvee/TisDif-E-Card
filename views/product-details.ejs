@@ -33,7 +33,7 @@
         <% relatedProducts.forEach(related => { %>
           <div class="related-product-card">
             <a href="/product/<%= related._id %>">
-              <img src="<%= (related.image && related.image.length > 0) ? related.image[0] : '/images/placeholder.webp' %>" alt="<%= related.name %>">
+              <img src="<%= (related.image[0] && related.image[0].length > 0) ? related.image[0] : '/images/placeholder.webp' %>" alt="<%= related.name %>">
               <p><%= related.name %></p>  
               <% if (related.stock === 0) { %>
                 <p>Out Of Stock</p>

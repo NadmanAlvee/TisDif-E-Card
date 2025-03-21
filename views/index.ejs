@@ -1,34 +1,63 @@
 <%- include('./partials/headers/header.ejs') %>
 <link rel="stylesheet" href="/css/style.css" />
 
-    <div class="slides">
-        <img src="ui/16.webp" class="slide" id="slideOne" />
-        <img src="ui/15.webp" class="slide" id="slideTwo" />
-        <img src="ui/apple_giftcard.webp" class="slide" id="slideThree" />
+    <!-- Slide ups -->
+    <div class="typewrapper">
+        <div class="slideup">
+            <h2>DISCOVER</h2>
+            <ol>
+                <li><span>GIFT CARDS</span></li>
+                <li><span>IPHONES</span></li>
+                <li><span>ACCESSORIES</span></li>
+                <li><span>AND MANY MORE</span></li>
+            </ol>
+        </div>
     </div>
 
-    <!-- Product Cards -->
+    <!-- designs -->
+    <div class="h1s">
+        <h1 class="h1 p1">TISDIF E CARD</h1>
+        <h1 class="h1 p2">TISDIF E CARD</h1>
+        <h1 class="h1 p3">TISDIF E CARD</h1>
+        <h1 class="h1 p4">TISDIF E CARD</h1>
+    </div>
+
+    <!-- Products Section -->
     <% const categories = ["iphones", "giftcards", "accessories"]; %>
     <% categories.forEach(category => { 
         const categoryProducts = products.filter(product => product.category === category);
         if (categoryProducts.length > 0) { %>
-    
-            <section class="categories" id="<%= category %>">
-                <div class="heading">
-                    <h2>Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
-                </div>
-    
-                <div class="categories-container">
-                    <% categoryProducts.forEach(product => { %>
-                        <%- include('partials/homepage/product-card', { product }) %>
-                    <% }) %>
-                </div>
-            </section>
-    
+                <section class="categories" id="<%= category %>">
+                    <% if(category == 'giftcards') { %>
+                        <div class="giftcard-wrapper">
+                            <div class="product-text">
+                                <h2>Browse</h2>
+                                <h2>Giftcards</h2>
+                                <ol>
+                                    <li><span>The Perfect Gift</span></li>
+                                    <li><span>Anytime</span></li>
+                                    <li><span>Anywhere</span></li>
+                                </ol>
+                            </div>
+                        </div>
+                    <% } else if (category == 'iphones') { %>
+                        <div class="product-text">
+                            <h2>Browse iPhones%></h2>
+                        </div>
+                    <% } %>
+                    <div class="categories-container">
+                        <% categoryProducts.forEach(product => { %>
+                            <%- include('partials/homepage/product-card', { product }) %>
+                        <% }) %>
+                    </div>
+                </section>
         <% } 
     }) %>
 
-    <%- include('./partials/footer/footer.ejs') %>
-    <script src="/scripts/index.js" defer></script>
+<!-- Include footer partial -->
+<%- include('./partials/footer/footer.ejs') %>
+
+<!-- Move the Finisher Header script here -->
+<script src="/scripts/index.js" defer></script>
 </body>
 </html>
