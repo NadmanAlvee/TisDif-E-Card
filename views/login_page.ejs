@@ -1,83 +1,132 @@
 <%- include('./partials/headers/loginHeader.ejs') %>
 
-    <div class="wrapper">
-      <!-- Login Form -->
-      <form id="loginForm"
-            action="/login"
-            method="post"
-        >
-        <h1>Login</h1>
+<!-- Login Form -->
+<div class="wrapper" id="loginWrapper">
+  <form id="loginForm" action="/login" method="post">
+    <h1>Login</h1>
 
-        <div class="input-box">
-          <input type="text" name="userid" placeholder="Enter your email or mobile" required />
-          <% if(errors.userid) { %>
-            <p class="error show"><%= errors.userid.msg %></p>
-          <% } %>
-        </div>
-
-        <div class="input-box">
-          <input type="password" name="password" placeholder="Enter your password" required />
-          <% if(errors.password) { %>
-            <p class="error show"><%= errors.password.msg %></p>
-          <% } %>
-        </div>
-
-        <% if(errors.common) { %>
-          <p class="error show"><%= errors.common.msg %></p>
-        <% } %>
-
-        <button type="submit" class="btn">Login</button>
-      </form>
+    <div class="input-box">
+      <input type="text" name="userid" placeholder="Enter your email or mobile" required />
+      <% if(errors.userid) { %>
+        <p class="error show"><%= errors.userid.msg %></p>
+      <% } %>
     </div>
-    <div class="wrapper">
-      <!-- Registration Form -->
-      <form id="registerForm"
-      action="/login/register"
-      method="post"
-        >
-        <h1>Register</h1>
 
-        <div class="input-box">
-          <input type="text" name="username" placeholder="Enter your username" required />
-          <% if(errors.username) { %>
-            <p class="error show"><%= errors.username.msg %></p>
-          <% } %>
-        </div>
-
-        <div class="input-box">
-          <input type="text" name="mobile" placeholder="Enter your mobile number" required />
-          <% if(errors.mobile) { %>
-            <p class="error show"><%= errors.mobile.msg %></p>
-          <% } %>
-        </div>
-
-        <div class="input-box">
-          <input type="email" name="email" placeholder="Enter your email" required />
-          <% if(errors.email) { %>
-            <p class="error show"><%= errors.email.msg %></p>
-          <% } %>
-        </div>
-
-        <div class="input-box">
-          <input type="password" name="new_password" placeholder="Enter your password" required />
-          <% if(errors.new_password) { %>
-            <p class="error show"><%= errors.new_password.msg %></p>
-          <% } %>
-        </div>
-
-        <div class="input-box">
-          <input type="password" name="confirm_password" placeholder="Confirm your password" required />
-          <% if(errors.confirm_password) { %>
-            <p class="error show"><%= errors.confirm_password.msg %></p>
-          <% } %>
-        </div>
-        <% if(errors.common) { %>
-          <p class="error show"><%= errors.common.msg %></p>
-        <% } %>
-        <button type="submit" class="btn">Register</button>
-
-      </form>
+    <div class="input-box">
+      <input type="password" name="password" placeholder="Enter your password" required />
+      <% if(errors.password) { %>
+        <p class="error show"><%= errors.password.msg %></p>
+      <% } %>
     </div>
-    <link rel="stylesheet" href="/css/login.css" />
-  </body>
+
+    <% if(errors.common) { %>
+      <p class="error show"><%= errors.common.msg %></p>
+    <% } %>
+
+    <button type="submit" class="btn">Login</button>
+
+    <div class="register-link">
+      <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+    </div>
+  </form>
+</div>
+
+<!-- Registration Form -->
+<div class="wrapper" id="registerWrapper" style="display: none;">
+  <form id="registerForm" action="/login/register" method="post">
+    <h1>Register</h1>
+
+    <div class="input-box">
+      <input type="text" name="username" placeholder="Enter your username" required />
+      <% if(errors.username) { %>
+        <p class="error show"><%= errors.username.msg %></p>
+      <% } %>
+    </div>
+
+    <div class="input-box">
+      <!-- Country code select and mobile number input in a flex container -->
+      <div class="input-box-div">
+        <select name="country_code" required>
+          <option value="+880">+880 (Bangladesh)</option>
+          <option value="+1">+1 (US)</option>
+          <option value="+44">+44 (UK)</option>
+          <option value="+91">+91 (India)</option>
+          <option value="+61">+61 (Australia)</option>
+        </select>
+        <input 
+          type="text" 
+          name="mobile" 
+          placeholder="Enter your mobile number" 
+          required
+        />
+      </div>
+      <% if(errors.mobile) { %>
+        <p class="error show"><%= errors.mobile.msg %></p>
+      <% } %>
+    </div>
+
+    <div class="input-box">
+      <input type="email" name="email" placeholder="Enter your email" required />
+      <% if(errors.email) { %>
+        <p class="error show"><%= errors.email.msg %></p>
+      <% } %>
+    </div>
+
+    <div class="input-box">
+      <input type="password" name="new_password" placeholder="Enter your password" required />
+      <% if(errors.new_password) { %>
+        <p class="error show"><%= errors.new_password.msg %></p>
+      <% } %>
+    </div>
+
+    <div class="input-box">
+      <input type="password" name="confirm_password" placeholder="Confirm your password" required />
+      <% if(errors.confirm_password) { %>
+        <p class="error show"><%= errors.confirm_password.msg %></p>
+      <% } %>
+    </div>
+
+    <button type="submit" class="btn">Register</button>
+
+    <div class="register-link">
+      <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+    </div>
+  </form>
+</div>
+
+<link rel="stylesheet" href="/css/login.css" />
+
+<!-- Pass the active form variable from the server into a global JS variable -->
+<script>
+  window.activeForm = "<%= typeof form !== 'undefined' ? form : 'login' %>";
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginWrapper = document.getElementById('loginWrapper');
+    const registerWrapper = document.getElementById('registerWrapper');
+    const showRegisterLink = document.getElementById('showRegister');
+    const showLoginLink = document.getElementById('showLogin');
+
+    if (window.activeForm === 'register') {
+      loginWrapper.style.display = 'none';
+      registerWrapper.style.display = 'block';
+    } else {
+      loginWrapper.style.display = 'block';
+      registerWrapper.style.display = 'none';
+    }
+
+    showRegisterLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      loginWrapper.style.display = 'none';
+      registerWrapper.style.display = 'block';
+    });
+
+    showLoginLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      registerWrapper.style.display = 'none';
+      loginWrapper.style.display = 'block';
+    });
+  });
+</script>
+</body>
 </html>

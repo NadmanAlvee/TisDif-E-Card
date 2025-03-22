@@ -9,12 +9,24 @@ const User = require("../models/User");
 // Register User
 async function register(req, res, next) {
 	try {
-		const { username, email, mobile, new_password } = req.body;
+		const { username, email, mobile, new_password, country_code } = req.body;
 
 		// Validate required fields
-		if (!username || !email || !mobile || !new_password) {
+		if (!username || !email || !mobile || !new_password || !country_code) {
 			throw createError(400, "All fields are required");
 		}
+
+		// Remove leading zero from mobile if present
+		let processedMobile = mobile;
+		if (processedMobile.startsWith("0")) {
+			processedMobile = processedMobile.substring(1);
+		}
+		if (processedMobile.startsWith(country_code)) {
+			processedMobile = processedMobile.substring(country_code.length);
+		}
+
+		// Concatenate country code with mobile number
+		processedMobile = country_code + processedMobile;
 
 		// Check if user already exists
 		const existingUser = await User.findOne({ email });
@@ -29,7 +41,7 @@ async function register(req, res, next) {
 		const newUser = new User({
 			username,
 			email,
-			mobile,
+			mobile: processedMobile,
 			password: hashedPassword,
 		});
 

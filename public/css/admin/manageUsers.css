@@ -11,6 +11,10 @@ text-decoration: none;
 scroll-padding-top: 2rem;
 scroll-behavior: smooth;
 }
+.container h1 {
+    text-align: center;
+    margin: 90px auto 0;
+}
 .navbar {
 position: fixed;
 height: 70px;
@@ -38,7 +42,6 @@ padding: 1.5rem 1rem;
 .navbar a:hover {
 border-bottom: 2px solid var(--text-color);
 }
-/* container */
 .order-list {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
@@ -68,4 +71,24 @@ border-radius: 4px;
 border: 1px solid #ddd;
 margin-top: 1rem;
 width: 200px;
+}
+@media (max-width: 1024px) {
+.navbar {
+padding: 0 20px;
+}
+.navbar a {
+font-size: 15px;
+}
+.order-list {
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust columns dynamically */
+gap: 15px;
+padding: 0 10px;
+}
+.order-card {
+padding: 0.8rem;
+box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.status-control select {
+width: 100%;
+}
 }
