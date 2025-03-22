@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TisDif e-Card</title>
-    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
-    <link rel="stylesheet" href="/css/header.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TisDif e-Card | Home</title>
+  <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
+  <link rel="stylesheet" href="/css/header.css" />
 </head>
 <body>
   <!-- Nav Bar -->
   <header>
-    <!-- Icon -->
+    <!-- Logo -->
     <a href="/" class="LOGO">
-        <img src="/ui/icons/LOGO-T.webp" />
+      <img src="/ui/icons/LOGO-T.webp" alt="Logo" />
     </a>
     
     <!-- Navbar topics -->
@@ -26,77 +26,76 @@
 
     <!-- Account Section -->
     <div class="account-container">
-        <!-- Cart icon -->
-        <a href="/cart" class="cart-icon">
-            <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
-            Cart
-            <% if (cartItems.length > 0) { %>
-                <span class="cart-badge"><%= cartItems.length %></span>
-            <% } else { %>
-                <span class="cart-badge">0</span>
-            <% } %>
-        </a>
+      <!-- Cart icon -->
+      <a href="/cart" class="cart-icon">
+        <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
+        Cart
+        <% if (cartItems.length > 0) { %>
+          <span class="cart-badge"><%= cartItems.length %></span>
+        <% } else { %>
+          <span class="cart-badge">0</span>
+        <% } %>
+      </a>
 
-        <!-- Profile Icon -->
-        <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)" id="profileLink">
-            <!-- Profile Icon -->
-            <a href="/account" class="profile-icon" id="profile">
-                <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
-                Profile
-            </a>
-            <!-- User Profile Dropdown -->
-            <div class="menu-dropdown" id="menuDropdown">
-                <% if (Object.keys(loggedInUser).length > 0) { %>
-                    <div id="user-info">
-                        <p>Username: <%= loggedInUser.username %></p>
-                        <p>Email: <%= loggedInUser.email %></p>
-                        <a href="/account">My Account</a>
-                        <% if (loggedInUser.role == "admin") { %>
-                            <a href="/admin">Manage Products</a>
-                            <a href="/admin/users">Manage Users</a>
-                        <% } %>
-                    </div>
-                    <button id="logout-button" onclick="logout()">Logout</button>
-                <% } else { %>
-                    <button id="login-button" onclick="window.location.href='/login'">Login</button>
-                <% } %>
+      <!-- Profile Icon -->
+      <div class="profile-container" onmouseover="toggleMenu(true)" onmouseleave="toggleMenu(false)" id="profileLink">
+        <a href="/account" class="profile-icon" id="profile">
+          <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
+          Profile
+        </a>
+        <!-- User Profile Dropdown -->
+        <div class="menu-dropdown" id="menuDropdown">
+          <% if (Object.keys(loggedInUser).length > 0) { %>
+            <div id="user-info">
+              <p>Username: <%= loggedInUser.username %></p>
+              <p>Email: <%= loggedInUser.email %></p>
+              <a href="/account">My Account</a>
+              <% if (loggedInUser.role == "admin") { %>
+                <a href="/admin">Manage Products</a>
+                <a href="/admin/users">Manage Users</a>
+              <% } %>
             </div>
+            <button id="logout-button" onclick="logout()">Logout</button>
+          <% } else { %>
+            <button id="login-button" onclick="window.location.href='/login'">Login</button>
+          <% } %>
         </div>
+      </div>
     </div>
 
-    <!-- Mobile Section -->
+    <!-- Mobile Container (only visible on mobile) -->
     <div class="mobile-container">
-        <!-- Home icon -->
-        <a href="/" class="home-icon">
-            <img src="https://img.icons8.com/material-outlined/32/home--v2.png" alt="home"/>
-        </a>
-        
-        <!-- Cart icon -->
-        <a href="/cart" class="cart-icon">
-            <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
-            <% if (cartItems.length > 0) { %>
-                <span class="cart-badge"><%= cartItems.length %></span>
-            <% } else { %>
-                <span class="cart-badge">0</span>
-            <% } %>
-        </a>
+      <!-- Home icon -->
+      <a href="/" class="mobile-home-icon">
+        <img src="https://img.icons8.com/material-outlined/32/home--v2.png" alt="home"/>
+      </a>
+      
+      <!-- Cart icon -->
+      <a href="/cart" class="mobile-cart-icon">
+        <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
+        <% if (cartItems.length > 0) { %>
+          <span class="mobile-cart-badge"><%= cartItems.length %></span>
+        <% } else { %>
+          <span class="mobile-cart-badge">0</span>
+        <% } %>
+      </a>
 
-        <!-- Profile Icon -->
-        <div class="profile-container">
-            <!-- Profile Icon -->
-            <a href="/account" class="profile-icon">
-                <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
-            </a>
-        </div>
+      <!-- Profile Icon -->
+      <div class="mobile-profile-container">
+        <a href="/account" class="mobile-profile-icon">
+          <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
+        </a>
+      </div>
     </div>
 
     <!-- Hamburger Menu -->
     <div class="hamburger" id="hamburger" aria-label="Menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </div>
-
   </header>
 
-<script src="/scripts/header.js" defer></script>
+  <script src="/scripts/header.js" defer></script>
+</body>
+</html>
