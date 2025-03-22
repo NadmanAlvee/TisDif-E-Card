@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Slide in
-	const slideInCards = document.querySelectorAll(".related-card.slide-in");
+	const slideInCards = document.querySelectorAll(".slide-in");
 
 	const observerOptions = {
 		threshold: 0.3,

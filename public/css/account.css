@@ -11,12 +11,21 @@ margin-bottom: 10px;
 .profile {
 position: relative;
 display: flex;
+row-gap: 20px;
 flex-direction: column;
 border-radius: 10px;
 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 margin-bottom: 2rem;
 padding: 1.5rem;
 border: 1px solid lightgray;
+}
+.profile a {
+color: #0056b3;
+padding: 5px;
+}
+.profile a:hover {
+color: #002c5c;
+transition: 0.5s;
 }
 .profile p{
 padding: 5px;
@@ -156,4 +165,16 @@ font-size: 0.8rem;
 color: red;
 background-color: rgba(207, 0, 0, 0.068);
 max-width: 100%;
+}
+@media (max-width: 768px) {
+.order-status {
+padding: 0.5rem 1rem;
+border-radius: 20px;
+font-weight: bolder;
+text-transform: uppercase;
+font-size: 10px;
+}
+.container {
+font-size: 15px;
+}
 }

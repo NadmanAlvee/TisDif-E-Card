@@ -1,108 +1,119 @@
 body {
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #f9f9f9, #e6e6e6);
+overflow: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+background: linear-gradient(180deg, #ffffff00, #ffdbed6b, hsl(240deg 100% 50% / 21%));
 }
-
-.show.error{
-  color: red;
-  text-align: center;
+.show.error {
+color: red;
+text-align: center;
 }
-
 .wrapper {
-  margin: 20px;
-  width: 420px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px 40px;
+margin: 20px;
+background: white;
+border-radius: 20px;
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+padding: 30px 40px;
 }
-
+#registerWrapper {
+background-color: transparent;
+}
+#loginWrapper {
+width: 400px;
+max-width: 400px;
+background-color: transparent;
+}
 .wrapper h1 {
-  font-size: 28px;
-  text-align: center;
+font-size: 28px;
+text-align: center;
 }
-
 .wrapper .input-box {
-  position: relative;
-  width: 100%;
-  margin: 20px 0;
+position: relative;
+width: 100%;
+margin: 20px 0;
 }
-
 .input-box input {
-  text-align: center;
-  width: 100%;
-  height: 45px;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 0 40px 0 15px;
-  font-size: 14px;
+text-align: center;
+width: 100%;
+height: 45px;
+background-color: transparent;
+border: 1px solid #ccc;
+border-radius: 20px;
+padding: 0 40px 0 15px;
+font-size: 14px;
 }
-
-.input-box i {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: #888;
+.input-box-div {
+display: flex;
+gap: 10px;
+width: 100%;
 }
-
-.wrapper .remember-forgot {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: 10px 0;
+.input-box select {
+background: none;
+padding: 0 10px;
+border-radius: 20px;
+border: 1px solid #ccc;
+height: 45px;
+font-size: 14px;
+cursor: pointer;
 }
-
 .wrapper .btn {
-  text-align: center;
-  justify-content: center;
-  max-width: 100%;
-  width: 100%;
-  height: 45px;
-  background: #8b8b8b;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 1s;
+position: relative;
+overflow: hidden;
+text-align: center;
+justify-content: center;
+max-width: 100%;
+width: 100%;
+height: 45px;
+background: linear-gradient(20deg, #35353577, hsl(0deg 0% 0% / 80%));
+border: none;
+border-radius: 15px;
+color: white;
+font-weight: bold;
+font-size: 16px;
+cursor: pointer;
 }
-
-.wrapper .btn:hover {
-  background: #00520b;
-  border-radius: 20px;
+.wrapper .btn::after {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(180deg, #86868646, hsl(0deg 0% 0% / 80%));
+opacity: 0;
+transition: opacity 1s;
+border-radius: inherit;
+z-index: -1;
 }
-
+.wrapper .btn:hover::after {
+opacity: 1;
+}
 .wrapper .register-link p {
-  padding: 15px;
-  text-align: center;
-  font-size: 14px;
+padding: 15px;
+text-align: center;
+font-size: 14px;
 }
-
 .wrapper .register-link p a {
-  color: #dd4600;
-  text-decoration: none;
-  font-weight: bold;
+color: #007705;
+text-decoration: none;
+font-weight: bold;
 }
-
 .wrapper .register-link p a:hover {
-  text-decoration: underline;
+text-decoration: underline;
 }
-
 @media (max-width: 768px) {
-  body {
-    overflow: scroll;
-    flex-direction: column;
-  }
-
-  .wrapper {
-    margin-top: 100px;
-  }
+body {
+overflow: scroll;
+flex-direction: column;
+}
+.wrapper {
+margin-top: 100px;
+width: 90%;
+padding: 20px;
+}
+.input-box-div {
+flex-direction: column;
+}
 }

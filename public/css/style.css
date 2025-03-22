@@ -149,9 +149,18 @@ user-select: none;
 -ms-user-select: none;
 margin: 10px;
 }
+.product-text.slide-in.appear {
+opacity: 1;
+transform: translateX(0);
+}
+.product-text.slide-in{
+opacity: 0;
+transform: translateX(-60px);
+transition: transform 2s ease-out, opacity 1.2s ease-out;
+}
 .product-text h2{
 -webkit-text-fill-color: transparent;
-background: linear-gradient(7deg, #7272723f, #000000);
+background: linear-gradient(13deg, #b5b5b5f0, #000000);
 background-clip: text;
 -webkit-background-clip: text;
 display: flex;
@@ -193,7 +202,7 @@ text-align: center;
 position: relative;
 margin-bottom: 25px;
 }
-.slide-in:hover {
+.product-card:hover {
 box-shadow: 19px 31px 68px 0px rgb(255 0 235 / 29%);
 }
 .product-card img {

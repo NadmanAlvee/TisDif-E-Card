@@ -14,7 +14,7 @@
         <%- include('./partials/accessories.ejs') %>
       <% } %>
 
-      <div class="product-images">
+      <div class="product-images slide-in">
         <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
       </div>
     </div>
@@ -22,7 +22,7 @@
     <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
     if(RelatedProducts.length > 0) { %>
       <section class="related-container">
-          <div class="related-text">
+          <div class="related-text slide-in">
             <h2>Browse</h2>
             <h2>Similar</h2>
             <h2>Products</h2>

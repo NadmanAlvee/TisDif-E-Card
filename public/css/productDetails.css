@@ -31,17 +31,34 @@ body {
 }
 
 .product-images {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 40%;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  background-color: var(--background-color-2);
+  border-radius: 30px;
+  width: 300px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.product-images.slide-in.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-images.slide-in {
+  opacity: 0.5;
+  transform: translateY(10px);
+  transition: transform 1s ease-out, opacity 0.5s ease-out;
 }
 
 #main-image {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
+border-radius: 20px;
+width: 100%;
+object-fit: contain;
+object-position: center;
 }
 
 .product-info {
@@ -82,7 +99,7 @@ body {
   font-size: 6rem;
   font-weight: bold;
   -webkit-text-fill-color: transparent;
-  background: linear-gradient(7deg, #7272723f, #000000);
+  background: linear-gradient(198deg, #8f0101b0, #8f0101fc, #000000);
   background-clip: text;
   -webkit-background-clip: text;
   margin-bottom: 15px;
@@ -163,7 +180,6 @@ overflow: auto;
 background: linear-gradient(20deg, #ffffff00, #ffdbed6b, hsl(328deg 100% 50% / 20%));
 height: 93vh;
 }
-
 .related-text {
 user-select: none;
 -webkit-user-select: none;
@@ -171,9 +187,18 @@ user-select: none;
 -ms-user-select: none;
 margin: 10px;
 }
+.related-text.slide-in.appear {
+opacity: 1;
+transform: translateX(0);
+}
+.related-text.slide-in{
+opacity: 0;
+transform: translateX(-60px);
+transition: transform 2s ease-out, opacity 1.2s ease-out;
+}
 .related-text h2{
 -webkit-text-fill-color: transparent;
-background: linear-gradient(20deg, red, magenta);
+background: linear-gradient(13deg, #b5b5b5f0, #000000);
 background-clip: text;
 -webkit-background-clip: text;
 display: flex;
@@ -267,10 +292,13 @@ margin-bottom: 25px;
   #product-name {
     font-size: 2rem;
   }
-  .product-images,
+
+  .product-images {
+    width: 260px;
+  }
+
   .product-info {
-    width: 50%;
-    max-width: 500px;
+    width: 60%;
   }
   .product-info {
     text-align: center;
@@ -317,8 +345,14 @@ margin-bottom: 25px;
   .related-price {
     font-size: 0.9rem;
   }
+  .product-images {
+    width: 230px;
+  }
 }
 @media (max-width: 373px) {
+  .product-images {
+    width: 200px;
+  }
   .related-text h2 {
     font-size: clamp(1.8rem, 5.5vw, 2.5rem);
   }

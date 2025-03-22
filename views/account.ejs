@@ -8,6 +8,12 @@
         <p><strong>Username:</strong> <%= user.username %></p>
         <p><strong>Email Adress:</strong> <%= user.email %></p>
         <p><strong>Mobile:</strong> <%= user.mobile %></p>
+        <% if (Object.keys(loggedInUser).length > 0) { %>
+            <% if (loggedInUser.role == "admin") { %>
+                <strong><a href="/admin">Manage Products</a></strong>
+                <strong><a href="/admin/users">Manage Users</a></strong>
+            <% } %>
+        <% } %>
         <div>
             <button class="logout" onclick="logout()">Logout</button>
         </div>

@@ -24,7 +24,7 @@
           >
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">Email Address</label>
           <input type="text" name="email" id="email"
           <% if (user.email) { %>
             value="<%= user.email %>"
@@ -32,7 +32,7 @@
           >
         </div>
         <div class="form-group">
-          <label for="address">Address</label>
+          <label for="address">Delivery Address</label>
           <textarea name="address" id="address" rows="3" required></textarea>
         </div>
       </form>
@@ -66,7 +66,7 @@
             <% const itemTotal = item.productId.price * item.selected_quantity %>
             <% grandTotal += itemTotal; %>
             <li>
-              <strong><%= item.productId.name %></strong> - 
+              <strong><%= item.productId.name %></strong>:
               <%= item.selected_quantity %> x 
               <%= item.productId.price.toLocaleString() %> BDT = 
               <%= itemTotal.toLocaleString() %> BDT

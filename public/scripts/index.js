@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// Slide in
-	const slideInCards = document.querySelectorAll(".product-card.slide-in");
+	const slideInCards = document.querySelectorAll(".slide-in");
 
 	const observerOptions = {
 		threshold: 0.3,
