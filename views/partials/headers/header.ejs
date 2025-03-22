@@ -10,12 +10,13 @@
 <body>
   <!-- Nav Bar -->
   <header>
-    <!-- Logo -->
-    <a href="/" class="LOGO">
-      <img src="/ui/icons/LOGO-T.webp" alt="Logo" />
+    <!-- Left -->
+    <a href="/" class="logo">
+      <img src="https://img.icons8.com/nolan/96/online-shop-shopping-bag.png" alt="logo" />
+      <P>TISDIF-E-CARD</P>    
     </a>
     
-    <!-- Navbar topics -->
+    <!-- Center -->
     <nav class="navbar" id="navbar">
       <li><a id="scrollToIphones">iPhones</a></li>
       <li><a id="scrollToGiftCards">GiftCards</a></li>
@@ -24,7 +25,7 @@
       <li><a href="/account">My Orders</a></li>
     </nav>
 
-    <!-- Account Section -->
+    <!-- Right -->
     <div class="account-container">
       <!-- Cart icon -->
       <a href="/cart" class="cart-icon">
@@ -62,32 +63,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Mobile Container (only visible on mobile) -->
-    <div class="mobile-container">
-      <!-- Home icon -->
-      <a href="/" class="mobile-home-icon">
-        <img src="https://img.icons8.com/material-outlined/32/home--v2.png" alt="home"/>
-      </a>
-      
-      <!-- Cart icon -->
-      <a href="/cart" class="mobile-cart-icon">
-        <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
-        <% if (cartItems.length > 0) { %>
-          <span class="mobile-cart-badge"><%= cartItems.length %></span>
-        <% } else { %>
-          <span class="mobile-cart-badge">0</span>
-        <% } %>
-      </a>
-
-      <!-- Profile Icon -->
-      <div class="mobile-profile-container">
-        <a href="/account" class="mobile-profile-icon">
-          <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
-        </a>
-      </div>
-    </div>
-
+    
     <!-- Hamburger Menu -->
     <div class="hamburger" id="hamburger" aria-label="Menu">
       <span class="bar"></span>
@@ -95,7 +71,30 @@
       <span class="bar"></span>
     </div>
   </header>
+  <!-- Mobile Container (only visible on mobile) -->
+  <div class="mobile-container">
+    <!-- Home icon -->
+    <a href="/" class="mobile-home-icon">
+      <img src="https://img.icons8.com/material-outlined/32/home--v2.png" alt="home"/>
+    </a>
+    
+    <!-- Cart icon -->
+    <a href="/cart" class="mobile-cart-icon">
+      <img src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png" alt="shopping-cart"/>
+      <% if (cartItems.length > 0) { %>
+        <span class="mobile-cart-badge"><%= cartItems.length %></span>
+      <% } else { %>
+        <span class="mobile-cart-badge">0</span>
+      <% } %>
+    </a>
 
+    <!-- Profile Icon -->
+    <div class="mobile-profile-container">
+      <a href="/account" class="mobile-profile-icon">
+        <img src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png" alt="Account"/>
+      </a>
+    </div>
+  </div>
   <script src="/scripts/header.js" defer></script>
 </body>
 </html>

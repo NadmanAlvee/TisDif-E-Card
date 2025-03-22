@@ -3,7 +3,6 @@
     --background-color: #fff;
     --font-size: 1.2rem;
   }
-  
   * {
     font-family: sans-serif;
     margin: 0;
@@ -15,7 +14,6 @@
     scroll-padding-top: 2rem;
     scroll-behavior: smooth;
   }
-  
   header {
     position: fixed;
     top: 0;
@@ -26,26 +24,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--background-color);
     padding: 0 200px;
     transition: 0.5s;
     box-shadow: 0 0px 60px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
   }
-  
-  /* Logo */
-  .LOGO img {
-    width: 80px;
-    height: 100%;
-    background: none;
-  }
-  
   /* Navbar */
+  .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo img {
+    max-width: 32px;
+    transform: translateY(-2%);
+  }
+  .logo p {
+    font-size: 1rem;
+    min-width: fit-content;
+    cursor: pointer;
+    font-size: var(--font-size);
+    font-weight: lighter;
+    color: var(--text-color);
+    padding: 1rem;
+    text-wrap-mode: nowrap;
+  }
   .navbar {
     display: flex;
     align-items: center;
     column-gap: 0.5rem;
   }
-  
   .navbar a {
     position: relative;
     cursor: pointer;
@@ -53,8 +63,8 @@
     font-weight: lighter;
     color: var(--text-color);
     padding: 1rem;
+    text-wrap: nowrap;
   }
-  
   .navbar a::after {
     content: '';
     position: absolute;
@@ -157,7 +167,6 @@
   #user-info p,
   #user-info {
     padding: 12px 15px;
-    background-color: var(--background-color);
     color: var(--text-color);
     font-weight: 600;
     display: flex;
@@ -166,7 +175,6 @@
   
   #user-info a {
     padding: 12px 15px;
-    background-color: var(--background-color);
     font-weight: 700;
   }
   
@@ -180,18 +188,16 @@
     position: absolute;
     right: 0;
     top: 100%;
-    background: var(--background-color);
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(137deg, #ffffffe8, #fff0f7, hsl(258deg 100% 83.88% / 51%));
     min-width: 200px;
     z-index: 100;
   }
-  
   .menu-dropdown.active {
     display: block;
   }
-  
   #login-button,
   #logout-button {
     width: 100%;
@@ -216,15 +222,10 @@
       height: 60px;
       padding: 0 30px;
     }
-    
-    .LOGO img {
-      width: 60px;
-    }
-    
     .navbar {
       position: fixed;
       flex-direction: column;
-      top: -100%;
+      top: -100vh;
       left: 0;
       width: 100%;
       background-color: var(--background-color);
@@ -234,16 +235,17 @@
       align-items: center;
       transition: top 1s ease-in-out;
       z-index: 1000;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+
+      display: flex;
+      justify-content: center;
+      row-gap: 100px;
     }
     
     .navbar.active {
       top: 0;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      row-gap: 100px;
+      height: 100vh;
     }
     
     .account-container {
@@ -251,22 +253,24 @@
     }
     
     .mobile-container {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 60px;
-      background-color: var(--background-color);
+      background-color: hsla(0, 0%, 100%, 0.2);
+      backdrop-filter: blur(45px);
+      -webkit-backdrop-filter: blur(45px);
       display: flex;
       align-items: center;
       justify-content: space-around;
       gap: 20px;
       z-index: 999;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0px 50px rgba(0, 0, 0, 0.08);
     }
     
     .mobile-cart-icon {
@@ -280,7 +284,7 @@
     .mobile-home-icon img,
     .mobile-cart-icon img,
     .mobile-profile-icon img {
-      width: 32px;
+      width: 26px;
     }
     
     .mobile-cart-badge {

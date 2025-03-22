@@ -29,7 +29,7 @@ const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT;
 
 // Connect to MongoDB
 connectDB();

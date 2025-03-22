@@ -1,3 +1,7 @@
+body {
+    background: linear-gradient(180deg, hsl(240deg 100% 50% / 5%), #ffdbed6b, hsl(240deg 100% 50% / 10%));
+    min-height: 100vh;
+}
 .container {
 font-size: 20px;
 padding: 20px;

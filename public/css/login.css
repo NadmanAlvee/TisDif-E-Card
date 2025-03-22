@@ -108,8 +108,10 @@ body {
 overflow: scroll;
 flex-direction: column;
 }
+#loginWrapper {
+    width: auto;
+}
 .wrapper {
-margin-top: 100px;
 width: 90%;
 padding: 20px;
 }

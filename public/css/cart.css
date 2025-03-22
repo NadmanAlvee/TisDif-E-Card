@@ -1,5 +1,5 @@
 body {
-background: linear-gradient(160deg, #ffffff00, #ffdbed6b, hsl(40deg 100% 50% / 20%));
+background: linear-gradient(160deg, #ffffff00, hsl(230.37deg 100% 50% / 8%));
 min-height: 100vh;
 }
 .cart-container {
@@ -81,12 +81,12 @@ background: #d93636;
 
 /* Cart Total */
 .cart-total-section {
-text-align: right;
 margin-top: 20px;
+text-align: center;
 display: flex;
-align-items: center;
-justify-content: space-around;
-flex-direction: row;
+flex-direction: column;
+align-content: center;
+flex-wrap: wrap;
 }
 
 .cart-total-text {
@@ -96,15 +96,16 @@ font-size: 20px;
 .cart-checkout-btn {
 display: inline-block;
 padding: 10px 20px;
-background: #17a2b8;
+background: linear-gradient(160deg, hsla(128, 100%, 56%, 0.705), hsla(128, 100%, 18%, 1.705));
 color: white;
+font-weight: bold;
 font-size: 16px;
 border-radius: 5px;
 text-decoration: none;
 }
 
 .cart-checkout-btn:hover {
-background: #138496;
+background: #139624;
 }
 
 /* Responsive Styles */
@@ -134,11 +135,6 @@ white-space: nowrap;
 .cart-table th,
 .cart-table td {
 padding: 8px;
-}
-
-.cart-total-section {
-flex-direction: column;
-align-items: flex-start;
 }
 
 .cart-total-text {
