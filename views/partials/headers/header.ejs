@@ -67,17 +67,22 @@
     </div>
     
     <!-- Hamburger Menu -->
-    <div class="search-div">
-    <div class="hamburger" id="hamburger" aria-label="Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
+    <div id="search-div">
+      <!-- Search bar -->
+      <button class="searchBtn">
+        <img src="https://img.icons8.com/ios-glyphs/60/search--v1.png" alt="Search">
+      </button>
+      
+      <div class="hamburger" id="hamburger" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
     </div>
   </header>
   <!-- Search bar -->
-  <div class="searchBar" id="searchBar">
-    <input type="text" placeholder="Search Products">
+  <div class="searchBar" id="searchBar" onmouseleave="toggleSearch()">
+    <input type="text" spellcheck="false" placeholder="Search Products">
   </div>
   <!-- Mobile Container (only visible on mobile) -->
   <div class="mobile-container">

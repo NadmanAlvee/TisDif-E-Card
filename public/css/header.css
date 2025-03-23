@@ -83,12 +83,12 @@
   
   /* Hamburger Menu */
   .hamburger {
-    display: none;
     flex-direction: column;
     justify-content: space-between;
-    width: 30px;
+    min-width: 30px;
     height: 24px;
     cursor: pointer;
+    position: relative;
     z-index: 1002;
   }
   
@@ -120,6 +120,13 @@
   }
 
   /* search */
+  #search-div {
+    flex-direction: row;
+    column-gap: 25px;
+    width: 15vw;
+    align-items: center;
+    justify-content: center;
+  }
   .searchBtn {
     background: none;
     border: none;
@@ -131,30 +138,44 @@
   .searchBar {
     opacity: 0;
     position: fixed;
-    top: 70px;
+    top: -40dvh;
     left: 0;
     width: 100%;
     transition: 0.3s ease;
-    height: 30vh;
+    height: 40dvh;
     z-index: 1;
   }
   .searchBar.active {
     display: flex;
+    top: 0;
     opacity: 1;
-    box-shadow: 0 0px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
     background: #fff;
     justify-content: center;
     align-items: center;
   }
   .searchBar.active ~ * {
     transition: 0.5s;
-    filter: blur(30px);
+    filter: blur(7px);
   }
   .searchBar input {
-    height: 20%;
-    width: 50%;
+    font-size: 16px;
+    color: var(--text-color);
+    height: 14%;
+    width: 60%;
+    margin-inline-start: -38px;
+    margin-inline-end: -33px;
+    padding-inline-start: 42px;
+    padding-inline-end: 38px;
     transform: translateY(-100%);
     position: relative;
+    border-radius: 30px;
+    border: 1px solid var(--text-color);
+  }
+  .searchBar input::placeholder {
+    color: var(--text-color);
+    font-size: 14px;
+    padding: 20px;
   }
   header.searchMode {
     box-shadow: none;
@@ -195,7 +216,7 @@
   }
   
   .profile-icon img {
-    width: 28px;
+    width: 32px;
     position: relative;
     top: -1px;
   }
@@ -341,7 +362,7 @@
       border-radius: 50%;
     }
 
-    .hamburger {
+    #search-div, .hamburger {
         display: flex;
     }
   }
@@ -352,7 +373,7 @@
       display: none;
     }
     
-    .hamburger {
+    #search-div {
       display: none;
     }
   }

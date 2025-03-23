@@ -1,6 +1,6 @@
 <%- include('./partials/headers/header.ejs') %>
 <link rel="stylesheet" href="/css/style.css" />
-    <div class="container">
+    <div class="container" id="container">
         <div class="sections">
             <!-- Slide ups -->
             <div class="typewrapper">
@@ -16,11 +16,11 @@
             </div>
 
             <!-- designs -->
-            <div class="h1s">
-                <h2 class="h1 p1">TISDIF E CARD</h2>
-                <h2 class="h1 p2">TISDIF E CARD</h2>
-                <h2 class="h1 p3">TISDIF E CARD</h2>
-                <h2 class="h1 p4">TISDIF E CARD</h2>
+            <div class="h2s">
+                <h2 class="h2 p1">TISDIF E CARD</h2>
+                <h2 class="h2 p2">TISDIF E CARD</h2>
+                <h2 class="h2 p3">TISDIF E CARD</h2>
+                <h2 class="h2 p4">TISDIF E CARD</h2>
             </div>
         </div>
 
@@ -29,41 +29,17 @@
         <% categories.forEach(category => { 
             const categoryProducts = products.filter(product => product.category === category);
             if (categoryProducts.length > 0) { %>
-
-        <div class="categories sections" id="<%= category %>">
-            <% if(category == 'giftcards') { %>
-                <div class="giftcard-wrapper">
-                    <div class="product-text slide-in">
-                        <h2>Browse</h2>
-                        <h2>Giftcards</h2>
-                        <ol>
-                            <li><span>The Perfect Gift</span></li>
-                            <li><span>Anytime</span></li>
-                            <li><span>Anywhere</span></li>
-                        </ol>
+                <div class="sections" id="<%= category %>">
+                    <div class="product-text">
+                        <h2>Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
+                    </div>
+                    <div class="product-container">
+                        <% categoryProducts.forEach(product => { %>
+                            <%- include('partials/homepage/product-card', { product }) %>
+                        <% }) %>
                     </div>
                 </div>
-            <% } else if (category == 'accessories') { %>
-                <div class="accessories-wrapper">
-                    <div class="product-text slide-in">
-                        <h2>Browse</h2>
-                        <h2>Accessories</h2>
-                        <ol>
-                            <li><span>Small Additions</span></li>
-                            <li><span>Big Impact</span></li>
-                            <li><span>Elevate Your Tech</span></li>
-                        </ol>
-                    </div>
-                </div>
-            <% } %>
-            <div class="categories-container">
-                <% categoryProducts.forEach(product => { %>
-                    <%- include('partials/homepage/product-card', { product }) %>
-                <% }) %>
-            </div>
-        </div>
-        <% } 
-        }) %>
+        <% } }) %>
     </div>
 
 <!-- Include footer partial -->

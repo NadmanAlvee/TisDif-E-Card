@@ -4,6 +4,7 @@ const navbar = document.getElementById("navbar");
 const searchBtn = document.querySelectorAll(".searchBtn");
 const searchBar = document.getElementById("searchBar");
 const Header = document.getElementById("Header");
+const indexContainer = document.getElementById("container");
 
 // Search
 searchBtn.forEach((e) => {
@@ -12,7 +13,15 @@ searchBtn.forEach((e) => {
 		Header.classList.toggle("searchMode");
 	});
 });
+function toggleSearch() {
+	searchBar.classList.remove("active");
+	Header.classList.remove("searchMode");
+}
+indexContainer.addEventListener("click", () => {
+	toggleSearch();
+});
 
+// hamburger
 hamburger.addEventListener("click", () => {
 	hamburger.classList.toggle("active");
 	navbar.classList.toggle("active");
