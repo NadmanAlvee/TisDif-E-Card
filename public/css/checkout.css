@@ -74,7 +74,6 @@ body {
   .payment-delivery {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
   }
   
   .payment-method h2,
@@ -112,7 +111,6 @@ body {
   }
   
   .order-summary li {
-    background-color: #f9f9f9e0;
     margin-bottom: 5px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -147,6 +145,11 @@ body {
   @media screen and (max-width: 768px) {
     .checkout-container {
       flex-direction: column;
+      margin: 50px auto;
+    }
+
+    .personal-info h2 {
+      font-size: 20px;
     }
     
     .left-container,
@@ -165,6 +168,13 @@ body {
     .delivery-method {
       width: 100%;
       margin-bottom: 15px;
+    }
+    .payment-method h2,
+    .delivery-method h2 {
+      font-size: 17px;
+    }
+    .payment-option, .delivery-option {
+      height: 40px;
     }
   }
   

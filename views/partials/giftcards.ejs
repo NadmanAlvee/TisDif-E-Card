@@ -17,15 +17,5 @@
         <% } %>
 
         <p id="selected-price">Total Amount: <span id="total-price">0.00</span> BDT</p>
-        <div class="actions">
-            <% if (product.stock > 0) { %>
-                <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
-                <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
-            <% } else { %>
-                <button class="empty-stock">ADD TO CART</button>
-                <button class="empty-stock">Buy Now</button>
-            <% } %>
-        </div>
-       
     </div>
 </div>
