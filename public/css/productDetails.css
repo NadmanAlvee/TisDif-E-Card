@@ -1,9 +1,9 @@
 :root {
 --height: clamp(5rem, 8vw, 5rem);
---heading-font-size: clamp(2rem, 5vw, 4rem);
---child-font-size: clamp(1.8rem, 4vw, 4rem);
---heading-font-size-2: clamp(3rem, 6vw, 4rem);
---child-font-size-2: clamp(1.5rem, 3vw, 5rem);
+--heading-font-size: clamp(2rem, 5vw, 3rem);
+--child-font-size: clamp(1.8rem, 4vw, 3rem);
+--heading-font-size-2: clamp(3rem, 6vw, 3rem);
+--child-font-size-2: clamp(1.5rem, 3vw , 4rem);
 --text-color: hsla(0, 0%, 0%, 0.65);
 --background-color: #fff;
 --background-color-2: #8080802e;
@@ -26,7 +26,7 @@ flex-direction: column;
 }
 .sections {
 scroll-snap-align: end;
-transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .product-main {
@@ -89,7 +89,7 @@ margin: 0;
 }
 
 #product-name {
-font-size: 3rem;
+font-size: 2rem;
 font-weight: bold;
 -webkit-text-fill-color: transparent;
 background: linear-gradient(198deg, #8f0101b0, #8f0101fc, #000000);
@@ -194,7 +194,7 @@ transform: translateX(0);
 .related-text.slide-in{
 opacity: 0;
 transform: translateX(-60px);
-transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+transition: transform 0.4s ease, opacity 0.4s ease;
 }
 .related-text h2{
 -webkit-text-fill-color: transparent;
@@ -236,7 +236,7 @@ transform: translateY(-5px);
 
 .related-card img {
 border-radius: 20px;
-width: 170px;
+width: 100%;
 object-fit: contain;
 object-position: center;
 }
@@ -258,7 +258,7 @@ font-weight: lighter;
 .related-card.slide-in {
 opacity: 0;
 transform: translateX(40px);
-transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .related-card.slide-in.appear {
@@ -281,7 +281,7 @@ transform: translateY(-200%);
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
 #configs {
-align-items: center;
+align-items: flex-start;
 }
 .product-main {
 height: 85vh;
@@ -319,13 +319,13 @@ flex-direction: column;
 }
 
 .related-text {
-margin: 0;
 width: 100%;
 max-width: none;
 }
 
 .related-card {
 width: 100%;
+max-width: 110px;
 margin-bottom: 40px;
 }
 
@@ -344,15 +344,14 @@ width: 100%;
 }
 
 @media (max-width: 880px) {
+:root {
+--heading-font-size-2: clamp(2rem, 6vw, 5rem);
+--child-font-size-2: clamp(2rem, 3vw, 5rem);
+}
 .related-name {
 font-size: 15px;
 }
 .related-price {
-font-size: 0.9rem;
-}
-}
-@media (max-width: 373px) {
-.related-text h2 {
-font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+font-size: 14px;
 }
 }

@@ -1,7 +1,6 @@
 <%- include('./partials/headers/header.ejs') %>
 <link rel="stylesheet" href="/css/style.css" />
     <div class="container">
-
         <div class="sections">
             <!-- Slide ups -->
             <div class="typewrapper">
@@ -44,9 +43,17 @@
                         </ol>
                     </div>
                 </div>
-            <% } else if (category == 'iphones') { %>
-                <div class="product-text">
-                    <h2>Browse iPhones%></h2>
+            <% } else if (category == 'accessories') { %>
+                <div class="accessories-wrapper">
+                    <div class="product-text slide-in">
+                        <h2>Browse</h2>
+                        <h2>Accessories</h2>
+                        <ol>
+                            <li><span>Small Additions</span></li>
+                            <li><span>Big Impact</span></li>
+                            <li><span>Elevate Your Tech</span></li>
+                        </ol>
+                    </div>
                 </div>
             <% } %>
             <div class="categories-container">
@@ -55,7 +62,6 @@
                 <% }) %>
             </div>
         </div>
-
         <% } 
         }) %>
     </div>

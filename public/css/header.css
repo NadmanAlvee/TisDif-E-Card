@@ -1,7 +1,7 @@
 :root {
     --text-color: hsla(0, 0%, 0%, 0.65);
     --background-color: #fff;
-    --font-size: 1.2rem;
+    --font-size: 1rem;
   }
   * {
     font-family: sans-serif;
@@ -118,7 +118,49 @@
     gap: 30px;
     align-items: center;
   }
-  
+
+  /* search */
+  .searchBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .searchBtn img {
+    width: 32px;
+  }
+  .searchBar {
+    opacity: 0;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    transition: 0.3s ease;
+    height: 30vh;
+    z-index: 1;
+  }
+  .searchBar.active {
+    display: flex;
+    opacity: 1;
+    box-shadow: 0 0px 60px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+  }
+  .searchBar.active ~ * {
+    transition: 0.5s;
+    filter: blur(30px);
+  }
+  .searchBar input {
+    height: 20%;
+    width: 50%;
+    transform: translateY(-100%);
+    position: relative;
+  }
+  header.searchMode {
+    box-shadow: none;
+    background: #fff;
+  }
+
   /* Cart Icon */
   .cart-icon {
     position: relative;
