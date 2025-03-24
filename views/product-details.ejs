@@ -4,7 +4,13 @@
     <div class="product-main sections">
       <div class="product-images">
         <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
-      </div>
+        <div class="thumbnail-image-div">
+          <% product.image.forEach((image)=>{ %>
+            <img class="thumbnail-images" onclick="updateMainImage(this)" src="<%= image %>" alt="Product Thumbnail Image">
+          <% }) %>
+        </div>
+    </div>
+    
       <div class="product-div">
         <% if (product.category == 'giftcards') { %>
           <%- include('./partials/giftcards.ejs') %>
@@ -28,9 +34,7 @@
     if(RelatedProducts.length > 0) { %>
     <section class="related-container sections">
         <div class="related-text slide-in">
-          <h2>Browse</h2>
-          <h2>Similar</h2>
-          <h2>Products</h2>
+          <h2>Browse Similar Products</h2>
         </div>
         <div class="related-product-card">
           <% relatedProducts.forEach(related => { %>

@@ -1,12 +1,21 @@
-<div class="product-info">
+<div class="product-info" data-price="<%= product.price %>">
     <h2 id="product-name"><%= product.name %></h2>
     <div id="configs">
-        <p id="product-price">Price: ৳<span id="total-price"><%= product.price.toFixed(2) %></span></p>
+        <p>Status: 
+            <% if (product.stock > 0){ %>
+                <span class="in-stock">In Stock</span>
+            <% } else { %>
+                <span class="out-of-stock">Out Of Stock</span>
+            <% } %>
+        </p>
+
+        <!-- Quantity selector for accessories -->
         <div class="quantity-selector">
-            <button id="decrease-qty">-</button>
-            <span id="quantity">1</span>
-            <button id="increase-qty">+</button>
+            <button class="qty-btn decrease">-</button>
+            <span class="quantity-value">1</span>
+            <button class="qty-btn increase">+</button>
         </div>
-        <button class="add-to-cart">Add to Cart</button>
+
+        <p id="selected-price">Total Price: <span id="total-price">0.00</span> BDT</p>
     </div>
 </div>

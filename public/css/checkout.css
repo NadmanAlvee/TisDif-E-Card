@@ -1,180 +1,185 @@
 body {
-    background: linear-gradient(160deg, #ffffff00, #ffdbed6b, hsl(40deg 100% 50% / 20%));
-    min-height: 100vh;
-  }
-  
-  /* Main container styles */
-  .checkout-container {
-    max-width: 800px;
-    margin: 100px auto;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    column-gap: 2vw;
-  }
-  
-  /* Left and Right Columns */
-  .left-container,
-  .right-container {
-    min-height: 60vh;
-    min-width: 60%;
-    box-shadow: 9px 15px 24px rgb(0 0 0 / 5%);
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding: 30px;
-  }
-  
-  .left-container {
-    width: 50%;
-  }
-  
-  .right-container {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  /* Personal Info Form */
-  .personal-info h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    font-size: 16px;
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  textarea {
-    background: none;
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #0000003d;
-  }
-  
-  /* Payment and Delivery Section */
-  .order-summary-section {
-    display: flex;
-    flex-direction: column;
-  }
+	background: linear-gradient(
+		160deg,
+		#ffffff00,
+		#ffdbed6b,
+		hsl(40deg 100% 50% / 20%)
+	);
+	min-height: 100vh;
+}
 
-  .payment-delivery {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .payment-method h2,
-  .delivery-method h2 {
-    margin-bottom: 10px;
-  }
-  
-  .payment-option,
-  .delivery-option {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 60px;
-    text-align: center;
-    font-size: large;
-    font-weight: 600;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    border: 1px solid #4caf50;
-    background: rgba(77, 176, 80, 0.051);
-    color: green;
-  }
-  
-  /* Order Summary Section */
-  .order-summary {
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-  
-  .order-summary ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .order-summary li {
-    margin-bottom: 5px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .grand-total {
-    font-size: 1.2rem;
-    font-weight: bolder;
-    color: red;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Confirm Order Button */
-  .confirm-order-btn {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .confirm-order-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive Styles */
-  @media screen and (max-width: 768px) {
-    .checkout-container {
-      flex-direction: column;
-      margin: 50px auto;
-    }
+/* Main container styles */
+.checkout-container {
+	max-width: 800px;
+	margin: 100px auto;
+	padding: 20px;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	column-gap: 2vw;
+}
 
-    .personal-info h2 {
-      font-size: 20px;
-    }
-    
-    .left-container,
-    .right-container {
-      box-shadow: none;
-      min-height: 0;
-      width: 100%;
-      padding: 10px;
-    }
-    
-    .payment-delivery {
-      flex-direction: column;
-    }
-    
-    .payment-method,
-    .delivery-method {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-    .payment-method h2,
-    .delivery-method h2 {
-      font-size: 17px;
-    }
-    .payment-option, .delivery-option {
-      height: 40px;
-    }
-  }
-  
+/* Left and Right Columns */
+.left-container,
+.right-container {
+	min-height: 60vh;
+	min-width: 60%;
+	box-shadow: 9px 15px 24px rgb(0 0 0 / 5%);
+	border-radius: 10px;
+	box-sizing: border-box;
+	padding: 30px;
+}
+
+.left-container {
+	width: 50%;
+}
+
+.right-container {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/* Personal Info Form */
+.personal-info h2 {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	font-size: 16px;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+	background: none;
+	width: 100%;
+	padding: 8px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	border: 1px solid #0000003d;
+}
+
+/* Payment and Delivery Section */
+.order-summary-section {
+	display: flex;
+	flex-direction: column;
+}
+
+.payment-delivery {
+	display: flex;
+	justify-content: space-between;
+}
+
+.payment-method h2,
+.delivery-method h2 {
+	margin-bottom: 10px;
+}
+
+.payment-option,
+.delivery-option {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	height: 60px;
+	text-align: center;
+	font-size: large;
+	font-weight: 600;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	border: 1px solid #4caf50;
+	background: rgba(77, 176, 80, 0.051);
+	color: green;
+}
+
+/* Order Summary Section */
+.order-summary {
+	padding: 15px;
+	margin-bottom: 15px;
+	border-radius: 4px;
+}
+
+.order-summary ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.order-summary li {
+	margin-bottom: 5px;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.grand-total {
+	font-size: 1.2rem;
+	font-weight: bolder;
+	color: red;
+	margin-top: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Confirm Order Button */
+.confirm-order-btn {
+	display: inline-block;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	padding: 12px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.confirm-order-btn:hover {
+	background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+	.checkout-container {
+		flex-direction: column;
+		margin: 50px auto;
+	}
+
+	.personal-info h2 {
+		font-size: 20px;
+	}
+
+	.left-container,
+	.right-container {
+		box-shadow: none;
+		min-height: 0;
+		width: 100%;
+		padding: 10px;
+	}
+
+	.payment-delivery {
+		flex-direction: column;
+	}
+
+	.payment-method,
+	.delivery-method {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.payment-method h2,
+	.delivery-method h2 {
+		font-size: 17px;
+	}
+	.payment-option,
+	.delivery-option {
+		height: 40px;
+	}
+}

@@ -1,199 +1,250 @@
-:root {--height: clamp(5rem, 8vw, 5rem);--heading-font-size: clamp(3rem, 3vw, 5rem);--child-font-size: clamp(3rem, 3vw, 5rem);--heading-font-size-2: clamp(4rem, 3vw, 5rem);--child-font-size-2: clamp(4rem, 3vw, 5rem);--text-color: hsla(0, 0%, 0%, 0.65);--background-color: #fff;--background-color-2: #8080802e;}
+:root {
+	--height: clamp(2rem, 8vw, 3rem);
+	--heading-font-size: clamp(3rem, 3vw, 5rem);
+	--child-font-size: clamp(3rem, 3vw, 5rem);
+	--text-color: hsla(0, 0%, 0%, 0.65);
+	--background-color: #fff;
+	--background-color-2: #8080802e;
+}
 .container {
-margin: 0 min(10dvw, max(7dvw, 20dvw));
-user-select: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
+	margin: 0 min(20dvw, max(7dvw, 20dvw));
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 /* Slide up */
-.typewrapper {margin-top: 70px;position: relative;color: var(--text-color);padding: 2rem;}
-.typewrapper .slideup {
-user-select: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-display: flex;
-font-size: var(--child-font-size);
-align-items: center;
-column-gap: 20px;
-justify-content: center;
+.typewrapper {
+	position: relative;
+	color: var(--text-color);
+	padding: 2rem;
 }
-.slideup h2{
-width: fit-content;
-font-size: var(--heading-font-size);
+.typewrapper .slideup {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	display: flex;
+	font-size: var(--child-font-size);
+	align-items: center;
+	column-gap: 20px;
+	justify-content: center;
+}
+.slideup h2 {
+	width: fit-content;
+	font-size: var(--heading-font-size);
 }
 .typewrapper .slideup ol {
-list-style: none;
-height: var(--height);
-line-height: var(--height);
-overflow: hidden;
+	list-style: none;
+	height: var(--height);
+	line-height: var(--height);
+	overflow: hidden;
 }
 .typewrapper .slideup ol li {
-width: fit-content;
-animation: slide-up 12s infinite;
+	width: fit-content;
+	animation: slide-up 12s infinite;
 }
 .typewrapper .slideup ol li span {
-font-weight: 600;
--webkit-text-fill-color: transparent;
-background: linear-gradient(20deg, red, magenta);
-background-clip: text;
--webkit-background-clip: text;
-white-space: nowrap;
+	font-weight: 600;
+	-webkit-text-fill-color: transparent;
+	background: linear-gradient(20deg, red, magenta);
+	background-clip: text;
+	-webkit-background-clip: text;
+	white-space: nowrap;
 }
 @keyframes slide-up {
-0%, 10% {
-transform: translateY(0%);
-}
-15%, 25% {
-transform: translateY(-100%);
-}
-30%, 40% {
-transform: translateY(-200%);
-}
-45%, 55% {
-transform: translateY(-300%);
-}
+	0%,
+	10% {
+		transform: translateY(0%);
+	}
+	15%,
+	25% {
+		transform: translateY(-100%);
+	}
+	30%,
+	40% {
+		transform: translateY(-200%);
+	}
+	45%,
+	55% {
+		transform: translateY(-300%);
+	}
 }
 /* Gradient Text Effect */
 .h2s {
-overflow: hidden;
+	overflow: hidden;
 }
 .h2 {
-user-select: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-width: fit-content;
-line-height: 0.8;
-white-space: nowrap;
-font-size: 8rem;
-position: relative;
-background: linear-gradient(to right,
-hsla(299, 100%, 70%, 0.70), hsla(255, 100%, 50%, 0.50), hsla(240, 100%, 50%, 0.60),
-hsla(255, 100%, 50%, 0.50), hsla(299, 100%, 70%, 0.70)
-);
-background-size: 200%;
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: animate-gradient 4s linear infinite;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	width: fit-content;
+	line-height: 0.8;
+	white-space: nowrap;
+	font-size: 8rem;
+	position: relative;
+	background: linear-gradient(
+		to right,
+		hsla(299, 100%, 70%, 0.7),
+		hsla(255, 100%, 50%, 0.5),
+		hsla(240, 100%, 50%, 0.6),
+		hsla(255, 100%, 50%, 0.5),
+		hsla(299, 100%, 70%, 0.7)
+	);
+	background-size: 200%;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: animate-gradient 4s linear infinite;
 }
-.p1 {left: 0%;}
-.p2 {left: 14%;}
-.p3 {left: 25%;}
-.p4 {left: 6%;}
+.p1 {
+	left: 0%;
+}
+.p2 {
+	left: 14%;
+}
+.p3 {
+	left: 25%;
+}
+.p4 {
+	left: 6%;
+}
 @keyframes animate-gradient {
-to {
-background-position: 200%;
-}
+	to {
+		background-position: 200%;
+	}
 }
 
 /* Main Container */
 .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 /* first child */
 .sections:first-child {
-    height: 70vh;
-    flex-direction:column;
-    overflow: hidden;
+	display: flex;
+	height: 70vh;
+	flex-direction: column;
+	overflow: hidden;
+	justify-content: center;
 }
 
 .categories {
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-evenly;
-column-gap: 10%;
-max-width: 100%;
-overflow: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	column-gap: 10%;
+	max-width: 100%;
+	overflow: auto;
 }
 .sections {
-    overflow: auto;
-    height: 55dvh;
+	overflow: auto;
+	height: 55dvh;
 }
 .product-text h2 {
-    font-size: 2.6rem;
-    min-width: fit-content;
-    background: linear-gradient(13deg, #5f5f5f, #434343bd);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 3% 0;
+	font-size: 2.6rem;
+	min-width: fit-content;
+	background: linear-gradient(13deg, #5f5f5f, #434343bd);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	padding: 3% 0;
 }
 .product-container {
-    display: flex;
-    gap: 7%;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
-    /* padding-left: 20dvw; */
+	display: flex;
+	gap: 7%;
+	align-items: center;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 /* Product Cards */
 .product-card {
-    background-color: #80808026;
-    border-radius: 20px;
-    width: 190px;
-    padding: 10px;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+	background-color: #80808026;
+	border-radius: 20px;
+	width: 190px;
+	padding: 10px;
+	transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+	text-align: center;
+}
+.product-name {
+	font-size: 17px;
+}
+.product-price {
+	font-size: 1rem;
+	color: #333;
 }
 .product-card img {
-    border-radius: 10px;
-    width: 100%;
-    object-fit: contain;
+	border-radius: 10px;
+	width: 100%;
+	object-fit: contain;
 }
 .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 10px 10px 14px rgba(0, 0, 0, 0.3);
-    transition: 0.4s ease;
+	transform: translateY(-10px);
+	box-shadow: 10px 10px 14px rgba(0, 0, 0, 0.3);
+	transition: 0.4s ease;
 }
 
 /* Animations */
 @keyframes slide-up {
-    0%, 10% { transform: translateY(0%); }
-    15%, 25% { transform: translateY(-100%); }
-    30%, 40% { transform: translateY(-200%); }
-    45%, 55% { transform: translateY(-300%); }
+	0%,
+	10% {
+		transform: translateY(0%);
+	}
+	15%,
+	25% {
+		transform: translateY(-100%);
+	}
+	30%,
+	40% {
+		transform: translateY(-200%);
+	}
+	45%,
+	55% {
+		transform: translateY(-300%);
+	}
 }
 
 @keyframes animate-gradient {
-    to { background-position: 200%; }
+	to {
+		background-position: 200%;
+	}
 }
 
 /* Responsive Design */
 @media (max-width: 780px) {
-    .sections:first-child {
-        height: 55dvh;
-    }
-    .sections {
-        height: 40dvh;
-    }
-    .h2 {
-        font-size: 5rem;
-    }
-    .typewrapper {
-        padding: 1rem;
-    }
-    .slideup {
-        flex-direction: column;
-        align-items: flex-start !important;
-    }
-    .slideup h2,.product-text h2,.typewrapper .slideup {
-        font-size: 2rem;
-    }
-    .product-card {
-        max-width: 110px;
-    }
-
-    .product-card h3 {
-        padding: 2%;
-        font-size: 16px;
-    }
-    .product-price {
-        padding: 2%;
-        text-wrap: nowrap;
-    } 
+	.container {
+		margin: 5%;
+	}
+	.typewrapper {
+		padding: 1rem;
+	}
+	.sections {
+		height: 40dvh;
+	}
+	.sections:first-child {
+		height: 45dvh;
+	}
+	.h2 {
+		font-size: 3rem;
+	}
+	.slideup h2,
+	.product-text h2,
+	.typewrapper .slideup {
+		font-size: 22px;
+	}
+	.product-card {
+		max-width: 110px;
+	}
+	.product-card h3 {
+		padding: 2%;
+		font-size: 14px;
+	}
+	.product-price {
+		font-size: 14px;
+		padding: 2%;
+		text-wrap: nowrap;
+	}
 }

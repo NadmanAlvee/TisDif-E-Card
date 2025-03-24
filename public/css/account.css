@@ -1,184 +1,183 @@
 body {
-    background: linear-gradient(180deg, hsl(240deg 100% 50% / 5%), #ffdbed6b, hsl(240deg 100% 50% / 10%));
-    min-height: 100vh;
+	min-height: 100vh;
 }
 .container {
-font-size: 20px;
-padding: 20px;
-margin-top: 80px;
+	font-size: 20px;
+	padding: 20px;
+	margin-top: 80px;
 }
 h3 {
-display: flex;
-justify-content: center;
-margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
 }
 .profile {
-position: relative;
-display: flex;
-row-gap: 20px;
-flex-direction: column;
-border-radius: 10px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-margin-bottom: 2rem;
-padding: 1.5rem;
-border: 1px solid lightgray;
+	position: relative;
+	display: flex;
+	row-gap: 20px;
+	flex-direction: column;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	border: 1px solid lightgray;
 }
 .profile a {
-color: #0056b3;
-padding: 5px;
+	color: #0056b3;
+	padding: 5px;
 }
 .profile a:hover {
-color: #002c5c;
-transition: 0.5s;
+	color: #002c5c;
+	transition: 0.5s;
 }
-.profile p{
-padding: 5px;
+.profile p {
+	padding: 5px;
 }
 .logout {
-display: flex;
-flex-direction: row;
-padding: 0.5rem 1rem;
-border: none;
-border-bottom: 4px solid hsl(0deg 100% 46% / 60%);
-border-radius: 20px;
-color: hsl(0deg 100% 43.03% / 99%);
-cursor: pointer;
-right: 0;
-bottom: 0;
-position: absolute;
-translate: -50% -50%;
-font-weight: bolder;
-background-color: rgba(207, 0, 0, 0.068);
-max-width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-bottom: 4px solid hsl(0deg 100% 46% / 60%);
+	border-radius: 20px;
+	color: hsl(0deg 100% 43.03% / 99%);
+	cursor: pointer;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	translate: -50% -50%;
+	font-weight: bolder;
+	background-color: rgba(207, 0, 0, 0.068);
+	max-width: 100%;
 }
 .logout:hover {
-border: none;
+	border: none;
 }
 .order-card {
-border-radius: 10px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-margin-bottom: 2rem;
-padding: 1.5rem;
-border: 1px solid lightgray;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	border: 1px solid lightgray;
 }
 .order-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-bottom: 1px solid #eee;
-padding-bottom: 1rem;
-margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 .order-status {
-padding: 0.5rem 1rem;
-border-radius: 20px;
-font-weight: bolder;
-text-transform: uppercase;
-font-size: 0.8rem;
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+	font-weight: bolder;
+	text-transform: uppercase;
+	font-size: 0.8rem;
 }
 .order-status.pending {
-border: 2px solid hsl(45, 100%, 50%);
-color: hsl(45, 100%, 40%);
-background-color: rgba(255, 251, 0, 0.1);
+	border: 2px solid hsl(45, 100%, 50%);
+	color: hsl(45, 100%, 40%);
+	background-color: rgba(255, 251, 0, 0.1);
 }
 .order-status.processing {
-border: 2px solid hsl(45, 100%, 50%);
-color: hsl(45, 100%, 40%);
-background-color: rgba(255, 251, 0, 0.1);
+	border: 2px solid hsl(45, 100%, 50%);
+	color: hsl(45, 100%, 40%);
+	background-color: rgba(255, 251, 0, 0.1);
 }
 .order-status.shipped {
-border: 2px solid hsl(266, 100%, 50%);
-color: hsl(266, 100%, 40%);
-background-color: rgba(119, 0, 255, 0.1);
+	border: 2px solid hsl(266, 100%, 50%);
+	color: hsl(266, 100%, 40%);
+	background-color: rgba(119, 0, 255, 0.1);
 }
 .order-status.delivered {
-border: 2px solid hsl(130, 100%, 20%);
-color: hsl(130, 100%, 20%);
-background-color: rgba(0, 255, 21, 0.1);
+	border: 2px solid hsl(130, 100%, 20%);
+	color: hsl(130, 100%, 20%);
+	background-color: rgba(0, 255, 21, 0.1);
 }
 .order-status.cancelled {
-border: 2px solid hsl(0, 100%, 30%);
-color: hsl(0, 100%, 20%);
-background-color: rgba(255, 0, 0, 0.1);
+	border: 2px solid hsl(0, 100%, 30%);
+	color: hsl(0, 100%, 20%);
+	background-color: rgba(255, 0, 0, 0.1);
 }
 .items-list {
-display: grid;
-gap: 1rem;
+	display: grid;
+	gap: 1rem;
 }
 .item-card {
-display: flex;
-gap: 1rem;
-padding: 1rem;
-border-radius: 8px;
+	display: flex;
+	gap: 1rem;
+	padding: 1rem;
+	border-radius: 8px;
 }
 .product-image {
-width: 80px;
-height: 80px;
-object-fit: contain;
-border-radius: 4px;
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	border-radius: 4px;
 }
 .item-info {
-flex: 1;
+	flex: 1;
 }
 .item-info h4 {
-margin: 0 0 0.5rem 0;
-color: var(--text-color);
+	margin: 0 0 0.5rem 0;
+	color: var(--text-color);
 }
 .variant {
-color: #666;
-font-size: 0.9rem;
-margin-bottom: 0.5rem;
+	color: #666;
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
 }
 .order-summary {
-margin-top: 2rem;
-padding-top: 1rem;
-border-top: 1px solid #eee;
-display: flex;
-flex-direction: column;
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: column;
 }
 .summary-item {
-display: flex;
-justify-content: space-between;
-margin-bottom: 0.5rem;
-padding: 0.3rem 0;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	padding: 0.3rem 0;
 }
 .summary-item span:first-child {
-color: var(--text-color);
+	color: var(--text-color);
 }
 .summary-item span:last-child {
-font-weight: bold;
-color: var(--text-color);
+	font-weight: bold;
+	color: var(--text-color);
 }
 .no-orders {
-text-align: center;
-padding: 2rem;
-color: #666;
+	text-align: center;
+	padding: 2rem;
+	color: #666;
 }
 .summary-cancel {
-display: flex;
-justify-content: flex-end;
-padding-top: 12px;
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 12px;
 }
 .cancelBtn {
-padding: 0.5rem 1rem;
-border-color: rgba(255, 0, 0, 0.452);
-border-radius: 20px;
-font-weight: bolder;
-text-transform: uppercase;
-font-size: 0.8rem;
-color: red;
-background-color: rgba(207, 0, 0, 0.068);
-max-width: 100%;
+	padding: 0.5rem 1rem;
+	border-color: rgba(255, 0, 0, 0.452);
+	border-radius: 20px;
+	font-weight: bolder;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	color: red;
+	background-color: rgba(207, 0, 0, 0.068);
+	max-width: 100%;
 }
 @media (max-width: 768px) {
-.order-status {
-padding: 0.5rem 1rem;
-border-radius: 20px;
-font-weight: bolder;
-text-transform: uppercase;
-font-size: 10px;
-}
-.container {
-font-size: 15px;
-}
+	.order-status {
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-weight: bolder;
+		text-transform: uppercase;
+		font-size: 10px;
+	}
+	.container {
+		font-size: 15px;
+	}
 }
