@@ -5,11 +5,17 @@ const createError = require("http-errors");
 
 // internalimports
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 
 // get login page
 async function getLogin(req, res, next) {
+	const userId = res.locals.loggedInUser._id;
+	const cartItems = await Cart.find({ userId });
+	const page_title = "TisDif e-Card | Login";
 	res.render("login_page.ejs", {
 		loggedInUser: res.locals.loggedInUser,
+		cartItems: cartItems,
+		page_title,
 	});
 }
 
@@ -52,8 +58,8 @@ async function login(req, res, next) {
 				});
 				// logged in user local identifier
 				res.locals.loggedInUser = userObject;
-				// render homepage
-				res.redirect("/");
+				// redirect homepage
+				res.redirect("/account");
 			} else {
 				throw createError("Login failed! Please try again.");
 			}
@@ -61,24 +67,23 @@ async function login(req, res, next) {
 			throw createError("Login failed! Please try again.");
 		}
 	} catch (err) {
+		const userId = res.locals.loggedInUser._id;
+		const cartItems = await Cart.find({ userId });
+		const page_title = "TisDif e-Card | Login";
 		res.render("login_page.ejs", {
 			errors: {
 				common: {
 					msg: err.message,
 				},
 			},
+			loggedInUser: res.locals.loggedInUser,
+			cartItems: cartItems,
+			page_title,
 		});
 	}
-}
-
-// DO LOGOUT
-function logout(req, res) {
-	res.clearCookie(process.env.COOKIE_NAME);
-	res.send("logged out");
 }
 
 module.exports = {
 	getLogin,
 	login,
-	logout,
 };

@@ -81,7 +81,6 @@ async function register(req, res, next) {
 			res.redirect("/account");
 		}
 	} catch (err) {
-		req.flash("registerErrors", { common: { msg: err.message } });
 		res.redirect("/login");
 	}
 }

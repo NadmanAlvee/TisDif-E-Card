@@ -3,7 +3,7 @@ const express = require("express");
 
 // external imports
 const sessionInfo = require("../middlewares/common/sessionInfo");
-const { getLogin, login, logout } = require("../controller/loginController");
+const { getLogin, login } = require("../controller/loginController");
 const {
 	doLoginValidators,
 	doLoginValidationHandler,
@@ -37,8 +37,5 @@ router.post(
 	doRegisterValidationHandler,
 	register
 );
-
-// logout url
-router.delete("/", logout);
 
 module.exports = router;

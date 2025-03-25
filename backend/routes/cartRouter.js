@@ -47,8 +47,8 @@ router.get("/", async (req, res) => {
 
 		// Fetch cart items with product details
 		const cartItems = await Cart.find({ userId }).populate("productId");
-
-		res.render("cart", { cartItems });
+		const page_title = "TisDif e-Card | Cart";
+		res.render("cart", { cartItems, page_title });
 	} catch (error) {
 		console.error("Error loading cart:", error);
 		res.status(500).send("Internal Server Error");

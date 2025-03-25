@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const slideInCards = document.querySelectorAll(".slide-in");
 
 	const observerOptions = {
-		threshold: 0.3,
+		threshold: 0.1,
 	};
 
 	const observer = new IntersectionObserver((entries, obs) => {

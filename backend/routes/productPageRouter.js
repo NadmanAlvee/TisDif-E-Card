@@ -11,18 +11,20 @@ router.get("/:id", async (req, res) => {
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId });
 
-		if (!product) {
-			return res.status(404).render("404", { message: "Product not found" });
-		}
-
 		// Fetch related products (excluding current product)
 		const relatedProducts = await Product.find({
 			_id: { $ne: id },
 			category: product.category,
 		});
-		res.render("product-details", { product, relatedProducts, cartItems });
+		const page_title = `${product.name} price in bangladesh`;
+		res.render("product-details", {
+			product,
+			relatedProducts,
+			cartItems,
+			page_title,
+		});
 	} catch (error) {
-		res.status(500).render("error", { message: error.message });
+		res.status(500).json({ error: error.message });
 	}
 });
 

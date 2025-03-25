@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>TisDif e-Card | Login</title>
+		<title><%= page_title %></title>
 		<link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico" />
 		<link rel="stylesheet" href="/css/header.css" />
 	</head>
@@ -43,6 +43,11 @@
           src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png"
           alt="shopping-cart"
         />
+        <% if (cartItems.length > 0) { %>
+        <span class="cart-badge"><%= cartItems.length %></span>
+        <% } else { %>
+        <span class="cart-badge">0</span>
+        <% } %>
       </a>
 
       <!-- Profile Icon -->
@@ -117,6 +122,11 @@
         src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png"
         alt="shopping-cart"
       />
+      <% if (cartItems.length > 0) { %>
+      <span class="mobile-cart-badge"><%= cartItems.length %></span>
+      <% } else { %>
+      <span class="mobile-cart-badge">0</span>
+      <% } %>
     </a>
 
     <!-- Profile Icon -->

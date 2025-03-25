@@ -101,10 +101,12 @@ router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 			Cart.find({ userId }).populate("productId"),
 			Order.find({ user: userId }).populate("items.product"),
 		]);
+		const page_title = "TisDif e-Card | Account";
 		res.render("account", {
 			user,
 			orders,
 			cartItems,
+			page_title,
 			errors: {
 				common: {
 					msg: err.message,

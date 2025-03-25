@@ -371,6 +371,15 @@ header.searchMode {
 	.hamburger {
 		display: flex;
 	}
+	.searchBar input {
+		height: 18%;
+		width: 60%;
+		transform: translateY(50%);
+	}
+	.searchBar {
+		top: -20dvh;
+		height: 20dvh;
+	}
 }
 
 /* Hide mobile container on larger screens */

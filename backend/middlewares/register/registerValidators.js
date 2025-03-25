@@ -1,6 +1,7 @@
 const { check, validationResult } = require("express-validator");
 const createError = require("http-errors");
 const User = require("../../models/User");
+const Cart = require("../../models/Cart");
 
 const doRegisterValidators = [
 	check("username")
@@ -44,16 +45,22 @@ const doRegisterValidators = [
 	}),
 ];
 
-const doRegisterValidationHandler = (req, res, next) => {
+const doRegisterValidationHandler = async (req, res, next) => {
 	const errors = validationResult(req);
 	const mappedErrors = errors.mapped();
 
 	if (Object.keys(mappedErrors).length === 0) {
 		next();
 	} else {
+		const userId = res.locals.loggedInUser._id;
+		const cartItems = await Cart.find({ userId });
+		const page_title = "TisDif e-Card | Login";
 		res.render("login_page.ejs", {
 			errors: mappedErrors,
 			form: "register",
+			loggedInUser: res.locals.loggedInUser,
+			cartItems: cartItems,
+			page_title,
 		});
 	}
 };

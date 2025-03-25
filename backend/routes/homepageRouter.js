@@ -11,13 +11,14 @@ const router = express.Router();
 // homepage route
 router.get("/", async (req, res) => {
 	try {
-		const products = await Product.find(); // Fetch all products from the database
+		const products = await Product.find();
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId });
-
+		const page_title = "TisDif e-Card | Home";
 		res.render("index.ejs", {
 			products: products,
 			cartItems: cartItems,
+			page_title,
 		});
 	} catch (error) {
 		console.error("Error fetching products:", error);
