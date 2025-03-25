@@ -21,7 +21,6 @@ router.get("/", async (req, res) => {
 			page_title,
 		});
 	} catch (error) {
-		console.error("Error fetching products:", error);
 		res.status(500).send("Error fetching products.");
 	}
 });

@@ -53,7 +53,6 @@ router.post("/checkout", async (req, res) => {
 		});
 		res.redirect(`/account`);
 	} catch (error) {
-		console.error("Order error:", error);
 		res.status(500).send("Order processing failed");
 	}
 });

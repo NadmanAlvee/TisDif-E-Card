@@ -103,8 +103,16 @@
     </div>
   </header>
   <!-- Search bar -->
-  <div class="searchBar" id="searchBar" onmouseleave="toggleSearch()">
-    <input type="text" spellcheck="false" placeholder="Search Products" />
+  <div class="searchBar" id="searchBar">
+    <form action="/search" method="GET">
+      <input
+        name="searchQuery"
+        type="text"
+        spellcheck="false"
+        placeholder="Search Products"
+        required
+      />
+    </form>
   </div>
   <!-- Mobile Container (only visible on mobile) -->
   <div class="mobile-container">

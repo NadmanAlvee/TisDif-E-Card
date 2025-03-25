@@ -18,7 +18,6 @@ router.get("/", async (req, res) => {
 			page_title,
 		});
 	} catch (error) {
-		console.error("Checkout error:", error);
 		res.status(500).send("Server Error");
 	}
 });

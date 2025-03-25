@@ -1,4 +1,4 @@
-<%- include('./partials/headers/header.ejs') %>
+<%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/style.css" />
     <div class="container" id="container">
         <div class="sections">
@@ -27,17 +27,15 @@
                     </div>
                     <div class="product-container slide-in">
                         <% categoryProducts.forEach(product => { %>
-                            <%- include('partials/homepage/product-card', { product }) %>
+                            <%- include('partials/product-card', { product }) %>
                         <% }) %>
                     </div>
                 </div>
         <% } }) %>
     </div>
 
-<!-- Include footer partial -->
-<%- include('./partials/footer/footer.ejs') %>
 
-<!-- Move the Finisher Header script here -->
 <script src="/scripts/index.js" defer></script>
+<%- include('./partials/footer.ejs') %>
 </body>
 </html>

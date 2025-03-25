@@ -31,7 +31,6 @@ router.post("/add-to-cart", checkLogin, async (req, res) => {
 		await cartItem.save();
 		res.status(200).json({ message: "Item added to cart", cartItem });
 	} catch (error) {
-		console.error("Error adding to cart:", error);
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
@@ -50,7 +49,6 @@ router.get("/", async (req, res) => {
 		const page_title = "TisDif e-Card | Cart";
 		res.render("cart", { cartItems, page_title });
 	} catch (error) {
-		console.error("Error loading cart:", error);
 		res.status(500).send("Internal Server Error");
 	}
 });
@@ -69,7 +67,6 @@ router.post("/:id/delete", checkLogin, async (req, res) => {
 		await Cart.deleteOne({ _id: cartId });
 		return res.redirect("/cart");
 	} catch (error) {
-		console.error("Error removing cart item:", error);
 		return res.status(500).json({ message: "Internal server error" });
 	}
 });

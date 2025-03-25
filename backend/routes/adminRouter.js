@@ -58,7 +58,6 @@ router.post("/add-product", async (req, res) => {
 		await newProduct.save();
 		res.redirect("/admin");
 	} catch (err) {
-		console.error(err);
 		res.status(500).send("Error adding product");
 	}
 });

@@ -13,13 +13,6 @@ searchBtn.forEach((e) => {
 		Header.classList.toggle("searchMode");
 	});
 });
-function toggleSearch() {
-	searchBar.classList.remove("active");
-	Header.classList.remove("searchMode");
-}
-indexContainer.addEventListener("click", () => {
-	toggleSearch();
-});
 
 // hamburger
 hamburger.addEventListener("click", () => {

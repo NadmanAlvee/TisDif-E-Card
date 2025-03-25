@@ -1,0 +1,18 @@
+<%- include('./partials/header.ejs') %>
+<link rel="stylesheet" href="/css/search.css">
+<div class="container">
+    <% if (typeof finds !== 'undefined' && finds.length > 0) { %>
+        <div class="product-container">
+            <% finds.forEach((product) => { %>
+                <%- include('partials/product-card', { product }) %>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="not-found">
+            <h3>No products found for "<%= query %>"</h3>
+        </div>
+    <% } %>
+</div>
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

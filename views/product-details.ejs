@@ -1,4 +1,4 @@
-<%- include('./partials/headers/header-2.ejs') %>
+<%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/productDetails.css" />
   <main class="product-details">
     <div class="product-main sections">
@@ -47,7 +47,7 @@
                       <% if (related.stock === 0) { %>
                           <p class="related-price">Out Of Stock</p>
                       <% } else { %>
-                          <p class="related-price"><%= related.price.toFixed(2).toLocaleString() %> BDT</p>
+                          <p class="related-price"><%= related.price.toFixed(2).toLocaleString() %>৳</p>
                       <% } %>
                   </div>
               </a>  
@@ -58,5 +58,6 @@
   </main>
 <script src="/scripts/addToCart.js" defer></script>
 <script src="/scripts/product-details.js" defer></script>
+<%- include('./partials/footer.ejs') %>
 </body>
 </html>

@@ -4,7 +4,6 @@ const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const flash = require("connect-flash");
 dotenv.config();
 
 // internel imports
@@ -27,6 +26,7 @@ const accountRouter = require("./routes/accountRouter");
 const checkoutRouter = require("./routes/checkoutRouter");
 const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
+const searchRouter = require("./routes/searchRouter");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -48,15 +48,6 @@ app.use(
 		},
 	})
 );
-
-// Middleware
-app.use(flash());
-
-app.use((req, res, next) => {
-	res.locals.success_msg = req.flash("success");
-	res.locals.error_msg = req.flash("error");
-	next();
-});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -83,6 +74,8 @@ app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
 app.use("/cart", sessionInfo, checkLogin, cartRouter);
 
 app.use("/order", sessionInfo, checkLogin, orderRouter);
+
+app.use("/search", sessionInfo, checkLogin, searchRouter);
 
 // Error handling
 app.use(notFoundHandler); // 404

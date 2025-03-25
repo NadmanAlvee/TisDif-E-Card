@@ -26,7 +26,6 @@ router.get("/", checkLogin, async (req, res) => {
 			page_title,
 		});
 	} catch (error) {
-		console.error("Error fetching account details:", error);
 		res.status(500).send("Server Error");
 	}
 });
