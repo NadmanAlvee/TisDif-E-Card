@@ -4,7 +4,6 @@ const navbar = document.getElementById("navbar");
 const searchBtn = document.querySelectorAll(".searchBtn");
 const searchBar = document.getElementById("searchBar");
 const Header = document.getElementById("Header");
-const indexContainer = document.getElementById("container");
 
 // Search
 searchBtn.forEach((e) => {

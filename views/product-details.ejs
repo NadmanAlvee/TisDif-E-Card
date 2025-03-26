@@ -32,28 +32,16 @@
     </div>
     <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
     if(RelatedProducts.length > 0) { %>
-    <section class="related-container sections">
-        <div class="related-text slide-in">
-          <h2>Browse Similar Products</h2>
-        </div>
-        <div class="related-product-card">
-          <% relatedProducts.forEach(related => { %>
-              <a href="/product/<%= related._id %>">
-                  <div class="related-card slide-in <%= related.stock === 0 ? 'out-of-stock' : '' %>">
-                      <img class="main-image"
-                          src="<%= (related.image && related.image.length && related.image[0]) ? related.image[0] : '/images/placeholder.webp' %>"
-                          alt="<%= related.name %>" />
-                      <h3 class="related-name"><%= related.name %></h3>
-                      <% if (related.stock === 0) { %>
-                          <p class="related-price">Out Of Stock</p>
-                      <% } else { %>
-                          <p class="related-price"><%= related.price.toFixed(2).toLocaleString() %>৳</p>
-                      <% } %>
-                  </div>
-              </a>  
-          <% }) %>
-        </div>
-    </section>
+      <section class="sections">
+          <div class="product-text">
+            <h2>Browse Similar Products</h2>
+          </div>
+          <div class="product-container">
+            <% relatedProducts.forEach(product => { %>
+              <%- include('partials/product-card', { product }) %>
+            <% }) %>
+          </div>
+      </section>
     <% } %>
   </main>
 <script src="/scripts/addToCart.js" defer></script>

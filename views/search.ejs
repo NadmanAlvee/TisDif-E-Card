@@ -1,6 +1,9 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/search.css">
 <div class="container">
+    <div class="product-text">
+        <h2>Search result for <%= query %></h2>
+    </div>
     <% if (typeof finds !== 'undefined' && finds.length > 0) { %>
         <div class="product-container">
             <% finds.forEach((product) => { %>
@@ -9,7 +12,7 @@
         </div>
     <% } else { %>
         <div class="not-found">
-            <h3>No products found for "<%= query %>"</h3>
+            <h3>No products found!</h3>
         </div>
     <% } %>
 </div>

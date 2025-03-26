@@ -4,6 +4,10 @@
 	--font-size: 1rem;
 }
 * {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
@@ -313,6 +317,11 @@ header.searchMode {
 	.navbar.active {
 		top: 0;
 		height: 100vh;
+	}
+
+	.searchBar input {
+		width: 70vw;
+		transform: translateY(20px);
 	}
 
 	.account-container {

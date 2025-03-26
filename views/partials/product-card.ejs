@@ -1,14 +1,28 @@
 <a href="/product/<%= product._id %>">
-    <div class="product-card slide-in <%= product.stock === 0 ? 'out-of-stock' : '' %>" data-id="<%= product._id %>">
+    <div class="product-card <%= product.stock === 0 ? 'out-of-stock' : '' %>" data-id="<%= product._id %>">
         <img class="main-image"
              src="<%= (product.image && product.image.length && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>"
              alt="<%= product.name %>" />
         
         <h3 class="product-name"><%= product.name %></h3>
-        <% if (product.stock === 0) { %>
-            <p class="product-price">Out Of Stock</p>
-        <% } else { %>
-            <p class="product-price"><%= product.price.toFixed(2).toLocaleString() %>৳</p>
-        <% } %>
+        <p class="price-container">
+            <% if (product.stock === 0) { %>
+                <span class="product-price">Out Of Stock</span>
+            <% } else { %>
+                <% if (product.saveTag > 0) { %>
+                    <span class="product-price">
+                        <%= product.price.toFixed(2).toLocaleString() %>৳
+                    </span>
+                    <span class="old-price">
+                        <%= (product.price + (product.price * (product.saveTag / 100))).toFixed(2) %>৳
+                    </span>
+                    <!-- <span class="discount-label"><%= product.saveTag %>% OFF</span> -->
+                <% } else { %>
+                    <span class="product-price">
+                        <%= product.price.toFixed(2).toLocaleString() %>৳
+                    </span>
+                <% } %>
+            <% } %>
+        </p>
     </div>
 </a>
