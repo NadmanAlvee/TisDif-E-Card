@@ -1,6 +1,13 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/productDetails.css" />
   <main class="product-details">
+    <div class="breadcrumb">
+      <ul>
+        <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
+        <li><a href="/search?searchQuery=<%= product.category %>"><%= product.category.charAt(0).toUpperCase() + product.category.slice(1) %></a></li>
+        <li><a href="/product/<%= product._id %>"><%= product.name %></a></li>
+      </ul>
+    </div>
     <div class="product-main sections">
       <div class="product-images">
         <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">

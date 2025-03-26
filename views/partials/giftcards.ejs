@@ -1,7 +1,7 @@
 <div class="product-info" data-price="<%= product.price %>">
     <h2 id="product-name"><%= product.name %></h2>
     <div id="configs">
-        <p class="product-price-container">
+        <p class="product-price-container">Price: 
             <% if (product.saveTag > 0) { %>
               <span class="old-product-price"><%= (product.price + (product.price * (product.saveTag / 100))).toFixed(2) %>৳</span>
               <span class="new-price">
@@ -12,7 +12,6 @@
               <span class="new-price"><%= product.price %>৳</span>
             <% } %>
         </p>
-          
         <p>Status: <% if (product.stock > 0){ %>
             <span class="in-stock">In Stock</span>
             <% } else { %>

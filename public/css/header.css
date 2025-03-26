@@ -30,7 +30,7 @@ header {
 	justify-content: space-between;
 	padding: 0 200px;
 	transition: 0.5s;
-	box-shadow: 0 0px 60px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0px 7px rgba(0, 0, 0, 0.3);
 	backdrop-filter: blur(30px);
 	-webkit-backdrop-filter: blur(30px);
 }
@@ -142,35 +142,35 @@ header {
 .searchBar {
 	opacity: 0;
 	position: fixed;
-	top: -30dvh;
+	top: -35vh;
 	left: 0;
 	width: 100%;
-	transition: 0.3s ease;
-	height: 30dvh;
+	transition: 0.4s linear;
+	height: 35vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	z-index: 1;
 }
 .searchBar.active {
-	display: flex;
 	top: 0;
 	opacity: 1;
 	box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
-	background: #fff;
-	justify-content: center;
-	align-items: center;
+	backdrop-filter: blur(15px);
 }
 .searchBar.active ~ * {
-	transition: 0.5s;
-	filter: blur(7px);
+	transition: 0.4s linear;
+	filter: blur(1px);
 }
 .searchBar input {
+	background: none;
 	font-size: 16px;
 	color: var(--text-color);
 	height: 40px;
 	width: 50vw;
-	margin-inline-start: -38px;
 	margin-inline-end: -33px;
-	padding-inline-start: 42px;
 	padding-inline-end: 38px;
+	padding-inline-start: 20px;
 	position: relative;
 	border-radius: 30px;
 	border: 1px solid var(--text-color);
@@ -183,6 +183,38 @@ header {
 header.searchMode {
 	box-shadow: none;
 	background: #fff;
+}
+
+.global_search {
+	display: flex;
+	flex-direction: column;
+	margin-top: 60px;
+}
+.global_search_ql h2 {
+	padding: 6px 0;
+	font-size: 14px;
+	font-weight: lighter;
+}
+.global_search_ql {
+	padding: 10px;
+	font-size: 14px;
+}
+.global_search_ql ol li {
+	padding: 8px 0;
+}
+
+.global_search_ql ol li a {
+	display: flex;
+	font-weight: 600;
+	color: #4d4d4d;
+	align-items: center;
+	text-decoration: underline;
+}
+
+.global_search_ql ol li a img {
+	margin-right: 5px;
+	width: 14px;
+	height: auto;
 }
 
 /* Cart Icon */
@@ -321,7 +353,6 @@ header.searchMode {
 
 	.searchBar input {
 		width: 70vw;
-		transform: translateY(20px);
 	}
 
 	.account-container {
@@ -380,8 +411,8 @@ header.searchMode {
 		display: flex;
 	}
 	.searchBar {
-		top: -20dvh;
-		height: 20dvh;
+		top: -35vh;
+		height: 35vh;
 	}
 }
 

@@ -104,15 +104,25 @@
   </header>
   <!-- Search bar -->
   <div class="searchBar" id="searchBar">
-    <form action="/search" method="GET">
-      <input
-        name="searchQuery"
-        type="text"
-        spellcheck="false"
-        placeholder="Search Products"
-        required
-      />
-    </form>
+    <div class="global_search">
+      <form action="/search" method="GET">
+        <input
+          name="searchQuery"
+          type="text"
+          spellcheck="false"
+          placeholder="Search Products"
+          required
+        />
+      </form>
+      <div class="global_search_ql">
+        <h2>Quick Links</h2>
+          <ol>
+            <li><a href="/search?searchQuery=giftcards"><img src="https://img.icons8.com/small/16/arrow.png" alt="arrow"/> GiftCards</a></li>
+            <li><a href="/search?searchQuery=accessories"><img src="https://img.icons8.com/small/16/arrow.png" alt="arrow"/> Accessories</a></li>
+            <li><a href="/search?searchQuery=iphones"><img src="https://img.icons8.com/small/16/arrow.png" alt="arrow"/> iPhones</a></li>
+          </ol>
+      </div>
+    </div>
   </div>
   <!-- Mobile Container (only visible on mobile) -->
   <div class="mobile-container">

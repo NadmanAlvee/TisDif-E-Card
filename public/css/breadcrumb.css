@@ -1,0 +1,23 @@
+.breadcrumb {
+	margin-bottom: 5%;
+	margin-top: 100px;
+}
+
+.breadcrumb ul {
+	text-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	font-size: 14px;
+	font-weight: 600;
+	align-items: flex-end;
+}
+.breadcrumb ul img {
+	transform: translateY(15%);
+	width: 18px;
+}
+.breadcrumb li:not(:last-child)::after {
+	content: " / ";
+	font-size: 14px;
+	padding: 0 5px;
+}

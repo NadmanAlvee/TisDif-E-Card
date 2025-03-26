@@ -1,4 +1,5 @@
 @import url("product-container.css");
+@import url("breadcrumb.css");
 :root {
 	--height: clamp(2rem, 8vw, 3rem);
 	--slide-up-font-size: 2rem;
@@ -6,10 +7,8 @@
 	--background-color: #fff;
 	--background-color-2: #8080802e;
 }
-
 .container {
 	margin: 0 20vw;
-	margin-top: 100px;
 	padding-bottom: 80px;
 	user-select: none;
 	position: relative;
@@ -22,11 +21,12 @@
 	flex-direction: column;
 	justify-content: flex-start;
 }
-
+.breadcrumb {
+	margin-bottom: 0;
+}
 .product-container {
 	margin-bottom: 140px;
 }
-
 .not-found {
 	text-align: center;
 	padding: 5%;
@@ -34,8 +34,10 @@
 .not-found h3 {
 	color: rgb(255 30 0 / 83%);
 }
-
 @media (max-width: 780px) {
+	.product-container {
+		gap: 5%;
+	}
 	.container {
 		margin: 2%;
 		margin-top: 100px;

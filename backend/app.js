@@ -1,5 +1,6 @@
 // external imports
 const express = require("express");
+const compression = require("compression");
 const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -16,7 +17,6 @@ const {
 	notFoundHandler,
 } = require("./middlewares/common/errorHandlers");
 const logout = require("./controller/logoutController");
-
 // routes
 const homepageRouter = require("./routes/homepageRouter");
 const loginRouter = require("./routes/loginRouter");
@@ -29,11 +29,15 @@ const orderRouter = require("./routes/orderRouter");
 const searchRouter = require("./routes/searchRouter");
 
 const app = express();
+app.use(
+	compression({
+		level: 6, // Compression level (0-9)
+		threshold: 1024, // Compress responses larger than 1KB
+	})
+);
 const PORT = process.env.PORT;
-
 // Connect to MongoDB
 connectDB();
-
 // Session
 app.use(
 	session({
@@ -48,7 +52,6 @@ app.use(
 		},
 	})
 );
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
