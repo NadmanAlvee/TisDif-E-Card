@@ -50,14 +50,14 @@ app.use(
 		saveUninitialized: false,
 		store: MongoStore.create({
 			client: mongoose.connection.getClient(),
-			ttl: 0, // 1 day (seconds) 24 * 60 * 60,
+			ttl: 24 * 60 * 60, // 1 day (seconds)
 			autoRemove: "native",
 		}),
 		cookie: {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production",
 			sameSite: "lax",
-			maxAge: 0, // 1 day (milliseconds) 1000 * 60 * 60 * 24,
+			maxAge: 1000 * 60 * 60 * 24, // 1 day (milliseconds)
 		},
 	})
 );
