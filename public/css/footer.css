@@ -1,0 +1,70 @@
+.footer-container,
+.footer-container * {
+	color: hsl(0, 0%, 30%);
+}
+
+.footer-container {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	padding: 2vh 5vw;
+	height: 35vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: hsl(0deg 0% 95%);
+}
+
+.footer-div-1 {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	align-items: center;
+	justify-content: space-between;
+}
+.footer-sections {
+	height: 85%;
+}
+.footer-sections h2 {
+	padding-bottom: 12px;
+	font-size: 21px;
+}
+.business-name {
+	width: 30%;
+	height: 55%;
+	font-size: 35px;
+}
+.contacts {
+	display: flex;
+	flex-direction: column;
+	width: 34%;
+}
+.contacts li,
+.socials li {
+	padding: 12px 0;
+	font-size: 14px;
+}
+.contacts ul li a,
+.socials ul li a {
+	text-decoration: underline;
+}
+.contacts ul li img,
+.socials ul li img {
+	width: 15px;
+	margin-right: 4px;
+	transform: translateY(15%);
+}
+
+.footer-div-2 {
+	border-top: 1px solid hsl(0, 0%, 30%);
+	padding-top: 1rem;
+	text-align: center;
+	bottom: 0;
+	position: relative;
+}
+
+@media (max-width: 900px) {
+	.footer-container {
+		height: 30vh;
+	}
+}

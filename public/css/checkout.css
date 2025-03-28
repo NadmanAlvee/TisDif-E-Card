@@ -1,16 +1,7 @@
 @import url("global.css");
-body {
-	background: linear-gradient(
-		160deg,
-		#ffffff00,
-		#ffdbed6b,
-		hsl(40deg 100% 50% / 20%)
-	);
-	min-height: 100vh;
-}
-
 /* Main container styles */
 .checkout-container {
+	min-height: 85vh;
 	max-width: 800px;
 	margin: 100px auto;
 	padding: 20px;

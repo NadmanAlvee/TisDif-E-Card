@@ -1,13 +1,9 @@
 @import url("global.css");
 @import url("breadcrumb.css");
-body {
-	background: linear-gradient(160deg, #ffffff00, hsl(230.37deg 100% 50% / 8%));
-	min-height: 100vh;
-}
 .cart-container {
+	min-height: 85vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	margin: 0 20vw;
 }
 /* Empty cart */

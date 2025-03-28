@@ -1,9 +1,5 @@
 @import url("global.css");
 * {
-	user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	margin: 0;
 	padding: 0;
 	color: var(--text-color);
@@ -14,6 +10,10 @@
 	scroll-behavior: smooth;
 }
 header {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	position: fixed;
 	top: 0;
 	right: 0;

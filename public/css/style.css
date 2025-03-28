@@ -6,6 +6,7 @@
 }
 
 .container {
+	min-height: 70vh;
 	margin: 0 20vw;
 	user-select: none;
 	position: relative;

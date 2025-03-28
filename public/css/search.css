@@ -2,6 +2,7 @@
 @import url("product-container.css");
 @import url("breadcrumb.css");
 .container {
+	min-height: 70vh;
 	margin: 0 20vw;
 	padding-bottom: 80px;
 	user-select: none;
