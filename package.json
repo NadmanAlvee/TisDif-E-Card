@@ -1,7 +1,25 @@
 {
 	"dependencies": {
 		"bcryptjs": "^3.0.1",
-		"compress": "^0.99.0",
+		"compression": "^1.8.0",
+		"connect-flash": "^0.1.1",
+		"connect-mongo": "^5.1.0",
+		"cookie-parser": "^1.4.7",
+		"dotenv": "^16.4.7",
+		"ejs": "^3.1.10",
+		"express": "^4.21.2",
+		"express-session": "^1.18.1",
+		"express-validator": "^7.2.1",
+		"http-errors": "^2.0.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.9.5"
+	},
+	"scripts": {
+		"start": "cross-env NODE_ENV=development nodemon ./backend/app.js",
+		"prod": "cross-env NODE_ENV=production nodemon ./backend/app.js"
+	},
+	"devDependencies": {
+		"bcryptjs": "^3.0.1",
 		"compression": "^1.8.0",
 		"connect-flash": "^0.1.1",
 		"cookie-parser": "^1.4.7",
@@ -14,10 +32,7 @@
 		"http-errors": "^2.0.0",
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.9.5",
+		"connect-mongo": "^5.1.0",
 		"nodemon": "^3.1.9"
-	},
-	"scripts": {
-		"start": "cross-env NODE_ENV=development nodemon ./backend/app.js",
-		"prod": "cross-env NODE_ENV=production nodemon ./backend/app.js"
 	}
 }
