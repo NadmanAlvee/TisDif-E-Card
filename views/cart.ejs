@@ -1,12 +1,17 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/cart.css">
-
+<div class="breadcrumb">
+    <ul>
+      <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
+      <li><a href="/cart">Cart</a></li>
+    </ul>
+</div>
 <div class="cart-container">
     <!-- <h2 class="cart-title">My Cart</h2> -->
         <% if (cartItems.length === 0) { %>
         <div class="empty-cart">
             <div class="cart-icon-wrapper">
-                <img src="/ui/homepage/empty_cart.png" alt="Empty Cart Image">
+                <img src="/images/homepage/empty_cart.png" alt="Empty Cart Image">
             </div>
             <h2>Cart Empty!</h2>
             <p>Your cart is starving—feed it something delicious! 🍕🛍️</p>

@@ -3,12 +3,19 @@ const express = require("express");
 const compression = require("compression");
 const path = require("path");
 const dotenv = require("dotenv");
+dotenv.config();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-dotenv.config();
-
+const app = express();
+app.use(
+	compression({
+		threshold: 0, // in bytes, 1024 byte - 1kb
+		level: 6,
+	})
+);
 // internel imports
 const checkAdmin = require("./middlewares/checkAdmin");
+const findSlides = require("./middlewares/utils/findSlides");
 const { checkLogin } = require("./middlewares/common/checkLogin");
 const sessionInfo = require("./middlewares/common/sessionInfo");
 const connectDB = require("./MongooseConfig");
@@ -28,13 +35,6 @@ const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
 const searchRouter = require("./routes/searchRouter");
 
-const app = express();
-app.use(
-	compression({
-		level: 6, // Compression level (0-9)
-		threshold: 1024, // Compress responses larger than 1KB
-	})
-);
 const PORT = process.env.PORT;
 // Connect to MongoDB
 connectDB();
@@ -60,7 +60,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Frontend Routes
-app.use("/", sessionInfo, checkLogin, homepageRouter);
+app.use("/", sessionInfo, checkLogin, findSlides, homepageRouter);
 
 app.use("/login", sessionInfo, loginRouter);
 

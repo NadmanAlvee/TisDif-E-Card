@@ -1,12 +1,6 @@
+@import url("global.css");
 @import url("product-container.css");
 @import url("breadcrumb.css");
-:root {
-	--height: clamp(2rem, 8vw, 3rem);
-	--slide-up-font-size: 2rem;
-	--text-color: hsla(0, 0%, 0%, 0.65);
-	--background-color: #fff;
-	--background-color-2: #8080802e;
-}
 .container {
 	margin: 0 20vw;
 	padding-bottom: 80px;
@@ -40,6 +34,5 @@
 	}
 	.container {
 		margin: 2%;
-		margin-top: 100px;
 	}
 }

@@ -1,56 +1,56 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/productDetails.css" />
-  <main class="product-details">
-    <div class="breadcrumb">
-      <ul>
-        <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
-        <li><a href="/search?searchQuery=<%= product.category %>"><%= product.category.charAt(0).toUpperCase() + product.category.slice(1) %></a></li>
-        <li><a href="/product/<%= product._id %>"><%= product.name %></a></li>
-      </ul>
-    </div>
-    <div class="product-main sections">
-      <div class="product-images">
-        <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
-        <div class="thumbnail-image-div">
-          <% product.image.forEach((image)=>{ %>
-            <img class="thumbnail-images" onclick="updateMainImage(this)" src="<%= image %>" alt="Product Thumbnail Image">
-          <% }) %>
-        </div>
-    </div>
-    
-      <div class="product-div">
-        <% if (product.category == 'giftcards') { %>
-          <%- include('./partials/giftcards.ejs') %>
-        <% } else if (product.category == 'iphones') { %>
-          <%- include('./partials/iphones.ejs') %>
-        <% } else if (product.category == 'accessories') { %>
-          <%- include('./partials/accessories.ejs') %>
+<div class="breadcrumb">
+  <ul>
+    <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
+    <li><a href="/search?searchQuery=<%= product.category %>"><%= product.category.charAt(0).toUpperCase() + product.category.slice(1) %></a></li>
+    <li><a href="/product/<%= product._id %>"><%= product.name %></a></li>
+  </ul>
+</div>
+<main class="product-details">
+  <div class="product-main sections">
+    <div class="product-images">
+      <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
+      <div class="thumbnail-image-div">
+        <% product.image.forEach((image)=>{ %>
+          <img class="thumbnail-images" onclick="updateMainImage(this)" src="<%= image %>" alt="Product Thumbnail Image">
+        <% }) %>
+      </div>
+  </div>
+  
+    <div class="product-div">
+      <% if (product.category == 'giftcards') { %>
+        <%- include('./partials/giftcards.ejs') %>
+      <% } else if (product.category == 'iphones') { %>
+        <%- include('./partials/iphones.ejs') %>
+      <% } else if (product.category == 'accessories') { %>
+        <%- include('./partials/accessories.ejs') %>
+      <% } %>
+      <div class="actions">
+        <% if (product.stock > 0) { %>
+            <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
+            <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
+        <% } else { %>
+            <button class="empty-stock">ADD TO CART</button>
+            <button class="empty-stock">Buy Now</button>
         <% } %>
-        <div class="actions">
-          <% if (product.stock > 0) { %>
-              <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
-              <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
-          <% } else { %>
-              <button class="empty-stock">ADD TO CART</button>
-              <button class="empty-stock">Buy Now</button>
-          <% } %>
-        </div>
       </div>
     </div>
-    <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
-    if(RelatedProducts.length > 0) { %>
-      <section class="sections">
-          <div class="product-text">
-            <h2>Browse Similar Products</h2>
-          </div>
-          <div class="product-container">
-            <% relatedProducts.forEach(product => { %>
-              <%- include('partials/product-card', { product }) %>
-            <% }) %>
-          </div>
-      </section>
-    <% } %>
-  </main>
+  </div>
+  <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
+  if(RelatedProducts.length > 0) { %>
+    <section class="sections">
+        <div class="product-text">
+          <h2>Browse Similar Products</h2>
+        </div>
+        <div class="product-container">
+          <% relatedProducts.forEach(product => { %>
+            <%- include('partials/product-card', { product }) %>
+          <% }) %>
+        </div>
+    </section>
+  <% } %>
+</main>
 <script src="/scripts/addToCart.js" defer></script>
 <script src="/scripts/product-details.js" defer></script>
 <%- include('./partials/footer.ejs') %>

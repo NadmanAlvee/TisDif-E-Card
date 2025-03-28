@@ -1,8 +1,10 @@
+@import url("global.css");
 body {
 	min-height: 100vh;
+	margin: 0 20vw;
 }
 .container {
-	font-size: 20px;
+	font-size: 16px;
 	padding: 20px;
 	margin-top: 80px;
 }
@@ -170,6 +172,9 @@ h3 {
 	max-width: 100%;
 }
 @media (max-width: 768px) {
+	body {
+		margin: 0;
+	}
 	.order-status {
 		padding: 0.5rem 1rem;
 		border-radius: 20px;

@@ -1,14 +1,9 @@
-:root {
-	--text-color: hsla(0, 0%, 0%, 0.65);
-	--background-color: #fff;
-	--font-size: 1rem;
-}
+@import url("global.css");
 * {
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	font-family: sans-serif;
 	margin: 0;
 	padding: 0;
 	color: var(--text-color);
@@ -145,7 +140,7 @@ header {
 	top: -35vh;
 	left: 0;
 	width: 100%;
-	transition: 0.4s linear;
+	transition: 0.1s linear;
 	height: 35vh;
 	display: flex;
 	justify-content: center;
@@ -155,12 +150,13 @@ header {
 .searchBar.active {
 	top: 0;
 	opacity: 1;
+	background: rgb(255, 255, 255, 0.8);
 	box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(15px);
 }
 .searchBar.active ~ * {
-	transition: 0.4s linear;
-	filter: blur(1px);
+	transition: 0.3s linear;
+	filter: blur(2px);
 }
 .searchBar input {
 	background: none;
@@ -168,7 +164,6 @@ header {
 	color: var(--text-color);
 	height: 40px;
 	width: 50vw;
-	margin-inline-end: -33px;
 	padding-inline-end: 38px;
 	padding-inline-start: 20px;
 	position: relative;
@@ -206,7 +201,6 @@ header.searchMode {
 .global_search_ql ol li a {
 	display: flex;
 	font-weight: 600;
-	color: #4d4d4d;
 	align-items: center;
 	text-decoration: underline;
 }

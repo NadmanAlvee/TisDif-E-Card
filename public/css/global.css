@@ -1,0 +1,15 @@
+@font-face {
+	font-family: "Regular";
+	src: url("/fonts/HelveticaNeueRoman.otf") format("opentype");
+}
+* {
+	font-family: "Regular";
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+:root {
+	--height: clamp(2rem, 8vw, 3rem);
+	--text-color: rgba(0, 0, 0, 0.8);
+	--background-color: #fff;
+	--background-color-2: #8080802e;
+}

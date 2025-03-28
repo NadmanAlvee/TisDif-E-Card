@@ -1,26 +1,13 @@
+@import url("global.css");
 @import url("product-container.css");
 @import url("breadcrumb.css");
-:root {
-	--text-color: hsla(0, 0%, 0%, 0.65);
-	--background-color: #fff;
-	--background-color-2: #8080802e;
-}
-
-* {
-	margin: 0;
-	box-sizing: border-box;
-}
-
 body {
-	font-family: Arial, sans-serif;
 	background: none;
-	color: var(--text-color);
 }
-
 .product-details {
 	display: flex;
 	flex-direction: column;
-	margin: 0 min(20dvw, max(7dvw, 20dvw));
+	margin: 0 20vw;
 }
 .sections {
 	scroll-snap-align: end;
@@ -29,21 +16,22 @@ body {
 
 .product-main {
 	height: fit-content;
-	margin-bottom: 5%;
+	margin: 5% 0;
 	display: flex;
 	gap: 10%;
-	justify-content: center;
+	justify-content: space-around;
 }
 
 .product-images {
+	display: flex;
 	height: 100%;
-	width: 240px;
+	width: 250px;
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	text-align: center;
 	row-gap: 10px;
+	flex-direction: column;
 }
 
 .thumbnail-image-div {
@@ -67,13 +55,12 @@ body {
 #main-image {
 	border-radius: 20px;
 	border: 1px solid hsl(0deg 0% 0% / 0.2);
-	width: 220px;
+	width: 250px;
 	object-fit: contain;
 	object-position: center;
 }
 .product-div {
 	display: flex;
-	height: 100%;
 	flex-direction: column;
 }
 
@@ -125,7 +112,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 7px;
-	margin-bottom: 20px;
+	margin-bottom: 2%;
 }
 
 .price-btn {
@@ -149,7 +136,7 @@ body {
 
 #selected-price {
 	color: var(--text-color);
-	padding-bottom: 6%;
+	padding-bottom: 5%;
 	font-size: 19px;
 	font-weight: bold;
 }
@@ -250,12 +237,11 @@ body {
 	.product-main {
 		flex-direction: column;
 		height: auto;
-		margin: 10% 0;
+		margin: 6% 0;
 		margin-top: 0;
 	}
 	.product-images {
 		display: flex;
-		margin-top: 20%;
 		margin-bottom: 5%;
 		justify-content: center;
 		flex-direction: column;
@@ -283,12 +269,12 @@ body {
 		border-radius: 10px;
 	}
 	.product-details {
-		margin: 5%;
+		margin: 2%;
 	}
 	.buy-now,
 	.add-to-cart,
 	.empty-stock {
 		font-size: 13px;
-		width: 100%;
+		width: 35%;
 	}
 }

@@ -1,40 +1,36 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/style.css" />
     <div class="container" id="container">
-        <div class="sections">
-            <!-- Slide ups -->
-            <div class="typewrapper">
-                <div class="slideup">
-                    <h2>DISCOVER</h2>
-                    <ol>
-                        <li><span>GIFT CARDS</span></li>
-                        <li><span>IPHONES</span></li>
-                        <li><span>ACCESSORIES</span></li>
-                        <li><span>AND MANY MORE</span></li>
-                    </ol>
+        <% if (slides.length > 0) { %>  <!-- homepage slides -->
+            <div class="sections slider-wrapper">
+                <div class="slider">
+                    <% for ( let i = 0; i < slides.length; i++) { %>
+                        <img src="<%= slides[i] %>" class="image-slide" id="slide-<%=i%>" alt="image">
+                    <% } %>
                 </div>
             </div>
-        </div>
-
-        <!-- Products Sections -->
-        <% const categories = ["iphones", "giftcards", "accessories"]; %>
-        <% categories.forEach(category => { 
+            <div class="slider-nav">
+                <% for ( let i = 0; i < slides.length; i++) { %>
+                    <span class="dot" id="dot-<%=i%>"></span>
+                <% } %>
+            </div>
+        <% } %>
+        <% const categories = ["iphones", "giftcards", "accessories"]; %>   <!-- Products Sections -->
+        <% categories.forEach((category) => { 
             const categoryProducts = products.filter(product => product.category === category);
             if (categoryProducts.length > 0) { %>
-                <div class="sections" id="<%= category %>">
-                    <div class="product-text">
-                        <h2>Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
-                    </div>
-                    <div class="product-container">
-                        <% categoryProducts.forEach(product => { %>
-                            <%- include('partials/product-card', { product }) %>
-                        <% }) %>
-                    </div>
+            <div class="sections" id="<%= category %>">
+                <div class="product-text">
+                    <h2>Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %></h2>
                 </div>
+                <div class="product-container">
+                    <% categoryProducts.forEach(product => { %>
+                        <%- include('partials/product-card', { product }) %>
+                    <% }) %>
+                </div>
+            </div>
         <% } }) %>
     </div>
-
-
 <script src="/scripts/index.js" defer></script>
 <%- include('./partials/footer.ejs') %>
 </body>

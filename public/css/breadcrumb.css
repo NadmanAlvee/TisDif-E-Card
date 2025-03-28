@@ -1,16 +1,19 @@
 .breadcrumb {
-	margin-bottom: 5%;
+	margin: 0 20vw;
 	margin-top: 100px;
 }
 
 .breadcrumb ul {
-	text-wrap: nowrap;
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
 	font-size: 14px;
 	font-weight: 600;
 	align-items: flex-end;
+	width: 50%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .breadcrumb ul img {
 	transform: translateY(15%);
@@ -20,4 +23,17 @@
 	content: " / ";
 	font-size: 14px;
 	padding: 0 5px;
+}
+.breadcrumb ul li:last-child a {
+	color: #a00000;
+}
+@media (max-width: 780px) {
+	.breadcrumb {
+		margin: 2%;
+		margin-bottom: 5%;
+		margin-top: 80px;
+	}
+	.breadcrumb ul {
+		width: 90%;
+	}
 }

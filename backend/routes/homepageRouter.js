@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
 			products: products,
 			cartItems: cartItems,
 			page_title,
+			slides: res.locals.slides,
 		});
 	} catch (error) {
 		res.status(500).send("Error fetching products.");

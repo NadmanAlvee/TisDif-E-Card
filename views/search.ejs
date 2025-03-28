@@ -1,12 +1,12 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/search.css">
+<div class="breadcrumb">
+    <ul>
+      <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
+      <li><a href="/search?searchQuery=%>">Search</a></li>
+    </ul>
+</div>
 <div class="container">
-    <div class="breadcrumb">
-        <ul>
-          <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
-          <li><a href="/search?searchQuery=%>">Search</a></li>
-        </ul>
-      </div>
     <div class="product-text">
         <h2>Search result for <%= query %></h2>
     </div>

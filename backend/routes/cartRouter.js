@@ -61,9 +61,8 @@ router.post("/:id/delete", checkLogin, async (req, res) => {
 
 		const cartItem = await Cart.findOne({ _id: cartId, userId });
 		if (!cartItem) {
-			return res.status(404).json({ message: "Cart item not found" });
+			return res.redirect("/cart");
 		}
-
 		await Cart.deleteOne({ _id: cartId });
 		return res.redirect("/cart");
 	} catch (error) {
