@@ -102,6 +102,11 @@
       </div>
     </div>
   </header>
+  <% if(errors.common) { %>
+    <div class="common-error-div">
+      <div class="common-error-msg"><%= errors.common.msg %></div>
+    </div>
+  <% } %>
   <!-- Search bar -->
   <div class="searchBar" id="searchBar">
     <div class="global_search">

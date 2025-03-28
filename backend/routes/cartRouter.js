@@ -5,7 +5,7 @@ const { checkLogin } = require("../middlewares/common/checkLogin");
 const router = express.Router();
 
 // ➤ Add product to cart
-router.post("/add-to-cart", checkLogin, async (req, res) => {
+router.post("/add-to-cart", checkLogin, async (req, res, next) => {
 	try {
 		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 			return res.status(401).json({ message: "Unauthorized" });
@@ -36,7 +36,7 @@ router.post("/add-to-cart", checkLogin, async (req, res) => {
 });
 
 // ➤ Get logged-in user's cart items
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
 	try {
 		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 			return res.redirect("/login");
@@ -53,8 +53,8 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// POST /cart/:id/delete
-router.post("/:id/delete", checkLogin, async (req, res) => {
+// api /cart/:id/delete
+router.delete("/:id", checkLogin, async (req, res) => {
 	try {
 		const userId = res.locals.loggedInUser._id;
 		const cartId = req.params.id;
@@ -64,7 +64,7 @@ router.post("/:id/delete", checkLogin, async (req, res) => {
 			return res.redirect("/cart");
 		}
 		await Cart.deleteOne({ _id: cartId });
-		return res.redirect("/cart");
+		return res.status(200).json({ message: "Item deleted from Cart" });
 	} catch (error) {
 		return res.status(500).json({ message: "Internal server error" });
 	}

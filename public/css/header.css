@@ -29,6 +29,25 @@ header {
 	backdrop-filter: blur(30px);
 	-webkit-backdrop-filter: blur(30px);
 }
+/* error div */
+.common-error-div {
+	position: fixed;
+	top: 70px;
+	right: 0;
+	width: 100%;
+	height: 70px;
+	padding: 0 200px;
+	transition: top 0.5s linear;
+	background: #ff2222;
+}
+.common-error-msg {
+	display: flex;
+	font-size: 20px;
+	height: 100%;
+	color: white;
+	align-items: center;
+	justify-content: center;
+}
 /* Navbar */
 .logo {
 	display: flex;
@@ -316,6 +335,11 @@ header.searchMode {
 /* Visible only on mobile devices */
 @media (max-width: 1280px) {
 	header {
+		height: 60px;
+		padding: 0 30px;
+	}
+	.common-error-div {
+		top: 60px;
 		height: 60px;
 		padding: 0 30px;
 	}

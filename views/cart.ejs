@@ -40,11 +40,9 @@
                     </div>
                 </div>
                 <div >
-                    <form action="/cart/<%= item._id %>/delete" method="POST">
-                        <button class="delete-btn" type="submit">
-                            <img src="https://img.icons8.com/material-rounded/48/delete.png" alt="Delete">
-                        </button>
-                    </form>                              
+                    <button class="delete-btn" data-id="<%= item._id %>">
+                        <img src="https://img.icons8.com/material-rounded/48/delete.png" alt="Delete">
+                    </button>
                 </div>
                 <% grand_total += item.productId.price * item.selected_quantity; %>
             </div>
@@ -57,5 +55,50 @@
     <% } %>
 </div>
 <%- include('./partials/footer.ejs') %>
+<script>
+    function updateCartTotal(deletedItemTotal = 0) {
+        let total = parseFloat(document.querySelector(".cart-total-text strong").textContent.replace(" BDT", ""));
+        // Subtract deleted item's total
+        total -= deletedItemTotal;
+        // Ensure total doesn't go below zero
+        total = Math.max(total, 0);
+        document.querySelector(".cart-total-text strong").textContent = `${total} BDT`;
+        if (document.querySelectorAll(".cart-card").length === 0) {
+            window.location.reload();
+        }
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", async (event) => {
+                const itemId = button.getAttribute("data-id");
+                const cartCard = button.closest(".cart-card");
+
+                // Get price & quantity of the deleted item
+                const price = parseFloat(cartCard.querySelector(".price").textContent.replace("Unit Price: ", "").replace(" BDT", ""));
+                const quantity = parseInt(cartCard.querySelector(".quantity").textContent.replace("Quantity: ", ""));
+                const deletedItemTotal = price * quantity;
+
+                try {
+                    const response = await fetch(`/cart/${itemId}`, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" }
+                    });
+
+                    if (!response.ok) throw new Error(`Failed to delete item.`);
+
+                    // Remove item from UI
+                    cartCard.remove();
+
+                    // Update cart total
+                    updateCartTotal(deletedItemTotal);
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

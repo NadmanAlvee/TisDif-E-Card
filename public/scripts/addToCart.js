@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// Select buttons and elements
 	const addToCartButtons = document.querySelectorAll(".add-to-cart");
-	const buyNowButtons = document.querySelectorAll(".buy-now");
 	const totalPriceElement = document.getElementById("total-price");
 	const priceButtons = document.querySelectorAll(".price-btn");
 	const quantityValueElement = document.querySelector(".quantity-value");
