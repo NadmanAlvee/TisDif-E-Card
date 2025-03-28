@@ -19,65 +19,63 @@ async function getLogin(req, res, next) {
 	});
 }
 
-// do login
 async function login(req, res, next) {
-	// login process
 	try {
-		// find a user with this email or username
+		// Find a user by email or mobile
 		const user = await User.findOne({
 			$or: [{ email: req.body.userid }, { mobile: req.body.userid }],
 		});
+
 		if (user && user._id) {
+			// Validate password
 			const isValidPassword = await bcrypt.compare(
 				req.body.password,
 				user.password
 			);
-			// prepare token if password is correct
+
 			if (isValidPassword) {
-				// token
+				// Prepare user object and generate token
 				const userObject = {
 					username: user.username,
 					mobile: user.mobile,
 					email: user.email,
-					role: "customer",
+					role: user.role === "admin" ? "admin" : "customer", // Set role conditionally
 				};
-				if (user.role == "admin") {
-					userObject.role = "admin";
-				}
 
-				// generate token
 				const token = jwt.sign(userObject, process.env.JWT_SECRET, {
-					expiresIn: process.env.JWT_EXPIRY,
+					expiresIn: process.env.JWT_EXPIRY || "1d", // Default to 1 day if JWT_EXPIRY is not set
 				});
 
-				// set cookie
+				// Set cookie with the token
 				res.cookie(process.env.COOKIE_NAME, token, {
-					maxAge: 86400000,
+					maxAge: 86400000, // 1 day in milliseconds
 					httpOnly: true,
 					signed: true,
 				});
-				// logged in user local identifier
+
+				// Store logged-in user info in locals
 				res.locals.loggedInUser = userObject;
-				// redirect homepage
-				res.redirect("/account");
+
+				// Redirect to account page after successful login
+				return res.redirect("/account");
 			} else {
-				throw createError("Login failed! Please try again.");
+				throw createError("Login failed! Incorrect password.");
 			}
 		} else {
-			throw createError("Login failed! Please try again.");
+			throw createError("Login failed! User not found.");
 		}
 	} catch (err) {
-		const userId = res.locals.loggedInUser._id;
-		const cartItems = await Cart.find({ userId });
+		const cartItems = await Cart.find({
+			userId: res.locals.loggedInUser ? res.locals.loggedInUser._id : null,
+		});
 		const page_title = "TisDif e-Card | Login";
+
 		res.render("login_page.ejs", {
 			errors: {
-				common: {
-					msg: err.message,
-				},
+				common: { msg: err.message },
 			},
-			loggedInUser: res.locals.loggedInUser,
-			cartItems: cartItems,
+			loggedInUser: res.locals.loggedInUser || null, // Ensure loggedInUser is always safe
+			cartItems,
 			page_title,
 		});
 	}

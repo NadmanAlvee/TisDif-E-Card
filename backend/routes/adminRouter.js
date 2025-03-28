@@ -8,18 +8,18 @@ const User = require("../models/User");
 router.get("/", async (req, res) => {
 	try {
 		const products = await Product.find();
-		res.render("adminPortal", { products });
+		res.render("admin/manageProducts", { products });
 	} catch (err) {
 		res.status(500).send("Error fetching products");
 	}
 });
 
 // users route
-router.get("/users", async (req, res) => {
+router.get("/orders", async (req, res) => {
 	try {
 		const orders = await Order.find().populate("items.product").exec();
 		const users = await User.find();
-		res.render("manageUsers", { orders, users });
+		res.render("admin/manageOrders", { orders, users });
 	} catch (error) {
 		res.status(500).send("Error loading orders");
 	}

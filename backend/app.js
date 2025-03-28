@@ -1,5 +1,7 @@
 // external imports
 const express = require("express");
+const MongoStore = require("connect-mongo");
+const mongoose = require("mongoose");
 const compression = require("compression");
 const path = require("path");
 const dotenv = require("dotenv");
@@ -46,10 +48,16 @@ app.use(
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
+		store: MongoStore.create({
+			client: mongoose.connection.getClient(),
+			ttl: 0, // 1 day (seconds) 24 * 60 * 60,
+			autoRemove: "native",
+		}),
 		cookie: {
 			httpOnly: true,
-			secure: false,
+			secure: process.env.NODE_ENV === "production",
 			sameSite: "lax",
+			maxAge: 0, // 1 day (milliseconds) 1000 * 60 * 60 * 24,
 		},
 	})
 );
@@ -88,5 +96,5 @@ app.use(errorHandler); // common
 
 // Start the Server
 app.listen(PORT, () => {
-	console.log(`Server running on http://tisdifecard.com`);
+	console.log(`Server running on https://tisdifecard.com`);
 });

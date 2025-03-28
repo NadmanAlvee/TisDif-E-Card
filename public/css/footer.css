@@ -29,30 +29,36 @@
 	padding-bottom: 12px;
 	font-size: 21px;
 }
-.business-name {
-	width: 30%;
-	height: 55%;
-	font-size: 35px;
+.our-products h2 {
+	font-size: 16px;
 }
 .contacts {
 	display: flex;
 	flex-direction: column;
-	width: 34%;
+	width: 40%;
+}
+.our-products {
+	padding-left: 5%;
+}
+.contacts ul li a,
+.socials ul li a,
+.our-products ul li a {
+	text-decoration: underline;
+}
+.our-products li {
+	list-style: circle;
+	padding: 5px 0px;
+	font-size: 13px;
 }
 .contacts li,
 .socials li {
-	padding: 12px 0;
-	font-size: 14px;
-}
-.contacts ul li a,
-.socials ul li a {
-	text-decoration: underline;
+	padding: 16px 5px;
+	font-size: 16px;
 }
 .contacts ul li img,
 .socials ul li img {
-	width: 15px;
-	margin-right: 4px;
-	transform: translateY(15%);
+	width: 17px;
+	transform: translateX(-5px) translateY(18%);
 }
 
 .footer-div-2 {
@@ -65,6 +71,41 @@
 
 @media (max-width: 900px) {
 	.footer-container {
-		height: 30vh;
+		margin: 0;
+		padding: 3px;
+		padding-bottom: 12vh;
+		height: 48vh;
+	}
+	.footer-sections {
+		height: 90%;
+		padding: 2px;
+	}
+	.footer-sections h2 {
+		padding-bottom: 5px;
+		font-size: 16px;
+	}
+	.business-name {
+		font-size: 20px;
+	}
+	.contacts li,
+	.socials li {
+		padding: 15px 0;
+		font-size: 12px;
+	}
+	.our-products li {
+		padding: 8px 0;
+		font-size: 10px;
+	}
+	.contacts ul li img,
+	.socials ul li img {
+		width: 12px;
+		transform: translateX(-5px) translateY(15%);
+	}
+	.footer-div-2 {
+		padding: 0px 5px;
+	}
+	.footer-div-2 p {
+		font-size: 10px;
+		transform: translateY(15px);
 	}
 }

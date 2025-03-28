@@ -12,13 +12,11 @@ searchBtn.forEach((e) => {
 		Header.classList.toggle("searchMode");
 	});
 });
-
 // hamburger
 hamburger.addEventListener("click", () => {
 	hamburger.classList.toggle("active");
 	navbar.classList.toggle("active");
 });
-
 // menu dropdown
 function toggleMenu(show) {
 	const menu = document.getElementById("menuDropdown");
@@ -28,11 +26,10 @@ function toggleMenu(show) {
 		menu.classList.remove("active");
 	}
 }
-
+// Login logout
 function getLogin() {
 	window.location.href = "/login";
 }
-
 async function logout() {
 	try {
 		const response = await fetch("/logout", { method: "POST" });
@@ -46,3 +43,13 @@ async function logout() {
 		console.error("Error logging out:", error);
 	}
 }
+
+// scroll_to_contact
+const footer = document.getElementById("footer");
+const contactBtn = document.getElementById("scroll_to_contact");
+contactBtn.addEventListener("click", () => {
+	window.scrollTo({
+		top: footer.offsetTop,
+		behavior: "smooth",
+	});
+});

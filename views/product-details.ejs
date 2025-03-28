@@ -16,39 +16,76 @@
           <img class="thumbnail-images" onclick="updateMainImage(this)" src="<%= image %>" alt="Product Thumbnail Image">
         <% }) %>
       </div>
-  </div>
-  
+    </div>
     <div class="product-div">
-      <% if (product.category == 'giftcards') { %>
-        <%- include('./partials/giftcards.ejs') %>
-      <% } else if (product.category == 'iphones') { %>
-        <%- include('./partials/iphones.ejs') %>
-      <% } else if (product.category == 'accessories') { %>
-        <%- include('./partials/accessories.ejs') %>
-      <% } %>
+      <div class="product-info" data-price="<%= product.price %>">
+        <h2 id="product-name"><%= product.name %></h2>
+        <div id="configs">
+            <p class="product-price-container">Price:
+                <% if( Number(product.stock) > 0 ) { %>
+                    <% if (product.saveTag > 0) { %>
+                    <span class="old-product-price"><%= (product.price + (product.price * (product.saveTag / 100))).toFixed(2) %>৳</span>
+                    <span class="new-price">
+                        <%= product.price %>৳
+                    </span>
+                    <span class="discount-label"><%= product.saveTag %>% OFF</span>
+                    <% } else { %>
+                    <span class="new-price"><%= product.price %>৳</span>
+                    <% } %>
+                <% } else { %>
+                    <span class="new-price">
+                        <%= product.price %>৳
+                    </span>
+                <% } %>    
+            </p>
+            <p>Status:
+                <% if (product.stock > 0){ %>
+                    <span class="in-stock">In Stock</span>
+                <% } else { %>
+                    <span class="out-of-stock">Out Of Stock</span>
+                <% } %>
+            </p>
+            <% if (product.category == 'giftcards') { %>
+                <% if (product.varient == "usd"){ %>
+                    <%- include('./partials/giftcardVarients/usd.ejs') %>
+                <% } else if (product.varient == "inr") { %>
+                    <%- include('./partialsgiftcardVarients/inr.ejs') %>
+                <% } else if (product.varient == "aud") { %>
+                    <%- include('./partialsgiftcardVarients/aud.ejs') %>
+                <% } %>
+            <% } else { %>
+                <div class="quantity-selector">
+                  <button class="qty-btn decrease">-</button>
+                  <span class="quantity-value">1</span>
+                  <button class="qty-btn increase">+</button>
+                </div>
+            <% } %>
+            <p id="selected-price">Total Amount: <span id="total-price">0.00</span> BDT</p>
+        </div>
+      </div>
       <div class="actions">
         <% if (product.stock > 0) { %>
-            <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
-            <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
+          <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
+          <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
         <% } else { %>
-            <button class="empty-stock">ADD TO CART</button>
-            <button class="empty-stock">Buy Now</button>
+          <button class="empty-stock">ADD TO CART</button>
+          <button class="empty-stock">Buy Now</button>
         <% } %>
       </div>
     </div>
   </div>
   <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
   if(RelatedProducts.length > 0) { %>
-    <section class="sections">
-        <div class="product-text">
-          <h2>Browse Similar Products</h2>
-        </div>
-        <div class="product-container">
-          <% relatedProducts.forEach(product => { %>
-            <%- include('partials/product-card', { product }) %>
-          <% }) %>
-        </div>
-    </section>
+  <section class="sections">
+      <div class="product-text">
+        <h2>Browse Similar Products</h2>
+      </div>
+      <div class="product-container">
+        <% relatedProducts.forEach(product => { %>
+          <%- include('partials/product-card', { product }) %>
+        <% }) %>
+      </div>
+  </section>
   <% } %>
 </main>
 <script src="/scripts/addToCart.js" defer></script>
