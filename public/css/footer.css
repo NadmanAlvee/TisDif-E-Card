@@ -18,9 +18,9 @@
 .footer-div-1 {
 	display: flex;
 	flex-direction: row;
-	height: 100%;
 	align-items: center;
 	justify-content: space-between;
+	height: 60%;
 }
 .footer-sections {
 	height: 85%;
@@ -44,6 +44,7 @@
 .socials ul li a,
 .our-products ul li a {
 	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 .our-products li {
 	list-style: circle;
@@ -52,8 +53,8 @@
 }
 .contacts li,
 .socials li {
-	padding: 16px 5px;
-	font-size: 16px;
+	padding: 10px 4px;
+	font-size: 14px;
 }
 .contacts ul li img,
 .socials ul li img {
@@ -63,21 +64,25 @@
 
 .footer-div-2 {
 	border-top: 1px solid hsl(0, 0%, 30%);
-	padding-top: 1rem;
+	padding-top: 8px;
 	text-align: center;
 	bottom: 0;
 	position: relative;
 }
-
+.footer-div-2 p,
+.footer-div-2 a {
+	color: #6d6b6b;
+	font-size: 10px;
+}
 @media (max-width: 900px) {
 	.footer-container {
 		margin: 0;
 		padding: 3px;
 		padding-bottom: 12vh;
-		height: 48vh;
+		height: 45vh;
 	}
 	.footer-sections {
-		height: 90%;
+		height: 60%;
 		padding: 2px;
 	}
 	.footer-sections h2 {
@@ -89,11 +94,11 @@
 	}
 	.contacts li,
 	.socials li {
-		padding: 15px 0;
-		font-size: 12px;
+		padding: 7px 0;
+		font-size: 10px;
 	}
 	.our-products li {
-		padding: 8px 0;
+		padding: 6px 0;
 		font-size: 10px;
 	}
 	.contacts ul li img,

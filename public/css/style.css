@@ -8,18 +8,18 @@
 .container {
 	min-height: 70vh;
 	margin: 0 20vw;
-	user-select: none;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	user-select: none;
 }
 /* image slider */
 .slider-wrapper {
 	position: relative;
-	max-width: 55vw;
+	max-width: 54vw;
 }
 .slider {
 	display: flex;

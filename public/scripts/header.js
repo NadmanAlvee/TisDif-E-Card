@@ -48,6 +48,8 @@ async function logout() {
 const footer = document.getElementById("footer");
 const contactBtn = document.getElementById("scroll_to_contact");
 contactBtn.addEventListener("click", () => {
+	hamburger.classList.toggle("active");
+	navbar.classList.toggle("active");
 	window.scrollTo({
 		top: footer.offsetTop,
 		behavior: "smooth",

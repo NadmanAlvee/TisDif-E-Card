@@ -49,9 +49,9 @@
                 <% if (product.varient == "usd"){ %>
                     <%- include('./partials/giftcardVarients/usd.ejs') %>
                 <% } else if (product.varient == "inr") { %>
-                    <%- include('./partialsgiftcardVarients/inr.ejs') %>
+                    <%- include('./partials/giftcardVarients/inr.ejs') %>
                 <% } else if (product.varient == "aud") { %>
-                    <%- include('./partialsgiftcardVarients/aud.ejs') %>
+                    <%- include('./partials/giftcardVarients/aud.ejs') %>
                 <% } %>
             <% } else { %>
                 <div class="quantity-selector">
@@ -65,10 +65,10 @@
       </div>
       <div class="actions">
         <% if (product.stock > 0) { %>
-          <button class="add-to-cart" data-id="<%= product._id %>">ADD TO CART</button>
+          <button class="add-to-cart" data-id="<%= product._id %>">Add to Cart</button>
           <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
         <% } else { %>
-          <button class="empty-stock">ADD TO CART</button>
+          <button class="empty-stock">Add to Cart</button>
           <button class="empty-stock">Buy Now</button>
         <% } %>
       </div>

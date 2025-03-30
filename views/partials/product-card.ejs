@@ -1,5 +1,10 @@
 <a href="/product/<%= product._id %>">
     <div class="product-card <%= product.stock === 0 ? 'out-of-stock' : '' %>" data-id="<%= product._id %>">
+        <% if ((product.stock > 0) && (product.saveTag > 0)) { %>
+            <div class="ribbon-div">
+                <div class="ribbon"><%= product.saveTag %>% off</div>
+            </div>
+        <% } %>
         <img class="main-image"
              src="<%= (product.image && product.image.length && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>"
              alt="<%= product.name %>" />
@@ -16,7 +21,6 @@
                         <span class="old-price">
                             <%= (product.price + (product.price * (product.saveTag / 100))).toFixed(2) %>৳
                         </span>
-                        <!-- <span class="discount-label"><%= product.saveTag %>% OFF</span> -->
                     <% } else { %>
                         <span class="product-price">
                             <%= product.price.toFixed(2).toLocaleString() %>৳

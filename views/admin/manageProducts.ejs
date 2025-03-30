@@ -1,69 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TisDif | Manage Products</title>
-    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
-    <link rel="stylesheet" href="./css/admin/manageProducts.css">
-</head>
-<nav class="navbar">
-	<li><a href="/" target="_blank">TisDifeCard</a></li>
-	<li><a href="/admin" target="_blank">Manage Products</a></li>
-	<li><a href="/admin/users" target="_blank">Manage Users</a></li>
-	<li><a href="/admin/orders" target="_blank">Manage Orders</a></li>
-</nav>
-<div class="product-management-container">
+<%- include('./adminPageHeader.ejs') %>
+<link rel="stylesheet" href="/css/admin/manageProducts.css">
+<div class="container">
+	<h1>Product Management</h1>
     <div id="addNewProd">
         <h2>Add New Product</h2>
-        <form action="admin/add-product" method="POST">
-            <label for="name">Product Name: </label><br>
-            <input type="text" id="name" name="name" placeholder="Product Name" required><br>
+        <div id="new_prod_form">
+            <form action="/admin/add-product" method="POST">
+                <label for="name">Product Name: </label><br>
+                <input type="text" id="name" name="name" placeholder="Product Name" required><br>
 
-            <label for="price">Product Price: </label><br>
-            <input type="number" id="price" name="price" placeholder="Price" required><br>
+                <label for="price">Product Price: </label><br>
+                <input type="number" id="price" name="price" placeholder="Price" required><br>
 
-            <label for="varient">Product Varient: </label><br>
-            <input type="text" id="varient" name="varient" placeholder="Varient"><br>
+                <label for="varient">Product Varient: </label><br>
+                <input type="text" id="varient" name="varient" placeholder="Varient"><br>
 
-            <label for="description">Product Description: </label><br>
-            <input type="text" id="description" name="description" placeholder="Description"><br>
+                <label for="description">Product Description: </label><br>
+                <input type="text" id="description" name="description" placeholder="Description"><br>
 
-            <label for="image">Product Images: </label><br>
-            <input type="text" id="image" name="image" placeholder="Enter images links separated by commas (ex. /images/usdGC.webp,/images/inrGC.webp)"><br>
+                <label for="image">Product Images: </label><br>
+                <input type="text" id="image" name="image" placeholder="Enter images links separated by commas (ex. /images/usdGC.webp,/images/inrGC.webp)"><br>
 
-            <label for="category">Product Category:</label><br>
-            <select id="category" name="category" required>
-                <option value="giftcards" selected>Gift Cards</option>
-                <option value="iphones">iPhones</option>
-                <option value="accessories">Accessories</option>
-            </select><br>
+                <label for="category">Product Category:</label><br>
+                <select id="category" name="category" required>
+                    <option value="giftcards" selected>Gift Cards</option>
+                    <option value="iphones">iPhones</option>
+                    <option value="accessories">Accessories</option>
+                </select><br>
 
-            <label for="stock">Product Stock: </label><br>
-            <input type="number" id="stock" name="stock" placeholder="Stock" value=0><br>
+                <label for="stock">Product Stock: </label><br>
+                <input type="number" id="stock" name="stock" placeholder="Stock" value=0><br>
 
-            <label for="saveTag">Save Tag: </label><br>
-            <input type="number" id="saveTag" name="saveTag" placeholder="Save Tag" value=0><br>
+                <label for="saveTag">Save Tag: </label><br>
+                <input type="number" id="saveTag" name="saveTag" placeholder="Save Tag" value=0><br>
 
-            <button class="save-btn" type="submit">Add Product</button>
-        </form>
+                <button class="save-btn" type="submit">Add Product</button>
+            </form>
+        </div>
+        <div class="BtnDiv">
+            <button id="newProdBtn" onclick="displayForm()">Toggle Form</button>
+        </div>
     </div>
     <!-- Product List Section -->
-    <div id="ProdList">
-        <h2>Product List</h2>   
+    <div id="ProdList"> 
         <div class="product-container">
             <% products.forEach(product => { %>
                 <div class="product">
                     <h3><%= product.name %></h3>
-                    <label for="price-<%= product._id %>">Price (bdt):</label>
-                    <input type="number" class="price-input" id="price-<%= product._id %>" value="<%= product.price %>">
-                    <label for="stock-<%= product._id %>">Stock:</label>
-                    <input type="number" class="stock-input" id="stock-<%= product._id %>" value="<%= product.stock %>">
-                    <button class="save-btn" onclick="updateStock('<%= product._id %>')">Save</button>
-                    <!-- Delete button -->
-                    <button class="delete-btn" onclick="deleteProduct('<%= product._id %>')">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
+                    <div class="editing-form">
+                        <div class="input-div">
+                            <label for="price-<%= product._id %>">Price:</label>
+                            <input type="number" class="price-input" id="price-<%= product._id %>" value="<%= product.price %>">
+                        </div>
+                        <div class="input-div">
+                            <label for="stock-<%= product._id %>">Stock:</label>
+                            <input type="number" class="stock-input" id="stock-<%= product._id %>" value="<%= product.stock %>">
+                        </div>  
+                        <div class="input-div">
+                            <label for="discount-<%= product._id %>">Discount:</label>
+                            <input type="number" class="discount-input" id="discount-<%= product._id %>" value="<%= product.saveTag %>">
+                        </div>
+                    </div>
+                    <div class="btnActions">
+                        <button class="save-btn" onclick="updateStock('<%= product._id %>')">Save</button>
+                        <button class="delete-btn" onclick="deleteProduct('<%= product._id %>')">Delete</button>
+                    </div>
                 </div>
             <% }) %>
         </div>
@@ -73,13 +74,15 @@
     function updateStock(productId) {
         const stockValue = document.getElementById(`stock-${productId}`).value;
         const priceValue = document.getElementById(`price-${productId}`).value;
+        const discountValue = document.getElementById(`discount-${productId}`).value;
 
-        fetch(`admin/update/${productId}`, {
+        fetch(`/admin/update/${productId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 stock: stockValue,
-                price: priceValue
+                price: priceValue,
+                saveTag: discountValue,
             })
         }).then(response => {
             if (response.ok) {
@@ -91,7 +94,7 @@
     }
 
     function deleteProduct(productId) {
-        fetch(`admin/delete/${productId}`, {
+        fetch(`/admin/${productId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         }).then(response => {
@@ -101,6 +104,11 @@
                 alert('Error deleting product');
             }
         }).catch(error => console.error('Error:', error));
+    }
+
+    function displayForm() {
+        const new_prod_form = document.getElementById("new_prod_form");
+        new_prod_form.classList.toggle("active");
     }
 </script>
 </body>

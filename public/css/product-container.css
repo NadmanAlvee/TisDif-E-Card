@@ -28,6 +28,21 @@
 	align-items: center;
 	justify-content: center;
 }
+/* dicount ribbon */
+.ribbon-div {
+	position: relative;
+	width: 100%;
+	height: inherit;
+}
+.ribbon {
+	position: absolute;
+	background: #4b00d6;
+	color: white;
+	line-height: 23px;
+	top: 10px;
+	width: 31%;
+}
+/* ribbon end */
 .product-info-div {
 	display: flex;
 	flex-direction: column;
@@ -75,6 +90,12 @@
 		width: 180px;
 		min-height: 0;
 		height: auto;
+	}
+	.ribbon {
+		line-height: 21px;
+		width: 30%;
+		top: 10px;
+		font-size: 12px;
 	}
 	.product-card img {
 		max-height: 140px;

@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TisDif | Manage Orders</title>
-    <link rel="icon" type="image/x-icon" href="/ui/icons/favicon.ico">
-    <link rel="stylesheet" href="/css/admin/manageUsers.css">
-</head>
-<body>
-<nav class="navbar">
-	<li><a href="/" target="_blank">TisDifeCard</a></li>
-	<li><a href="/admin" target="_blank">Manage Products</a></li>
-	<li><a href="/admin/users" target="_blank">Manage Users</a></li>
-	<li><a href="/admin/orders" target="_blank">Manage Orders</a></li>
-</nav>
+<%- include('./adminPageHeader.ejs') %>
+<link rel="stylesheet" href="/css/admin/manageOrders.css">
 <div class="container">
-	<h1>User and Order Management</h1>
-	
+	<h1>Order Management</h1>
 	<div class="order-list">
 		<% orders.slice().reverse().forEach(order => { %>
 		<div class="order-card">
@@ -25,6 +10,7 @@
 				<p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
 				<p><strong>Email:</strong> <%= order.customerInfo.email %></p>
 				<p><strong>Phone:</strong> <%= order.customerInfo.mobile %></p>
+				<p><strong>Delvery Address:</strong> <%= order.customerInfo.address %></p>
 				<p>
 				    <strong>Order Date:</strong>
 				    <%= order.orderDate.toLocaleDateString() + ' ' + order.orderDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) %>
@@ -69,9 +55,8 @@
 					},
 					body: JSON.stringify({ status: newStatus }),
 				});
-				
 				if (!response.ok) throw new Error('Update failed');
-				alert('Order status updated successfully');
+				window.location.reload();
 			} catch (error) {
 				console.error(error);
 				alert('Error updating order status');

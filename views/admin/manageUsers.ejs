@@ -1,0 +1,48 @@
+<%- include('./adminPageHeader.ejs') %>
+<link rel="stylesheet" href="/css/admin/manageUsers.css">
+<div class="container">
+    <h1>User Management</h1>
+    <div class="Users-Wrapper">
+        <% if((Object.keys(users)).length > 0) { 
+            users.forEach((user) => { %>
+            <div class="user-card">
+                <p>Username: <%= user.username %></p>
+                <p>Email: <%= user.email %></p>
+                <p>Phone: <%= user.mobile %></p>
+                <div class="point_div">
+                    <label>Point:</label>
+                    <input  type="number"
+                            class="point-input"
+                            id="point-<%= user._id %>"
+                            step="5"
+                            value="<%= user.points %>"
+                    >
+                </div>
+                <div class="btnActions">
+                    <button class="save-btn" onclick="updateUser('<%= user._id %>')">Save</button>
+                </div>
+            </div>
+        <% }) } %>
+    </div>
+<script>
+    function updateUser(user_Id) {
+	const newPoints = document.getElementById(`point-${user_Id}`).value;
+
+	fetch("/admin/users/update_pts", {
+		method: "PUT",
+		headers: {
+			"content-type": "application/json",
+		},
+		body: JSON.stringify({
+			id: user_Id,
+			points: newPoints,
+		}),
+	})
+		.then((response) => {
+            if (response.ok) window.location.reload();
+        })
+		.catch((error) => {
+            window.alert("Error updating user");
+        });
+    }
+</script>

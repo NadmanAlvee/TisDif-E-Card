@@ -9,10 +9,17 @@ router.get("/", async (req, res) => {
 	try {
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find(userId).populate("productId");
-		const query = searchSanitizer(req.query.searchQuery);
+		let query = searchSanitizer(req.query.searchQuery);
+		const offers = searchSanitizer(req.query.offers);
 		let finds;
-		if (query === null) {
-			finds = await Product.find(); // display all products
+		if (offers === "true" && (query === null || query === "")) {
+			finds = await Product.find({
+				saveTag: { $gt: 0 },
+				stock: { $gt: 0 },
+			}).exec();
+			query = "offers";
+		} else if (query === null) {
+			finds = await Product.find();
 		} else {
 			finds = await Product.find({
 				$or: [
