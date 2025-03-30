@@ -3,20 +3,32 @@ const Product = require("../models/Product"); // Import the Product model
 const Cart = require("../models/Cart");
 const router = express.Router();
 
+const mongoose = require("mongoose");
+
 // Get a single product and render the EJS page
 router.get("/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
+
+		// Validate ObjectId before querying
+		if (!mongoose.Types.ObjectId.isValid(id)) {
+			return res.redirect("/");
+		}
 		const product = await Product.findById(id);
+		if (!product) {
+			return res.redirect("/nofound");
+		}
+
 		const userId = res.locals.loggedInUser._id;
 		const cartItems = await Cart.find({ userId });
 
-		// Fetch related products (excluding current product)
+		// Fetch related products (excluding the current product)
 		const relatedProducts = await Product.find({
 			_id: { $ne: id },
 			category: product.category,
 		});
-		const page_title = `${product.name} price in bangladesh`;
+
+		const page_title = `${product.name} price in Bangladesh`;
 		res.render("product-details", {
 			product,
 			relatedProducts,
@@ -28,7 +40,7 @@ router.get("/:id", async (req, res) => {
 	}
 });
 
-// API: Get a single product (returns JSON)
+// API: Get a single product
 router.get("/api/:id", async (req, res) => {
 	try {
 		const { id } = req.params;

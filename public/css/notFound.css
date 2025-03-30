@@ -1,0 +1,36 @@
+@import url("global.css");
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #f8f9fa;
+}
+
+.wrapper {
+	text-align: center;
+}
+
+.wrapper h1 {
+	font-size: 8rem;
+	color: #ff6b6b;
+	margin-bottom: 20px;
+}
+
+.wrapper h4 {
+	font-size: 1.5rem;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.wrapper p {
+	font-size: 1rem;
+	color: #555;
+	line-height: 1.5;
+}

@@ -1,8 +1,12 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const router = express.Router();
+const multiUploader = require("../middlewares/utils/multiUploader");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
+router.use(express.urlencoded({ extended: true }));
 
 // product management page routing
 router.get("/products", async (req, res) => {
@@ -13,30 +17,42 @@ router.get("/products", async (req, res) => {
 		res.status(500).json({ message: "An error occured" });
 	}
 });
-// Add a new product
-router.post("/add-product", async (req, res) => {
-	try {
-		const { name, price, description, image, category, stock, saveTag } =
-			req.body;
-
-		const imageArray = image.split(",").map((img) => img.trim());
-
-		const newProduct = new Product({
-			name,
-			price,
-			description,
-			image: imageArray,
-			category,
-			stock,
-			saveTag,
-		});
-
-		await newProduct.save();
-		res.redirect("/admin");
-	} catch (err) {
-		res.status(500).json({ message: "An error occured" });
+// add new product
+router.post(
+	"/add-product",
+	multiUploader.array("productImageArray", 8),
+	async (req, res) => {
+		try {
+			const {
+				productName,
+				productPrice,
+				productVarient,
+				productDescription,
+				productCategory,
+				productStock,
+				productSaveTag,
+			} = req.body;
+			const imageFilenames = req.files.map((file) => {
+				return `/images/products/${productCategory}/${file.filename}`;
+			});
+			// Create new product instance
+			const newProduct = new Product({
+				name: productName,
+				price: productPrice,
+				varient: productVarient,
+				description: productDescription,
+				category: productCategory,
+				stock: productStock,
+				saveTag: productSaveTag,
+				image: imageFilenames,
+			});
+			await newProduct.save();
+			res.status(200).json({ message: "Product created successfully" });
+		} catch (err) {
+			res.status(500).json({ message: "An error occurred." });
+		}
 	}
-});
+);
 // Update stock
 router.put("/update/:id", async (req, res) => {
 	try {
@@ -52,9 +68,28 @@ router.put("/update/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
+		const product = await Product.findById(id);
+		if (!product) {
+			return res.status(404).json({ message: "Product not found" });
+		}
+		const productImages = product.image || [];
+		// Promise.all() to wait for each promise to resolve
+		await Promise.all(
+			productImages.map(async (image) => {
+				try {
+					await fs.promises.unlink(
+						path.join(__dirname, "../../public/", image)
+					);
+				} catch (err) {
+					console.error(`Failed to delete image ${image}:`, err);
+				}
+			})
+		);
+		// Delete product from database
 		await Product.findByIdAndDelete(id);
 		res.status(200).json({ message: "Product deleted successfully" });
 	} catch (err) {
+		console.error("Error deleting product:", err);
 		res.status(500).json({ message: "Error deleting product" });
 	}
 });
