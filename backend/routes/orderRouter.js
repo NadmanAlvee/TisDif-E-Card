@@ -130,6 +130,9 @@ router.put("/update_pts/:id", async (req, res) => {
 		if (isNaN(points)) {
 			return res.status(400).json({ message: "Invalid points" });
 		}
+		await User.findByIdAndUpdate(requestedOrder.user, {
+			$inc: { points: points },
+		});
 		await Order.findByIdAndUpdate(order_id, {
 			$inc: {
 				given_point: points,
