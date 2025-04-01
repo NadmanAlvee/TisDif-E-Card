@@ -109,6 +109,12 @@ body {
 	margin-bottom: 15px;
 }
 
+.points-possible {
+	font-size: 22px;
+	color: #ff0039;
+	font-weight: bold;
+}
+
 .price-options {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);

@@ -1,27 +1,28 @@
 <%- include('./partials/header.ejs') %>
-<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/search.css" />
 <div class="breadcrumb">
-    <ul>
-      <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
-      <li><a href="/search?searchQuery=%>">Search</a></li>
-    </ul>
+	<ul>
+		<li>
+			<a href="/"
+				><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"
+			/></a>
+		</li>
+		<li><a href="/search?searchQuery=%>">Search</a></li>
+	</ul>
 </div>
 <div class="container">
-    <div class="product-text">
-        <h2>Search result for <%= query %></h2>
-    </div>
-    <% if (typeof finds !== 'undefined' && finds.length > 0) { %>
-        <div class="product-container">
-            <% finds.forEach((product) => { %>
-                <%- include('partials/product-card', { product }) %>
-            <% }) %>
-        </div>
-    <% } else { %>
-        <div class="not-found">
-            <h3>No products found!</h3>
-        </div>
-    <% } %>
+	<div class="product-text">
+		<h2>Search result for <%= query %></h2>
+	</div>
+	<% if (typeof finds !== 'undefined' && finds.length > 0) { %>
+	<div class="product-container">
+		<% finds.forEach((product) => { %> <%- include('partials/product-card', {
+		product }) %> <% }) %>
+	</div>
+	<% } else { %>
+	<div class="not-found">
+		<h3>No products found!</h3>
+	</div>
+	<% } %>
 </div>
 <%- include('./partials/footer.ejs') %>
-</body>
-</html>

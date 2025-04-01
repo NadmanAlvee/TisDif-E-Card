@@ -1,95 +1,120 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/productDetails.css" />
 <div class="breadcrumb">
-  <ul>
-    <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
-    <li><a href="/search?searchQuery=<%= product.category %>"><%= product.category.charAt(0).toUpperCase() + product.category.slice(1) %></a></li>
-    <li><a href="/product/<%= product._id %>"><%= product.name %></a></li>
-  </ul>
+	<ul>
+		<li>
+			<a href="/"
+				><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"
+			/></a>
+		</li>
+		<li>
+			<a href="/search?searchQuery=<%= product.category %>"
+				><%= product.category.charAt(0).toUpperCase() +
+				product.category.slice(1) %></a
+			>
+		</li>
+		<li><a href="/product/<%= product._id %>"><%= product.name %></a></li>
+	</ul>
 </div>
 <main class="product-details">
-  <div class="product-main sections">
-    <div class="product-images">
-      <img id="main-image" src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>" alt="Product Image">
-      <div class="thumbnail-image-div">
-        <% product.image.forEach((image)=>{ %>
-          <img class="thumbnail-images" onclick="updateMainImage(this)" src="<%= image %>" alt="Product Thumbnail Image">
-        <% }) %>
-      </div>
-    </div>
-    <div class="product-div">
-      <div class="product-info" data-price="<%= product.price %>">
-        <h2 id="product-name"><%= product.name %></h2>
-        <div id="configs">
-            <p class="product-price-container">Price:
-                <% if( Number(product.stock) > 0 ) { %>
-                    <% if (product.saveTag > 0) { %>
-                    <span class="old-product-price"><%= (product.price + (product.price * (product.saveTag / 100))).toFixed(2) %>৳</span>
-                    <span class="new-price">
-                        <%= product.price %>৳
-                    </span>
-                    <span class="discount-label"><%= product.saveTag %>% OFF</span>
-                    <% } else { %>
-                    <span class="new-price"><%= product.price %>৳</span>
-                    <% } %>
-                <% } else { %>
-                    <span class="new-price">
-                        <%= product.price %>৳
-                    </span>
-                <% } %>    
-            </p>
-            <p>Status:
-                <% if (product.stock > 0){ %>
-                    <span class="in-stock">In Stock</span>
-                <% } else { %>
-                    <span class="out-of-stock">Out Of Stock</span>
-                <% } %>
-            </p>
-            <% if (product.category == 'giftcards') { %>
-                <% if (product.varient == "usd"){ %>
-                    <%- include('./partials/giftcardVarients/usd.ejs') %>
-                <% } else if (product.varient == "inr") { %>
-                    <%- include('./partials/giftcardVarients/inr.ejs') %>
-                <% } else if (product.varient == "aud") { %>
-                    <%- include('./partials/giftcardVarients/aud.ejs') %>
-                <% } %>
-            <% } else { %>
-                <div class="quantity-selector">
-                  <button class="qty-btn decrease">-</button>
-                  <span class="quantity-value">1</span>
-                  <button class="qty-btn increase">+</button>
-                </div>
-            <% } %>
-            <p id="selected-price">Total Amount: <span id="total-price">0.00</span> BDT</p>
-        </div>
-      </div>
-      <div class="actions">
-        <% if (product.stock > 0) { %>
-          <button class="add-to-cart" data-id="<%= product._id %>">Add to Cart</button>
-          <button class="buy-now add-to-cart" data-id="<%= product._id %>">Buy Now</button>
-        <% } else { %>
-          <button class="empty-stock">Add to Cart</button>
-          <button class="empty-stock">Buy Now</button>
-        <% } %>
-      </div>
-    </div>
-  </div>
-  <% const RelatedProducts = relatedProducts.filter(Product => Product.category === product.category);
-  if(RelatedProducts.length > 0) { %>
-  <section class="sections">
-      <div class="product-text">
-        <h2>Browse Similar Products</h2>
-      </div>
-      <div class="product-container">
-        <% relatedProducts.forEach(product => { %>
-          <%- include('partials/product-card', { product }) %>
-        <% }) %>
-      </div>
-  </section>
-  <% } %>
+	<div class="product-main sections">
+		<div class="product-images">
+			<img
+				id="main-image"
+				src="<%= (Array.isArray(product.image) && product.image.length > 0 && product.image[0]) ? product.image[0] : '/images/placeholder.webp' %>"
+				alt="Product Image"
+			/>
+			<div class="thumbnail-image-div">
+				<% product.image.forEach((image)=>{ %>
+				<img
+					class="thumbnail-images"
+					onclick="updateMainImage(this)"
+					src="<%= image %>"
+					alt="Product Thumbnail Image"
+				/>
+				<% }) %>
+			</div>
+		</div>
+		<div class="product-div">
+			<div class="product-info" data-price="<%= product.price %>">
+				<h2 id="product-name"><%= product.name %></h2>
+				<div id="configs">
+					<p class="product-price-container">
+						Price: <% if( Number(product.stock) > 0 ) { %> <% if
+						(product.saveTag > 0) { %>
+						<span class="old-product-price"
+							><%= (product.price + (product.price * (product.saveTag /
+							100))).toFixed(2) %>৳</span
+						>
+						<span class="new-price"> <%= product.price %>৳ </span>
+						<span class="discount-label"><%= product.saveTag %>% OFF</span>
+						<% } else { %>
+						<span class="new-price"><%= product.price %>৳</span>
+						<% } %> <% } else { %>
+						<span class="new-price"> <%= product.price %>৳ </span>
+						<% } %>
+					</p>
+					<p>
+						Status: <% if (product.stock > 0){ %>
+						<span class="in-stock">In Stock</span>
+						<% } else { %>
+						<span class="out-of-stock">Out Of Stock</span>
+						<% } %>
+					</p>
+					<% if (product.pointsPossible != 0) { %>
+					<p>
+						Possible Points:
+						<span class="points-possible"
+							><%= ((product.pointsPossible)*100) %>%</span
+						>
+					</p>
+					<% } %> <% if (product.category == 'giftcards') { %> <% if
+					(product.varient == "usd"){ %> <%-
+					include('./partials/giftcardVarients/usd.ejs') %> <% } else if
+					(product.varient == "inr") { %> <%-
+					include('./partials/giftcardVarients/inr.ejs') %> <% } else if
+					(product.varient == "aud") { %> <%-
+					include('./partials/giftcardVarients/aud.ejs') %> <% } %> <% } else {
+					%>
+					<div class="quantity-selector">
+						<button class="qty-btn decrease">-</button>
+						<span class="quantity-value">1</span>
+						<button class="qty-btn increase">+</button>
+					</div>
+					<% } %>
+					<p id="selected-price">
+						Total Amount: <span id="total-price">0.00</span> BDT
+					</p>
+				</div>
+			</div>
+			<div class="actions">
+				<% if (product.stock > 0) { %>
+				<button class="add-to-cart" data-id="<%= product._id %>">
+					Add to Cart
+				</button>
+				<button class="buy-now add-to-cart" data-id="<%= product._id %>">
+					Buy Now
+				</button>
+				<% } else { %>
+				<button class="empty-stock">Add to Cart</button>
+				<button class="empty-stock">Buy Now</button>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<% const RelatedProducts = relatedProducts.filter(Product => Product.category
+	=== product.category); if(RelatedProducts.length > 0) { %>
+	<section class="sections">
+		<div class="product-text">
+			<h2>Browse Similar Products</h2>
+		</div>
+		<div class="product-container">
+			<% relatedProducts.forEach(product => { %> <%-
+			include('partials/product-card', { product }) %> <% }) %>
+		</div>
+	</section>
+	<% } %>
 </main>
 <script src="/scripts/addToCart.js" defer></script>
 <script src="/scripts/product-details.js" defer></script>
 <%- include('./partials/footer.ejs') %>
-</body>
-</html>

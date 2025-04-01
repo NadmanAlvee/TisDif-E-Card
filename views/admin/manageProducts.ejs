@@ -1,137 +1,226 @@
 <%- include('./adminPageHeader.ejs') %>
-<link rel="stylesheet" href="/css/admin/manageProducts.css">
+<link rel="stylesheet" href="/css/admin/manageProducts.css" />
 <div class="container">
 	<h1>Product Management</h1>
-    <div id="addNewProd">
-        <h2>Add New Product</h2>
-        <div id="new_prod_form">
-            <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
-                <label for="productName">Product Name: </label><br>
-                <input type="text" id="name" name="productName" placeholder="Product Name" required><br>
+	<div id="addNewProd">
+		<h2>Add New Product</h2>
+		<div id="new_prod_form">
+			<form
+				action="/admin/add-product"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<label for="productName">Product Name: </label><br />
+				<input
+					type="text"
+					id="name"
+					name="productName"
+					placeholder="Product Name"
+					required
+				/><br />
 
-                <label for="productPrice">Product Price: </label><br>
-                <input type="number" id="price" name="productPrice" placeholder="Price" required><br>
+				<label for="productPrice">Product Price: </label><br />
+				<input
+					type="number"
+					id="price"
+					name="productPrice"
+					placeholder="Price"
+					required
+				/><br />
 
-                <label for="productVarient">Product Varient: </label><br>
-                <input type="text" id="varient" name="productVarient" placeholder="Varient"><br>
+				<label for="productVarient">Product Varient: </label><br />
+				<input
+					type="text"
+					id="varient"
+					name="productVarient"
+					placeholder="Varient"
+				/><br />
 
-                <label for="productDescription">Product Description: </label><br>
-                <input type="text" id="description" name="productDescription" placeholder="Description"><br>
+				<label for="productDescription">Product Description: </label><br />
+				<input
+					type="text"
+					id="description"
+					name="productDescription"
+					placeholder="Description"
+				/><br />
 
-                <label for="productCategory">Product Category:</label><br>
-                <select id="category" name="productCategory" required>
-                    <option value="giftcards" selected>Gift Cards</option>
-                    <option value="iphones">iPhones</option>
-                    <option value="accessories">Accessories</option>
-                </select><br>
+				<label for="productCategory">Product Category:</label><br />
+				<select id="category" name="productCategory" required>
+					<option value="giftcards" selected>Gift Cards</option>
+					<option value="iphones">iPhones</option>
+					<option value="accessories">Accessories</option></select
+				><br />
 
-                <label for="productStock">Product Stock: </label><br>
-                <input type="number" id="stock" name="productStock" placeholder="Stock" value=0><br>
+				<label for="productStock">Product Stock: </label><br />
+				<input
+					type="number"
+					id="stock"
+					name="productStock"
+					placeholder="Stock"
+					value="0"
+				/><br />
 
-                <label for="productSaveTag">Save Tag: </label><br>
-                <input type="number" id="saveTag" name="productSaveTag" placeholder="Save Tag" value=0><br>
+				<label for="productSaveTag">Save Tag: </label><br />
+				<input
+					type="number"
+					id="saveTag"
+					name="productSaveTag"
+					placeholder="Save Tag"
+					value="0"
+				/><br />
 
-                <label for="productImageArray">Product Images: </label><br>
-                <input type="file" id="image" name="productImageArray" multiple accept="image/*">
+				<label for="productPoints">Possible Points: </label><br />
+				<input
+					type="number"
+					id="productPoints"
+					name="productPoints"
+					placeholder="Ex: 50"
+					value="0"
+				/><br />
 
-                <button class="save-btn" type="submit">Add Product</button>
-            </form>
-        </div>
-        <div class="BtnDiv">
-            <button id="newProdBtn" onclick="displayForm()">Toggle Form</button>
-        </div>
-    </div>
-    <!-- Product List Section -->
-    <div id="ProdList"> 
-        <div class="product-container">
-            <% products.forEach(product => { %>
-                <div class="product">
-                    <h3><%= product.name %></h3>
-                    <div class="editing-form">
-                        <div class="input-div">
-                            <label for="price-<%= product._id %>">Price:</label>
-                            <input type="number" class="price-input" id="price-<%= product._id %>" value="<%= product.price %>">
-                        </div>
-                        <div class="input-div">
-                            <label for="stock-<%= product._id %>">Stock:</label>
-                            <input type="number" class="stock-input" id="stock-<%= product._id %>" value="<%= product.stock %>">
-                        </div>  
-                        <div class="input-div">
-                            <label for="discount-<%= product._id %>">Discount:</label>
-                            <input type="number" class="discount-input" id="discount-<%= product._id %>" value="<%= product.saveTag %>">
-                        </div>
-                    </div>
-                    <div class="btnActions">
-                        <button class="save-btn" onclick="updateStock('<%= product._id %>')">Save</button>
-                        <button class="delete-btn" onclick="deleteProduct('<%= product._id %>')">Delete</button>
-                    </div>
-                </div>
-            <% }) %>
-        </div>
-    </div>
+				<label for="productImageArray">Product Images: </label><br />
+				<input
+					type="file"
+					id="image"
+					name="productImageArray"
+					multiple
+					accept="image/*"
+				/>
+
+				<button class="save-btn" type="submit">Add Product</button>
+			</form>
+		</div>
+		<div class="BtnDiv">
+			<button id="newProdBtn" onclick="displayForm()">Toggle Form</button>
+		</div>
+	</div>
+	<!-- Product List Section -->
+	<div id="ProdList">
+		<div class="product-container">
+			<% products.forEach(product => { %>
+			<div class="product">
+				<h3><%= product.name %></h3>
+				<div class="editing-form">
+					<div class="input-div">
+						<label>Price:</label>
+						<input
+							type="number"
+							class="price-input"
+							id="price-<%= product._id %>"
+							value="<%= product.price %>"
+						/>
+					</div>
+					<div class="input-div">
+						<label>Stock:</label>
+						<input
+							type="number"
+							class="stock-input"
+							id="stock-<%= product._id %>"
+							value="<%= product.stock %>"
+						/>
+					</div>
+					<div class="input-div">
+						<label>Discount:</label>
+						<input
+							type="number"
+							class="discount-input"
+							id="discount-<%= product._id %>"
+							value="<%= product.saveTag %>"
+						/>
+					</div>
+					<div class="input-div">
+						<label>Points:</label>
+						<input
+							type="number"
+							class="points-input"
+							id="points-<%= product._id %>"
+							value="<%= product.pointsPossible %>"
+						/>
+					</div>
+				</div>
+				<div class="btnActions">
+					<button class="save-btn" onclick="updateStock('<%= product._id %>')">
+						Save
+					</button>
+					<button
+						class="delete-btn"
+						onclick="deleteProduct('<%= product._id %>')"
+					>
+						Delete
+					</button>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+	</div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector("#new_prod_form form");
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const formData = new FormData(form);
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData
-                });
+	document.addEventListener("DOMContentLoaded", function () {
+		const form = document.querySelector("#new_prod_form form");
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const formData = new FormData(form);
+			try {
+				const response = await fetch(form.action, {
+					method: form.method,
+					body: formData,
+				});
 
-                if (response.ok) {
-                    window.location.reload();
-                } else {
-                    window.alert("Failed to add product:");
-                }
-            } catch (err) {
-                console.error("Error occurred while adding product:");
-            }
-        });
-    });
+				if (response.ok) {
+					window.location.reload();
+				} else {
+					window.alert("Failed to add product:");
+				}
+			} catch (err) {
+				console.error("Error occurred while adding product:");
+			}
+		});
+	});
 
-    function updateStock(productId) {
-        const stockValue = document.getElementById(`stock-${productId}`).value;
-        const priceValue = document.getElementById(`price-${productId}`).value;
-        const discountValue = document.getElementById(`discount-${productId}`).value;
+	function updateStock(productId) {
+		const stockValue = document.getElementById(`stock-${productId}`).value;
+		const priceValue = document.getElementById(`price-${productId}`).value;
+		const discountValue = document.getElementById(
+			`discount-${productId}`
+		).value;
+		const pointsValue = document.getElementById(`points-${productId}`).value;
+		fetch(`/admin/update/${productId}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				stock: stockValue,
+				price: priceValue,
+				saveTag: discountValue,
+				pointsPossible: pointsValue,
+			}),
+		})
+			.then((response) => {
+				if (response.ok) {
+					window.location.reload();
+				} else {
+					alert("Error updating stock");
+				}
+			})
+			.catch((error) => console.error("Error:", error));
+	}
 
-        fetch(`/admin/update/${productId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                stock: stockValue,
-                price: priceValue,
-                saveTag: discountValue,
-            })
-        }).then(response => {
-            if (response.ok) {
-                window.location.reload();
-            } else {
-                alert('Error updating stock');
-            }
-        }).catch(error => console.error('Error:', error));
-    }
+	function deleteProduct(productId) {
+		fetch(`/admin/${productId}`, {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+		})
+			.then((response) => {
+				if (response.ok) {
+					window.location.reload();
+				} else {
+					alert("Error deleting product");
+				}
+			})
+			.catch((error) => console.error("Error:", error));
+	}
 
-    function deleteProduct(productId) {
-        fetch(`/admin/${productId}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => {
-            if (response.ok) {
-                window.location.reload();
-            } else {
-                alert('Error deleting product');
-            }
-        }).catch(error => console.error('Error:', error));
-    }
-
-    function displayForm() {
-        const new_prod_form = document.getElementById("new_prod_form");
-        new_prod_form.classList.toggle("active");
-    }
+	function displayForm() {
+		const new_prod_form = document.getElementById("new_prod_form");
+		new_prod_form.classList.toggle("active");
+	}
 </script>
-</body>
-</html>

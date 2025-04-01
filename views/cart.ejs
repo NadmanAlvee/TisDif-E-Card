@@ -1,104 +1,124 @@
 <%- include('./partials/header.ejs') %>
-<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/cart.css" />
 <div class="breadcrumb">
-    <ul>
-      <li><a href="/"><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"/></a></li>
-      <li><a href="/cart">Cart</a></li>
-    </ul>
+	<ul>
+		<li>
+			<a href="/"
+				><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"
+			/></a>
+		</li>
+		<li><a href="/cart">Cart</a></li>
+	</ul>
 </div>
 <div class="cart-container">
-    <!-- <h2 class="cart-title">My Cart</h2> -->
-        <% if (cartItems.length === 0) { %>
-        <div class="empty-cart">
-            <div class="cart-icon-wrapper">
-                <img src="/images/homepage/empty_cart.png" alt="Empty Cart Image">
-            </div>
-            <h2>Cart Empty!</h2>
-            <p>Your cart is starving—feed it something delicious! 🍕🛍️</p>
-        </div>          
-            <% } else { %>
-            <% let grand_total = 0; %>
-            <div class="cart-wrapper">
-            <% cartItems.forEach(item => { %>
-            <div class="cart-card">
-                <div class="thumbnail-image">
-                    <img src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
-                    alt="<%= item.productId.name %>" />
-                </div>
-                <div class="card-info">
-                    <div class="name">
-                        <%= item.productId.name %>
-                    </div>
-                    <div class="price">
-                        Unit Price: <%= item.productId.price %> BDT
-                    </div>
-                    <div class="quantity">
-                        Quantity: <%= item.selected_quantity %>
-                    </div>
-                    <div class="total">
-                        Total: <strong><%= item.productId.price * item.selected_quantity %> BDT</strong>
-                    </div>
-                </div>
-                <div >
-                    <button class="delete-btn" data-id="<%= item._id %>">
-                        <img src="https://img.icons8.com/fluency/50/cancel.png" alt="Delete">
-                    </button>
-                </div>
-                <% grand_total += item.productId.price * item.selected_quantity; %>
-            </div>
-            <% }); %>
-        </div>
-    <div class="cart-total-section">
-        <p class="cart-total-text">Total: <strong><%= grand_total %> BDT</strong></p>
-        <a href="/checkout" class="cart-checkout-btn">Proceed to Checkout</a>    
-    </div>
-    <% } %>
+	<!-- <h2 class="cart-title">My Cart</h2> -->
+	<% if (cartItems.length === 0) { %>
+	<div class="empty-cart">
+		<div class="cart-icon-wrapper">
+			<img src="/images/homepage/empty_cart.png" alt="Empty Cart Image" />
+		</div>
+		<h2>Cart Empty!</h2>
+		<p>Your cart is starving—feed it something delicious! 🍕🛍️</p>
+	</div>
+	<% } else { %> <% let grand_total = 0; %>
+	<div class="cart-wrapper">
+		<% cartItems.forEach(item => { %>
+		<div class="cart-card">
+			<div class="thumbnail-image">
+				<img
+					src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
+					alt="<%= item.productId.name %>"
+				/>
+			</div>
+			<div class="card-info">
+				<div class="name"><%= item.productId.name %></div>
+				<div class="price">Unit Price: <%= item.productId.price %> BDT</div>
+				<div class="quantity">Quantity: <%= item.selected_quantity %></div>
+				<div class="total">
+					Total:
+					<strong
+						><%= item.productId.price * item.selected_quantity %> BDT</strong
+					>
+				</div>
+			</div>
+			<div>
+				<button class="delete-btn" data-id="<%= item._id %>">
+					<img
+						src="https://img.icons8.com/fluency/50/cancel.png"
+						alt="Delete"
+					/>
+				</button>
+			</div>
+			<% grand_total += item.productId.price * item.selected_quantity; %>
+		</div>
+		<% }); %>
+	</div>
+	<div class="cart-total-section">
+		<p class="cart-total-text">
+			Total: <strong><%= grand_total %> BDT</strong>
+		</p>
+		<a href="/checkout" class="cart-checkout-btn">Proceed to Checkout</a>
+	</div>
+	<% } %>
 </div>
 <%- include('./partials/footer.ejs') %>
 <script>
-    function updateCartTotal(deletedItemTotal = 0) {
-        let total = parseFloat(document.querySelector(".cart-total-text strong").textContent.replace(" BDT", ""));
-        // Subtract deleted item's total
-        total -= deletedItemTotal;
-        // Ensure total doesn't go below zero
-        total = Math.max(total, 0);
-        document.querySelector(".cart-total-text strong").textContent = `${total} BDT`;
-        if (document.querySelectorAll(".cart-card").length === 0) {
-            window.location.reload();
-        }
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-        const deleteButtons = document.querySelectorAll(".delete-btn");
+	function updateCartTotal(deletedItemTotal = 0) {
+		let total = parseFloat(
+			document
+				.querySelector(".cart-total-text strong")
+				.textContent.replace(" BDT", "")
+		);
+		// Subtract deleted item's total
+		total -= deletedItemTotal;
+		// Ensure total doesn't go below zero
+		total = Math.max(total, 0);
+		document.querySelector(
+			".cart-total-text strong"
+		).textContent = `${total} BDT`;
+		if (document.querySelectorAll(".cart-card").length === 0) {
+			window.location.reload();
+		}
+	}
+	document.addEventListener("DOMContentLoaded", () => {
+		const deleteButtons = document.querySelectorAll(".delete-btn");
 
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", async (event) => {
-                const itemId = button.getAttribute("data-id");
-                const cartCard = button.closest(".cart-card");
+		deleteButtons.forEach((button) => {
+			button.addEventListener("click", async (event) => {
+				const itemId = button.getAttribute("data-id");
+				const cartCard = button.closest(".cart-card");
 
-                // Get price & quantity of the deleted item
-                const price = parseFloat(cartCard.querySelector(".price").textContent.replace("Unit Price: ", "").replace(" BDT", ""));
-                const quantity = parseInt(cartCard.querySelector(".quantity").textContent.replace("Quantity: ", ""));
-                const deletedItemTotal = price * quantity;
+				// Get price & quantity of the deleted item
+				const price = parseFloat(
+					cartCard
+						.querySelector(".price")
+						.textContent.replace("Unit Price: ", "")
+						.replace(" BDT", "")
+				);
+				const quantity = parseInt(
+					cartCard
+						.querySelector(".quantity")
+						.textContent.replace("Quantity: ", "")
+				);
+				const deletedItemTotal = price * quantity;
 
-                try {
-                    const response = await fetch(`/cart/${itemId}`, {
-                        method: "DELETE",
-                        headers: { "Content-Type": "application/json" }
-                    });
+				try {
+					const response = await fetch(`/cart/${itemId}`, {
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" },
+					});
 
-                    if (!response.ok) throw new Error(`Failed to delete item.`);
+					if (!response.ok) throw new Error(`Failed to delete item.`);
 
-                    // Remove item from UI
-                    cartCard.remove();
+					// Remove item from UI
+					cartCard.remove();
 
-                    // Update cart total
-                    updateCartTotal(deletedItemTotal);
-                } catch (error) {
-                    console.error("Error:", error);
-                }
-            });
-        });
-    });
+					// Update cart total
+					updateCartTotal(deletedItemTotal);
+				} catch (error) {
+					console.error("Error:", error);
+				}
+			});
+		});
+	});
 </script>
-</body>
-</html>

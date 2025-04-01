@@ -31,6 +31,7 @@ router.post(
 				productCategory,
 				productStock,
 				productSaveTag,
+				productPoints,
 			} = req.body;
 			const imageFilenames = req.files.map((file) => {
 				return `/images/products/${productCategory}/${file.filename}`;
@@ -45,6 +46,7 @@ router.post(
 				stock: productStock,
 				saveTag: productSaveTag,
 				image: imageFilenames,
+				pointsPossible: productPoints,
 			});
 			await newProduct.save();
 			res.status(200).json({ message: "Product created successfully" });
@@ -53,12 +55,17 @@ router.post(
 		}
 	}
 );
-// Update stock
+// Update Product Info
 router.put("/update/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
-		const { stock, price, saveTag } = req.body;
-		await Product.findByIdAndUpdate(id, { stock, price, saveTag });
+		const { stock, price, saveTag, pointsPossible } = req.body;
+		await Product.findByIdAndUpdate(id, {
+			stock,
+			price,
+			saveTag,
+			pointsPossible,
+		});
 		res.status(200).json({ message: "Product updated successfully" });
 	} catch (err) {
 		res.status(500).json({ message: "Error updating stock" });
@@ -106,9 +113,8 @@ router.get("/users", async (req, res) => {
 // Update loyalty points
 router.put("/users/update_pts", async (req, res) => {
 	try {
-		const { id, points } = req.body;
-		// Validate input
-		if (!id || !points || isNaN(Number(points))) {
+		const { id, parsedPoints } = req.body;
+		if (!id || parsedPoints === undefined || isNaN(Number(parsedPoints))) {
 			return res.status(400).json({ message: "Invalid Input" });
 		}
 		await User.findByIdAndUpdate(id, {
@@ -123,9 +129,14 @@ router.put("/users/update_pts", async (req, res) => {
 // order management page routing
 router.get("/orders", async (req, res) => {
 	try {
-		const orders = await Order.find().populate("items.product").exec();
+		const orders = await Order.find().populate("items.product");
 		const users = await User.find();
-		res.render("admin/manageOrders", { orders, users, page_title: "Orders" });
+		console.log(orders);
+		res.render("admin/manageOrders", {
+			orders,
+			users,
+			page_title: "Orders",
+		});
 	} catch (err) {
 		res.status(500).json({ message: "An error occured" });
 	}

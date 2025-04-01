@@ -1,92 +1,100 @@
 <%- include('./partials/header.ejs') %>
-<link rel="stylesheet" href="/css/account.css">
+<link rel="stylesheet" href="/css/account.css" />
 
 <div class="container">
-    <h3>My Account</h2>
-    <div class="profile">
-        <p><strong>Username:</strong> <%= user.username %></p>
-        <p><strong>Email Adress:</strong> <%= user.email %></p>
-        <p><strong>Mobile:</strong> <%= user.mobile %></p>
-        <% if (Object.keys(loggedInUser).length > 0) { %>
-            <% if (loggedInUser.role == "admin") { %>
-                <strong><a href="/admin/products" target="_blank">Manage Products</a></strong>
-                <strong><a href="/admin/users" target="_blank">Manage Users</a></strong>
-                <strong><a href="/admin/orders" target="_blank">Manage Orders</a></strong>
-            <% } %>
-        <% } %>
-        <div>
-            <button class="logout" onclick="logout()">Logout</button>
-        </div>
-    </div>
-    <h3>My Orders</h3>
-    <div class="orders">
-        
-        <% if (orders.length > 0) { %>
-            <div class="order-list">
-                <% orders.forEach(order => { %>
-                    <div class="order-card">
-                        <div class="order-header">
-                            <div>
-                                <p class="order-id"><strong>Order ID:</strong> <%= order._id %></p>
-                                <p class="order-date"><strong>Date:</strong> <%= new Date(order.orderDate).toLocaleDateString() %></p>
-                                <p class="order-id"><strong>Address:</strong> <%= order.customerInfo.address %></p>
-                            </div>
-                            <div class="order-status <%= order.status.toLowerCase() %>">
-                                <%= order.status %>
-                            </div>
-                        </div>
+	<h3>My Account</h3>
+	<div class="profile">
+		<p><strong>Username:</strong> <%= user.username %></p>
+		<p><strong>Email Adress:</strong> <%= user.email %></p>
+		<p><strong>Mobile:</strong> <%= user.mobile %></p>
+		<% if (Object.keys(loggedInUser).length > 0) { %> <% if (loggedInUser.role
+		== "admin") { %>
+		<strong
+			><a href="/admin/products" target="_blank">Manage Products</a></strong
+		>
+		<strong><a href="/admin/users" target="_blank">Manage Users</a></strong>
+		<strong><a href="/admin/orders" target="_blank">Manage Orders</a></strong>
+		<% } %> <% } %>
+		<div>
+			<button class="logout" onclick="logout()">Logout</button>
+		</div>
+	</div>
+	<h3>My Orders</h3>
+	<div class="orders">
+		<% if (orders.length > 0) { %>
+		<div class="order-list">
+			<% orders.forEach(order => { %>
+			<div class="order-card">
+				<div class="order-header">
+					<div>
+						<p class="order-id"><strong>Order ID:</strong> <%= order._id %></p>
+						<p class="order-date">
+							<strong>Date:</strong> <%= new
+							Date(order.orderDate).toLocaleDateString() %>
+						</p>
+						<p class="order-id">
+							<strong>Address:</strong> <%= order.customerInfo.address %>
+						</p>
+					</div>
+					<div class="order-status <%= order.status.toLowerCase() %>">
+						<%= order.status %>
+					</div>
+				</div>
+				<div class="order-details">
+					<div class="items-list">
+						<% order.items.forEach((item, index) => { %>
+						<div class="item-card">
+							<% if (item.product && item.product.image) { %>
+							<img
+								src="<%= item.product.image[0] %>"
+								alt="<%= item.product.name %>"
+								class="product-image"
+							/>
+							<% } %>
+							<div class="item-info">
+								<h4><%= item.product?.name || 'Product not found' %></h4>
+								<p>Quantity: <%= item.quantity %></p>
+								<p>Price per unit: <%= item.price.toFixed(2) %> BDT</p>
+								<% if (order.status.toLowerCase() === 'pending') { %>
+								<div class="summary-cancel">
+									<form
+										action="/order/<%= order._id %>/items/<%= item._id %>/delete"
+										method="POST"
+									>
+										<button class="cancelBtn">Cancel Item</button>
+									</form>
+								</div>
+								<% if (errors && errors.common) { %>
+								<p class="error show"><%= errors.common.msg %></p>
+								<% } %> <% } %>
+							</div>
+						</div>
+						<% }) %>
+					</div>
 
-                        <div class="order-details">
-                            <div class="items-list">
-                                <% order.items.forEach((item, index) => { %>
-                                    <div class="item-card">
-                                        <% if (item.product && item.product.image) { %>
-                                            <img src="<%= item.product.image[0] %>" alt="<%= item.product.name %>" class="product-image">
-                                        <% } %>
-                                        <div class="item-info">
-                                            <h4><%= item.product?.name || 'Product not found' %></h4>
-                                            <p>Quantity: <%= item.quantity %></p>
-                                            <p>Price per unit: <%= item.price.toFixed(2) %> BDT</p>
-                                            <% if (order.status.toLowerCase() === 'pending') { %>
-                                                <div class="summary-cancel">
-                                                    <form action="/order/<%= order._id %>/items/<%= item._id %>/delete" method="POST">
-                                                        <button class="cancelBtn">Cancel Item</button>
-                                                    </form>
-                                                </div>
-                                                <% if (errors && errors.common) { %>
-                                                    <p class="error show"><%= errors.common.msg %></p>
-                                                <% } %>
-                                            <% } %>
-                                        </div>
-                                    </div>
-                                <% }) %>
-                            </div>
-
-                            <div class="order-summary">
-                                <div class="summary-item">
-                                    <span>Total Amount:</span>
-                                    <span><%= order.totalAmount.toFixed(2) %> BDT</span>
-                                </div>
-                                <div class="summary-item">
-                                    <span>Payment Method:</span>
-                                    <span><%= order.paymentMethod.replace(/,/g, '') %></span>
-                                </div>
-                                <div class="summary-item">
-                                    <span>Delivery Method:</span>
-                                    <span><%= order.deliveryMethod.replace(/,/g, '') %></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
-            </div>
-        <% } else { %>
-            <p class="no-orders">No orders found.</p>
-        <% } %>
-    </div>
+					<div class="order-summary">
+						<div class="summary-item">
+							<span>Total Amount:</span>
+							<span><%= order.totalAmount.toFixed(2) %> BDT</span>
+						</div>
+						<div class="summary-item">
+							<span>Payment Method:</span>
+							<span><%= order.paymentMethod.replace(/,/g, '') %></span>
+						</div>
+						<div class="summary-item">
+							<span>Delivery Method:</span>
+							<span><%= order.deliveryMethod.replace(/,/g, '') %></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+		<% } else { %>
+		<p class="no-orders">No orders found.</p>
+		<% } %>
+	</div>
 </div>
 
 <script src="/scripts/account.js" defer></script>
 <%- include('./partials/footer.ejs') %>
-</body>
-</html>

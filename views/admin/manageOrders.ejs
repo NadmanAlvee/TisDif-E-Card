@@ -10,13 +10,18 @@
 				<p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
 				<p><strong>Email:</strong> <%= order.customerInfo.email %></p>
 				<p><strong>Phone:</strong> <%= order.customerInfo.mobile %></p>
-				<p><strong>Delvery Address:</strong> <%= order.customerInfo.address %></p>
+				<p><strong>Delivery Address:</strong> <%= order.customerInfo.address %></p>
 				<p>
 				    <strong>Order Date:</strong>
 				    <%= order.orderDate.toLocaleDateString() + ' ' + order.orderDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) %>
 				</p>
 				<p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
-				
+				<p><strong>Points Possible:</strong>
+					<input type="number" id="pts-<%= order._id %>" step="5" value="<%= order.point_possible %>">
+					<button onclick="updatePts(`<%= order._id %>`)">Give Points</button>
+				</p>
+				<p><strong>Given Points: <%= order.given_point.toLocaleString() %> </strong>
+				</p>
 				<div class="items-list">
 					<% order.items.forEach(item => { %>
 					<div class="item">
@@ -28,11 +33,11 @@
 				
 				<div class="status-control">
 					<select class="status-select" data-order-id="<%= order._id %>">
-						<option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
-						<option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %>>Processing</option>
-						<option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
-						<option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
-						<option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+						<option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %> >Pending</option>
+						<option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %> >Processing</option>
+						<option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %> >Shipped</option>
+						<option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %> >Delivered</option>
+						<option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %> >Cancelled</option>
 					</select>
 				</div>
 			</div>
@@ -40,7 +45,6 @@
 		<% }); %>
 	</div>
 </div>
-
 <script>
 	document.querySelectorAll('.status-select').forEach(select => {
 		select.addEventListener('change', async function() {
@@ -63,6 +67,21 @@
 			}
 		});
 	});
+	function updatePts(order_id){
+		const ptsInput = document.getElementById(`pts-${order_id}`);
+		const point_possible = ptsInput.value;
+		fetch(`/order/update_pts/${order_id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ point_possible })
+		})
+		.then(response => {
+			if (response.ok) window.location.reload();
+		})
+		.catch(error => {
+			window.alert("Error updating points");
+		});
+		}
 </script>
-</body>
-</html>

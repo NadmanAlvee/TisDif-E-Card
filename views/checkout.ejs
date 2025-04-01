@@ -1,86 +1,181 @@
 <%- include('./partials/header.ejs') %>
-<link rel="stylesheet" href="/css/checkout.css">
+<link rel="stylesheet" href="/css/checkout.css" />
+<form id="checkout-form" action="/order/checkout" method="POST">
+	<div class="container">
+		<h2 class="checkout-heading">Checkout</h2>
+		<div class="container-wrapper">
+			<!-- Left Column -->
+			<div class="left-container">
+				<h3 class="left-h3">SHIPPING DETAILS</h3>
+				<div class="personal-info">
+					<div class="form-group">
+						<label for="order_fullName">Full Name</label>
+						<input
+							type="text"
+							name="order_fullName"
+							spellcheck="false"
+							id="fullName"
+							required
+							<% if(user.username){ %>
+							value="<%= user.username %>"
+							<% } %>
+						/>
+					</div>
+					<div class="form-group">
+						<label for="order_mobile">Mobile Number</label>
+						<input
+							type="text"
+							name="order_mobile"
+							spellcheck="false"
+							id="mobile"
+							required
+							<% if(user.mobile){ %>
+							value="<%= user.mobile %>"
+							<% } %>
+						/>
+					</div>
+					<div class="form-group">
+						<label for="order_email">Email Address</label>
+						<input
+							type="email"
+							name="order_email"
+							spellcheck="false"
+							id="email"
+							required
+							<% if(user.email){ %>
+							value="<%= user.email %>"
+							<% } %>
+						/>
+					</div>
+					<div class="form-group">
+						<label for="order_address">Delivery Address</label>
+						<input
+							type="text"
+							name="order_address"
+							id="address"
+							spellcheck="false"
+							placeholder="Ex. John Doe, 456 Elm Street, Suite 3, Los Angeles, CA 90001, USA"
+							required
+						/>
+					</div>
+				</div>
+				<div class="left-bottom">
+					<h3 class="left-h3">PAYMENT DETAILS</h3>
+					<div class="payment-method">
+						<label>Payment Method</label>
+						<div class="payment-option">Online Payment</div>
+					</div>
+					<div class="delivery-method">
+						<label>Delivery Method</label>
+						<div class="delivery-option">Home Delivery</div>
+					</div>
+				</div>
+			</div>
 
-<div class="checkout-container">
-  <!-- Left Column: Personal Information -->
-  <div class="left-container">
-    <div class="personal-info">
-      <h2>Customer Information</h2>
-      <form id="checkout-form" action="/order/checkout" method="POST">
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" name="fullName" id="fullName"
-          <% if (user.username) { %>
-            value="<%= user.username %>"
-          <% } %>
-          >
-        </div>
-        <div class="form-group">
-          <label for="mobile">Mobile Number</label>
-          <input type="text" name="mobile" id="mobile" 
-          <% if (user.mobile) { %>
-            value="<%= user.mobile %>"
-          <% } %>
-          >
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="text" name="email" id="email"
-          <% if (user.email) { %>
-            value="<%= user.email %>"
-          <% } %>
-          >
-        </div>
-        <div class="form-group">
-          <label for="address">Delivery Address</label>
-          <textarea name="address" id="address" rows="3" required></textarea>
-        </div>
-      </form>
-    </div>
-  </div>
+			<!-- Right Column -->
+			<div class="right-container">
+				<h3 class="left-h3">YOUR ORDER</h3>
+				<div class="order-summary">
+					<ul>
+						<div class="cart-wrapper">
+							<% cartItems.forEach(item => { %>
+							<div class="cart-card">
+								<div class="delete-btn-wrapper">
+									<button
+										type="button"
+										class="delete-btn"
+										data-id="<%= item._id %>"
+									>
+										<img
+											src="https://img.icons8.com/fluency/50/cancel.png"
+											alt="Delete"
+										/>
+									</button>
+								</div>
+								<div class="thumbnail-image">
+									<img
+										src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
+										alt="<%= item.productId.name %>"
+									/>
+								</div>
+								<div class="card-info">
+									<div class="name"><%= item.productId.name %></div>
+									<div class="price">
+										Price: <%= item.productId.price %> BDT
+									</div>
+									<div class="quantity">
+										Quantity: <%= item.selected_quantity %>
+									</div>
+								</div>
+								<div class="total">
+									<p><%= item.total_price.toLocaleString() %> BDT</p>
+								</div>
+							</div>
+							<% }); %>
+						</div>
+						<li id="subtotal-div">
+							<strong>Subtotal:</strong>
+							<%= grand_total.toLocaleString() %> BDT
+						</li>
+						<li>
+							<strong>Delivery Charge:</strong>
+							<%= delivery_charge.toLocaleString() %> BDT
+						</li>
+						<li>
+							<strong>Points Possible:</strong>
+							<%= point_possible %> points
+						</li>
+						<li>
+							<strong>Points Available:</strong>
+							<%= user.points %> points
+						</li>
+						<li id="grandTotal-div">
+							<strong>Grand Total:</strong>
+							<strong name="grand_total"><%= grand_total.toLocaleString() %> BDT</strong>
+						</li>
+						<li>
+							<input type="checkbox" name="use_Points" value="yes">
+							<div class="use_points">USE <%= user.points %> POINTS</div>
+						</li>
+					</ul>
+				</div>
+				<button type="submit" class="confirm-order-btn">Confirm Order</button>
+			</div>
+		</div>
+	</div>
+</form>
 
-  <!-- Right Column -->
-  <div class="right-container">
-    <!-- Top Section: Payment and Delivery -->
-    <div class="payment-delivery">
-      <div class="payment-method">
-        <h2>Payment Method</h2>
-        <div class="payment-option">
-          Online Payment
-        </div>
-      </div>
-      <div class="delivery-method">
-        <h2>Delivery Method</h2>
-        <div class="delivery-option">
-          Home Delivery
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Section: Order Summary & Confirm -->
-    <div class="order-summary-section">
-      <div class="order-summary">
-        <% let grandTotal = 0; %>
-        <ul>
-          <% cartItems.forEach(item => { %>
-            <% const itemTotal = item.productId.price * item.selected_quantity %>
-            <% grandTotal += itemTotal; %>
-            <li>
-              <strong><%= item.productId.name %></strong>:
-              <%= item.selected_quantity %> x 
-              <%= item.productId.price.toLocaleString() %> BDT = 
-              <%= itemTotal.toLocaleString() %> BDT
-            </li>
-          <% }); %>
-        </ul>
-        <p class="grand-total">Grand Total: <%= grandTotal.toLocaleString() %> BDT</p>
-      </div>
-      <!-- Note: The confirm button remains within the form.
-           You may need to adjust your form tags if you want the whole checkout to submit together -->
-      <button type="submit" form="checkout-form" class="confirm-order-btn">Confirm Order</button>
-    </div>
-  </div>
-</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		// Update the grand total when the checkbox is checked/unchecked
+		const usePointsCheckbox = document.querySelector('input[name="use_Points"]');
+		const grandTotalElement = document.getElementById("grandTotal-div");
+		usePointsCheckbox.addEventListener("change", function () {
+			if (this.checked) {
+				grandTotalElement.innerHTML =
+					"<strong>Grand Total:</strong><strong><%= total_after_discount %> BDT</strong>";
+			} else {
+				grandTotalElement.innerHTML =
+					"<strong>Grand Total:</strong><strong><%= grand_total %> BDT</strong>";
+			}
+		});
+		// cart delete
+		const deleteButtons = document.querySelectorAll(".delete-btn");
+		deleteButtons.forEach((button) => {
+			button.addEventListener("click", async () => {
+				const itemId = button.getAttribute("data-id");
+				try {
+					const response = await fetch(`/cart/${itemId}`, {
+						method: "DELETE",
+						headers: { "Content-Type": "application/json" },
+					});
+					if (!response.ok) throw new Error("Failed to delete item.");
+					window.location.reload();
+				} catch (error) {
+					console.error("Error:", error);
+				}
+			});
+		});
+	});
+</script>
 <%- include('./partials/footer.ejs') %>
-</body>
-</html>

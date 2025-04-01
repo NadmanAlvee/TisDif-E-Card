@@ -1,21 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const Cart = require("../models/Cart");
+const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 
 // GET /checkout
 router.get("/", async (req, res) => {
 	try {
 		if (!res.locals.loggedInUser) return res.redirect("/login");
-
 		const userId = res.locals.loggedInUser._id;
-		const cartItems = await Cart.find({ userId }).populate("productId");
 
-		if (cartItems.length === 0) return res.redirect("/cart");
-		const page_title = "TisDif e-Card | Checkout";
+		const checkoutData = await checkoutDetails(userId);
+
+		if (!checkoutData) return res.redirect("/cart");
+		console.log(checkoutData);
 		res.render("checkout", {
-			cartItems,
-			user: res.locals.loggedInUser, // Pre-fill user info
-			page_title,
+			...checkoutData,
+			page_title: "TisDif e-Card | Checkout",
 		});
 	} catch (error) {
 		res.status(500).send("Server Error");

@@ -4,16 +4,25 @@ const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const User = require("../models/User");
 const createHttpError = require("http-errors");
+const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 
 router.post("/checkout", async (req, res) => {
 	try {
-		const user = res.locals.loggedInUser;
-		if (!user) return res.redirect("/login");
+		const userId = res.locals.loggedInUser._id;
+		if (!userId) return res.redirect("/login");
 
-		// Get cart items
-		const cartItems = await Cart.find({ userId: user._id }).populate(
-			"productId"
-		);
+		const {
+			user,
+			cartItems,
+			grand_total,
+			point_possible,
+			delivery_charge,
+			total_after_discount,
+		} = await checkoutDetails(userId);
+
+		const use_Points = req.body.use_Points === "yes";
+		const pointsToDeduct = use_Points ? Math.min(user.points, grand_total) : 0;
+		const totalAmount = grand_total - pointsToDeduct;
 
 		// Create order items array
 		const orderItems = cartItems.map((item) => ({
@@ -22,24 +31,22 @@ router.post("/checkout", async (req, res) => {
 			price: item.productId.price,
 		}));
 
-		// Calculate total
-		const totalAmount = cartItems.reduce(
-			(total, item) => total + item.productId.price * item.selected_quantity,
-			0
-		);
-
 		// Create order
 		const order = new Order({
 			user: user._id,
 			items: orderItems,
-			totalAmount,
+			totalAmount: totalAmount,
+			point_possible: point_possible,
+			given_point: 0,
+			delivery_charge: delivery_charge,
+			pointsUsed: pointsToDeduct,
 			paymentMethod: "Online Payment",
 			deliveryMethod: "Home Delivery",
 			customerInfo: {
-				fullName: req.body.fullName,
-				mobile: req.body.mobile,
-				email: req.body.email,
-				address: req.body.address,
+				fullName: req.body.order_fullName,
+				mobile: req.body.order_mobile,
+				email: req.body.order_email,
+				address: req.body.order_address,
 			},
 		});
 
@@ -47,10 +54,12 @@ router.post("/checkout", async (req, res) => {
 		await order.save();
 		await Cart.deleteMany({ userId: user._id });
 
-		// Update user with order history
+		// Update user points and order history
 		await User.findByIdAndUpdate(user._id, {
+			$inc: { points: -pointsToDeduct },
 			$push: { orders: order._id },
 		});
+
 		res.redirect(`/account`);
 	} catch (error) {
 		res.status(500).send("Order processing failed");
@@ -61,35 +70,31 @@ router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 	try {
 		const userId = res.locals.loggedInUser._id;
 		const { orderId, itemId } = req.params;
-
-		// 1. Verify order ownership
 		const order = await Order.findOne({
 			_id: orderId,
 			user: userId,
 		});
-
 		if (!order) {
-			throw createHttpError("an error occured!");
+			throw createHttpError("An error occurred!");
 		}
-
-		// 2. Find the item to remove
 		const itemToRemove = order.items.find(
 			(item) => item._id.toString() === itemId
 		);
-
 		if (!itemToRemove) {
 			throw createHttpError("Item not found in order");
 		}
-
-		// 3. Remove the item and update total
+		// Remove the item and update total
 		await Order.findByIdAndUpdate(orderId, {
 			$pull: { items: { _id: itemId } },
 			$inc: { totalAmount: -(itemToRemove.quantity * itemToRemove.price) },
 		});
-
-		// 4. Check if order becomes empty
 		const updatedOrder = await Order.findById(orderId);
 		if (updatedOrder.items.length === 0) {
+			if (order.pointsUsed && order.pointsUsed > 0) {
+				await User.findByIdAndUpdate(userId, {
+					$inc: { points: order.pointsUsed },
+				});
+			}
 			await Order.findByIdAndDelete(orderId);
 		}
 		res.redirect("/account");
@@ -108,10 +113,33 @@ router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 			page_title,
 			errors: {
 				common: {
-					msg: err.message,
+					msg: error.message,
 				},
 			},
 		});
+	}
+});
+
+router.put("/update_pts/:id", async (req, res) => {
+	const order_id = req.params.id;
+	const requestedOrder = await Order.findById(order_id);
+	if (!requestedOrder)
+		return res.status(404).json({ message: "Order not found" });
+	try {
+		const points = Number(req.body.point_possible);
+		if (isNaN(points)) {
+			return res.status(400).json({ message: "Invalid points" });
+		}
+		await Order.findByIdAndUpdate(order_id, {
+			$inc: {
+				given_point: points,
+				point_possible: -points,
+			},
+		});
+		return res.sendStatus(200);
+	} catch (err) {
+		console.error(err);
+		return res.status(500).send("An error occurred");
 	}
 });
 
