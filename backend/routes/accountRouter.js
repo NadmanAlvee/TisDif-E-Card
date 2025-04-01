@@ -1,6 +1,7 @@
 const express = require("express");
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
+const User = require("../models/User");
 const { checkLogin } = require("../middlewares/common/checkLogin");
 
 const router = express.Router();
@@ -11,7 +12,8 @@ router.get("/", checkLogin, async (req, res) => {
 			return res.redirect("/login");
 		}
 
-		const user = res.locals.loggedInUser;
+		const user = await User.findById(res.locals.loggedInUser._id);
+		console.log(user);
 		const userId = user._id;
 
 		const [cartItems, orders] = await Promise.all([
