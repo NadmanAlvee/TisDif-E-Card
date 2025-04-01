@@ -7,11 +7,10 @@
 		<p><strong>Username:</strong> <%= user.username %></p>
 		<p><strong>Email Adress:</strong> <%= user.email %></p>
 		<p><strong>Mobile:</strong> <%= user.mobile %></p>
+		<p><strong>Accumulated Points:</strong> <%= user.points %></p>
 		<% if (Object.keys(loggedInUser).length > 0) { %> <% if (loggedInUser.role
 		== "admin") { %>
-		<strong
-			><a href="/admin/products" target="_blank">Manage Products</a></strong
-		>
+		<strong><a href="/admin/products" target="_blank">Manage Products</a></strong>
 		<strong><a href="/admin/users" target="_blank">Manage Users</a></strong>
 		<strong><a href="/admin/orders" target="_blank">Manage Orders</a></strong>
 		<% } %> <% } %>
