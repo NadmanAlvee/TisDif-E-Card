@@ -63,16 +63,13 @@ async function login(req, res, next) {
 			throw createError("Login failed! User not found.");
 		}
 	} catch (err) {
-		const cartItems = await Cart.find({
-			userId: res.locals.loggedInUser ? res.locals.loggedInUser._id : null,
-		});
+		const cartItems = [];
 		const page_title = "TisDif e-Card | Login";
-
 		res.render("login_page.ejs", {
 			errors: {
 				common: { msg: err.message },
 			},
-			loggedInUser: res.locals.loggedInUser || null, // Ensure loggedInUser is always safe
+			loggedInUser: {},
 			cartItems,
 			page_title,
 		});

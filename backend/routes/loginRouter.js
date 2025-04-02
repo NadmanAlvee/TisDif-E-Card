@@ -4,10 +4,6 @@ const express = require("express");
 // external imports
 const { getLogin, login } = require("../controller/loginController");
 const {
-	doLoginValidators,
-	doLoginValidationHandler,
-} = require("../middlewares/login/loginValidators");
-const {
 	doRegisterValidationHandler,
 	doRegisterValidators,
 } = require("../middlewares/register/registerValidators");
@@ -20,7 +16,7 @@ const router = express.Router();
 router.get("/", getLogin);
 
 // process login
-router.post("/", doLoginValidators, doLoginValidationHandler, login);
+router.post("/", login);
 
 // register new user
 router.post(
