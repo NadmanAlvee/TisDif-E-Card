@@ -30,6 +30,9 @@
 			<h2>
 				Browse <%= category.charAt(0).toUpperCase() + category.slice(1) %>
 			</h2>
+			<p>
+				<a href="/search?searchQuery=<%= category %>">VIEW ALL</a>
+			</p>
 		</div>
 		<div class="product-container">
 			<% categoryProducts.forEach(product => { %> <%-

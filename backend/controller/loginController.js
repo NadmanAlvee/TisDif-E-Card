@@ -9,12 +9,10 @@ const Cart = require("../models/Cart");
 
 // get login page
 async function getLogin(req, res, next) {
-	const userId = res.locals.loggedInUser._id;
-	const cartItems = await Cart.find({ userId });
 	const page_title = "TisDif e-Card | Login";
 	res.render("login_page.ejs", {
-		loggedInUser: res.locals.loggedInUser,
-		cartItems: cartItems,
+		loggedInUser: {},
+		cartItems: [],
 		page_title,
 	});
 }
@@ -48,13 +46,13 @@ async function login(req, res, next) {
 
 				// Set cookie with the token
 				res.cookie(process.env.COOKIE_NAME, token, {
-					maxAge: 86400000, // 1 day in milliseconds
+					maxAge: 86400000,
 					httpOnly: true,
+					secure: process.env.NODE_ENV === "production", // enable in production
 					signed: true,
 				});
 
-				// Store logged-in user info in locals
-				res.locals.loggedInUser = userObject;
+				res.locals.loggedInUser = user;
 
 				// Redirect to account page after successful login
 				return res.redirect("/account");

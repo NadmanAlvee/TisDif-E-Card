@@ -63,11 +63,12 @@ async function register(req, res, next) {
 		res.cookie(process.env.COOKIE_NAME, token, {
 			maxAge: 86400000,
 			httpOnly: true,
+			secure: process.env.NODE_ENV === "production", // enable in production
 			signed: true,
 		});
 
 		// Save user in local session
-		res.locals.loggedInUser = userObject;
+		res.locals.loggedInUser = result;
 
 		console.log("New Register: \n" + res.locals.loggedInUser);
 
@@ -81,7 +82,19 @@ async function register(req, res, next) {
 			res.redirect("/account");
 		}
 	} catch (err) {
-		res.redirect("/login");
+		const cartItems = await Cart.find({
+			userId: res.locals.loggedInUser ? res.locals.loggedInUser._id : null,
+		});
+		const page_title = "TisDif e-Card | Login";
+
+		res.render("login_page.ejs", {
+			errors: {
+				common: { msg: err.message },
+			},
+			loggedInUser: res.locals.loggedInUser || null,
+			cartItems,
+			page_title,
+		});
 	}
 }
 

@@ -285,6 +285,7 @@ header.searchMode {
 }
 
 #user-info a {
+	color: red;
 	padding: 12px 15px;
 	font-weight: 700;
 }

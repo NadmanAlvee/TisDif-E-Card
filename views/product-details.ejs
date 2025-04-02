@@ -54,21 +54,20 @@
 						<span class="new-price"> <%= product.price %>৳ </span>
 						<% } %>
 					</p>
-					<p>
+					<p class="stock">
 						Status: <% if (product.stock > 0){ %>
 						<span class="in-stock">In Stock</span>
 						<% } else { %>
 						<span class="out-of-stock">Out Of Stock</span>
 						<% } %>
 					</p>
-					<% if (product.pointsPossible != 0) { %>
-					<p>
+					<p class="point-p">
 						Possible Points:
 						<span class="points-possible"
 							><%= ((product.pointsPossible)*100) %>%</span
 						>
 					</p>
-					<% } %> <% if (product.category == 'giftcards') { %> <% if
+					<% if (product.category == 'giftcards') { %> <% if
 					(product.varient == "usd"){ %> <%-
 					include('./partials/giftcardVarients/usd.ejs') %> <% } else if
 					(product.varient == "inr") { %> <%-

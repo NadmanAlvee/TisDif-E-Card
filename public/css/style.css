@@ -82,7 +82,21 @@
 	max-width: 100%;
 	overflow: auto;
 }
-@media (max-width: 900px) {
+.product-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.product-text p {
+	padding: 8px;
+	font-size: 13px;
+	background: #00000017;
+	border-radius: 20px;
+}
+
+@media (max-width: 768) {
 	.container {
 		margin: 2%;
 	}

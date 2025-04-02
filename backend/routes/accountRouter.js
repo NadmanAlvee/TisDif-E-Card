@@ -2,20 +2,17 @@ const express = require("express");
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const User = require("../models/User");
-const { checkLogin } = require("../middlewares/common/checkLogin");
 
 const router = express.Router();
 
-router.get("/", checkLogin, async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
 		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 			return res.redirect("/login");
 		}
 
 		const user = await User.findById(res.locals.loggedInUser._id);
-		console.log(user);
 		const userId = user._id;
-
 		const [cartItems, orders] = await Promise.all([
 			Cart.find({ userId }).populate("productId"),
 			Order.find({ user: userId }).populate("items.product"),

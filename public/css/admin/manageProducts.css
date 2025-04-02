@@ -3,7 +3,6 @@
 	font-family: sans-serif;
 	color: var(--text-color);
 	box-sizing: border-box;
-	scroll-padding-top: 2rem;
 }
 .container {
 	display: flex;
@@ -43,6 +42,12 @@
 	text-align: center;
 }
 #newProdBtn {
+	color: black;
+	cursor: pointer;
+	border: 1px solid #46464636;
+	padding: 8px 20px;
+	border-radius: 15px;
+	transition: 0.3s;
 	text-align: center;
 	padding: 8px;
 	width: 10rem;
@@ -70,7 +75,6 @@
 	padding: 10px;
 	border-radius: 5px;
 	width: 400px;
-	height: 240px;
 	box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.1);
 }
 .product h3 {
@@ -89,6 +93,7 @@
 }
 input[type="text"],
 input[type="number"],
+input[type="file"],
 select {
 	width: 100%;
 	padding: 10px;
@@ -108,36 +113,89 @@ select {
 	flex-direction: row;
 	justify-content: space-evenly;
 }
-button {
+.save-btn {
 	color: black;
 	cursor: pointer;
 	border: 1px solid #46464636;
 	padding: 8px 20px;
 	border-radius: 15px;
 	transition: 0.3s;
-}
-
-.save-btn {
 	color: green;
 	font-weight: bold;
 	border: 1px solid green;
 }
 
 .delete-btn {
+	color: black;
+	cursor: pointer;
+	border: 1px solid #46464636;
+	padding: 8px 20px;
+	border-radius: 15px;
+	transition: 0.3s;
 	font-weight: bold;
 	border: 1px solid red;
 }
 
 .save-btn:hover {
-	border: transparent;
 	background: hsla(133, 100%, 15%, 0.8);
 	color: white;
 }
 .delete-btn:hover {
-	border: none;
 	background: hsl(2, 100%, 14%, 0.8);
 	color: white;
 }
+
+.product-image-list {
+	height: 100px;
+	overflow-y: auto;
+}
+
+.product-image-list ul {
+	display: flex;
+	overflow-x: hidden;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.product-image-list ul li {
+	position: relative;
+	font-size: 15px;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 8px;
+}
+
+.deleteImgBtn {
+	position: absolute;
+	background: none;
+	border: none;
+}
+
+.red-cross {
+	z-index: 5;
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	margin: 0;
+}
+
+.prod-Image {
+	width: 80px;
+	height: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.add-image-button {
+	position: relative;
+	color: #ffffff;
+	background: #00514a;
+	cursor: pointer;
+	padding: 8px 20px;
+	border: none;
+	border-radius: 5px;
+	z-index: 10;
+}
+
 #category {
 	cursor: pointer;
 }
@@ -149,7 +207,6 @@ button {
 		gap: 10px;
 	}
 	.product {
-		max-width: 250px;
 		padding: 10px;
 	}
 	.product h3,

@@ -55,6 +55,45 @@ router.post(
 		}
 	}
 );
+// add new image
+router.post(
+	"/product/add-product-image",
+	multiUploader.array("productImageUpdate", 8),
+	async (req, res) => {
+		try {
+			const { productId, productCategory } = req.body;
+			const imageFilenames = req.files.map((file) => {
+				return `/images/products/${productCategory}/${file.filename}`;
+			});
+			await Product.findByIdAndUpdate(productId, {
+				$push: { image: { $each: imageFilenames } },
+			});
+			res.redirect("/admin/products");
+		} catch (err) {
+			res.status(500).json({ message: "An error occurred." });
+		}
+	}
+);
+// delete product image
+router.delete("/product/delete-product-image", async (req, res) => {
+	try {
+		const { productId, imageUrl } = req.body;
+		await Product.findByIdAndUpdate(productId, {
+			$pull: { image: imageUrl },
+		});
+		const filePath = path.join(__dirname, "../../public", imageUrl);
+		fs.unlink(filePath, (err) => {
+			if (err) {
+				console.error("Failed to delete file:", err);
+			}
+		});
+		res.status(200).json({ message: "Image deleted successfully" });
+	} catch (err) {
+		console.error("Error deleting image:", err);
+		res.status(500).json({ message: "An error occurred." });
+	}
+});
+
 // Update Product Info
 router.put("/update/:id", async (req, res) => {
 	try {

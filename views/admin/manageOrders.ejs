@@ -16,7 +16,7 @@
 				    <%= order.orderDate.toLocaleDateString() + ' ' + order.orderDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) %>
 				</p>
 				<p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
-				<p><strong>Points Possible:</strong>
+				<p class="point_possible-div"><strong>Points Possible:</strong>
 					<input type="number" id="pts-<%= order._id %>" step="5" value="<%= order.point_possible %>">
 					<button onclick="updatePts(`<%= order._id %>`)">Give Points</button>
 				</p>

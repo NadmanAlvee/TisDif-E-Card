@@ -1,14 +1,10 @@
 // external imports
 const express = require("express");
-const MongoStore = require("connect-mongo");
-const mongoose = require("mongoose");
 const compression = require("compression");
 const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
-const flash = require("connect-flash");
 const app = express();
 app.use(
 	compression({
@@ -41,27 +37,7 @@ const searchRouter = require("./routes/searchRouter");
 const PORT = process.env.PORT;
 // Connect to MongoDB
 connectDB();
-// Session
-app.use(
-	session({
-		name: "tisdifecard",
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		saveUninitialized: false,
-		store: MongoStore.create({
-			client: mongoose.connection.getClient(),
-			ttl: 24 * 60 * 60, // 1 day (seconds)
-			autoRemove: "native",
-		}),
-		cookie: {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: "lax",
-			maxAge: 1000 * 60 * 60 * 24, // 1 day (milliseconds)
-		},
-	})
-);
-app.use(flash());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
@@ -78,7 +54,9 @@ app.use("/logout", logout);
 
 app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 
-app.use("/product", sessionInfo, checkLogin, productPageRouter);
+app.use("/product", sessionInfo, productPageRouter);
+
+app.use("/search", sessionInfo, searchRouter);
 
 app.use("/account", sessionInfo, checkLogin, accountRouter);
 
@@ -87,8 +65,6 @@ app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
 app.use("/cart", sessionInfo, checkLogin, cartRouter);
 
 app.use("/order", sessionInfo, checkLogin, orderRouter);
-
-app.use("/search", sessionInfo, checkLogin, searchRouter);
 
 // Error handling
 app.use(notFoundHandler); // 404

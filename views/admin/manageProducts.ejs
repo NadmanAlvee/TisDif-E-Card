@@ -85,6 +85,7 @@
 					name="productImageArray"
 					multiple
 					accept="image/*"
+    				style="font-size: 12px;"
 				/>
 
 				<button class="save-btn" type="submit">Add Product</button>
@@ -147,7 +148,39 @@
 						onclick="deleteProduct('<%= product._id %>')"
 					>
 						Delete
-					</button>
+					</button> 
+				</div>
+				<!-- manage product images -->
+				<div id="Product_Image_form">
+					<form
+						action="/admin/product/add-product-image"
+						method="POST"
+						enctype="multipart/form-data"
+					>
+						<div class="product-image-list">
+						<ul>
+							<input type="hidden" name="productCategory" value="<%= product.category %>">
+							<input type="hidden" name="productId" value="<%= product._id %>">
+							<input type="hidden" name="productName" value="<%= product.name %>">
+							<% product.image.forEach((image)=>{ %>
+								<li>
+									<button type="button" class="deleteImgBtn" data-image="<%= image %>">
+									  <img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
+									</button>
+									<img class="prod-Image" width="80px" height="100%" src="<%= image %>" alt="product-image"/>
+								</li>								  
+							<% }) %>
+						</ul>
+						</div>
+						<input
+								type="file"
+								name="productImageUpdate"
+								multiple
+								accept="image/*"
+								style="font-size: 12px;"
+							/>
+						<button type="submit" class="add-image-button">Add image</button>
+					</form>
 				</div>
 			</div>
 			<% }) %>
@@ -156,6 +189,7 @@
 </div>
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
+		// new product
 		const form = document.querySelector("#new_prod_form form");
 		form.addEventListener("submit", async (event) => {
 			event.preventDefault();
@@ -174,6 +208,31 @@
 			} catch (err) {
 				console.error("Error occurred while adding product:");
 			}
+		});
+		// delete image
+		const deleteButtons = document.querySelectorAll(".deleteImgBtn");
+		deleteButtons.forEach((btn) => {
+			btn.addEventListener("click", async (event) => {
+				event.preventDefault();
+				const imageUrl = btn.getAttribute("data-image");
+				const productId = btn.closest("form").querySelector("input[name='productId']").value;
+				try {
+				const response = await fetch("/admin/product/delete-product-image", {
+					method: "DELETE",
+					headers: {
+					"Content-Type": "application/json"
+					},
+					body: JSON.stringify({ productId, imageUrl })
+				});
+				if (response.ok) {
+					window.location.reload();
+				} else {
+					window.alert("Failed to delete the image.");
+				}
+				} catch (err) {
+					console.error("Error occurred while deleting product image:", err);
+				}
+			});
 		});
 	});
 

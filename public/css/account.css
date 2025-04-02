@@ -6,6 +6,7 @@ body {
 .container {
 	font-size: 16px;
 	padding: 20px;
+	min-height: 70vh;
 	margin-top: 80px;
 }
 h3 {
