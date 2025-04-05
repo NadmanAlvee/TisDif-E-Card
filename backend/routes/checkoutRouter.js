@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
 		const checkoutData = await checkoutDetails(userId);
 
 		if (!checkoutData) return res.redirect("/cart");
-		console.log(checkoutData);
 		res.render("checkout", {
 			...checkoutData,
 			page_title: "TisDif e-Card | Checkout",

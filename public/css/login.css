@@ -46,7 +46,7 @@ body {
 	height: 45px;
 	background-color: transparent;
 	border: 1px solid #ccc;
-	border-radius: 20px;
+	border-radius: 8px;
 	padding: 0 40px 0 15px;
 	font-size: 14px;
 }
@@ -58,11 +58,12 @@ body {
 .input-box select {
 	background: none;
 	padding: 0 10px;
-	border-radius: 20px;
+	border-radius: 8px;
 	border: 1px solid #ccc;
 	height: 45px;
 	font-size: 14px;
 	cursor: pointer;
+	width: 60%;
 }
 .wrapper .btn {
 	position: relative;
@@ -74,7 +75,7 @@ body {
 	height: 45px;
 	background: linear-gradient(20deg, #35353577, hsl(0deg 0% 0% / 80%));
 	border: none;
-	border-radius: 15px;
+	border-radius: 8px;
 	color: white;
 	font-weight: bold;
 	font-size: 16px;
@@ -121,7 +122,10 @@ body {
 		width: 90%;
 		padding: 20px;
 	}
-	.input-box-div {
-		flex-direction: column;
+	.wrapper h1 {
+		font-size: 20px;
+	}
+	.input-box input {
+		font-size: 12px;
 	}
 }

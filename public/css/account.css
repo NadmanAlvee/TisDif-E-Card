@@ -95,7 +95,7 @@ h3 {
 	color: hsl(45, 100%, 40%);
 	background-color: rgba(255, 251, 0, 0.1);
 }
-.order-status.processing {
+.order-status.confirmed {
 	border: 2px solid hsl(45, 100%, 50%);
 	color: hsl(45, 100%, 40%);
 	background-color: rgba(255, 251, 0, 0.1);

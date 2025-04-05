@@ -96,7 +96,7 @@
 	border-radius: 20px;
 }
 
-@media (max-width: 768) {
+@media (max-width: 768px) {
 	.container {
 		margin: 2%;
 	}

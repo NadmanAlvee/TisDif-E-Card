@@ -6,6 +6,7 @@ const multiUploader = require("../middlewares/utils/multiUploader");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
+const transporter = require("../middlewares/utils/transporter");
 router.use(express.urlencoded({ extended: true }));
 
 // product management page routing
@@ -170,7 +171,6 @@ router.get("/orders", async (req, res) => {
 	try {
 		const orders = await Order.find().populate("items.product");
 		const users = await User.find();
-		console.log(orders);
 		res.render("admin/manageOrders", {
 			orders,
 			users,
@@ -185,9 +185,39 @@ router.put("/update-order-status/:id", async (req, res) => {
 	try {
 		const { id } = req.params;
 		const { status } = req.body;
-		await Order.findByIdAndUpdate(id, { status });
+		const order = await Order.findByIdAndUpdate(id, { status }, { new: true })
+			.populate("user")
+			.populate("items.product");
+
+		if (!order) {
+			return res.status(404).json({ message: "Order not found" });
+		}
+		// Send email only for specific statuses
+		if (["Confirmed", "Shipped", "Delivered"].includes(status)) {
+			const mailOptions = {
+				from: process.env.EMAIL_USER,
+				to: order.user.email,
+				subject: `Your Order is ${status}! - TisdifeCard`,
+				html: `
+			<h2>Thank you for your order!</h2>
+			<p>Order ID: #${order._id}</p>
+			<p><strong>Order Details:</strong></p>
+			${order.items
+				.map(
+					(item) =>
+						`${item.product.name} - ${item.quantity} x ${item.price} BDT`
+				)
+				.join("")}
+			<p>Total Amount: <strong>${order.totalAmount.toFixed(2)}</strong> BDT</p>
+			<p>Thank you for trusting TisdifeCard!</p>
+		  `,
+			};
+			await transporter.sendMail(mailOptions);
+			console.log(`Main sent to: ${order.user.email}`);
+		}
 		res.status(200).json({ message: "Order status updated successfully" });
 	} catch (err) {
+		console.error("Error updating order status:", err);
 		res.status(500).json({ message: "Error updating order status" });
 	}
 });
