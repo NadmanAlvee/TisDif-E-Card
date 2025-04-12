@@ -11,5 +11,10 @@
 	--height: clamp(2rem, 8vw, 3rem);
 	--text-color: rgba(0, 0, 0, 0.8);
 	--background-color: #fff;
-	--background-color-2: #8080802e;
+	--background-color-2: rgba(128, 128, 128, 0.2);
+}
+::selection {
+	background: #24890d;
+	color: #fff;
+	text-shadow: none;
 }

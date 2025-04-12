@@ -7,62 +7,100 @@ const createHttpError = require("http-errors");
 const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 
 router.post("/checkout", async (req, res) => {
-	try {
-		const userId = res.locals.loggedInUser._id;
-		if (!userId) return res.redirect("/login");
+	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
+		try {
+			const { cartItems, grand_total, delivery_charge, total_after_discount } =
+				await checkoutDetails(req, res);
+			// Create order items array
+			const orderItems = cartItems.map((item) => ({
+				product: item.productId._id,
+				quantity: item.selected_quantity,
+				price: item.productId.price,
+			}));
+			// Create order
+			const order = new Order({
+				items: orderItems,
+				totalAmount: grand_total,
+				given_point: 0,
+				delivery_charge: delivery_charge,
+				paymentMethod: "Online Payment",
+				deliveryMethod: "Home Delivery",
+				customerInfo: {
+					fullName: req.body.order_fullName,
+					mobile: req.body.order_mobile,
+					email: req.body.order_email,
+					address: req.body.order_address,
+				},
+			});
+			// Save order and clear cart
+			await order.save();
+			res.clearCookie(process.env.CART_NAME);
 
-		const {
-			user,
-			cartItems,
-			grand_total,
-			point_possible,
-			delivery_charge,
-			total_after_discount,
-		} = await checkoutDetails(userId);
+			res.render("order_confirmed", {
+				page_title: "Order Confirmed",
+				cartItems: [],
+			});
+		} catch (error) {
+			res.status(500).send("Order processing failed");
+		}
+	} else {
+		try {
+			const userId = res.locals.loggedInUser._id;
+			const {
+				user,
+				cartItems,
+				grand_total,
+				point_possible,
+				delivery_charge,
+				total_after_discount,
+			} = await checkoutDetails(req, res, userId);
+			const use_Points = req.body.use_Points === "yes";
+			const pointsToDeduct = use_Points
+				? Math.min(user.points, grand_total)
+				: 0;
+			const totalAmount = grand_total - pointsToDeduct;
+			// Create order items array
+			const orderItems = cartItems.map((item) => ({
+				product: item.productId._id,
+				quantity: item.selected_quantity,
+				price: item.productId.price,
+			}));
+			// Create order
+			const order = new Order({
+				user: user._id,
+				items: orderItems,
+				totalAmount: totalAmount,
+				point_possible: point_possible,
+				given_point: 0,
+				delivery_charge: delivery_charge,
+				pointsUsed: pointsToDeduct,
+				paymentMethod: "Online Payment",
+				deliveryMethod: "Home Delivery",
+				customerInfo: {
+					fullName: req.body.order_fullName,
+					mobile: req.body.order_mobile,
+					email: req.body.order_email,
+					address: req.body.order_address,
+				},
+			});
 
-		const use_Points = req.body.use_Points === "yes";
-		const pointsToDeduct = use_Points ? Math.min(user.points, grand_total) : 0;
-		const totalAmount = grand_total - pointsToDeduct;
+			// Save order and clear cart
+			await order.save();
+			await Cart.deleteMany({ userId: user._id });
 
-		// Create order items array
-		const orderItems = cartItems.map((item) => ({
-			product: item.productId._id,
-			quantity: item.selected_quantity,
-			price: item.productId.price,
-		}));
+			// Update user points and order history
+			await User.findByIdAndUpdate(user._id, {
+				$inc: { points: -pointsToDeduct },
+				$push: { orders: order._id },
+			});
 
-		// Create order
-		const order = new Order({
-			user: user._id,
-			items: orderItems,
-			totalAmount: totalAmount,
-			point_possible: point_possible,
-			given_point: 0,
-			delivery_charge: delivery_charge,
-			pointsUsed: pointsToDeduct,
-			paymentMethod: "Online Payment",
-			deliveryMethod: "Home Delivery",
-			customerInfo: {
-				fullName: req.body.order_fullName,
-				mobile: req.body.order_mobile,
-				email: req.body.order_email,
-				address: req.body.order_address,
-			},
-		});
-
-		// Save order and clear cart
-		await order.save();
-		await Cart.deleteMany({ userId: user._id });
-
-		// Update user points and order history
-		await User.findByIdAndUpdate(user._id, {
-			$inc: { points: -pointsToDeduct },
-			$push: { orders: order._id },
-		});
-
-		res.redirect(`/account`);
-	} catch (error) {
-		res.status(500).send("Order processing failed");
+			res.render("order_confirmed", {
+				page_title: "Order Confirmed",
+				cartItems: [],
+			});
+		} catch (error) {
+			res.status(500).send("Order processing failed");
+		}
 	}
 });
 

@@ -18,22 +18,16 @@ async function register(req, res, next) {
 
 		// Remove leading zero from mobile if present
 		let processedMobile = mobile;
-		if (processedMobile.startsWith("0")) {
-			processedMobile = processedMobile.substring(1);
-		}
 		if (processedMobile.startsWith(country_code)) {
 			processedMobile = processedMobile.substring(country_code.length);
 		}
-
 		// Concatenate country code with mobile number
 		processedMobile = country_code + processedMobile;
-
 		// Check if user already exists
 		const existingUser = await User.findOne({ email });
 		if (existingUser) {
 			throw createError(409, "User already exists");
 		}
-
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(new_password, salt);
 

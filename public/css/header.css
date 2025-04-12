@@ -285,13 +285,13 @@ header.searchMode {
 }
 
 #user-info a {
-	color: red;
+	color: #0056b3;
 	padding: 12px 15px;
 	font-weight: 700;
 }
 
 #user-info a:hover {
-	color: #278fff;
+	color: #002c5c;
 	transition: 0.5s;
 }
 
@@ -303,12 +303,7 @@ header.searchMode {
 	padding: 15px;
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-	background: linear-gradient(
-		137deg,
-		#ffffffe8,
-		#fff0f7,
-		hsl(258deg 100% 83.88% / 51%)
-	);
+	background: white;
 	min-width: 200px;
 	z-index: 100;
 }

@@ -7,7 +7,7 @@
 		<p><strong>Username:</strong> <%= user.username %></p>
 		<p><strong>Email Adress:</strong> <%= user.email %></p>
 		<p><strong>Mobile:</strong> <%= user.mobile %></p>
-		<p><strong>Accumulated Points:</strong> <%= user.points %></p>
+		<p><strong>Accumulated Points:</strong> <%= user.points.toLocaleString() %></p>
 		<% if (Object.keys(loggedInUser).length > 0) { %> <% if (loggedInUser.role
 		== "admin") { %>
 		<strong><a href="/admin/products" target="_blank">Manage Products</a></strong>
@@ -27,13 +27,6 @@
 				<div class="order-header">
 					<div>
 						<p class="order-id"><strong>Order ID:</strong> <%= order._id %></p>
-						<p class="order-date">
-							<strong>Date:</strong> <%= new
-							Date(order.orderDate).toLocaleDateString() %>
-						</p>
-						<p class="order-id">
-							<strong>Address:</strong> <%= order.customerInfo.address %>
-						</p>
 					</div>
 					<div class="order-status <%= order.status.toLowerCase() %>">
 						<%= order.status %>

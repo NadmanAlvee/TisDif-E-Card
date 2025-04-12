@@ -47,23 +47,14 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Frontend Routes
 app.use("/", sessionInfo, checkLogin, findSlides, homepageRouter);
-
 app.use("/login", sessionInfo, loginRouter);
-
 app.use("/logout", logout);
-
 app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
-
 app.use("/product", sessionInfo, productPageRouter);
-
 app.use("/search", sessionInfo, searchRouter);
-
 app.use("/account", sessionInfo, checkLogin, accountRouter);
-
 app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
-
 app.use("/cart", sessionInfo, checkLogin, cartRouter);
-
 app.use("/order", sessionInfo, checkLogin, orderRouter);
 
 // Error handling
@@ -72,5 +63,5 @@ app.use(errorHandler); // common
 
 // Start the Server
 app.listen(PORT, () => {
-	console.log(`Server running on https://tisdifecard.com`);
+	console.log(`Server running on port ${PORT}`);
 });

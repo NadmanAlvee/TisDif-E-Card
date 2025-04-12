@@ -16,8 +16,8 @@
 							spellcheck="false"
 							id="fullName"
 							required
-							<% if(user.username){ %>
-							value="<%= user.username %>"
+							<% if(user !== undefined){ %>
+								value="<%= user.username %>"
 							<% } %>
 						/>
 					</div>
@@ -29,7 +29,7 @@
 							spellcheck="false"
 							id="mobile"
 							required
-							<% if(user.mobile){ %>
+							<% if(user !== undefined){ %>
 							value="<%= user.mobile %>"
 							<% } %>
 						/>
@@ -42,7 +42,7 @@
 							spellcheck="false"
 							id="email"
 							required
-							<% if(user.email){ %>
+							<% if(user !== undefined){ %>
 							value="<%= user.email %>"
 							<% } %>
 						/>
@@ -94,14 +94,14 @@
 								</div>
 								<div class="thumbnail-image">
 									<img
-										src="<%= (item.productId.image && item.productId.image.length && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
+										src="<%= (item.productId.image && item.productId.image.length > 0 && item.productId.image[0]) ? item.productId.image[0] : '/images/placeholder.webp' %>"
 										alt="<%= item.productId.name %>"
 									/>
 								</div>
 								<div class="card-info">
 									<div class="name"><%= item.productId.name %></div>
 									<div class="price">
-										Price: <%= item.productId.price %> BDT
+										Price: <%= item.productId.price.toLocaleString() %> BDT
 									</div>
 									<div class="quantity">
 										Quantity: <%= item.selected_quantity %>
@@ -123,11 +123,11 @@
 						</li>
 						<li>
 							<strong>Points Possible:</strong>
-							<%= point_possible %> points
+							<%= point_possible.toLocaleString() %> points
 						</li>
 						<li>
 							<strong>Points Available:</strong>
-							<%= user.points %> points
+							<%= user.points.toLocaleString() %> points
 						</li>
 						<li id="grandTotal-div">
 							<strong>Grand Total:</strong>
@@ -135,7 +135,7 @@
 						</li>
 						<li>
 							<input type="checkbox" name="use_Points" value="yes">
-							<div class="use_points">USE <%= user.points %> POINTS</div>
+							<div class="use_points">USE <%= user.points.toLocaleString() %> POINTS</div>
 						</li>
 					</ul>
 				</div>
@@ -153,10 +153,10 @@
 		usePointsCheckbox.addEventListener("change", function () {
 			if (this.checked) {
 				grandTotalElement.innerHTML =
-					"<strong>Grand Total:</strong><strong><%= total_after_discount %> BDT</strong>";
+					"<strong>Grand Total:</strong><strong><%= total_after_discount.toLocaleString() %> BDT</strong>";
 			} else {
 				grandTotalElement.innerHTML =
-					"<strong>Grand Total:</strong><strong><%= grand_total %> BDT</strong>";
+					"<strong>Grand Total:</strong><strong><%= grand_total.toLocaleString() %> BDT</strong>";
 			}
 		});
 		// cart delete

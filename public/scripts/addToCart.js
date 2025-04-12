@@ -68,11 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 					window.location.reload();
 				} else {
 					alert("Please log in first!");
-					window.location = "/login";
 				}
 			} catch (error) {
 				alert("Please log in first!");
-				window.location = "/login";
 			}
 		});
 	});

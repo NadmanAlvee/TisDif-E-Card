@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"start": "cross-env NODE_ENV=development nodemon ./backend/app.js",
-		"prod": "cross-env NODE_ENV=production nodemon ./backend/app.js"
+		"production": "cross-env NODE_ENV=production nodemon ./backend/app.js"
 	},
 	"devDependencies": {
 		"bcryptjs": "^3.0.1",

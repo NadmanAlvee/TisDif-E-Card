@@ -3,9 +3,7 @@ const User = require("../../models/User");
 
 const checkLogin = async (req, res, next) => {
 	let cookies =
-		req.signedCookies && Object.keys(req.signedCookies).length > 0
-			? req.signedCookies
-			: null;
+		process.env.COOKIE_NAME in req.signedCookies ? req.signedCookies : null;
 	if (cookies) {
 		try {
 			const token = cookies[process.env.COOKIE_NAME];

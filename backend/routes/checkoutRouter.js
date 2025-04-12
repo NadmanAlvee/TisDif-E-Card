@@ -4,19 +4,35 @@ const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 
 // GET /checkout
 router.get("/", async (req, res) => {
-	try {
-		if (!res.locals.loggedInUser) return res.redirect("/login");
-		const userId = res.locals.loggedInUser._id;
-
-		const checkoutData = await checkoutDetails(userId);
-
-		if (!checkoutData) return res.redirect("/cart");
-		res.render("checkout", {
-			...checkoutData,
-			page_title: "TisDif e-Card | Checkout",
-		});
-	} catch (error) {
-		res.status(500).send("Server Error");
+	const page_title = "TisDif e-Card | Checkout";
+	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
+		try {
+			const checkoutData = await checkoutDetails(req, res);
+			if (!checkoutData) return res.redirect("/cart");
+			res.render("checkout", {
+				...checkoutData,
+				delivery_charge: 0,
+				page_title,
+			});
+		} catch (error) {
+			res.status(500).send("Internal Server Error");
+		}
+	} else {
+		try {
+			const checkoutData = await checkoutDetails(
+				req,
+				res,
+				res.locals.loggedInUser._id
+			);
+			if (!checkoutData) return res.redirect("/cart");
+			res.render("checkout", {
+				...checkoutData,
+				delivery_charge: 0,
+				page_title,
+			});
+		} catch (error) {
+			res.status(500).send("Internal Server Error");
+		}
 	}
 });
 

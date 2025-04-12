@@ -83,32 +83,28 @@
 	}
 	document.addEventListener("DOMContentLoaded", () => {
 		const deleteButtons = document.querySelectorAll(".delete-btn");
-
 		deleteButtons.forEach((button) => {
 			button.addEventListener("click", async (event) => {
 				const itemId = button.getAttribute("data-id");
 				const cartCard = button.closest(".cart-card");
-
-				// Get price & quantity of the deleted item
-				const price = parseFloat(
-					cartCard
-						.querySelector(".price")
-						.textContent.replace("Unit Price: ", "")
-						.replace(" BDT", "")
-				);
-				const quantity = parseInt(
-					cartCard
-						.querySelector(".quantity")
-						.textContent.replace("Quantity: ", "")
-				);
-				const deletedItemTotal = price * quantity;
-
 				try {
+					const price = parseFloat(
+						cartCard
+							.querySelector(".price")
+							.textContent.replace("Unit Price: ", "")
+							.replace(" BDT", "")
+					);
+					const quantity = parseInt(
+						cartCard
+							.querySelector(".quantity")
+							.textContent.replace("Quantity: ", "")
+					);
+					const deletedItemTotal = price * quantity;
 					const response = await fetch(`/cart/${itemId}`, {
 						method: "DELETE",
 						headers: { "Content-Type": "application/json" },
+						credentials: "include", // send cookies also with request
 					});
-
 					if (!response.ok) throw new Error(`Failed to delete item.`);
 
 					// Remove item from UI
