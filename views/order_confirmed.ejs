@@ -1,9 +1,47 @@
 <%- include('./partials/header.ejs') %>
+<link rel="stylesheet" href="/css/orderConfirmed.css" />
+<link rel="stylesheet" href="/css/progressStepper.css">
+
+<div class="stepper_wrapper">
+    <div class="stepper">
+        <!-- Step 1 -->
+        <div class="step done">
+        <div class="circle">1</div>
+        <div class="label">Cart</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 2 -->
+        <div class="step done">
+        <div class="circle">2</div>
+        <div class="label">Checkout</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 3 -->
+        <div class="step active">
+        <div class="circle">3</div>
+        <div class="label">Confirmation</div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
 	<div class="wrapper">
-		<h1>Congratulations!</h1>
-		<p>Your order has been confirmed.</p>
+		<img class="greenCheck" src="https://img.icons8.com/forma-light/100/40C057/checked.png" alt="checked"/>
+		<h1>Thank you! Your order has been placed.</h1>
+		<div class="orderDiv">
+			<div class="orderDetails">
+				<p>Order id: <span><%= newOrder._id %></span></p>
+				<p>Order total: <span><%= newOrder.totalAmount %> Bdt</span></p>
+				<p>Delivered to: <span><%= newOrder.customerInfo.fullName %></span></p>
+			</div>
+			<div class="orderBottom">
+				<a href="/account">track order status? Click here</a>
+			</div>
+		</div>
 	</div>
 </div>
 

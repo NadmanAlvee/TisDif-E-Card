@@ -9,8 +9,12 @@ const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 router.post("/checkout", async (req, res) => {
 	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 		try {
-			const { cartItems, grand_total, delivery_charge, total_after_discount } =
-				await checkoutDetails(req, res);
+			const response = await checkoutDetails(req, res);
+			if (response === null) {
+				res.redirect("/cart");
+				return;
+			}
+			const { cartItems, grand_total, delivery_charge } = response;
 			// Create order items array
 			const orderItems = cartItems.map((item) => ({
 				product: item.productId._id,
@@ -32,12 +36,14 @@ router.post("/checkout", async (req, res) => {
 					address: req.body.order_address,
 				},
 			});
-			// Save order and clear cart
-			await order.save();
-			res.clearCookie(process.env.CART_NAME);
+
+			const newOrder = await order.save();
+
+			res.clearCookie(process.env.CART_NAME); // clear cart cookie
 
 			res.render("order_confirmed", {
 				page_title: "Order Confirmed",
+				newOrder,
 				cartItems: [],
 			});
 		} catch (error) {
@@ -46,14 +52,13 @@ router.post("/checkout", async (req, res) => {
 	} else {
 		try {
 			const userId = res.locals.loggedInUser._id;
-			const {
-				user,
-				cartItems,
-				grand_total,
-				point_possible,
-				delivery_charge,
-				total_after_discount,
-			} = await checkoutDetails(req, res, userId);
+			const response = await checkoutDetails(req, res, userId);
+			if (response === null) {
+				res.redirect("/cart");
+				return;
+			}
+			const { user, cartItems, grand_total, point_possible, delivery_charge } =
+				response;
 			const use_Points = req.body.use_Points === "yes";
 			const pointsToDeduct = use_Points
 				? Math.min(user.points, grand_total)
@@ -85,9 +90,9 @@ router.post("/checkout", async (req, res) => {
 			});
 
 			// Save order and clear cart
-			await order.save();
-			await Cart.deleteMany({ userId: user._id });
+			const newOrder = await order.save();
 
+			await Cart.deleteMany({ userId: user._id });
 			// Update user points and order history
 			await User.findByIdAndUpdate(user._id, {
 				$inc: { points: -pointsToDeduct },
@@ -96,6 +101,7 @@ router.post("/checkout", async (req, res) => {
 
 			res.render("order_confirmed", {
 				page_title: "Order Confirmed",
+				newOrder,
 				cartItems: [],
 			});
 		} catch (error) {

@@ -6,6 +6,7 @@ const checkoutDetails = async (req, res, userId) => {
 	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 		const cartCookie = req.signedCookies[process.env.CART_NAME];
 		const cartItems = cartCookie ? JSON.parse(cartCookie) : [];
+		if (!(cartItems.length > 0)) return null;
 		const populatedItems = await Promise.all(
 			cartItems.map(async (item) => {
 				const product = await Product.findById(item.productId);

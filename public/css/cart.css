@@ -36,6 +36,7 @@
 }
 /* Cart Container */
 .cart-wrapper {
+	margin: 40px 0;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;

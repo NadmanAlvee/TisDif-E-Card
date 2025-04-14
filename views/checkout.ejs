@@ -1,5 +1,33 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/checkout.css" />
+<link rel="stylesheet" href="/css/progressStepper.css">
+
+<div class="stepper_wrapper">
+    <div class="stepper">
+        <!-- Step 1 -->
+        <div class="step done">
+        <div class="circle">1</div>
+        <div class="label">Cart</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 2 -->
+        <div class="step active">
+        <div class="circle">2</div>
+        <div class="label">Checkout</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 3 -->
+        <div class="step future">
+        <div class="circle">3</div>
+        <div class="label">Confirmation</div>
+        </div>
+    </div>
+</div>
+
 <form id="checkout-form" action="/order/checkout" method="POST">
 	<div class="container">
 		<h2 class="checkout-heading">Checkout</h2>

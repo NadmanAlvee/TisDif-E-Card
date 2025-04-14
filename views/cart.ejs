@@ -1,15 +1,33 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/cart.css" />
-<div class="breadcrumb">
-	<ul>
-		<li>
-			<a href="/"
-				><img src="https://img.icons8.com/material/24/home--v5.png" alt="home"
-			/></a>
-		</li>
-		<li><a href="/cart">Cart</a></li>
-	</ul>
+<link rel="stylesheet" href="/css/progressStepper.css">
+
+<div class="stepper_wrapper">
+    <div class="stepper">
+        <!-- Step 1 -->
+        <div class="step active">
+        <div class="circle">1</div>
+        <div class="label">Cart</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 2 -->
+        <div class="step future">
+        <div class="circle">2</div>
+        <div class="label">Checkout</div>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Step 3 -->
+        <div class="step future">
+        <div class="circle">3</div>
+        <div class="label">Confirmation</div>
+        </div>
+    </div>
 </div>
+
 <div class="cart-container">
 	<!-- <h2 class="cart-title">My Cart</h2> -->
 	<% if (cartItems.length === 0) { %>
