@@ -29,6 +29,7 @@ const loginRouter = require("./routes/loginRouter");
 const productPageRouter = require("./routes/productPageRouter");
 const adminRouter = require("./routes/adminRouter");
 const accountRouter = require("./routes/accountRouter");
+const trackOrderRouter = require("./routes/trackOrderRouter");
 const checkoutRouter = require("./routes/checkoutRouter");
 const cartRouter = require("./routes/cartRouter");
 const orderRouter = require("./routes/orderRouter");
@@ -53,12 +54,14 @@ app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
 app.use("/product", sessionInfo, productPageRouter);
 app.use("/search", sessionInfo, searchRouter);
 app.use("/account", sessionInfo, checkLogin, accountRouter);
+app.use("/trackOrder", sessionInfo, checkLogin, trackOrderRouter);
 app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
 app.use("/cart", sessionInfo, checkLogin, cartRouter);
 app.use("/order", sessionInfo, checkLogin, orderRouter);
 
 // Error handling
-app.use(notFoundHandler); // 404
+app.use(notFoundHandler); // 404 page
+
 app.use(errorHandler); // common
 
 // Start the Server

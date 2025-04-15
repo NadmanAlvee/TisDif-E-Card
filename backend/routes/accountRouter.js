@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
 		if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 			return res.redirect("/login");
 		}
-
 		const user = await User.findById(res.locals.loggedInUser._id);
 		const userId = user._id;
 		const [cartItems, orders] = await Promise.all([
