@@ -17,99 +17,100 @@
 					name="orderQuery"
 					type="text"
 					spellcheck="false"
-					placeholder="Search Order id"
 					required
+					placeholder="Search Order id"
 				/>
 			</form>
 		</div>
 	</div>
 
-	<% if(order != null){ %>
-		<div class="order-card">
-			<div class="order-header">
-				<div>
-					<p class="order-id"><strong>Order ID:</strong> <%= order._id %></p>
-				</div>
-				<div class="order-status <%= order.status.toLowerCase() %>">
-					<%= order.status %>
-				</div>
-			</div>
-			<div class="order-details">
-				<div class="items-list">
-					<% order.items.forEach((item, index) => { %>
-					<div class="item-card">
-						<% if (item.product && item.product.image) { %>
-						<img
-							src="<%= item.product.image[0] %>"
-							alt="<%= item.product.name %>"
-							class="product-image"
-						/>
-						<% } %>
-						<div class="item-info">
-							<h4><%= item.product?.name || 'Product not found' %></h4>
-							<p>Quantity: <%= item.quantity %></p>
-							<p>Price per unit: <%= item.price.toFixed(2) %> BDT</p>
-							<% if (order.status.toLowerCase() === 'pending') { %>
-							<div class="summary-cancel">
-								<form
-									action="/order/<%= order._id %>/items/<%= item._id %>/delete"
-									method="POST"
-								>
-									<button class="cancelBtn">Cancel Item</button>
-								</form>
-							</div>
-							<% if (errors && errors.common) { %>
-							<p class="error show"><%= errors.common.msg %></p>
-							<% } %> <% } %>
-						</div>
-					</div>
-					<% }) %>
-				</div>
-
-				<div class="order-summary">
-					<div class="summary-item">
-						<span>Total Amount:</span>
-						<span><%= order.totalAmount.toFixed(2) %> BDT</span>
-					</div>
-					<div class="summary-item">
-						<span>Payment Method:</span>
-						<span><%= order.paymentMethod.replace(/,/g, '') %></span>
-					</div>
-					<div class="summary-item">
-						<span>Delivery Method:</span>
-						<span><%= order.deliveryMethod.replace(/,/g, '') %></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% } %>
-
+	<div id="orderDiv">
+	</div>
 </div>
 
 <script>
-	document.addEventListener("DOMContentLoaded", ()=>{
+	document.addEventListener("DOMContentLoaded", () => {
 		const searchForm = document.querySelector("#orderSearch form");
-		searchForm.addEventListener("submit", (event)=>{
+		const orderDiv = document.getElementById("orderDiv");
+
+		searchForm.addEventListener("submit", (event) => {
 			event.preventDefault();
+			orderDiv.innerHTML = ""; // clear previous result
 
 			const orderInput = searchForm.querySelector("input[name='orderQuery']");
 			const orderQuery = orderInput.value.trim();
 
-			fetch("/trackOrder", {
-				method: "POST",
+			fetch(`/trackOrder/${orderQuery}`, {
+				method: "GET",
 				headers: {
-					"Content-Type": "application/json",
 					"Accept": "application/json",
-				},
-				body: JSON.stringify({ orderQuery })
+				}
 			})
 			.then(response => {
-				window.location.href = `/trackOrder/${orderQuery}`
+				if (response && response.ok) {
+					return response.json();
+				} else {
+					const orderCard = document.createElement("div");
+					orderCard.classList.add("no-order");
+					orderCard.innerText = "Order not found or invalid Order ID.";
+					orderDiv.append(orderCard);
+					throw new Error("No order found");
+				}
+			})
+			.then(order => {
+				const orderCard = document.createElement("div");
+				orderCard.classList.add("order-card");
+				orderCard.innerHTML = `
+					<div class="order-header">
+						<div>
+							<p class="order-id"><strong>Order ID:</strong> ${order._id}</p>
+						</div>
+						<div class="order-status ${order.status.toLowerCase()}">
+							${order.status}
+						</div>
+					</div>
+					<div class="order-details">
+						<div class="items-list">
+							${order.items.map(item => `
+								<div class="item-card">
+									${item.product?.image ? `
+										<img
+											src="${item.product.image[0]}"
+											alt="${item.product.name}"
+											class="product-image"
+										/>
+									` : ''}
+									<div class="item-info">
+										<h4>${item.product?.name || 'Product not found'}</h4>
+										<p>Quantity: ${item.quantity}</p>
+										<p>Price per unit: ${item.price.toFixed(2)} BDT</p>
+									</div>
+								</div>
+							`).join('')}
+						</div>
+						<div class="order-summary">
+							<div class="summary-item">
+								<span>Total Amount:</span>
+								<span>${order.totalAmount.toFixed(2)} BDT</span>
+							</div>
+							<div class="summary-item">
+								<span>Payment Method:</span>
+								<span>${order.paymentMethod.replace(/,/g, '')}</span>
+							</div>
+							<div class="summary-item">
+								<span>Delivery Method:</span>
+								<span>${order.deliveryMethod.replace(/,/g, '')}</span>
+							</div>
+						</div>
+					</div>
+				`;
+				orderDiv.append(orderCard);
 			})
 			.catch(err => {
-
-			})
-		})
-	})
+				console.error("Tracking error:", err);
+			});
+		});
+	});
 </script>
+
 <%- include('./partials/footer.ejs') %>

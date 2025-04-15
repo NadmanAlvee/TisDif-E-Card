@@ -27,7 +27,6 @@
 	height: 40px;
 	width: 50vw;
 	padding-inline-end: 38px;
-	padding-inline-start: 20px;
 	position: relative;
 	border-radius: 30px;
 	border: 1px solid var(--text-color);
@@ -41,4 +40,114 @@
 .search_wrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+/* order card */
+#orderDiv {
+	margin-top: 50px;
+}
+
+.order-card {
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	border: 1px solid lightgray;
+}
+.order-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+}
+.order-status {
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+	font-weight: bolder;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+}
+.order-status.pending {
+	border: 2px solid hsl(45, 100%, 50%);
+	color: hsl(45, 100%, 40%);
+	background-color: rgba(255, 251, 0, 0.1);
+}
+.order-status.confirmed {
+	border: 2px solid hsl(45, 100%, 50%);
+	color: hsl(45, 100%, 40%);
+	background-color: rgba(255, 251, 0, 0.1);
+}
+.order-status.shipped {
+	border: 2px solid hsl(266, 100%, 50%);
+	color: hsl(266, 100%, 40%);
+	background-color: rgba(119, 0, 255, 0.1);
+}
+.order-status.delivered {
+	border: 2px solid hsl(130, 100%, 20%);
+	color: hsl(130, 100%, 20%);
+	background-color: rgba(0, 255, 21, 0.1);
+}
+.order-status.cancelled {
+	border: 2px solid hsl(0, 100%, 30%);
+	color: hsl(0, 100%, 20%);
+	background-color: rgba(255, 0, 0, 0.1);
+}
+.items-list {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+.item-card {
+	display: flex;
+	gap: 1rem;
+	padding: 8px;
+	width: 312px;
+	border-bottom: 1px solid #ddd;
+}
+.product-image {
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+	border-radius: 4px;
+}
+.item-info {
+	flex: 1;
+}
+.item-info h4 {
+	margin: 0 0 0.5rem 0;
+	color: var(--text-color);
+}
+.variant {
+	color: #666;
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
+}
+.order-summary {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: column;
+}
+.summary-item {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	padding: 0.3rem 0;
+}
+.summary-item span:first-child {
+	color: var(--text-color);
+}
+.summary-item span:last-child {
+	font-weight: bold;
+	color: var(--text-color);
+}
+
+.no-order {
+	text-align: center;
+	padding: 2rem;
+	color: #666;
 }
