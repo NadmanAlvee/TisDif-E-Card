@@ -2,6 +2,40 @@
 <link rel="stylesheet" href="/css/admin/manageProducts.css" />
 <div class="container">
 	<h1>Product Management</h1>
+	<!-- homepage slider control -->
+	<div id="homepage_picture_form">
+		<h2>Homepage Picture slides</h2>
+		<form
+			action="/admin/add_homepage_picture"
+			method="POST"
+			enctype="multipart/form-data"
+		>
+			<% if (slides && (slides.length > 0)) { %>
+				<ul>
+				<% slides.forEach(slide => { %>
+					<li>
+						<button type="button" class="deleteSlideBtn" data-slide="<%= slide %>">
+							<img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
+						</button>
+						<img class="slides" src="<%= slide %>" alt="slide">
+					</li>
+				<% }) %> 
+				</ul>
+			<% } %>
+			<input
+				type="file"
+				name="slideImageUpdate"
+				multiple
+				accept="image/*"
+				style="font-size: 12px;"
+			/>
+			<button type="submit" class="add-slide-button">Update Slide</button>
+		</form>
+		<div class="BtnDiv">
+			<button id="newProdBtn" onclick="displayForm()">Toggle Form</button>
+		</div>
+	</div>
+	<!-- New product form -->
 	<div id="addNewProd">
 		<h2>Add New Product</h2>
 		<div id="new_prod_form">
@@ -189,22 +223,51 @@
 </div>
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
+		// delete homepage slide
+		const slideDeleteButtons = document.querySelectorAll(".deleteSlideBtn");
+		slideDeleteButtons.forEach(btn =>{
+			btn.addEventListener("click", (event)=> {
+				event.preventDefault();
+				const slideUrl = btn.getAttribute("data-slide");
+				try {
+					fetch("/admin/delete_homepage_picture", {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ slideUrl })
+					})
+					.then(response => {
+						if (response.ok) {
+							window.location.reload();
+						}
+					})
+					.catch(err => {
+						window.alert("Failed to add product:");
+					});
+				} catch (err) {
+					console.error("Error occurred while deleting slide image:", err);
+				}
+			})
+		})
 		// new product
 		const form = document.querySelector("#new_prod_form form");
-		form.addEventListener("submit", async (event) => {
+		form.addEventListener("submit", (event) => {
 			event.preventDefault();
 			const formData = new FormData(form);
 			try {
-				const response = await fetch(form.action, {
+				fetch(form.action, {
 					method: form.method,
 					body: formData,
-				});
-
-				if (response.ok) {
-					window.location.reload();
-				} else {
+				})
+				.then(response => {
+					if (response.ok) {
+						window.location.reload();
+					}
+				})
+				.catch(err => {
 					window.alert("Failed to add product:");
-				}
+				});
 			} catch (err) {
 				console.error("Error occurred while adding product:");
 			}

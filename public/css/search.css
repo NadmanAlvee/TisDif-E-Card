@@ -29,7 +29,7 @@
 .not-found h3 {
 	color: rgb(255 30 0 / 83%);
 }
-@media (max-width: 780px) {
+@media (max-width: 1280px) {
 	.product-container {
 		gap: 3%;
 	}

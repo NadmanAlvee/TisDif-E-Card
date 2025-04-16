@@ -50,7 +50,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use("/", sessionInfo, checkLogin, findSlides, homepageRouter);
 app.use("/login", sessionInfo, loginRouter);
 app.use("/logout", logout);
-app.use("/admin", sessionInfo, checkLogin, checkAdmin, adminRouter);
+app.use("/admin", sessionInfo, checkLogin, findSlides, checkAdmin, adminRouter);
 app.use("/product", sessionInfo, productPageRouter);
 app.use("/search", sessionInfo, searchRouter);
 app.use("/account", sessionInfo, checkLogin, accountRouter);

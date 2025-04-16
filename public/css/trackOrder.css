@@ -1,20 +1,22 @@
+.stepper {
+	margin: 0;
+	margin-bottom: 50px;
+	width: 85%;
+	max-width: none;
+}
 .container {
 	margin-top: 100px;
 	padding: 20px;
 	min-height: 70vh;
 }
-
 .container h3 {
 	font-size: 2rem;
 	text-align: center;
 	margin-bottom: 30px;
 }
-
 .container h3 img {
 	width: 40px;
-}
-
-/* search */
+} /* search */
 .orderSearch {
 	display: flex;
 	justify-content: center;
@@ -27,6 +29,7 @@
 	height: 40px;
 	width: 50vw;
 	padding-inline-end: 38px;
+	padding-inline-start: 20px;
 	position: relative;
 	border-radius: 30px;
 	border: 1px solid var(--text-color);
@@ -34,25 +37,23 @@
 .orderSearch input::placeholder {
 	color: var(--text-color);
 	font-size: 14px;
-	padding: 20px;
 }
-
 .search_wrapper {
 	display: flex;
 	flex-direction: column;
-}
-
-/* order card */
+} /* order card */
 #orderDiv {
 	margin-top: 50px;
+	display: flex;
+	justify-content: center;
 }
-
 .order-card {
 	border-radius: 10px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	margin-bottom: 2rem;
 	padding: 1.5rem;
 	border: 1px solid lightgray;
+	width: 80%;
 }
 .order-header {
 	display: flex;
@@ -61,38 +62,6 @@
 	border-bottom: 1px solid #eee;
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
-}
-.order-status {
-	padding: 0.5rem 1rem;
-	border-radius: 20px;
-	font-weight: bolder;
-	text-transform: uppercase;
-	font-size: 0.8rem;
-}
-.order-status.pending {
-	border: 2px solid hsl(45, 100%, 50%);
-	color: hsl(45, 100%, 40%);
-	background-color: rgba(255, 251, 0, 0.1);
-}
-.order-status.confirmed {
-	border: 2px solid hsl(45, 100%, 50%);
-	color: hsl(45, 100%, 40%);
-	background-color: rgba(255, 251, 0, 0.1);
-}
-.order-status.shipped {
-	border: 2px solid hsl(266, 100%, 50%);
-	color: hsl(266, 100%, 40%);
-	background-color: rgba(119, 0, 255, 0.1);
-}
-.order-status.delivered {
-	border: 2px solid hsl(130, 100%, 20%);
-	color: hsl(130, 100%, 20%);
-	background-color: rgba(0, 255, 21, 0.1);
-}
-.order-status.cancelled {
-	border: 2px solid hsl(0, 100%, 30%);
-	color: hsl(0, 100%, 20%);
-	background-color: rgba(255, 0, 0, 0.1);
 }
 .items-list {
 	display: flex;
@@ -145,9 +114,19 @@
 	font-weight: bold;
 	color: var(--text-color);
 }
-
 .no-order {
 	text-align: center;
 	padding: 2rem;
 	color: #666;
+}
+@media (max-width: 1280px) {
+	.orderSearch input {
+		width: 85vw;
+	}
+	.order-card {
+		width: 100%;
+	}
+	.stepper {
+		width: 100%;
+	}
 }

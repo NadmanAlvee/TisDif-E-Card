@@ -8,6 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 20px;
 }
 .container h1 {
 	text-align: center;
@@ -16,15 +17,31 @@
 	color: white;
 	padding: 20px;
 }
-#addNewProd {
+.slides {
+	width: 250px;
+	height: 100%;
+	position: relative;
+}
+#homepage_picture_form ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+#homepage_picture_form ul li button {
+	position: absolute;
+	border: none;
+	background: none;
+	z-index: 5;
+}
+#addNewProd,
+#homepage_picture_form {
 	width: 100%;
 	padding: 8px;
 	background: #fff;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border: 1px solid #afafaf66;
-	border-radius: 5px;
 }
-#addNewProd h2 {
+#addNewProd h2,
+#homepage_picture_form h2 {
 	text-align: center;
 	margin: 9px;
 	font-size: 18px;
@@ -36,7 +53,6 @@
 #new_prod_form.active {
 	display: flex;
 }
-
 .BtnDiv {
 	width: 100%;
 	text-align: center;
@@ -124,7 +140,6 @@ select {
 	font-weight: bold;
 	border: 1px solid green;
 }
-
 .delete-btn {
 	color: black;
 	cursor: pointer;
@@ -135,7 +150,6 @@ select {
 	font-weight: bold;
 	border: 1px solid red;
 }
-
 .save-btn:hover {
 	background: hsla(133, 100%, 15%, 0.8);
 	color: white;
@@ -144,19 +158,16 @@ select {
 	background: hsl(2, 100%, 14%, 0.8);
 	color: white;
 }
-
 .product-image-list {
 	height: 100px;
 	overflow-y: auto;
 }
-
 .product-image-list ul {
 	display: flex;
 	overflow-x: hidden;
 	flex-wrap: wrap;
 	gap: 10px;
 }
-
 .product-image-list ul li {
 	position: relative;
 	font-size: 15px;
@@ -164,13 +175,11 @@ select {
 	flex-direction: row;
 	margin-bottom: 8px;
 }
-
 .deleteImgBtn {
 	position: absolute;
 	background: none;
 	border: none;
 }
-
 .red-cross {
 	z-index: 5;
 	width: 22px;
@@ -178,13 +187,11 @@ select {
 	padding: 0;
 	margin: 0;
 }
-
 .prod-Image {
 	width: 80px;
 	height: 100%;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 }
-
 .add-image-button {
 	position: relative;
 	color: #ffffff;
@@ -195,7 +202,6 @@ select {
 	border-radius: 5px;
 	z-index: 10;
 }
-
 #category {
 	cursor: pointer;
 }

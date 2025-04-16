@@ -14,14 +14,12 @@
 	max-width: 680px;
 	padding: 10px 0;
 }
-
 .step {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	position: relative;
 }
-
 .step .circle {
 	width: 30px;
 	height: 30px;
@@ -33,21 +31,18 @@
 	justify-content: center;
 	font-weight: bold;
 }
-
 .step.done .circle {
 	background-color: #6a5acd;
 }
-
 .step.active .circle {
 	background-color: #9370db;
 }
-
 .step.future .circle {
 	background-color: #e0e0e0;
 	color: #6a5acd;
 }
-
 .step .label {
+	text-wrap: nowrap;
 	height: 0;
 	position: absolute;
 	font-size: 16px;
@@ -55,14 +50,30 @@
 	font-weight: bold;
 	transform: translateY(40px);
 }
-
+.cancelled .circle {
+	background-color: #ed0000;
+}
+.cancelled .label {
+	color: #ff0000;
+}
 .line {
 	height: 3px;
 	background-color: #ccc;
 	flex: 1;
 	min-width: 20px;
 }
-
 .step.done + .line {
 	background-color: #6a5acd;
+}
+@media (max-width: 1280px) {
+	.stepper {
+		width: 100%;
+		margin-top: 80px;
+		margin-bottom: 0;
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.step .label {
+		font-size: 11px;
+	}
 }

@@ -20,8 +20,66 @@
 		<span class="dot" id="dot-<%=i%>"></span>
 		<% } %>
 	</div>
-	<% } %> <% const categories = ["iphones", "giftcards", "accessories"]; %>
+	<% } %>
+	<!-- Quick Links -->
+	<div class="QLContainer">
+		<h2>Quick Links</h2>
+		<p>fast forward to your desired destinition</p>
+		<div class="catWrapper">
+			<div class="cats">
+				<a href="/search?searchQuery=">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/carbon-copy/100/product.png" alt="product"/>
+						<p>All Products</p>
+					</div>
+				</a>
+			</div>
+			<div class="cats">
+				<a href="/trackOrder">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/carbon-copy/100/track-order.png" alt="track-order"/>
+						<p>Track Orders</p>
+					</div>
+				</a>
+			</div>
+			<div class="cats">
+				<a href="/search?searchQuery=iphones">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/dotty/100/iphone14-pro.png" alt="iphone"/>
+						<p>iPhones</p>
+					</div>
+				</a>
+			</div>
+			<div class="cats">
+				<a href="/search?searchQuery=giftcards">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/dotty/100/gift-card.png" alt="gift-card"/>
+						<p>GiftCards</p>
+					</div>
+				</a>
+			</div>
+			<div class="cats">
+				<a href="/search?searchQuery=accessories">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/external-flaticons-lineal-flat-icons/100/external-charger-devices-flaticons-lineal-flat-icons-2.png" alt="Accessories"/>
+						<p>Accessories</p>
+					</div>
+				</a>
+			</div>
+			<div class="cats">
+				<a href="search?searchQuery=&offers=true">
+					<div class="inner-cats">
+						<img src="https://img.icons8.com/carbon-copy/100/discount.png" alt="Offers"/>
+						<p>Offers</p>
+					</div>
+				</a>
+			</div>			
+		</div>
+	</div>
+
 	<!-- Products Sections -->
+	<% const categories = ["iphones", "giftcards", "accessories"]; %>
+	
 	<% categories.forEach((category) => { const categoryProducts =
 	products.filter(product => product.category === category); if
 	(categoryProducts.length > 0) { %>

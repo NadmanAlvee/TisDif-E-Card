@@ -1,4 +1,5 @@
 <%- include('./partials/header.ejs') %>
+<link rel="stylesheet" href="/css/progressStepper.css">
 <link rel="stylesheet" href="/css/trackOrder.css" />
 
 <div class="container">
@@ -58,15 +59,48 @@
 				}
 			})
 			.then(order => {
+				const statusSteps = ["cancelled", "pending", "confirmed", "shipped", "delivered"];
+				const currentStep = statusSteps.indexOf(order.status.toLowerCase());
+
+				let stepperHTML = `
+					<div class="stepper_wrapper">
+						<div class="stepper">
+				`;
+				statusSteps.forEach((label, index) => {
+					let statusClass = "";
+
+					if (order.status.toLowerCase() === "cancelled") {
+						statusClass = index === 0 ? "step cancelled" : "step future";
+					} else if (index === 0) {
+						statusClass = "step future";
+					} else if (index < currentStep) {
+						statusClass = "step done";
+					} else if (index === currentStep) {
+						statusClass = "step active";
+					} else {
+						statusClass = "step future";
+					}
+
+					if (index !== 0) stepperHTML += `<div class="line"></div>`;
+					stepperHTML += `
+						<div class="${statusClass}">
+							<div class="circle">${index}</div>
+							<div class="label">${label.charAt(0).toUpperCase() + label.slice(1)}</div>
+						</div>
+					`;
+				});
+				stepperHTML += `
+						</div>
+					</div>
+				`;
+
 				const orderCard = document.createElement("div");
 				orderCard.classList.add("order-card");
 				orderCard.innerHTML = `
+					${stepperHTML}
 					<div class="order-header">
 						<div>
 							<p class="order-id"><strong>Order ID:</strong> ${order._id}</p>
-						</div>
-						<div class="order-status ${order.status.toLowerCase()}">
-							${order.status}
 						</div>
 					</div>
 					<div class="order-details">

@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const router = express.Router();
 const multiUploader = require("../middlewares/utils/multiUploader");
+const slideUploader = require("../middlewares/utils/slideUploader");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 const User = require("../models/User");
@@ -12,9 +13,36 @@ router.use(express.urlencoded({ extended: true }));
 router.get("/products", async (req, res) => {
 	try {
 		const products = await Product.find();
-		res.render("admin/manageProducts", { products, page_title: "Products" });
+		res.render("admin/manageProducts", {
+			products,
+			page_title: "Products",
+			slides: res.locals.slides,
+		});
 	} catch (err) {
 		res.status(500).json({ message: "An error occured" });
+	}
+});
+// add_homepage_picture
+router.post(
+	"/add_homepage_picture",
+	slideUploader.array("slideImageUpdate", 8),
+	(req, res) => {
+		res.redirect("/admin/products");
+	}
+);
+// delete homepage_picture
+router.delete("/delete_homepage_picture", async (req, res) => {
+	try {
+		const { slideUrl } = req.body;
+		const filePath = path.join(__dirname, "../../public", slideUrl);
+		fs.unlink(filePath, (err) => {
+			if (err) {
+				console.error("Failed to delete file:", err);
+			}
+		});
+		res.status(200).json({ message: "Slide image deleted successfully" });
+	} catch (error) {
+		res.status(500).json({ message: "An error occurred." });
 	}
 });
 // add new product
@@ -89,11 +117,9 @@ router.delete("/product/delete-product-image", async (req, res) => {
 		});
 		res.status(200).json({ message: "Image deleted successfully" });
 	} catch (err) {
-		console.error("Error deleting image:", err);
 		res.status(500).json({ message: "An error occurred." });
 	}
 });
-
 // Update Product Info
 router.put("/update/:id", async (req, res) => {
 	try {
@@ -139,7 +165,6 @@ router.delete("/:id", async (req, res) => {
 		res.status(500).json({ message: "Error deleting product" });
 	}
 });
-
 // user management page routing
 router.get("/users", async (req, res) => {
 	try {
@@ -164,7 +189,6 @@ router.put("/users/update_pts", async (req, res) => {
 		res.status(500).json({ message: "An error occurred" });
 	}
 });
-
 // order management page routing
 router.get("/orders", async (req, res) => {
 	try {

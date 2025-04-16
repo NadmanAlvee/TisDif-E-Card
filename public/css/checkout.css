@@ -21,7 +21,6 @@
 .right-container {
 	min-height: 80vh;
 }
-
 .left-container {
 	padding: 10px;
 	width: 100%;
@@ -74,8 +73,7 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 14px;
-}
-/* Cart Cards */
+} /* Cart Cards */
 .cart-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -135,9 +133,7 @@
 }
 .delete-btn img {
 	width: 24px;
-}
-
-/* Order Summary Section */
+} /* Order Summary Section */
 .left-bottom {
 	display: flex;
 	flex-direction: column;
@@ -153,8 +149,7 @@
 	border-bottom: 1px solid #ddd;
 	flex-direction: row;
 	justify-content: space-between;
-}
-/* Payment and Delivery Section */
+} /* Payment and Delivery Section */
 .order-summary-section {
 	display: flex;
 	flex-direction: column;
@@ -166,8 +161,7 @@
 .payment-method h2,
 .delivery-method h2 {
 	margin-bottom: 10px;
-}
-/* Confirm Order Button */
+} /* Confirm Order Button */
 .confirm-order-btn {
 	display: inline-block;
 	background-color: #007bff;
@@ -179,8 +173,7 @@
 }
 .confirm-order-btn:hover {
 	background-color: #0056b3;
-}
-/* Responsive Styles */
+} /* Responsive Styles */
 @media screen and (max-width: 768px) {
 	.container-wrapper {
 		display: flex;
@@ -190,7 +183,7 @@
 	}
 	.checkout-heading {
 		margin: 0;
-		margin-top: 80px;
+		margin-top: 30px;
 		width: 100%;
 		font-size: 24px;
 		padding: 16px 0;
@@ -218,7 +211,6 @@
 	.delivery-method {
 		margin-bottom: 0;
 	}
-
 	.cart-wrapper {
 		height: 220px;
 		margin: 24px 0;

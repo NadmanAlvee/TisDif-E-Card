@@ -5,6 +5,7 @@ const Cart = require("../models/Cart");
 const User = require("../models/User");
 const createHttpError = require("http-errors");
 const checkoutDetails = require("../middlewares/utils/checkoutDetails");
+const transporter = require("../middlewares/utils/transporter");
 
 router.post("/checkout", async (req, res) => {
 	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
@@ -37,7 +38,47 @@ router.post("/checkout", async (req, res) => {
 				},
 			});
 
-			const newOrder = await order.save();
+			await order.save();
+			const newOrder = await Order.findById(order._id).populate(
+				"items.product"
+			);
+
+			// new order mail to admin
+			const mailOptions = {
+				from: process.env.EMAIL_USER,
+				to: "nadmanalvee0585@gmail.com", // admin email
+				subject: "New Order Placed - TisdifeCard",
+				html: `
+					<h2>🛒 New Order Received</h2>
+					<p><strong>Order ID:</strong> ${newOrder._id}</p>
+					<h3>👤 Customer Information</h3>
+					<ul>
+						<li><strong>Name:</strong> ${req.body.order_fullName}</li>
+						<li><strong>Mobile:</strong> ${req.body.order_mobile}</li>
+						<li><strong>Email:</strong> ${req.body.order_email}</li>
+						<li><strong>Address:</strong> ${req.body.order_address}</li>
+					</ul>
+					
+					<h3>📦 Order Details</h3>
+					<ul>
+						${newOrder.items
+							.map(
+								(item) => `
+								<li>
+								${item.product.name} - ${item.quantity} x ${item.product.price} BDT
+								</li>
+							`
+							)
+							.join("")}
+					</ul>
+					<p><strong>Total Amount:</strong> <strong>${grand_total} BDT</strong></p>
+					<p><strong>Delivery Method:</strong> Home Delivery</p>
+					<p><strong>Payment Method:</strong> Online Payment</p>
+					<p><strong>Delivery Charge:</strong> ${delivery_charge} BDT</p>
+					<hr />
+				`,
+			};
+			await transporter.sendMail(mailOptions);
 
 			res.clearCookie(process.env.CART_NAME); // clear cart cookie
 

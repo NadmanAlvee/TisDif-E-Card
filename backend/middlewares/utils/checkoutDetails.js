@@ -34,6 +34,7 @@ const checkoutDetails = async (req, res, userId) => {
 			},
 			point_possible: 0,
 			total_after_discount: grand_total,
+			delivery_charge: 0,
 		};
 	} else {
 		const user = await User.findById(userId);
@@ -59,6 +60,7 @@ const checkoutDetails = async (req, res, userId) => {
 			grand_total,
 			point_possible,
 			total_after_discount,
+			delivery_charge: 0,
 		};
 	}
 };
