@@ -93,8 +93,8 @@
 			</p>
 		</div>
 		<div class="product-container">
-			<% categoryProducts.forEach(product => { %> <%-
-			include('partials/product-card', { product }) %> <% }) %>
+			<% categoryProducts.forEach(product => { %>
+			<%- include('partials/product-card', { product }) %> <% }) %>
 		</div>
 	</div>
 	<% } }) %>

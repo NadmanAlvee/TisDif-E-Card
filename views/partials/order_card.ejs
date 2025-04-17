@@ -1,0 +1,41 @@
+<div class="order-card">
+    <button type="button" class="deleteOrderBtn" data-order="<%= order._id %>">
+        <img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
+    </button>
+    <h3>Order #<%= order._id %></h3>
+    <div class="order-details">
+        <p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
+        <p><strong>Email:</strong> <%= order.customerInfo.email %></p>
+        <p><strong>Phone:</strong> <%= order.customerInfo.mobile %></p>
+        <p><strong>Delivery Address:</strong> <%= order.customerInfo.address %></p>
+        <p>
+            <strong>Order Date:</strong>
+            <%= order.orderDate.toLocaleDateString() + ' ' + order.orderDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) %>
+        </p>
+        <p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
+        <p class="point_possible-div"><strong>Points Possible:</strong>
+            <input type="number" id="pts-<%= order._id %>" step="5" value="<%= order.point_possible %>">
+            <button onclick="updatePts(`<%= order._id %>`)">Give Points</button>
+        </p>
+        <p><strong>Given Points: <%= order.given_point.toLocaleString() %> </strong>
+        </p>
+        <div class="items-list">
+            <% order.items.forEach(item => { %>
+            <div class="item">
+                <p><%= item.product.name %> (x<%= item.quantity %>)</p>
+                <p><%= item.price %> BDT each</p>
+            </div>
+            <% }); %>
+        </div>
+        
+        <div class="status-control">
+            <select class="status-select" data-order-id="<%= order._id %>">
+                <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %> >Pending</option>
+                <option value="Confirmed" <%= order.status === 'Confirmed' ? 'selected' : '' %> >Confirmed</option>
+                <option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %> >Shipped</option>
+                <option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %> >Delivered</option>
+                <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %> >Cancelled</option>
+            </select>
+        </div>
+    </div>
+</div>
