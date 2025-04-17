@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const ProductSchema = new mongoose.Schema({
+	slug: { type: String, unique: true },
 	name: {
 		type: String,
 		required: true,
@@ -36,6 +38,14 @@ const ProductSchema = new mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+});
+
+// Slug generation hook
+ProductSchema.pre("save", function (next) {
+	if (!this.slug && this.name) {
+		this.slug = slugify(this.name, { lower: true, strict: true });
+	}
+	next();
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

@@ -1,4 +1,4 @@
-<a href="/product/<%= product._id %>">
+<a href="/product/<%= product.slug %>">
 	<div
 		class="product-card <%= product.stock === 0 ? 'out-of-stock' : '' %>"
 		data-id="<%= product._id %>"

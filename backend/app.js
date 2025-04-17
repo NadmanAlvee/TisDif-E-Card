@@ -23,6 +23,7 @@ const {
 	notFoundHandler,
 } = require("./middlewares/common/errorHandlers");
 const logout = require("./controller/logoutController");
+const Product = require("./models/Product");
 // routes
 const homepageRouter = require("./routes/homepageRouter");
 const loginRouter = require("./routes/loginRouter");
@@ -45,6 +46,31 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.get("/sitemap.xml", async (req, res) => {
+	try {
+		const products = await Product.find({}, "slug"); // Just get IDs to build URLs
+		const urls = products
+			.map(
+				(p) => `
+		<url>
+		  <loc>https://tisdifecard.com/product/${p.slug}</loc>
+		  <changefreq>weekly</changefreq>
+		  <priority>0.8</priority>
+		</url>`
+			)
+			.join("");
+
+		const xml = `<?xml version="1.0" encoding="UTF-8"?>
+	  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+		${urls}
+	  </urlset>`;
+		res.header("Content-Type", "application/xml");
+		res.send(xml);
+	} catch (err) {
+		console.error("Sitemap error:", err);
+		res.status(500).send("Internal Server Error");
+	}
+});
 
 // Frontend Routes
 app.use("/", sessionInfo, checkLogin, findSlides, homepageRouter);

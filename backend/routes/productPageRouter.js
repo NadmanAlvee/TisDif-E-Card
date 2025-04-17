@@ -2,20 +2,16 @@ const express = require("express");
 const Product = require("../models/Product"); // Import the Product model
 const Cart = require("../models/Cart");
 const router = express.Router();
-const mongoose = require("mongoose");
 
-// Get a single product and render the EJS page
-router.get("/:id", async (req, res) => {
-	const { id } = req.params;
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.redirect("/");
-	}
-	const product = await Product.findById(id);
+// Get a single product using slug and render the EJS page
+router.get("/:slug", async (req, res) => {
+	const { slug } = req.params;
+	const product = await Product.findOne({ slug });
 	if (!product) {
 		return res.redirect("/nofound");
 	}
 	const relatedProducts = await Product.find({
-		_id: { $ne: id },
+		_id: { $ne: product._id },
 		category: product.category,
 	});
 	const page_title = `${product.name} price in Bangladesh`;

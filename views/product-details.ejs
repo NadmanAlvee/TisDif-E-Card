@@ -1,4 +1,221 @@
-<%- include('./partials/header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title><%= page_title %></title>
+<!-- metas -->
+<meta property="og:title" content="<%= product.name %>" />
+<meta property="og:description" content="<%= product.description.slice(0, 150) %>" />
+<meta property="og:image" content="https://tisdifecard.com/<%= product.image[0] %>" />
+<meta property="og:url" content="https://tisdifecard.com/product/<%= product.slug %>" />
+<meta property="og:type" content="product" />
+<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org/",
+	  "@type": "Product",
+	  "name": "<%= product.name %>",
+	  "image": [
+		"https://tisdifecard.com/<%= product.image[0] %>"
+	  ],
+	  "description": "<%= product.description.slice(0, 150) %>",
+	  "sku": "<%= product._id %>",
+	  "offers": {
+		"@type": "Offer",
+		"url": "https://tisdifecard.com/product/<%= product.slug %>",
+		"priceCurrency": "BDT",
+		"price": "<%= product.price %>",
+		"availability": "<%= product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' %>"
+	  }
+	}
+</script>
+<link rel="icon" type="image/x-icon" href="/images/icons/favicon.ico" />
+<link rel="stylesheet" href="/css/header.css" />
+</head>
+<body>
+<header id="Header">
+	<!-- Left -->
+	<a href="/" class="logo">
+		<img
+			src="https://img.icons8.com/nolan/32/online-shop-shopping-bag.png"
+			alt="logo"
+		/>
+		<P>TISDIF-E-CARD</P>
+	</a>
+
+	<!-- Center -->
+	<nav class="navbar" id="navbar">
+		<li><a href="/search?searchQuery=iphones">iPhones</a></li>
+		<li><a href="/search?searchQuery=giftcards">GiftCards</a></li>
+		<li><a href="/search?searchQuery=accessories">Accessories</a></li>
+		<li><a href="/search?searchQuery=&offers=true">Offers</a></li>
+		<li><a href="/trackOrder">Track Orders</a></li>
+		<li><a href="/account">My Account</a></li>
+		<li><a id="scroll_to_contact">Contact Us</a></li>
+	</nav>
+
+	<!-- Right -->
+	<div class="account-container">
+		<!-- Search button -->
+		<button class="searchBtn">
+			<img
+				src="https://img.icons8.com/ios-glyphs/60/search--v1.png"
+				alt="Search"
+			/>
+		</button>
+		<!-- Cart icon -->
+		<a href="/cart" class="cart-icon">
+			<img
+				src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png"
+				alt="shopping-cart"
+			/>
+			<% if (cartItems.length > 0) { %>
+			<span class="cart-badge"><%= cartItems.length %></span>
+			<% } else { %>
+			<span class="cart-badge">0</span>
+			<% } %>
+		</a>
+
+		<!-- Profile Icon -->
+		<div
+			class="profile-container"
+			onmouseover="toggleMenu(true)"
+			onmouseleave="toggleMenu(false)"
+			id="profileLink"
+		>
+			<a href="/account" class="profile-icon" id="profile">
+				<img
+					src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png"
+					alt="Account"
+				/>
+			</a>
+			<!-- User Profile Dropdown -->
+			<div class="menu-dropdown" id="menuDropdown">
+				<% if (loggedInUser && Object.keys(loggedInUser).length > 0) { %>
+				<div id="user-info">
+					<p>Username: <%= loggedInUser.username %></p>
+					<p>Email: <%= loggedInUser.email %></p>
+					<a href="/account">My Account</a>
+					<% if (loggedInUser.role == "admin") { %>
+					<a href="/admin/products">Manage Products</a>
+					<a href="/admin/users">Manage Users</a>
+					<a href="/admin/orders">Manage Orders</a>
+					<% } %>
+				</div>
+				<button id="logout-button" onclick="logout()">Logout</button>
+				<% } else { %>
+				<button id="login-button" onclick="window.location.href='/login'">
+					Login
+				</button>
+				<% } %>
+			</div>
+		</div>
+	</div>
+
+	<!-- Hamburger Menu -->
+	<div id="search-div">
+		<!-- Search bar -->
+		<button class="searchBtn">
+			<img
+				src="https://img.icons8.com/ios-glyphs/32/search--v1.png"
+				alt="Search"
+			/>
+		</button>
+
+		<div class="hamburger" id="hamburger" aria-label="Menu">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</div>
+</header>
+<% if(errors.common) { %>
+<div class="common-error-div">
+	<div class="common-error-msg"><%= errors.common.msg %></div>
+</div>
+<% } %>
+<!-- Search bar -->
+<div class="searchBar" id="searchBar">
+	<div class="global_search">
+		<form action="/search" method="GET">
+			<input
+				name="searchQuery"
+				type="text"
+				spellcheck="false"
+				placeholder="Search Products"
+				required
+			/>
+		</form>
+		<div class="global_search_ql">
+			<h2>Quick Links</h2>
+			<ol>
+				<li>
+					<a href="/search?searchQuery=giftcards"
+						><img
+							src="https://img.icons8.com/small/16/arrow.png"
+							alt="arrow"
+						/>
+						GiftCards</a
+					>
+				</li>
+				<li>
+					<a href="/search?searchQuery=accessories"
+						><img
+							src="https://img.icons8.com/small/16/arrow.png"
+							alt="arrow"
+						/>
+						Accessories</a
+					>
+				</li>
+				<li>
+					<a href="/search?searchQuery=iphones"
+						><img
+							src="https://img.icons8.com/small/16/arrow.png"
+							alt="arrow"
+						/>
+						iPhones</a
+					>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<!-- Mobile Container (only visible on mobile) -->
+<div class="mobile-container">
+	<!-- Home icon -->
+	<a href="/" class="mobile-home-icon">
+		<img
+			src="https://img.icons8.com/material-outlined/32/home--v2.png"
+			alt="home"
+		/>
+	</a>
+
+	<!-- Cart icon -->
+	<a href="/cart" class="mobile-cart-icon">
+		<img
+			src="https://img.icons8.com/fluency-systems-regular/48/shopping-cart--v1.png"
+			alt="shopping-cart"
+		/>
+		<% if (cartItems.length > 0) { %>
+		<span class="mobile-cart-badge"><%= cartItems.length %></span>
+		<% } else { %>
+		<span class="mobile-cart-badge">0</span>
+		<% } %>
+	</a>
+
+	<!-- Profile Icon -->
+	<div class="mobile-profile-container">
+		<a href="/account" class="mobile-profile-icon">
+			<img
+				src="https://img.icons8.com/fluency-systems-regular/48/guest-male.png"
+				alt="Account"
+			/>
+		</a>
+	</div>
+</div>
+<script src="/scripts/header.js" defer></script>
+<!-- head end -->
+
 <link rel="stylesheet" href="/css/productDetails.css" />
 <div class="breadcrumb">
 	<ul>
@@ -117,3 +334,5 @@
 <script src="/scripts/addToCart.js" defer></script>
 <script src="/scripts/product-details.js" defer></script>
 <%- include('./partials/footer.ejs') %>
+</body>
+</html>
