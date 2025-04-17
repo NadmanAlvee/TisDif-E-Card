@@ -218,14 +218,14 @@ body {
 	}
 	.product-images {
 		display: flex;
-		width: 200px;
+		width: 235px;
 		margin-bottom: 5%;
 		justify-content: center;
 		flex-direction: column;
 	}
 	#main-image {
-		height: 200px;
-		max-width: 200px;
+		height: 220px;
+		max-width: 220px;
 	}
 	.thumbnail-images {
 		height: 75px;

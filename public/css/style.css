@@ -93,6 +93,15 @@
 	border-radius: 15px;
 	padding: 10px;
 	border: 1px solid #ddd;
+	transition: all 0.2s linear;
+}
+.cats:hover {
+	border-radius: 0;
+	box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+	.inner-cats p {
+		font-weight: bold;
+		color: #a900ff;
+	}
 }
 .inner-cats {
 	display: flex;

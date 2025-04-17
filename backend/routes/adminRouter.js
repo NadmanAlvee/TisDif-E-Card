@@ -220,5 +220,40 @@ router.put("/update-order-status/:id", async (req, res) => {
 		res.status(500).json({ message: "Error updating order status" });
 	}
 });
+// give user points
+router.put("/update_pts/:id", async (req, res) => {
+	const order_id = req.params.id;
+	const requestedOrder = await Order.findById(order_id);
+	if (!requestedOrder)
+		return res.status(404).json({ message: "Order not found" });
+	try {
+		const points = Number(req.body.point_possible);
+		if (isNaN(points)) {
+			return res.status(400).json({ message: "Invalid points" });
+		}
+		await User.findByIdAndUpdate(requestedOrder.user, {
+			$inc: { points: points },
+		});
+		await Order.findByIdAndUpdate(order_id, {
+			$inc: {
+				given_point: points,
+				point_possible: -points,
+			},
+		});
+		return res.sendStatus(200);
+	} catch (err) {
+		return res.status(500).send("An error occurred");
+	}
+});
+// Delete Order by Id
+router.delete("/deleteOrderById/:id", async (req, res) => {
+	try {
+		const orderId = req.params.id;
+		await Order.findByIdAndDelete(orderId);
+		res.status(200).json("Order deleted Successfully");
+	} catch (err) {
+		return res.status(500).send("An error occurred");
+	}
+});
 
 module.exports = router;

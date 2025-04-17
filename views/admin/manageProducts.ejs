@@ -4,35 +4,37 @@
 	<h1>Product Management</h1>
 	<!-- homepage slider control -->
 	<div id="homepage_picture_form">
-		<h2>Homepage Picture slides</h2>
-		<form
-			action="/admin/add_homepage_picture"
-			method="POST"
-			enctype="multipart/form-data"
-		>
-			<% if (slides && (slides.length > 0)) { %>
-				<ul>
-				<% slides.forEach(slide => { %>
-					<li>
-						<button type="button" class="deleteSlideBtn" data-slide="<%= slide %>">
-							<img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
-						</button>
-						<img class="slides" src="<%= slide %>" alt="slide">
-					</li>
-				<% }) %> 
-				</ul>
-			<% } %>
-			<input
-				type="file"
-				name="slideImageUpdate"
-				multiple
-				accept="image/*"
-				style="font-size: 12px;"
-			/>
-			<button type="submit" class="add-slide-button">Update Slide</button>
-		</form>
+		<h2>Landing Page slides Control</h2>
+		<div id="homepage_slide_form">
+			<form
+				action="/admin/add_homepage_picture"
+				method="POST"
+				enctype="multipart/form-data"
+			>
+				<% if (slides && (slides.length > 0)) { %>
+					<ul>
+					<% slides.forEach(slide => { %>
+						<li>
+							<button type="button" class="deleteSlideBtn" data-slide="<%= slide %>">
+								<img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
+							</button>
+							<img class="slides" src="<%= slide %>" alt="slide">
+						</li>
+					<% }) %> 
+					</ul>
+				<% } %>
+				<input
+					type="file"
+					name="slideImageUpdate"
+					multiple
+					accept="image/*"
+					style="font-size: 12px;"
+				/>
+				<button type="submit" class="add-slide-button save-btn">Update Slide</button>
+			</form>
+		</div>
 		<div class="BtnDiv">
-			<button id="newProdBtn" onclick="displayForm()">Toggle Form</button>
+			<button id="newProdBtn" onclick="displaySlideForm()">Toggle Form</button>
 		</div>
 	</div>
 	<!-- New product form -->
@@ -327,6 +329,7 @@
 	}
 
 	function deleteProduct(productId) {
+		if (!confirm("Are you sure you want to delete this product?")) return;
 		fetch(`/admin/${productId}`, {
 			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
@@ -344,5 +347,9 @@
 	function displayForm() {
 		const new_prod_form = document.getElementById("new_prod_form");
 		new_prod_form.classList.toggle("active");
+	}
+	function displaySlideForm() {
+		const homepage_slide_form = document.getElementById("homepage_slide_form");
+		homepage_slide_form.classList.toggle("active");
 	}
 </script>

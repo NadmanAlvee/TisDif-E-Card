@@ -67,7 +67,7 @@
 }
 @media (max-width: 1280px) {
 	.stepper {
-		width: 100%;
+		width: 85%;
 		margin-top: 80px;
 		margin-bottom: 0;
 		font-size: 12px;

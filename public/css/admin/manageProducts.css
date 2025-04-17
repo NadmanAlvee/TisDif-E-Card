@@ -35,7 +35,7 @@
 }
 #addNewProd,
 #homepage_picture_form {
-	width: 100%;
+	width: 80%;
 	padding: 8px;
 	background: #fff;
 	border: 1px solid #afafaf66;
@@ -46,11 +46,13 @@
 	margin: 9px;
 	font-size: 18px;
 }
-#new_prod_form {
+#new_prod_form,
+#homepage_slide_form {
 	display: none;
 	flex-direction: column;
 }
-#new_prod_form.active {
+#new_prod_form.active,
+#homepage_slide_form.active {
 	display: flex;
 }
 .BtnDiv {

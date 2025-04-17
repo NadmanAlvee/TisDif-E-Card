@@ -205,30 +205,4 @@ router.post("/:orderId/items/:itemId/delete", async (req, res) => {
 	}
 });
 
-router.put("/update_pts/:id", async (req, res) => {
-	const order_id = req.params.id;
-	const requestedOrder = await Order.findById(order_id);
-	if (!requestedOrder)
-		return res.status(404).json({ message: "Order not found" });
-	try {
-		const points = Number(req.body.point_possible);
-		if (isNaN(points)) {
-			return res.status(400).json({ message: "Invalid points" });
-		}
-		await User.findByIdAndUpdate(requestedOrder.user, {
-			$inc: { points: points },
-		});
-		await Order.findByIdAndUpdate(order_id, {
-			$inc: {
-				given_point: points,
-				point_possible: -points,
-			},
-		});
-		return res.sendStatus(200);
-	} catch (err) {
-		console.error(err);
-		return res.status(500).send("An error occurred");
-	}
-});
-
 module.exports = router;

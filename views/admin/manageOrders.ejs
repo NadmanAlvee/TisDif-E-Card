@@ -5,6 +5,9 @@
 	<div class="order-list">
 		<% orders.slice().reverse().forEach(order => { %>
 		<div class="order-card">
+			<button type="button" class="deleteOrderBtn" data-order="<%= order._id %>">
+				<img class="red-cross" src="https://img.icons8.com/emoji/32/cross-mark-button-emoji.png" alt="delete-image"/>
+			</button>
 			<h3>Order #<%= order._id %></h3>
 			<div class="order-details">
 				<p><strong>Customer:</strong> <%= order.customerInfo.fullName %></p>
@@ -46,6 +49,29 @@
 	</div>
 </div>
 <script>
+	// delete order
+	document.addEventListener("DOMContentLoaded", function () {
+		const deleteButtons = document.querySelectorAll(".deleteOrderBtn");
+		deleteButtons.forEach(btn => {
+			btn.addEventListener("click", (event)=>{
+				const orderId = btn.getAttribute("data-order");
+				if (!confirm("Are you sure you want to delete this order?")) return;
+				fetch(`/admin/deleteOrderById/${orderId}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				.then(response => {
+					if(response.ok) window.location.reload();
+				})
+				.catch(error => {
+					window.alert("Could not delete order!")
+				})
+			});
+		});
+	});
+	// change status
 	document.querySelectorAll('.status-select').forEach(select => {
 		select.addEventListener('change', async function() {
 			const orderId = this.dataset.orderId;
@@ -67,10 +93,11 @@
 			}
 		});
 	});
+	// update points
 	function updatePts(order_id){
 		const ptsInput = document.getElementById(`pts-${order_id}`);
 		const point_possible = ptsInput.value;
-		fetch(`/order/update_pts/${order_id}`, {
+		fetch(`/admin/update_pts/${order_id}`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json"
