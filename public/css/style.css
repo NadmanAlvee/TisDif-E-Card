@@ -113,7 +113,7 @@
 	margin-bottom: 20px;
 }
 .inner-cats img {
-	width: 100px;
+	width: 78px;
 	padding: 10px;
 }
 .categories {
@@ -151,16 +151,16 @@
 		gap: 20px;
 	}
 	.cats {
-		padding: 10px;
+		padding: 8px;
 		border: 1px solid #ddd;
 	}
 	.inner-cats p {
-		font-size: 12px;
-		margin-bottom: 10px;
+		font-size: 11px;
+		margin-bottom: 5px;
 	}
 	.inner-cats img {
-		width: 70px;
-		padding: 5px;
+		width: 50px;
+		padding: 0;
 	}
 	.sections:last-child {
 		margin-bottom: 10vh;
