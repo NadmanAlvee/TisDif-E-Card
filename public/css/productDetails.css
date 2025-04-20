@@ -48,7 +48,6 @@ body {
 	cursor: pointer;
 }
 #main-image {
-	border-radius: 20px;
 	border: 1px solid hsl(0deg 0% 0% / 0.2);
 	width: 100%;
 	max-height: 350px;
@@ -107,24 +106,24 @@ body {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 7px;
-	margin-bottom: 2%;
+	margin-bottom: 8px;
 }
 .price-btn {
 	background-color: transparent;
-	border: 1px solid grey;
-	color: var(--text-color);
-	padding: 10px;
+	border: 1px solid purple;
+	color: purple;
+	padding: 8px;
 	cursor: pointer;
-	font-size: 1rem;
-	font-weight: 400;
-	border-radius: 10px;
+	font-size: 18px;
+	border-radius: 5px;
 	transition: all 0.3s ease;
 }
 .price-btn:hover,
 .price-btn.active {
-	background: linear-gradient(20deg, #7272723f, #000000ee);
+	background: linear-gradient(20deg, #fb01ff, #8500ff);
 	color: white;
 	border: none;
+	border-radius: 0;
 }
 #selected-price {
 	color: var(--text-color);

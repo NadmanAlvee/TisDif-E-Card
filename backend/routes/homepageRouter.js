@@ -10,7 +10,8 @@ const router = express.Router();
 
 // homepage route
 router.get("/", async (req, res) => {
-	const page_title = "TisDif e-Card | Home";
+	const page_title =
+		"TISDIF E-CARD | Authentic Apple Accessories in Bangladesh";
 	const products = await Product.find();
 	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 		try {
