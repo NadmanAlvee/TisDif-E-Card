@@ -27,14 +27,13 @@ const checkoutDetails = async (req, res, userId) => {
 		grand_total = parseFloat(grand_total).toFixed(2);
 		const validItems = populatedItems.filter((item) => item !== null);
 		return {
-			cartItems: validItems,
-			grand_total,
 			user: {
 				points: 0,
 			},
+			cartItems: validItems,
+			grand_total,
 			point_possible: 0,
 			total_after_discount: grand_total,
-			delivery_charge: 0,
 		};
 	} else {
 		const user = await User.findById(userId);
@@ -60,10 +59,7 @@ const checkoutDetails = async (req, res, userId) => {
 			grand_total,
 			point_possible,
 			total_after_discount,
-			delivery_charge: 0,
 		};
 	}
 };
-module.exports = checkoutDetails;
-
 module.exports = checkoutDetails;

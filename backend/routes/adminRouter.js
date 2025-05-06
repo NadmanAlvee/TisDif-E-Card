@@ -59,6 +59,7 @@ router.post(
 				productCategory,
 				productStock,
 				productSaveTag,
+				productWarranty,
 				productPoints,
 			} = req.body;
 			const imageFilenames = req.files.map((file) => {
@@ -73,6 +74,7 @@ router.post(
 				category: productCategory,
 				stock: productStock,
 				saveTag: productSaveTag,
+				warranty: productWarranty,
 				image: imageFilenames,
 				pointsPossible: productPoints,
 			});

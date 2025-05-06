@@ -30,6 +30,10 @@ const ProductSchema = new mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+	warranty: {
+		type: String,
+		default: "",
+	},
 	saveTag: {
 		type: Number,
 		default: 0,

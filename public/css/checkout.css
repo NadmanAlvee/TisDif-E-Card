@@ -2,14 +2,14 @@
 .container {
 	box-sizing: border-box;
 	margin: 0 3vw;
-	min-height: 90vh;
 }
 .container-wrapper {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
 	column-gap: 5vw;
+	min-height: 160vh;
+	align-self: flex-start;
 }
 .checkout-heading {
 	margin: 0 7.1vw;
@@ -39,21 +39,21 @@
 	padding: 6px 0;
 }
 .form-group label,
-.payment-method label,
+.payment-div label,
 .delivery-method label {
 	font-size: 14px;
 	display: block;
 	margin-bottom: 5px;
 }
-.personal-info input[type="text"],
-.personal-info input[type="email"] {
+input[type="text"],
+input[type="email"],
+input[type="number"] {
 	width: 100%;
 	padding: 14px 12px;
 	border: none;
 	box-shadow: 0px 0px 5px rgb(0 0 0 / 0.2);
 	margin: 8px 0;
 }
-.payment-option,
 .delivery-option {
 	align-items: center;
 	justify-content: center;
@@ -66,6 +66,28 @@
 	background: rgba(77, 176, 80, 0.051);
 	color: #007f00;
 }
+
+.payment_process {
+	display: flex;
+	padding: 20px;
+	column-gap: 20px;
+	justify-content: center;
+}
+.note {
+	font-size: 14px;
+	color: red;
+	padding-bottom: 16px;
+}
+.payment-option {
+	padding: 8px;
+	line-height: 24px;
+	border: 1px solid rgb(255, 166, 0);
+	background: #ffff00;
+}
+.payment-option ul li {
+	list-style: none;
+	padding: 8px 0;
+}
 .right-container {
 	padding: 10px;
 	width: 100%;
@@ -73,6 +95,9 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 14px;
+	position: sticky;
+	top: 80px;
+	height: 100%;
 } /* Cart Cards */
 .cart-wrapper {
 	display: flex;
@@ -158,10 +183,10 @@
 	display: flex;
 	justify-content: space-between;
 }
-.payment-method h2,
+.payment-div h2,
 .delivery-method h2 {
 	margin-bottom: 10px;
-} /* Confirm Order Button */
+}
 .confirm-order-btn {
 	display: inline-block;
 	background-color: #007bff;
@@ -207,7 +232,7 @@
 	.delivery-option {
 		margin-bottom: 5px;
 	}
-	.payment-method,
+	.payment-div,
 	.delivery-method {
 		margin-bottom: 0;
 	}

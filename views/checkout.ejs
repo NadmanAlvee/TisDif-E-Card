@@ -41,6 +41,7 @@
 						<input
 							type="text"
 							name="order_fullName"
+							placeholder=" Name: "
 							spellcheck="false"
 							id="fullName"
 							required
@@ -55,6 +56,7 @@
 							type="text"
 							name="order_mobile"
 							spellcheck="false"
+							placeholder="delivery phone: "
 							id="mobile"
 							required
 							<% if(user !== undefined){ %>
@@ -68,6 +70,7 @@
 							type="email"
 							name="order_email"
 							spellcheck="false"
+							placeholder="delivery email: "
 							id="email"
 							required
 							<% if(user !== undefined){ %>
@@ -89,10 +92,123 @@
 				</div>
 				<div class="left-bottom">
 					<h3 class="left-h3">PAYMENT DETAILS</h3>
-					<div class="payment-method">
-						<label>Payment Method</label>
-						<div class="payment-option">Online Payment</div>
+					
+					<div class="payment-div">
+						<label>Select A Payment Method</label>
+						<div class="payment_process">
+							<div class="options">
+								<input type="radio" id="online_payment" name="payment_method" value="online payment" required>
+								<label for="payment_method">Online Payment</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="cash_on_delivery" name="payment_method" value="cash on delivery" required>
+								<label for="payment_method">Cash on Delivery</label>
+							</div>
+						</div>
+						<!-- banks -->
+						<div class="payment_process">
+							<div class="options">
+								<input type="radio" id="bkash" name="billing_method" value="bkash" required>
+								<label for="billing_method">Bkash</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="nagad" name="billing_method" value="nagad" required>
+								<label for="billing_method">Nagad</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="city_bank" name="billing_method" value="city_bank" required>
+								<label for="billing_method">City Bank</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="pubali_bank" name="billing_method" value="pubali_bank" required>
+								<label for="billing_method">Pubali Bank</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="dbbl" name="billing_method" value="dbbl" required>
+								<label for="billing_method">DBBL</label>
+							</div>
+							<div class="options">
+								<input type="radio" id="standard_chartered_bank" name="billing_method" value="standard_chartered_bank" required>
+								<label for="billing_method">Standard Chartered Bank</label>
+							</div>
+						</div>
+
+						<p class="note">*Cash on delivery is not applicable for GiftCard orders.</p>
+
+						<div class="payment-option">
+							<ul>
+								<li>
+									bKash Send Money to 
+									01715506304 or 01571169254
+								</li>
+								<li>
+									Send money to Nagad: 
+									01715506304
+								</li>
+								<li>
+									The City Bank Current A/C: 
+									Account Number: 1453074816001
+									Account Name: TIS DIF E CARD 
+									Branch Name: Karwan Bazar Branch
+								</li>
+								<li>
+									Pubali Bank PLC
+									Account Name: TIS DIF E CARD
+									Account Number: 2438901052620
+									Branch Name: Naya Paltan
+								</li>
+								<li>
+									DBBL Current Account: 1261100044893
+									Account Name: TisDif e-Card
+									Branch Name: Elephant Road
+								</li>
+								<li>
+									Bank Transfer to:
+									Standard Chartered Bank
+									Account Number: 18958912201
+									Account Name: BADRUL ALAM
+									Branch Name: Gulshan
+									SWIFT CODE: SCBLBDDX
+									Routing Number: 215261726
+								</li>
+							</ul>
+						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="transaction_id">Transaction Id: </label>
+						<input
+							type="text"
+							name="transaction_id"
+							spellcheck="false"
+							placeholder="Transaction ID: "
+							id="transaction_id"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="four_digit">Sender last 4 digit: </label>
+						<input
+							type="number"
+							name="four_digit"
+							spellcheck="false"
+							placeholder="Sender Last Fout Digit: "
+							id="four_digit"
+							required
+						/>
+					</div>
+					<div class="form-group">
+						<label for="payment_amount">Payment Amount: </label>
+						<input
+							type="number"
+							name="payment_amount"
+							spellcheck="false"
+							placeholder="Payment Amount: "
+							id="payment_amount"
+							required
+						/>
+					</div>
+
 					<div class="delivery-method">
 						<label>Delivery Method</label>
 						<div class="delivery-option">Home Delivery</div>
@@ -144,10 +260,6 @@
 						<li id="subtotal-div">
 							<strong>Subtotal:</strong>
 							<%= grand_total.toLocaleString() %> BDT
-						</li>
-						<li>
-							<strong>Delivery Charge:</strong>
-							<%= delivery_charge.toLocaleString() %> BDT
 						</li>
 						<li>
 							<strong>Points Possible:</strong>

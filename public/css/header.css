@@ -18,7 +18,7 @@ header {
 	top: 0;
 	right: 0;
 	width: 100%;
-	height: 70px;
+	height: 60px;
 	z-index: 1000;
 	display: flex;
 	align-items: center;
@@ -54,14 +54,13 @@ header {
 	justify-content: center;
 }
 .logo img {
-	max-width: 32px;
-	transform: translateY(-2%);
+	max-width: 38px;
 }
 .logo p {
 	font-size: 1rem;
 	min-width: fit-content;
 	cursor: pointer;
-	font-size: var(--font-size);
+	font-size: 15px;
 	font-weight: 400;
 	color: var(--text-color);
 	padding: 1rem;
@@ -75,7 +74,7 @@ header {
 .navbar a {
 	position: relative;
 	cursor: pointer;
-	font-size: var(--font-size);
+	font-size: 15px;
 	font-weight: lighter;
 	color: var(--text-color);
 	padding: 1rem;
@@ -138,7 +137,7 @@ header {
 	cursor: pointer;
 }
 .searchBtn img {
-	width: 32px;
+	width: 30px;
 }
 .searchBar {
 	opacity: 0;
@@ -220,7 +219,7 @@ header.searchMode {
 	font-size: var(--font-size);
 }
 .cart-icon img {
-	width: 32px;
+	width: 30px;
 }
 .cart-badge {
 	position: absolute;
@@ -240,7 +239,7 @@ header.searchMode {
 	font-size: var(--font-size);
 }
 .profile-icon img {
-	width: 32px;
+	width: 29px;
 	position: relative;
 	top: -1px;
 } /* Profile Dropdown */

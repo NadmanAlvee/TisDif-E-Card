@@ -9,7 +9,7 @@
 }
 :root {
 	--height: clamp(2rem, 8vw, 3rem);
-	--text-color: rgba(0, 0, 0, 0.8);
+	--text-color: #242424;
 	--background-color: #fff;
 	--background-color-2: rgba(128, 128, 128, 0.2);
 }

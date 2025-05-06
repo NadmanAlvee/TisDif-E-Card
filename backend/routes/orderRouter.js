@@ -15,20 +15,24 @@ router.post("/checkout", async (req, res) => {
 				res.redirect("/cart");
 				return;
 			}
-			const { cartItems, grand_total, delivery_charge } = response;
+			const { cartItems, grand_total } = response;
 			// Create order items array
 			const orderItems = cartItems.map((item) => ({
 				product: item.productId._id,
 				quantity: item.selected_quantity,
 				price: item.productId.price,
 			}));
+			let totalAmount = grand_total;
 			// Create order
 			const order = new Order({
 				items: orderItems,
-				totalAmount: grand_total,
+				totalAmount,
 				given_point: 0,
-				delivery_charge: delivery_charge,
-				paymentMethod: "Online Payment",
+				payment_method: req.body.payment_method,
+				billing_method: req.body.billing_method,
+				transaction_id: req.body.transaction_id,
+				four_digit: req.body.four_digit,
+				payment_amount: req.body.payment_amount,
 				deliveryMethod: "Home Delivery",
 				customerInfo: {
 					fullName: req.body.order_fullName,
@@ -36,6 +40,7 @@ router.post("/checkout", async (req, res) => {
 					email: req.body.order_email,
 					address: req.body.order_address,
 				},
+				status: "Pending",
 			});
 
 			await order.save();
@@ -46,7 +51,7 @@ router.post("/checkout", async (req, res) => {
 			// new order mail to admin
 			const mailOptions = {
 				from: process.env.EMAIL_USER,
-				to: "nadmanalvee0585@gmail.com", // admin email
+				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
 				html: `
 					<h2>🛒 New Order Received</h2>
@@ -57,8 +62,17 @@ router.post("/checkout", async (req, res) => {
 						<li><strong>Mobile:</strong> ${req.body.order_mobile}</li>
 						<li><strong>Email:</strong> ${req.body.order_email}</li>
 						<li><strong>Address:</strong> ${req.body.order_address}</li>
+						<br>
+						<li style="color: green;"><strong>Payment Method:</strong>
+							${req.body.payment_method}
+						</li>
+						<li><strong>Billing Method:</strong> ${req.body.billing_method}</li>
+						<li><strong>Transaction Id:</strong> ${req.body.transaction_id}</li>
+						<li><strong>Last four digit:</strong> ${req.body.four_digit}</li>
+						<li style="color: green;"><strong>Payment Amount:</strong>
+							${req.body.payment_amount}
+						</li>
 					</ul>
-					
 					<h3>📦 Order Details</h3>
 					<ul>
 						${newOrder.items
@@ -70,14 +84,12 @@ router.post("/checkout", async (req, res) => {
 							`
 							)
 							.join("")}
+						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 					</ul>
-					<p><strong>Total Amount:</strong> <strong>${grand_total} BDT</strong></p>
-					<p><strong>Delivery Method:</strong> Home Delivery</p>
-					<p><strong>Payment Method:</strong> Online Payment</p>
-					<p><strong>Delivery Charge:</strong> ${delivery_charge} BDT</p>
 					<hr />
 				`,
 			};
+
 			await transporter.sendMail(mailOptions);
 
 			res.clearCookie(process.env.CART_NAME); // clear cart cookie
@@ -98,29 +110,43 @@ router.post("/checkout", async (req, res) => {
 				res.redirect("/cart");
 				return;
 			}
-			const { user, cartItems, grand_total, point_possible, delivery_charge } =
-				response;
+			const {
+				user,
+				cartItems,
+				grand_total,
+				point_possible,
+				total_after_discount,
+			} = response;
 			const use_Points = req.body.use_Points === "yes";
-			const pointsToDeduct = use_Points
-				? Math.min(user.points, grand_total)
-				: 0;
-			const totalAmount = grand_total - pointsToDeduct;
-			// Create order items array
+			let pointsToDeduct = 0;
+			if (use_Points) {
+				const grandTotalNum = parseFloat(grand_total);
+				pointsToDeduct = Math.min(user.points, grandTotalNum);
+				if (pointsToDeduct > grandTotalNum) {
+					pointsToDeduct = grandTotalNum;
+				}
+			}
 			const orderItems = cartItems.map((item) => ({
 				product: item.productId._id,
 				quantity: item.selected_quantity,
 				price: item.productId.price,
 			}));
-			// Create order
+			const finalTotal = use_Points
+				? parseFloat(total_after_discount)
+				: parseFloat(grand_total);
+			let totalAmount = finalTotal;
 			const order = new Order({
 				user: user._id,
 				items: orderItems,
-				totalAmount: totalAmount,
-				point_possible: point_possible,
+				totalAmount,
+				point_possible: parseFloat(point_possible),
 				given_point: 0,
-				delivery_charge: delivery_charge,
 				pointsUsed: pointsToDeduct,
-				paymentMethod: "Online Payment",
+				payment_method: req.body.payment_method,
+				billing_method: req.body.billing_method,
+				transaction_id: req.body.transaction_id,
+				four_digit: req.body.four_digit,
+				payment_amount: req.body.payment_amount,
 				deliveryMethod: "Home Delivery",
 				customerInfo: {
 					fullName: req.body.order_fullName,
@@ -128,8 +154,8 @@ router.post("/checkout", async (req, res) => {
 					email: req.body.order_email,
 					address: req.body.order_address,
 				},
+				status: "Pending",
 			});
-
 			await order.save();
 			const newOrder = await Order.findById(order._id).populate(
 				"items.product"
@@ -138,7 +164,7 @@ router.post("/checkout", async (req, res) => {
 			// new order mail to admin
 			const mailOptions = {
 				from: process.env.EMAIL_USER,
-				to: "nadmanalvee0585@gmail.com", // admin email
+				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
 				html: `
 					<h2>🛒 New Order Received</h2>
@@ -149,8 +175,17 @@ router.post("/checkout", async (req, res) => {
 						<li><strong>Mobile:</strong> ${req.body.order_mobile}</li>
 						<li><strong>Email:</strong> ${req.body.order_email}</li>
 						<li><strong>Address:</strong> ${req.body.order_address}</li>
+						<br>
+						<li style="color: green;"><strong>Payment Method:</strong>
+							${req.body.payment_method}
+						</li>
+						<li><strong>Billing Method:</strong> ${req.body.billing_method}</li>
+						<li><strong>Transaction Id:</strong> ${req.body.transaction_id}</li>
+						<li><strong>Last four digit:</strong> ${req.body.four_digit}</li>
+						<li style="color: green;"><strong>Payment Amount:</strong>
+							${req.body.payment_amount}
+						</li>
 					</ul>
-					
 					<h3>📦 Order Details</h3>
 					<ul>
 						${newOrder.items
@@ -162,11 +197,8 @@ router.post("/checkout", async (req, res) => {
 							`
 							)
 							.join("")}
+						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 					</ul>
-					<p><strong>Total Amount:</strong> <strong>${grand_total} BDT</strong></p>
-					<p><strong>Delivery Method:</strong> Home Delivery</p>
-					<p><strong>Payment Method:</strong> Online Payment</p>
-					<p><strong>Delivery Charge:</strong> ${delivery_charge} BDT</p>
 					<hr />
 				`,
 			};

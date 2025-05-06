@@ -48,7 +48,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.get("/sitemap.xml", async (req, res) => {
 	try {
-		const products = await Product.find({}, "slug"); // Just get IDs to build URLs
+		const products = await Product.find({}, "slug"); // get IDs to build URLs
 		const urls = products
 			.map(
 				(p) => `

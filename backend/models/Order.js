@@ -20,7 +20,11 @@ const orderSchema = new mongoose.Schema({
 	given_point: Number,
 	delivery_charge: Number,
 	pointsUsed: Number,
-	paymentMethod: String,
+	payment_method: String,
+	billing_method: String,
+	transaction_id: String,
+	four_digit: Number,
+	payment_amount: Number,
 	deliveryMethod: String,
 	customerInfo: {
 		fullName: String,
