@@ -15,19 +15,22 @@ router.post("/checkout", async (req, res) => {
 				res.redirect("/cart");
 				return;
 			}
-			const { cartItems, grand_total } = response;
+			const { cartItems, grand_total, point_possible } = response;
 			// Create order items array
 			const orderItems = cartItems.map((item) => ({
 				product: item.productId._id,
 				quantity: item.selected_quantity,
 				price: item.productId.price,
 			}));
+			let pointsToDeduct = 0;
 			let totalAmount = grand_total;
 			// Create order
 			const order = new Order({
 				items: orderItems,
 				totalAmount,
+				point_possible,
 				given_point: 0,
+				pointsUsed: 0,
 				payment_method: req.body.payment_method,
 				billing_method: req.body.billing_method,
 				transaction_id: req.body.transaction_id,
