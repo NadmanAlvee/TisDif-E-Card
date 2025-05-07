@@ -222,6 +222,21 @@ router.put("/update-order-status/:id", async (req, res) => {
 		res.status(500).json({ message: "Error updating order status" });
 	}
 });
+// update order state
+router.post("/order_message/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { message } = req.body;
+		const order = await Order.findByIdAndUpdate(id, { message }, { new: true });
+		if (!order) {
+			return res.status(404).json({ message: "Order not found" });
+		}
+		res.status(200).json({ message: "Order message updated successfully" });
+	} catch (err) {
+		console.error("Error updating order message:", err);
+		res.status(500).json({ message: "Error updating order message" });
+	}
+});
 // give user points
 router.put("/update_pts/:id", async (req, res) => {
 	const order_id = req.params.id;

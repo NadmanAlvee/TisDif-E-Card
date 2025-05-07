@@ -97,10 +97,10 @@
 }
 .cats:hover {
 	border-radius: 0;
-	box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+	border-color: #ffa5006e;
+	box-shadow: 0px 0px 42px 2px rgb(255 152 0 / 25%);
 	.inner-cats p {
-		font-weight: bold;
-		color: #a900ff;
+		color: #ff7300;
 	}
 }
 .inner-cats {

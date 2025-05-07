@@ -95,11 +95,12 @@
 	margin-bottom: 0.5rem;
 }
 .order-summary {
-	margin-top: 2rem;
-	padding-top: 1rem;
+	margin: 2rem 0;
+	padding: 1rem 0;
 	border-top: 1px solid #eee;
 	display: flex;
 	flex-direction: column;
+	border-bottom: 1px solid #eee;
 }
 .summary-item {
 	display: flex;
@@ -119,6 +120,16 @@
 	padding: 2rem;
 	color: #666;
 }
+.order_message {
+	display: flex;
+	justify-content: space-between;
+}
+.order_message p {
+	line-height: 30px;
+	max-width: 40%;
+	text-align: end;
+	font-size: 20px;
+}
 @media (max-width: 1280px) {
 	.orderSearch input {
 		width: 85vw;
@@ -128,5 +139,12 @@
 	}
 	.stepper {
 		width: 100%;
+	}
+	.order_message {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.order_message span {
+		text-align: left;
 	}
 }

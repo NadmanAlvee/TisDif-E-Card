@@ -27,7 +27,13 @@
             </div>
             <% }); %>
         </div>
-        
+        <div class="order_message">
+            <strong>Message:</strong>
+            <form class="order-message-form" data-message-id="<%= order._id %>">
+              <textarea name="order_message" rows="3" placeholder="<%= order.message %>"></textarea>
+              <button type="submit">Send</button>
+            </form>
+        </div>
         <div class="status-control">
             <select class="status-select" data-order-id="<%= order._id %>">
                 <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %> >Pending</option>

@@ -79,5 +79,32 @@
 		.catch(error => {
 			window.alert("Error updating points");
 		});
+	}
+
+	// send order message
+	document.querySelectorAll('.order-message-form').forEach((form) => {
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const orderId = form.dataset.messageId;
+		const message = form.querySelector('textarea').value.trim();
+
+		if (!message) return alert("Message cannot be empty.");
+
+		try {
+			const response = await fetch(`/admin/order_message/${orderId}`, {
+				method: 'POST',
+				headers: {
+				'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ message }),
+			});
+			if (!response.ok) throw new Error('Failed to send message');
+			window.location.reload();
+		} catch (error) {
+			console.error(error);
+			alert('Error sending message');
 		}
+	});
+});
+
 </script>

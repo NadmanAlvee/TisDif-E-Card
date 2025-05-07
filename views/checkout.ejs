@@ -92,44 +92,76 @@
 				</div>
 				<div class="left-bottom">
 					<h3 class="left-h3">PAYMENT DETAILS</h3>
+
+					<div class="checkout_notice">
+						<p>To confirm orders, outside Dhaka: send money 140Tk and send Transaction ID & Last 4 digit.</p>
+						<p>Inside Dhaka: send money 80Tk  and send Transaction ID & Last 4 digit.</p>
+						<p>please make full payment for giftcard orders</p>
+					</div>
 					
 					<div class="payment-div">
 						<label>Select A Payment Method</label>
 						<div class="payment_process">
+							<!-- Online Payment Option -->
 							<div class="options">
-								<input type="radio" id="online_payment" name="payment_method" value="online payment" required>
-								<label for="payment_method">Online Payment</label>
+								<label for="online_payment">
+										<img src="/images/icons/online_payment.png" alt="online payment">
+									<input type="radio" id="online_payment" name="payment_method" value="online payment" required>
+									<span>Online Payment</span>
+								</label>
 							</div>
+							<!-- Cash on Delivery Option -->
 							<div class="options">
-								<input type="radio" id="cash_on_delivery" name="payment_method" value="cash on delivery" required>
-								<label for="payment_method">Cash on Delivery</label>
+								<label for="cash_on_delivery">
+										<img src="/images/icons/cash_on_delivery.png" alt="cash on delivery">
+									<input type="radio" id="cash_on_delivery" name="payment_method" value="cash on delivery" required>
+									<span>Cash on Delivery</span>
+								</label>
 							</div>
 						</div>
 						<!-- banks -->
 						<div class="payment_process">
 							<div class="options">
-								<input type="radio" id="bkash" name="billing_method" value="bkash" required>
-								<label for="billing_method">Bkash</label>
+								<label for="bkash">
+										<img src="/images/icons/bkash.png" alt="bkash">
+									<input type="radio" id="bkash" name="billing_method" value="bkash" >
+									<span>Bkash</span>
+								</label>
 							</div>
 							<div class="options">
-								<input type="radio" id="nagad" name="billing_method" value="nagad" required>
-								<label for="billing_method">Nagad</label>
+								<label for="nagad">
+										<img src="/images/icons/nagad.png" alt="nagad">
+									<input type="radio" id="nagad" name="billing_method" value="nagad" >
+									<span>Nagad</span>
+								</label>
 							</div>
 							<div class="options">
-								<input type="radio" id="city_bank" name="billing_method" value="city_bank" required>
-								<label for="billing_method">City Bank</label>
+								<label for="city_bank">
+										<img src="/images/icons/city_bank.png" alt="city_bank">
+									<input type="radio" id="city_bank" name="billing_method" value="city_bank" >
+									<span>City Bank</span>
+								</label>
 							</div>
 							<div class="options">
-								<input type="radio" id="pubali_bank" name="billing_method" value="pubali_bank" required>
-								<label for="billing_method">Pubali Bank</label>
+								<label for="pubali_bank">
+										<img src="/images/icons/pubali_bank.png" alt="pubali_bank">
+									<input type="radio" id="pubali_bank" name="billing_method" value="pubali_bank" >
+									<span>Pubali Bank</span>
+								</label>
 							</div>
 							<div class="options">
-								<input type="radio" id="dbbl" name="billing_method" value="dbbl" required>
-								<label for="billing_method">DBBL</label>
+								<label for="dbbl">
+										<img src="/images/icons/dbbl.png" alt="dbbl">
+									<input type="radio" id="dbbl" name="billing_method" value="dbbl" >
+									<span>Dutch Bangla Bank Ltd</span>
+								</label>
 							</div>
 							<div class="options">
-								<input type="radio" id="standard_chartered_bank" name="billing_method" value="standard_chartered_bank" required>
-								<label for="billing_method">Standard Chartered Bank</label>
+								<label for="standard_chartered_bank">
+										<img src="/images/icons/standard_chartered_bank.png" alt="standard_chartered_bank">
+									<input type="radio" id="standard_chartered_bank" name="billing_method" value="standard_chartered_bank" >
+									<span>Standard Chartered Bank</span>
+								</label>
 							</div>
 						</div>
 
@@ -183,7 +215,7 @@
 							spellcheck="false"
 							placeholder="Transaction ID: "
 							id="transaction_id"
-							required
+							value=""
 						/>
 					</div>
 					<div class="form-group">
@@ -194,7 +226,7 @@
 							spellcheck="false"
 							placeholder="Sender Last Fout Digit: "
 							id="four_digit"
-							required
+							value=""
 						/>
 					</div>
 					<div class="form-group">
@@ -317,5 +349,18 @@
 			});
 		});
 	});
+
+	['payment_method', 'billing_method'].forEach((groupName) => {
+	document.querySelectorAll(`input[name="${groupName}"]`).forEach((radio) => {
+		radio.addEventListener('change', () => {
+			// Only remove `.selected` within the same group
+			document.querySelectorAll(`input[name="${groupName}"]`).forEach((input) => {
+				input.closest('.options').classList.remove('selected');
+			});
+			radio.closest('.options').classList.add('selected');
+		});
+	});
+});
+
 </script>
 <%- include('./partials/footer.ejs') %>

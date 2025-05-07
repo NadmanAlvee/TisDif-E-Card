@@ -2,13 +2,14 @@
 .container {
 	box-sizing: border-box;
 	margin: 0 3vw;
+	margin-bottom: 100px;
 }
 .container-wrapper {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	column-gap: 5vw;
-	min-height: 160vh;
+	min-height: 185vh;
 	align-self: flex-start;
 }
 .checkout-heading {
@@ -20,11 +21,14 @@
 .left-container,
 .right-container {
 	min-height: 80vh;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 16px 35px #0000001a;
+	padding: 22px;
 }
 .left-container {
-	padding: 10px;
 	width: 100%;
-	max-width: 40%;
+	max-width: 730px;
 	display: flex;
 	flex-direction: column;
 	row-gap: 14px;
@@ -66,12 +70,16 @@ input[type="number"] {
 	background: rgba(77, 176, 80, 0.051);
 	color: #007f00;
 }
-
-.payment_process {
-	display: flex;
-	padding: 20px;
-	column-gap: 20px;
-	justify-content: center;
+.checkout_notice {
+	padding: 8px 0;
+	background-color: rgba(255, 0, 0, 0.1);
+	border: 1px solid rgba(255, 0, 0, 0.6);
+}
+.checkout_notice p {
+	font-size: 15px;
+	line-height: 20px;
+	color: #b10010;
+	padding: 3px 10px;
 }
 .note {
 	font-size: 14px;
@@ -79,17 +87,62 @@ input[type="number"] {
 	padding-bottom: 16px;
 }
 .payment-option {
-	padding: 8px;
 	line-height: 24px;
 	border: 1px solid rgb(255, 166, 0);
-	background: #ffff00;
+	background: rgba(255, 255, 0, 0.8);
 }
 .payment-option ul li {
 	list-style: none;
-	padding: 8px 0;
+	padding: 10px 10px;
+	font-size: 15px;
 }
-.right-container {
+.options {
+	width: 120px;
+	height: 88px;
+	border: 1px solid #c9c9c9;
+	border-radius: 4px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.options.selected {
+	background-color: #edffef;
+	border-color: #00a306;
+	transition: 0.2s linear;
+	box-shadow: 0px 0px 20px 4px #00a3053b;
+}
+.options:hover {
+	background-color: #fffaed;
+	border-color: rgba(224, 146, 0, 0.8);
+	transition: 0.2s linear;
+	box-shadow: 0px 0px 10px 4px rgba(224, 146, 0, 0.2);
+	cursor: pointer;
+}
+.options img {
+	width: 40px;
+}
+.options input {
+	opacity: 0;
+}
+.options label {
+	height: 100%;
+	width: 100%;
+	padding: 11px 6px;
+	margin: 0;
+	z-index: 5;
+}
+.payment_process {
+	display: flex;
+	gap: 12px;
 	padding: 10px;
+	flex-wrap: wrap;
+	max-width: 500px;
+	justify-content: center;
+}
+
+.right-container {
 	width: 100%;
 	max-width: 40%;
 	display: flex;
@@ -199,7 +252,7 @@ input[type="number"] {
 .confirm-order-btn:hover {
 	background-color: #0056b3;
 } /* Responsive Styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 860px) {
 	.container-wrapper {
 		display: flex;
 		flex-direction: column;

@@ -84,6 +84,7 @@ router.post("/checkout", async (req, res) => {
 							`
 							)
 							.join("")}
+						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 					</ul>
 					<hr />
@@ -135,11 +136,15 @@ router.post("/checkout", async (req, res) => {
 				? parseFloat(total_after_discount)
 				: parseFloat(grand_total);
 			let totalAmount = finalTotal;
+			let points_to_give = parseFloat(point_possible);
+			if (totalAmount === 0) {
+				points_to_give = 0;
+			}
 			const order = new Order({
 				user: user._id,
 				items: orderItems,
 				totalAmount,
-				point_possible: parseFloat(point_possible),
+				point_possible: points_to_give,
 				given_point: 0,
 				pointsUsed: pointsToDeduct,
 				payment_method: req.body.payment_method,
@@ -197,6 +202,7 @@ router.post("/checkout", async (req, res) => {
 							`
 							)
 							.join("")}
+						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 					</ul>
 					<hr />

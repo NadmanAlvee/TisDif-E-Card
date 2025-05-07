@@ -106,6 +106,12 @@
 						</div>
 					</div>
 				</div>
+				<% if(order.message.length > 0) { %>
+					<div class="order_message">
+						<h3>Message: </h3>
+						<p><%= order.message %></p>
+					</div>
+				<% } %>
 			</div>
 			<% }) %>
 		</div>

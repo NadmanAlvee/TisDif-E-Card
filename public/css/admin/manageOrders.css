@@ -25,6 +25,7 @@
 	padding: 15px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	position: relative;
+	width: 350px;
 }
 .order-card p {
 	margin: 10px 0;
@@ -53,13 +54,26 @@
 }
 .point_possible-div input {
 	padding: 3px;
-	width: 50px;
+	width: 60px;
 	min-width: 30px;
 }
+
+.order_message {
+	display: flex;
+	gap: 20px;
+}
+.order_message textarea {
+	min-height: 100px;
+	min-width: 185px;
+	padding: 5px;
+}
+
 .items-list {
-	padding: 0 20px;
-	background: black;
-	color: wheat;
+	padding: 25px 10px;
+	background: #ededed;
+	color: #000000;
+	font-size: 17px;
+	font-weight: bold;
 }
 .status-control select {
 	padding: 0.5rem;
