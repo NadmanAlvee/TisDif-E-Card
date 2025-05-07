@@ -6,8 +6,10 @@ const User = require("../models/User");
 const createHttpError = require("http-errors");
 const checkoutDetails = require("../middlewares/utils/checkoutDetails");
 const transporter = require("../middlewares/utils/transporter");
+const multer = require("multer");
+const upload = multer();
 
-router.post("/checkout", async (req, res) => {
+router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 	if (!res.locals.loggedInUser || !res.locals.loggedInUser._id) {
 		try {
 			const response = await checkoutDetails(req, res);
@@ -50,17 +52,25 @@ router.post("/checkout", async (req, res) => {
 			const newOrder = await Order.findById(order._id).populate(
 				"items.product"
 			);
-
 			// new order mail to admin
 			const mailOptions = {
 				from: process.env.EMAIL_USER,
 				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
+				attachments: [
+					{
+						filename: `${req.body.order_email}-receipt.${req.file.mimetype}`,
+						content: req.file.buffer,
+						contentType: req.file.mimetype,
+						cid: "receipt@picture",
+						contentDisposition: "inline",
+					},
+				],
 				html: `
 					<h2>🛒 New Order Received</h2>
-					<p><strong>Order ID:</strong> ${newOrder._id}</p>
-					<h3>👤 Customer Information</h3>
+					<p>Order ID: ${newOrder._id}</p>
 					<ul>
+						<h3>👤 Customer Information</h3>
 						<li><strong>Name:</strong> ${req.body.order_fullName}</li>
 						<li><strong>Mobile:</strong> ${req.body.order_mobile}</li>
 						<li><strong>Email:</strong> ${req.body.order_email}</li>
@@ -75,9 +85,7 @@ router.post("/checkout", async (req, res) => {
 						<li style="color: green;"><strong>Payment Amount:</strong>
 							${req.body.payment_amount}
 						</li>
-					</ul>
-					<h3>📦 Order Details</h3>
-					<ul>
+						<h3>📦 Order Details</h3>
 						${newOrder.items
 							.map(
 								(item) => `
@@ -89,6 +97,9 @@ router.post("/checkout", async (req, res) => {
 							.join("")}
 						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
+						<hr />
+						<h4>Receipt Picture: </h4>
+						<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;">
 					</ul>
 					<hr />
 				`,
@@ -174,11 +185,20 @@ router.post("/checkout", async (req, res) => {
 				from: process.env.EMAIL_USER,
 				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
+				attachments: [
+					{
+						filename: `${req.body.order_email}-receipt.${req.file.mimetype}`,
+						content: req.file.buffer,
+						contentType: req.file.mimetype,
+						cid: "receipt@picture",
+						contentDisposition: "inline",
+					},
+				],
 				html: `
 					<h2>🛒 New Order Received</h2>
-					<p><strong>Order ID:</strong> ${newOrder._id}</p>
-					<h3>👤 Customer Information</h3>
+					<p>Order ID: ${newOrder._id}</p>
 					<ul>
+						<h3>👤 Customer Information</h3>
 						<li><strong>Name:</strong> ${req.body.order_fullName}</li>
 						<li><strong>Mobile:</strong> ${req.body.order_mobile}</li>
 						<li><strong>Email:</strong> ${req.body.order_email}</li>
@@ -193,9 +213,7 @@ router.post("/checkout", async (req, res) => {
 						<li style="color: green;"><strong>Payment Amount:</strong>
 							${req.body.payment_amount}
 						</li>
-					</ul>
-					<h3>📦 Order Details</h3>
-					<ul>
+						<h3>📦 Order Details</h3>
 						${newOrder.items
 							.map(
 								(item) => `
@@ -207,10 +225,14 @@ router.post("/checkout", async (req, res) => {
 							.join("")}
 						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
+						<hr />
+						<h4>Receipt Picture: </h4>
+						<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;">
 					</ul>
 					<hr />
 				`,
 			};
+
 			await transporter.sendMail(mailOptions);
 
 			await Cart.deleteMany({ userId: user._id });

@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<form id="checkout-form" action="/order/checkout" method="POST">
+<form id="checkout-form" action="/order/checkout" method="POST" enctype="multipart/form-data">
 	<div class="container">
 		<h2 class="checkout-heading">Checkout</h2>
 		<div class="container-wrapper">
@@ -168,41 +168,7 @@
 						<p class="note">*Cash on delivery is not applicable for GiftCard orders.</p>
 
 						<div class="payment-option">
-							<ul>
-								<li>
-									bKash Send Money to 
-									01715506304 or 01571169254
-								</li>
-								<li>
-									Send money to Nagad: 
-									01715506304
-								</li>
-								<li>
-									The City Bank Current A/C: 
-									Account Number: 1453074816001
-									Account Name: TIS DIF E CARD 
-									Branch Name: Karwan Bazar Branch
-								</li>
-								<li>
-									Pubali Bank PLC
-									Account Name: TIS DIF E CARD
-									Account Number: 2438901052620
-									Branch Name: Naya Paltan
-								</li>
-								<li>
-									DBBL Current Account: 1261100044893
-									Account Name: TisDif e-Card
-									Branch Name: Elephant Road
-								</li>
-								<li>
-									Bank Transfer to:
-									Standard Chartered Bank
-									Account Number: 18958912201
-									Account Name: BADRUL ALAM
-									Branch Name: Gulshan
-									SWIFT CODE: SCBLBDDX
-									Routing Number: 215261726
-								</li>
+							<ul id="pay">
 							</ul>
 						</div>
 					</div>
@@ -216,6 +182,15 @@
 							placeholder="Transaction ID: "
 							id="transaction_id"
 							value=""
+						/>
+					</div>
+					<div class="form-group">
+						<label for="receipt_picture">Receipt Picture: </label>
+						<input
+							type="file"
+							name="receipt_picture"
+							id="receipt_picture"
+							accept="image/*"
 						/>
 					</div>
 					<div class="form-group">
@@ -350,17 +325,67 @@
 		});
 	});
 
-	['payment_method', 'billing_method'].forEach((groupName) => {
-	document.querySelectorAll(`input[name="${groupName}"]`).forEach((radio) => {
+	document.querySelectorAll(`input[name="payment_method"]`).forEach((radio) => {
 		radio.addEventListener('change', () => {
-			// Only remove `.selected` within the same group
-			document.querySelectorAll(`input[name="${groupName}"]`).forEach((input) => {
+			document.querySelectorAll(`input[name="payment_method"]`).forEach((input) => {
 				input.closest('.options').classList.remove('selected');
 			});
 			radio.closest('.options').classList.add('selected');
 		});
 	});
-});
+	
+	document.querySelectorAll(`input[name="billing_method"]`).forEach((radio) => {
+		radio.addEventListener('change', () => {
+			document.querySelectorAll(`input[name="billing_method"]`).forEach((input) => {
+				input.closest('.options').classList.remove('selected');
+			});
+			radio.closest('.options').classList.add('selected');
+			let ul = document.getElementById("pay");
+			ul.style.border = "1px solid rgb(255, 166, 0)";
+			let value = radio.closest('input').value;
+			if(value === "bkash"){
+				ul.innerHTML = `<li>
+									bKash Send Money to 
+									01715506304 or 01571169254
+								</li>`
+			} else if(value === "nagad"){
+				ul.innerHTML = `<li>
+									Send money to Nagad: 
+									01715506304
+								</li>`
+			} else if(value === "city_bank"){
+				ul.innerHTML = `<li>
+									The City Bank Current A/C: 
+									Account Number: 1453074816001
+									Account Name: TIS DIF E CARD 
+									Branch Name: Karwan Bazar Branch
+								</li>`
+			} else if(value === "pubali_bank"){
+				ul.innerHTML = `<li>
+									Pubali Bank PLC
+									Account Name: TIS DIF E CARD
+									Account Number: 2438901052620
+									Branch Name: Naya Paltan
+								</li>`
+			} else if(value === "dbbl"){
+				ul.innerHTML = `<li>
+									DBBL Current Account: 1261100044893
+									Account Name: TisDif e-Card
+									Branch Name: Elephant Road
+								</li>`
+			} else if(value === "standard_chartered_bank"){
+				ul.innerHTML = `<li>
+									Bank Transfer to:
+									Standard Chartered Bank
+									Account Number: 18958912201
+									Account Name: BADRUL ALAM
+									Branch Name: Gulshan
+									SWIFT CODE: SCBLBDDX
+									Routing Number: 215261726
+								</li>`
+			}
+		});
+	});
 
 </script>
 <%- include('./partials/footer.ejs') %>

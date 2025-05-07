@@ -9,7 +9,7 @@
 	flex-direction: row;
 	justify-content: center;
 	column-gap: 5vw;
-	min-height: 185vh;
+	min-height: 160vh;
 	align-self: flex-start;
 }
 .checkout-heading {
@@ -84,11 +84,10 @@ input[type="number"] {
 .note {
 	font-size: 14px;
 	color: red;
-	padding-bottom: 16px;
+	padding: 10px 0;
 }
-.payment-option {
+.payment-option ul {
 	line-height: 24px;
-	border: 1px solid rgb(255, 166, 0);
 	background: rgba(255, 255, 0, 0.8);
 }
 .payment-option ul li {

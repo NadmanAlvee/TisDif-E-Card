@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				const data = await response.json();
 
 				if (response.ok) {
-					window.location = "/cart";
+					window.location = "/checkout";
 				} else {
 					alert("Please log in first!");
 				}

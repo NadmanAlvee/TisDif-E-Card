@@ -63,7 +63,7 @@ body {
 	height: 45px;
 	font-size: 14px;
 	cursor: pointer;
-	width: 60%;
+	min-width: fit-content;
 }
 .wrapper .btn {
 	position: relative;
