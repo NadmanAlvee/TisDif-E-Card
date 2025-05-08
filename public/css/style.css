@@ -14,7 +14,11 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-} /* image slider */
+}
+.container > div:first-child {
+	margin-top: 80px;
+}
+/* image slider */
 .slider-wrapper {
 	position: relative;
 	max-width: 54vw;
@@ -63,9 +67,6 @@
 	border: 2px solid black;
 	transform: translateY(10%);
 } /* section control */
-.sections:first-child {
-	margin-top: 80px;
-}
 .sections:last-child {
 	margin-bottom: 140px;
 }

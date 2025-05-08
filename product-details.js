@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	const quantityValueElement = document.getElementById("quantity-value");
 	const decreaseBtn = document.querySelector(".qty-btn.decrease");
 	const increaseBtn = document.querySelector(".qty-btn.increase");
+	const giftCardValueElement = document.getElementById("quantity-value");
+	let quantityValue = parseInt(
+		giftCardValueElement.textContent ? giftCardValueElement.textContent : 0,
+		10
+	);
 	const productElement = document.querySelector(".product-info");
 	const priceButtons = document.querySelectorAll(".price-btn");
 	const totalPrice = document.getElementById("total-price");
@@ -23,21 +28,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				const selectedPrice = parseFloat(this.getAttribute("data-price")) || 0;
 				totalPrice.textContent = (selectedPrice * productPrice).toFixed(2);
 				selectedQuantity = selectedPrice;
+				console.log("Seelcted Quantity: ", selectedQuantity); // remove later
 			});
 		});
 	}
 	// accessories quantity buttons script
 	if (decreaseBtn && increaseBtn && selectedQuantity) {
-		let quantityValue = parseInt(
-			quantityValueElement.textContent ? quantityValueElement.textContent : 0,
-			10
-		);
+		function updateTotal() {
+			totalPrice.textContent = (selectedQuantity * productPrice).toFixed(2);
+			console.log("Seelcted Quantity: ", selectedQuantity); // remove later
+		}
+		updateTotal();
+
 		decreaseBtn.addEventListener("click", function () {
 			if (quantityValue > 1) {
 				quantityValue--;
 				quantityValueElement.textContent = quantityValue;
 				selectedQuantity = quantityValue;
-				totalPrice.textContent = (selectedQuantity * productPrice).toFixed(2);
+				updateTotal();
 			}
 		});
 
@@ -45,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			quantityValue++;
 			quantityValueElement.textContent = quantityValue;
 			selectedQuantity = quantityValue;
-			totalPrice.textContent = (selectedQuantity * productPrice).toFixed(2);
+			updateTotal();
 		});
 	}
 

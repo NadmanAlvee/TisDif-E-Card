@@ -2,6 +2,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
+const Cart = require("../models/Cart");
 
 // Internal imports
 const User = require("../models/User");

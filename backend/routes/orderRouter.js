@@ -57,16 +57,24 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 				from: process.env.EMAIL_USER,
 				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
-				attachments: [
+			};
+			let imageHolder = "";
+			if (req.file) {
+				const ext = req.file.mimetype.split("/")[1];
+				const filename = `${req.body.order_email}-receipt.${ext}`;
+				mailOptions.attachments = [
 					{
-						filename: `${req.body.order_email}-receipt.${req.file.mimetype}`,
+						filename,
 						content: req.file.buffer,
 						contentType: req.file.mimetype,
 						cid: "receipt@picture",
 						contentDisposition: "inline",
 					},
-				],
-				html: `
+				];
+				imageHolder = `<h4>Receipt Picture: </h4>
+								<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;"></img>`;
+			}
+			mailOptions.html = `
 					<h2>🛒 New Order Received</h2>
 					<p>Order ID: ${newOrder._id}</p>
 					<ul>
@@ -98,13 +106,10 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 						<hr />
-						<h4>Receipt Picture: </h4>
-						<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;">
+						${imageHolder}
 					</ul>
 					<hr />
-				`,
-			};
-
+				`;
 			await transporter.sendMail(mailOptions);
 
 			res.clearCookie(process.env.CART_NAME); // clear cart cookie
@@ -115,6 +120,7 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 				cartItems: [],
 			});
 		} catch (error) {
+			console.error("Checkout failed:", error);
 			res.status(500).send("Order processing failed");
 		}
 	} else {
@@ -185,16 +191,24 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 				from: process.env.EMAIL_USER,
 				to: process.env.RECIEVE_EMAIL, // recieve email
 				subject: "New Order Placed - TisdifeCard",
-				attachments: [
+			};
+			let imageHolder = "";
+			if (req.file) {
+				const ext = req.file.mimetype.split("/")[1];
+				const filename = `${req.body.order_email}-receipt.${ext}`;
+				mailOptions.attachments = [
 					{
-						filename: `${req.body.order_email}-receipt.${req.file.mimetype}`,
+						filename,
 						content: req.file.buffer,
 						contentType: req.file.mimetype,
 						cid: "receipt@picture",
 						contentDisposition: "inline",
 					},
-				],
-				html: `
+				];
+				imageHolder = `<h4>Receipt Picture: </h4>
+								<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;"></img>`;
+			}
+			mailOptions.html = `
 					<h2>🛒 New Order Received</h2>
 					<p>Order ID: ${newOrder._id}</p>
 					<ul>
@@ -226,13 +240,10 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 						<li><strong>Points Used:</strong> ${pointsToDeduct}</li>
 						<li><p style="color: green;"><strong>Total Amount:</strong> <strong>${totalAmount} BDT</strong></p></li>
 						<hr />
-						<h4>Receipt Picture: </h4>
-						<img src="cid:receipt@picture" alt="receipt pimage" style="max-width: 400px;">
+						${imageHolder}
 					</ul>
 					<hr />
-				`,
-			};
-
+				`;
 			await transporter.sendMail(mailOptions);
 
 			await Cart.deleteMany({ userId: user._id });
@@ -248,6 +259,7 @@ router.post("/checkout", upload.single("receipt_picture"), async (req, res) => {
 				cartItems: [],
 			});
 		} catch (error) {
+			console.error("Checkout failed:", error);
 			res.status(500).send("Order processing failed");
 		}
 	}

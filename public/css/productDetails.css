@@ -8,6 +8,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0 20vw;
+	margin-bottom: 10vh;
 }
 .sections {
 	scroll-snap-align: end;
@@ -154,7 +155,7 @@ body {
 .qty-btn:hover {
 	background-color: #f2f2f2;
 }
-.quantity-value {
+#quantity-value {
 	margin: 0 10px;
 	font-size: 16px;
 	min-width: 20px;
