@@ -46,6 +46,7 @@ h3 {
 	gap: 20px;
 	padding-bottom: 16px;
 	border-bottom: 1px solid #ddd;
+	overflow: auto;
 }
 .personal_information h4 {
 	width: 160px;
@@ -66,7 +67,7 @@ h3 {
 	color: #2d2269;
 	transition: 0.3s linear;
 	padding: 4px;
-	background: none;
+	background: white;
 	position: absolute;
 	right: 0;
 }
@@ -254,5 +255,11 @@ textarea {
 	}
 	.order_message span {
 		text-align: left;
+	}
+	.personal_information {
+		flex-direction: column;
+	}
+	textarea {
+		min-width: 200px;
 	}
 }
