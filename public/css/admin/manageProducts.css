@@ -132,9 +132,7 @@ select {
 	justify-content: space-evenly;
 }
 .save-btn {
-	color: black;
 	cursor: pointer;
-	border: 1px solid #46464636;
 	padding: 8px 20px;
 	border-radius: 15px;
 	transition: 0.3s;

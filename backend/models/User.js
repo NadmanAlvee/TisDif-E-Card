@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema(
 			trim: true,
 			lowercase: true,
 		},
+		address: [String],
 		mobile: {
 			type: String,
 			required: true,

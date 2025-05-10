@@ -10,7 +10,15 @@
         <p><strong>Delivery Address:</strong> <%= order.customerInfo.address %></p>
         <p>
             <strong>Order Date:</strong>
-            <%= order.orderDate.toLocaleDateString() + ' ' + order.orderDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) %>
+            <%= new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Dhaka',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            }).format(new Date(order.orderDate)) %>
         </p>
         <p><strong>Total Amount:</strong> <%= order.totalAmount %> BDT</p>
         <p class="point_possible-div"><strong>Points Possible:</strong>

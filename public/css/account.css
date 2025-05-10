@@ -7,12 +7,12 @@
 }
 body {
 	min-height: 100vh;
-	margin: 0 10vw;
 }
 .container {
 	font-size: 16px;
 	padding: 20px;
 	min-height: 70vh;
+	margin: 0 10vw;
 	margin-top: 80px;
 }
 h3 {
@@ -40,8 +40,76 @@ h3 {
 	color: #002c5c;
 	transition: 0.5s;
 }
-.profile p {
-	padding: 5px;
+.personal_information {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #ddd;
+}
+.personal_information h4 {
+	width: 160px;
+}
+.addressContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+.addressContainer img {
+	width: 24px;
+	transform: translateY(-2px);
+}
+.makeDefault {
+	font-size: 14px;
+	min-width: fit-content;
+	border: 1px solid #2d2269;
+	color: #2d2269;
+	transition: 0.3s linear;
+	padding: 4px;
+	background: none;
+	position: absolute;
+	right: 0;
+}
+.makeDefault:hover {
+	color: white;
+	background: #2d2269;
+}
+.personal_information #submit_adress {
+	height: 100%;
+	cursor: pointer;
+	padding: 8px 20px;
+	transition: 0.3s;
+	color: green;
+	border: 1px solid green;
+}
+.personal_information #submit_adress:hover {
+	color: white;
+	background-color: green;
+}
+.personal_information #addAddressButton {
+	height: 100%;
+	background: none;
+	cursor: pointer;
+	padding: 8px 20px;
+	transition: 0.3s;
+	color: rgb(140, 0, 255);
+	border: 1px solid rgb(140, 0, 255);
+}
+.personal_information #addAddressButton:hover {
+	color: white;
+	background-color: rgb(140, 0, 255);
+}
+#textareaHolder {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+textarea {
+	min-width: 700px;
+	padding: 5px 5px;
+	border-radius: 3px;
+	border: 1px solid #afafaf;
+	margin-bottom: 5px;
 }
 .logout {
 	display: flex;
