@@ -7,10 +7,7 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
-const allowedOrigins = [
-  "https://tisdifecard.com",
-  "https://admin.tisdifecard.com",
-];
+const allowedOrigins = ["https://tisdifecard.com"];
 app.use(
   cors({
     origin: (origin, callback) => {
