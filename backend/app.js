@@ -5,12 +5,28 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const app = express();
+const allowedOrigins = [
+  "https://tisdifecard.com",
+  "https://admin.tisdifecard.com",
+];
 app.use(
-	compression({
-		threshold: 0, // in bytes, 1024 byte - 1kb
-		level: 6,
-	})
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+app.use(
+  compression({
+    threshold: 0, // in bytes, 1024 byte - 1kb
+    level: 6,
+  })
 );
 // internel imports
 const checkAdmin = require("./middlewares/checkAdmin");
@@ -19,8 +35,8 @@ const { checkLogin } = require("./middlewares/common/checkLogin");
 const sessionInfo = require("./middlewares/common/sessionInfo");
 const connectDB = require("./MongooseConfig");
 const {
-	errorHandler,
-	notFoundHandler,
+  errorHandler,
+  notFoundHandler,
 } = require("./middlewares/common/errorHandlers");
 const logout = require("./controller/logoutController");
 const Product = require("./models/Product");
@@ -47,29 +63,29 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.get("/sitemap.xml", async (req, res) => {
-	try {
-		const products = await Product.find({}, "slug"); // get IDs to build URLs
-		const urls = products
-			.map(
-				(p) => `
+  try {
+    const products = await Product.find({}, "slug"); // get IDs to build URLs
+    const urls = products
+      .map(
+        (p) => `
 		<url>
 		  <loc>https://tisdifecard.com/product/${p.slug}</loc>
 		  <changefreq>weekly</changefreq>
 		  <priority>0.8</priority>
 		</url>`
-			)
-			.join("");
+      )
+      .join("");
 
-		const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
 	  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 		${urls}
 	  </urlset>`;
-		res.header("Content-Type", "application/xml");
-		res.send(xml);
-	} catch (err) {
-		console.error("Sitemap error:", err);
-		res.status(500).send("Internal Server Error");
-	}
+    res.header("Content-Type", "application/xml");
+    res.send(xml);
+  } catch (err) {
+    console.error("Sitemap error:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 // Frontend Routes
@@ -92,5 +108,5 @@ app.use(errorHandler); // common
 
 // Start the Server
 app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

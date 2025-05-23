@@ -1,218 +1,240 @@
 <%- include('./partials/header.ejs') %>
-<link rel="stylesheet" href="/css/progressStepper.css">
-<link rel="stylesheet" href="/css/account.css" />
+	<link rel="stylesheet" href="/css/progressStepper.css">
+	<link rel="stylesheet" href="/css/account.css" />
 
-<div class="container">
-	<form id="address_form" action="/account/updateAdress" method="POST">
-		<h3>My Account</h3>
-		<div class="profile">
-			<div class="personal_information"><h4>Username: </h4> <%= user.username %> </div>
-			<div class="personal_information"><h4>Email Address: </h4> <%= user.email %> </div>
-			<div class="personal_information"><h4>Mobile: </h4> <%= user.mobile %> </div>
-			<div class="personal_information">
-				<h4>Address: </h4>
-				<div id="textareaHolder">
-						<% user.address.forEach((address, index) => { %>
+	<div class="container">
+		<form id="address_form" action="/account/updateAdress" method="POST">
+			<h3>My Account</h3>
+			<div class="profile">
+				<div class="personal_information">
+					<h4>Username: </h4>
+					<%= user.username %>
+				</div>
+				<div class="personal_information">
+					<h4>Email Address: </h4>
+					<%= user.email %>
+				</div>
+				<div class="personal_information">
+					<h4>Mobile: </h4>
+					<%= user.mobile %>
+				</div>
+				<div class="personal_information">
+					<h4>Address: </h4>
+					<div id="textareaHolder">
+						<% user.address.forEach((address, index)=> { %>
 							<div class="addressContainer">
-							<img data-index="<%=index%>" onclick="deleteAddress(event)" src="https://img.icons8.com/fluency/24/cancel.png" alt="delete-address">
-							<textarea class="address" name="address"><%= address %></textarea>
-							<% if(index !== 0) { %>
-								<button data-index="<%=index%>" onclick="makeDefault(event)" type="button" class="makeDefault">Make Default</button>
-							<% } %>
+								<textarea class="address" name="address"><%= address %></textarea>
+								<img data-index="<%=index%>" onclick="deleteAddress(event)"
+									src="https://img.icons8.com/fluency/24/cancel.png" alt="delete-address">
+								<% if(index !==0) { %>
+									<button data-index="<%=index%>" onclick="makeDefault(event)" type="button"
+										class="makeDefault">Make Default</button>
+									<% } %>
 							</div>
-						<% }) %>
+							<% }) %>
+					</div>
+					<button id="addAddressButton" type="button">Add New Address</button>
+					<button id="submit_adress" type="submit">Update Address</button>
 				</div>
-				<button id="addAddressButton" type="button">Add New Address</button>
-				<button id="submit_adress" type="submit">Update Address</button>
-			</div>
-			<div class="personal_information"><h4>Accumulated Points:</h4> <%= user.points.toLocaleString() %></div>
+				<div class="personal_information">
+					<h4>Accumulated Points:</h4>
+					<%= user.points.toLocaleString() %>
+				</div>
 
-			<% if (Object.keys(loggedInUser).length > 0) { %> <% if (loggedInUser.role
-			== "admin") { %>
-			<strong><a href="/admin/products" target="_blank">Manage Products</a></strong>
-			<strong><a href="/admin/users" target="_blank">Manage Users</a></strong>
-			<strong><a href="/admin/orders" target="_blank">Manage Orders</a></strong>
-			<% } %> <% } %>
-			<div>
-				<button class="logout" onclick="logout()">Logout</button>
-			</div>
-		</div>
-	</form>
-	<h3>My Orders</h3>
-	<div class="orders">
-		<% if (orders.length > 0) { %>
-		<div class="order-list">
-			<% orders.forEach(order => { %>
-			<div class="order-card">
-				<%
-					const steps = ['cancelled', 'pending', 'confirmed', 'shipped', 'delivered'];
-					const currentStatus = order.status.toLowerCase();
-					const currentStep = steps.indexOf(currentStatus);
-				%>
-				<div class="stepper_wrapper">
-					<div class="stepper">
-						<% steps.forEach((step, index) => {
-							let statusClass = '';
-							if (currentStatus === 'cancelled') {
-								statusClass = (index === 0) ? 'step cancelled' : 'step future';
-							} else if (index === 0) {
-								statusClass = 'step future';
-							} else if (index < currentStep) {
-								statusClass = 'step done';
-							} else if (index === currentStep) {
-								statusClass = 'step active';
-							} else {
-								statusClass = 'step future';
-							}
-						%>
-							<% if (index !== 0) { %><div class="line"></div><% } %>
-							<div class="<%= statusClass %>">
-								<div class="circle"><%= index %></div>
-								<div class="label"><%= step.charAt(0).toUpperCase() + step.slice(1) %></div>
-							</div>
-						<% }); %>
-					</div>
-				</div>
-				<div class="order-header">
-					<div>
-						<p class="order-id"><strong>Order ID:</strong> <%= order._id %></p>
-					</div>
-				</div>
-				<div class="order-details">
-					<div class="items-list">
-						<% order.items.forEach((item, index) => { %>
-						<div class="item-card">
-							<% if (item.product && item.product.image) { %>
-							<img
-								src="<%= item.product.image[0] %>"
-								alt="<%= item.product.name %>"
-								class="product-image"
-							/>
+				<% if (Object.keys(loggedInUser).length> 0) { %> <% if (loggedInUser.role=="admin" ) { %>
+						<strong><a href="/admin/products" target="_blank">Manage Products</a></strong>
+						<strong><a href="/admin/users" target="_blank">Manage Users</a></strong>
+						<strong><a href="/admin/orders" target="_blank">Manage Orders</a></strong>
+						<% } %>
 							<% } %>
-							<div class="item-info">
-								<h4><%= item.product?.name || 'Product not found' %></h4>
-								<p>Quantity: <%= item.quantity %></p>
-								<p>Price per unit: <%= item.price.toFixed(2) %> BDT</p>
-								<% if (order.status.toLowerCase() === 'pending') { %>
-								<div class="summary-cancel">
-									<form
-										action="/order/<%= order._id %>/items/<%= item._id %>/delete"
-										method="POST"
-									>
-										<button class="cancelBtn">Cancel Item</button>
-									</form>
+								<div>
+									<button class="logout" onclick="logout()">Logout</button>
 								</div>
-								<% if (errors && errors.common) { %>
-								<p class="error show"><%= errors.common.msg %></p>
-								<% } %> <% } %>
-							</div>
+			</div>
+		</form>
+		<h3>My Orders</h3>
+		<div class="orders">
+			<% if (orders.length> 0) { %>
+				<div class="order-list">
+					<% orders.forEach(order=> { %>
+						<div class="order-card">
+							<% const steps=['cancelled', 'pending' , 'confirmed' , 'shipped' , 'delivered' ]; const
+								currentStatus=order.status.toLowerCase(); const
+								currentStep=steps.indexOf(currentStatus); %>
+								<div class="stepper_wrapper">
+									<div class="stepper">
+										<% steps.forEach((step, index)=> {
+											let statusClass = '';
+											if (currentStatus === 'cancelled') {
+											statusClass = (index === 0) ? 'step cancelled' : 'step future';
+											} else if (index === 0) {
+											statusClass = 'step future';
+											} else if (index < currentStep) { statusClass='step done' ; } else if
+												(index===currentStep) { statusClass='step active' ; } else {
+												statusClass='step future' ; } %>
+												<% if (index !==0) { %>
+													<div class="line"></div>
+													<% } %>
+														<div class="<%= statusClass %>">
+															<div class="circle">
+																<%= index %>
+															</div>
+															<div class="label">
+																<%= step.charAt(0).toUpperCase() + step.slice(1) %>
+															</div>
+														</div>
+														<% }); %>
+									</div>
+								</div>
+								<div class="order-header">
+									<div>
+										<p class="order-id"><strong>Order ID:</strong>
+											<%= order._id %>
+										</p>
+									</div>
+								</div>
+								<div class="order-details">
+									<div class="items-list">
+										<% order.items.forEach((item, index)=> { %>
+											<div class="item-card">
+												<% if (item.product && item.product.image) { %>
+													<img src="<%= item.product.image[0] %>"
+														alt="<%= item.product.name %>" class="product-image" />
+													<% } %>
+														<div class="item-info">
+															<h4>
+																<%= item.product?.name || 'Product not found' %>
+															</h4>
+															<p>Quantity: <%= item.quantity %>
+															</p>
+															<p>Price per unit: <%= item.price.toFixed(2) %> BDT</p>
+															<% if (order.status.toLowerCase()==='pending' ) { %>
+																<div class="summary-cancel">
+																	<form
+																		action="/order/<%= order._id %>/items/<%= item._id %>/delete"
+																		method="POST">
+																		<button class="cancelBtn">Cancel Item</button>
+																	</form>
+																</div>
+																<% if (errors && errors.common) { %>
+																	<p class="error show">
+																		<%= errors.common.msg %>
+																	</p>
+																	<% } %>
+																		<% } %>
+														</div>
+											</div>
+											<% }) %>
+									</div>
+
+									<div class="order-summary">
+										<div class="summary-item">
+											<span>Total Amount:</span>
+											<span>
+												<%= order.totalAmount.toFixed(2) %> BDT
+											</span>
+										</div>
+										<div class="summary-item">
+											<span>Payment Method:</span>
+											<span>
+												<%= order.payment_method %>
+											</span>
+										</div>
+										<div class="summary-item">
+											<span>Delivery Method:</span>
+											<span>
+												<%= order.deliveryMethod %>
+											</span>
+										</div>
+									</div>
+								</div>
+								<% if(order.message.length> 0) { %>
+									<div class="order_message">
+										<h3>Message: </h3>
+										<p>
+											<%= order.message %>
+										</p>
+									</div>
+									<% } %>
 						</div>
 						<% }) %>
-					</div>
-
-					<div class="order-summary">
-						<div class="summary-item">
-							<span>Total Amount:</span>
-							<span><%= order.totalAmount.toFixed(2) %> BDT</span>
-						</div>
-						<div class="summary-item">
-							<span>Payment Method:</span>
-							<span><%= order.payment_method %></span>
-						</div>
-						<div class="summary-item">
-							<span>Delivery Method:</span>
-							<span><%= order.deliveryMethod %></span>
-						</div>
-					</div>
 				</div>
-				<% if(order.message.length > 0) { %>
-					<div class="order_message">
-						<h3>Message: </h3>
-						<p><%= order.message %></p>
-					</div>
-				<% } %>
-			</div>
-			<% }) %>
+				<% } else { %>
+					<p class="no-orders">No orders found.</p>
+					<% } %>
 		</div>
-		<% } else { %>
-		<p class="no-orders">No orders found.</p>
-		<% } %>
 	</div>
-</div>
 
-<script>
-	const submitBtn = document.getElementById('submit_adress');
-	submitBtn.addEventListener('click', function (event) {
-		event.preventDefault();
-		const addresses = Array.from(document.querySelectorAll('.address'))
-			.map(textarea => textarea.value.trim())
-			.filter(val => val !== '');
-		if (addresses.length === 0) {
-			alert('Please enter a valid address.');
-			return;
+	<script>
+		const submitBtn = document.getElementById('submit_adress');
+		submitBtn.addEventListener('click', function (event) {
+			event.preventDefault();
+			const addresses = Array.from(document.querySelectorAll('.address'))
+				.map(textarea => textarea.value.trim())
+				.filter(val => val !== '');
+			if (addresses.length === 0) {
+				alert('Please enter a valid address.');
+				return;
+			}
+			fetch('/account/updateAdress', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ address: addresses }),
+			})
+				.then((response) => {
+					if (response.ok) {
+						window.location.reload();
+					}
+				})
+				.catch((error) => {
+					console.error(error.message);
+				});
+		});
+		const addButton = document.getElementById('addAddressButton');
+		const textareaHolder = document.getElementById('textareaHolder');
+		addButton.addEventListener('click', function () {
+			const t1 = document.createElement('textarea');
+			t1.setAttribute('name', 'address');
+			t1.classList.add('address');
+			textareaHolder.appendChild(t1);
+		});
+		function deleteAddress(event) {
+			const index = parseInt(event.target.dataset.index);
+			fetch('/account/deleteAddress', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ index }),
+			}).then((response) => {
+				if (response.ok) {
+					window.location.reload();
+				}
+			}).catch((error) => {
+				console.error(error.message);
+			});
 		}
-		fetch('/account/updateAdress', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ address: addresses }),
-		})
-		.then((response) => {
-			if (response.ok) {
-				alert('Address updated successfully!');
-				window.location.reload();
-			}
-		})
-		.catch((error) => {
-			console.error(error.message);
-		});
-	});
-	const addButton = document.getElementById('addAddressButton');
-	const textareaHolder = document.getElementById('textareaHolder');
-	addButton.addEventListener('click', function () {
-		const t1 = document.createElement('textarea');
-		t1.setAttribute('name', 'address');
-		t1.classList.add('address');
-		textareaHolder.appendChild(t1);
-	});
-	function deleteAddress(event){
-		const index = parseInt(event.target.dataset.index);
-		fetch('/account/deleteAddress', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ index }),
-		}).then((response) => {
-			if (response.ok) {
-				alert('Address deleted successfully!');
-				window.location.reload();
-			}
-		}).catch((error) => {
-			console.error(error.message);
-		});
-	}
-	function makeDefault(event) {
-		const index = parseInt(event.target.dataset.index);
-		fetch('/account/makeDefault', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ index }),
-		})
-		.then((response) => {
-			if (response.ok) {
-				alert('Default address updated successfully!');
-				window.location.reload();
-			} else {
-				alert('Failed to update default address');
-			}
-		})
-		.catch((error) => {
-			console.error(error.message);
-		});
-	}
-</script>
-<%- include('./partials/footer.ejs') %>
+		function makeDefault(event) {
+			const index = parseInt(event.target.dataset.index);
+			fetch('/account/makeDefault', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ index }),
+			})
+				.then((response) => {
+					if (response.ok) {
+						window.location.reload();
+					} else {
+						alert('Failed to update default address');
+					}
+				})
+				.catch((error) => {
+					console.error(error.message);
+				});
+		}
+	</script>
+	<%- include('./partials/footer.ejs') %>
