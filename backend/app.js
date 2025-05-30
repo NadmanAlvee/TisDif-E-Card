@@ -2,21 +2,25 @@
 const express = require("express");
 const compression = require("compression");
 const path = require("path");
+const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
 const app = express();
-const allowedOrigins = ["https://tisdifecard.com"];
+const allowedOrigins = ["https://tisdifecard.com", "http://localhost:8080"];
 app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.error(`CORS: Origin ${origin} not allowed`);
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 app.use(

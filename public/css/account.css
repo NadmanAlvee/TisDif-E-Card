@@ -1,31 +1,26 @@
 @import url("global.css");
-
 .stepper {
 	margin: 0;
 	margin-bottom: 50px;
 	width: 85%;
 	max-width: none;
 }
-
 body {
 	min-height: 100vh;
 }
-
 .container {
 	font-size: 16px;
 	padding: 20px;
 	min-height: 70vh;
-	margin: 0;
+	margin: 0 10vw;
 	margin-top: 80px;
 }
-
 h3 {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 10px;
 	min-width: 5%;
 }
-
 .profile {
 	position: relative;
 	display: flex;
@@ -37,17 +32,14 @@ h3 {
 	padding: 1.5rem;
 	border: 1px solid lightgray;
 }
-
 .profile a {
 	color: #0056b3;
 	padding: 5px;
 }
-
 .profile a:hover {
 	color: #002c5c;
 	transition: 0.5s;
 }
-
 .personal_information {
 	display: flex;
 	flex-direction: row;
@@ -56,26 +48,18 @@ h3 {
 	border-bottom: 1px solid #ddd;
 	overflow: auto;
 }
-
 .personal_information h4 {
 	width: 160px;
 }
-
 .addressContainer {
 	display: flex;
+	flex-direction: row;
 	align-items: flex-start;
-	flex-direction: column;
-	position: relative;
 }
-
 .addressContainer img {
 	width: 24px;
-	position: absolute;
-	top: 0;
-	right: 0;
 	transform: translateY(-2px);
 }
-
 .makeDefault {
 	font-size: 14px;
 	min-width: fit-content;
@@ -84,14 +68,13 @@ h3 {
 	transition: 0.3s linear;
 	padding: 4px;
 	background: white;
+	position: absolute;
 	right: 0;
 }
-
 .makeDefault:hover {
 	color: white;
 	background: #2d2269;
 }
-
 .personal_information #submit_adress {
 	height: 100%;
 	cursor: pointer;
@@ -100,12 +83,10 @@ h3 {
 	color: green;
 	border: 1px solid green;
 }
-
 .personal_information #submit_adress:hover {
 	color: white;
 	background-color: green;
 }
-
 .personal_information #addAddressButton {
 	height: 100%;
 	background: none;
@@ -115,18 +96,15 @@ h3 {
 	color: rgb(140, 0, 255);
 	border: 1px solid rgb(140, 0, 255);
 }
-
 .personal_information #addAddressButton:hover {
 	color: white;
 	background-color: rgb(140, 0, 255);
 }
-
 #textareaHolder {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 }
-
 textarea {
 	min-width: 700px;
 	padding: 5px 5px;
@@ -134,7 +112,6 @@ textarea {
 	border: 1px solid #afafaf;
 	margin-bottom: 5px;
 }
-
 .logout {
 	display: flex;
 	flex-direction: row;
@@ -152,12 +129,9 @@ textarea {
 	background-color: rgba(207, 0, 0, 0.068);
 	max-width: 100%;
 }
-
 .logout:hover {
 	border: none;
-}
-
-/* order card */
+} /* order card */
 .order-card {
 	border-radius: 10px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -165,7 +139,6 @@ textarea {
 	padding: 2rem;
 	border: 1px solid lightgray;
 }
-
 .order-header {
 	display: flex;
 	justify-content: space-between;
@@ -174,7 +147,6 @@ textarea {
 	padding-bottom: 1rem;
 	margin-bottom: 1rem;
 }
-
 .order-status {
 	padding: 0.5rem 1rem;
 	border-radius: 20px;
@@ -182,13 +154,11 @@ textarea {
 	text-transform: uppercase;
 	font-size: 0.8rem;
 }
-
 .summary-cancel {
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;
 }
-
 .cancelBtn {
 	border: 2px solid red;
 	color: red;
@@ -196,14 +166,12 @@ textarea {
 	margin: 8px;
 	border-radius: 6px;
 }
-
 .items-list {
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-
 .item-card {
 	display: flex;
 	gap: 1rem;
@@ -211,29 +179,24 @@ textarea {
 	width: 312px;
 	border-bottom: 1px solid #ddd;
 }
-
 .product-image {
 	width: 80px;
 	height: 80px;
 	object-fit: contain;
 	border-radius: 4px;
 }
-
 .item-info {
 	flex: 1;
 }
-
 .item-info h4 {
 	margin: 0 0 0.5rem 0;
 	color: var(--text-color);
 }
-
 .variant {
 	color: #666;
 	font-size: 0.9rem;
 	margin-bottom: 0.5rem;
 }
-
 .order-summary {
 	margin: 2rem 0;
 	padding: 1rem 0;
@@ -242,18 +205,15 @@ textarea {
 	flex-direction: column;
 	border-bottom: 1px solid #eee;
 }
-
 .summary-item {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 0.5rem;
 	padding: 0.3rem 0;
 }
-
 .summary-item span:first-child {
 	color: var(--text-color);
 }
-
 .summary-item span:last-child {
 	font-weight: bold;
 	color: var(--text-color);
@@ -263,7 +223,6 @@ textarea {
 	display: flex;
 	justify-content: space-between;
 }
-
 .order_message p {
 	line-height: 30px;
 	max-width: 40%;
@@ -276,20 +235,16 @@ textarea {
 	padding: 2rem;
 	color: #666;
 }
-
 @media (max-width: 768px) {
 	.stepper {
 		width: 100%;
 	}
-
 	body {
 		margin: 0;
 	}
-
 	.container {
 		font-size: 15px;
 	}
-
 	.cancelBtn {
 		padding: 4px 6px;
 	}
@@ -298,16 +253,13 @@ textarea {
 		flex-direction: column;
 		align-items: flex-start;
 	}
-
 	.order_message span {
 		text-align: left;
 	}
-
 	.personal_information {
 		flex-direction: column;
 	}
-
 	textarea {
-		min-width: 285px;
+		min-width: 200px;
 	}
 }

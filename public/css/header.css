@@ -1,5 +1,4 @@
 @import url("global.css");
-
 * {
 	margin: 0;
 	padding: 0;
@@ -10,7 +9,6 @@
 	scroll-padding-top: 2rem;
 	scroll-behavior: smooth;
 }
-
 header {
 	user-select: none;
 	-webkit-user-select: none;
@@ -30,9 +28,7 @@ header {
 	box-shadow: 0 0px 7px rgba(0, 0, 0, 0.3);
 	backdrop-filter: blur(30px);
 	-webkit-backdrop-filter: blur(30px);
-}
-
-/* error div */
+} /* error div */
 .common-error-div {
 	position: fixed;
 	top: 70px;
@@ -43,7 +39,6 @@ header {
 	transition: top 0.5s linear;
 	background: #ff2222;
 }
-
 .common-error-msg {
 	display: flex;
 	font-size: 20px;
@@ -51,20 +46,16 @@ header {
 	color: white;
 	align-items: center;
 	justify-content: center;
-}
-
-/* Navbar */
+} /* Navbar */
 .logo {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
-
 .logo img {
 	max-width: 38px;
 }
-
 .logo p {
 	font-size: 1rem;
 	min-width: fit-content;
@@ -75,13 +66,11 @@ header {
 	padding: 1rem;
 	text-wrap-mode: nowrap;
 }
-
 .navbar {
 	display: flex;
 	align-items: center;
 	column-gap: 0.5rem;
 }
-
 .navbar a {
 	position: relative;
 	cursor: pointer;
@@ -91,7 +80,6 @@ header {
 	padding: 1rem;
 	text-wrap: nowrap;
 }
-
 .navbar a::after {
 	content: "";
 	position: absolute;
@@ -103,12 +91,9 @@ header {
 	transition: 0.5s;
 	transform: translateX(-50%);
 }
-
 .navbar a:hover::after {
 	width: 100%;
-}
-
-/* Hamburger Menu */
+} /* Hamburger Menu */
 .hamburger {
 	flex-direction: column;
 	justify-content: space-between;
@@ -118,7 +103,6 @@ header {
 	position: relative;
 	z-index: 1002;
 }
-
 .hamburger .bar {
 	height: 4px;
 	width: 100%;
@@ -126,27 +110,20 @@ header {
 	transition: all 0.4s ease-in-out;
 	transform-origin: center;
 }
-
 .hamburger.active .bar:nth-child(1) {
 	transform: rotate(-45deg) translate(-14.2px, 0);
 }
-
 .hamburger.active .bar:nth-child(2) {
 	opacity: 0;
 }
-
 .hamburger.active .bar:nth-child(3) {
 	transform: rotate(45deg) translate(-14px, 0);
-}
-
-/* Account Container */
+} /* Account Container */
 .account-container {
 	display: flex;
 	gap: 30px;
 	align-items: center;
-}
-
-/* search */
+} /* search */
 #search-div {
 	flex-direction: row;
 	column-gap: 25px;
@@ -154,31 +131,27 @@ header {
 	align-items: center;
 	justify-content: center;
 }
-
 .searchBtn {
 	background: none;
 	border: none;
 	cursor: pointer;
 }
-
 .searchBtn img {
 	width: 30px;
 }
-
 .searchBar {
 	opacity: 0;
 	position: fixed;
 	top: -35vh;
 	left: 0;
 	width: 100%;
-	transition: 0.2s linear;
+	transition: 0.1s linear;
 	height: 35vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
 }
-
 .searchBar.active {
 	top: 0;
 	opacity: 1;
@@ -186,12 +159,10 @@ header {
 	box-shadow: 0 0px 20px rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(15px);
 }
-
-.searchBar.active~* {
+.searchBar.active ~ * {
 	transition: 0.3s linear;
 	filter: blur(2px);
 }
-
 .searchBar input {
 	background: none;
 	font-size: 16px;
@@ -204,52 +175,42 @@ header {
 	border-radius: 30px;
 	border: 1px solid var(--text-color);
 }
-
 .searchBar input::placeholder {
 	color: var(--text-color);
 	font-size: 14px;
 }
-
 header.searchMode {
 	box-shadow: none;
 	background: #fff;
 }
-
 .global_search {
 	display: flex;
 	flex-direction: column;
 	margin-top: 60px;
 }
-
 .global_search_ql h2 {
 	padding: 6px 0;
 	font-size: 14px;
 	font-weight: lighter;
 }
-
 .global_search_ql {
 	padding: 10px;
 	font-size: 14px;
 }
-
 .global_search_ql ol li {
 	padding: 8px 0;
 }
-
 .global_search_ql ol li a {
 	display: flex;
 	font-weight: 600;
 	align-items: center;
 	text-decoration: underline;
 }
-
 .global_search_ql ol li a img {
 	margin-right: 5px;
 	width: 14px;
 	height: auto;
-}
-
-/* Cart Icon */
+} /* Cart Icon */
 .cart-icon {
 	position: relative;
 	display: flex;
@@ -257,11 +218,9 @@ header.searchMode {
 	gap: 8px;
 	font-size: var(--font-size);
 }
-
 .cart-icon img {
 	width: 30px;
 }
-
 .cart-badge {
 	position: absolute;
 	top: -3px;
@@ -272,28 +231,22 @@ header.searchMode {
 	font-weight: 700;
 	padding: 2px 6px;
 	border-radius: 50%;
-}
-
-/* Profile Icon */
+} /* Profile Icon */
 .profile-icon {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	font-size: var(--font-size);
 }
-
 .profile-icon img {
 	width: 29px;
 	position: relative;
 	top: -1px;
-}
-
-/* Profile Dropdown */
+} /* Profile Dropdown */
 .profile-container {
 	position: relative;
 	display: inline-block;
 }
-
 #user-info p,
 #user-info {
 	padding: 12px 15px;
@@ -302,18 +255,15 @@ header.searchMode {
 	display: flex;
 	flex-direction: column;
 }
-
 #user-info a {
 	color: #0056b3;
 	padding: 12px 15px;
 	font-weight: 700;
 }
-
 #user-info a:hover {
 	color: #002c5c;
 	transition: 0.5s;
 }
-
 .menu-dropdown {
 	display: none;
 	position: absolute;
@@ -326,11 +276,9 @@ header.searchMode {
 	min-width: 200px;
 	z-index: 100;
 }
-
 .menu-dropdown.active {
 	display: block;
 }
-
 #login-button,
 #logout-button {
 	width: 100%;
@@ -342,26 +290,21 @@ header.searchMode {
 	cursor: pointer;
 	margin-top: 10px;
 }
-
 #login-button:hover,
 #logout-button:hover {
 	background: linear-gradient(20deg, #00000088, hsl(0deg 0% 0% / 80%));
 	transition: ease 1s;
-}
-
-/* Visible only on mobile devices */
+} /* Visible only on mobile devices */
 @media (max-width: 1280px) {
 	header {
 		height: 60px;
 		padding: 0 30px;
 	}
-
 	.common-error-div {
 		top: 60px;
 		height: 60px;
 		padding: 0 30px;
 	}
-
 	.navbar {
 		position: fixed;
 		flex-direction: column;
@@ -377,24 +320,19 @@ header.searchMode {
 		row-gap: 70px;
 		justify-content: center;
 	}
-
 	.navbar.active {
 		top: 0;
 		height: 100vh;
 	}
-
 	.global_search {
 		width: 80%;
 	}
-
 	.searchBar input {
 		width: 100%;
 	}
-
 	.account-container {
 		display: none;
 	}
-
 	.mobile-container {
 		user-select: none;
 		-webkit-user-select: none;
@@ -415,7 +353,6 @@ header.searchMode {
 		z-index: 999;
 		box-shadow: 0 0px 50px rgba(0, 0, 0, 0.08);
 	}
-
 	.mobile-cart-icon {
 		position: relative;
 		display: flex;
@@ -423,13 +360,11 @@ header.searchMode {
 		gap: 8px;
 		font-size: var(--font-size);
 	}
-
 	.mobile-home-icon img,
 	.mobile-cart-icon img,
 	.mobile-profile-icon img {
 		width: 26px;
 	}
-
 	.mobile-cart-badge {
 		position: absolute;
 		top: -3px;
@@ -441,23 +376,19 @@ header.searchMode {
 		padding: 2px 6px;
 		border-radius: 50%;
 	}
-
 	#search-div,
 	.hamburger {
 		display: flex;
 	}
-
 	.searchBar {
 		top: -35vh;
 		height: 35vh;
 	}
 }
-
 @media (min-width: 1281px) {
 	.mobile-container {
 		display: none;
 	}
-
 	#search-div {
 		display: none;
 	}
