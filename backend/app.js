@@ -7,7 +7,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cookieParser = require("cookie-parser");
 const app = express();
-const allowedOrigins = ["https://tisdifecard.com", "http://localhost:8080"];
+const allowedOrigins = [
+  "https://tisdifecard.com",
+  "http://tisdifecard.com",
+  "https://www.tisdifecard.com",
+  "http://www.tisdifecard.com",
+  "http://localhost:8080",
+];
 app.use(
   cors({
     origin: (origin, callback) => {
