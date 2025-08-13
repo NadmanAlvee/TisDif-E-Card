@@ -39,6 +39,7 @@ app.use(
 const checkAdmin = require("./middlewares/checkAdmin");
 const findSlides = require("./middlewares/utils/findSlides");
 const { checkLogin } = require("./middlewares/common/checkLogin");
+const sessionInfo = require("./middlewares/common/sessionInfo");
 const connectDB = require("./MongooseConfig");
 const {
 	errorHandler,
@@ -95,17 +96,17 @@ app.get("/sitemap.xml", async (req, res) => {
 });
 
 // Frontend Routes
-app.use("/", checkLogin, findSlides, homepageRouter);
-app.use("/login", loginRouter);
+app.use("/", sessionInfo, checkLogin, findSlides, homepageRouter);
+app.use("/login", sessionInfo, loginRouter);
 app.use("/logout", logout);
-app.use("/admin", checkLogin, findSlides, checkAdmin, adminRouter);
-app.use("/product", productPageRouter);
-app.use("/search", searchRouter);
-app.use("/account", checkLogin, accountRouter);
-app.use("/trackOrder", checkLogin, trackOrderRouter);
-app.use("/checkout", checkLogin, checkoutRouter);
-app.use("/cart", checkLogin, cartRouter);
-app.use("/order", checkLogin, orderRouter);
+app.use("/admin", sessionInfo, checkLogin, findSlides, checkAdmin, adminRouter);
+app.use("/product", sessionInfo, productPageRouter);
+app.use("/search", sessionInfo, searchRouter);
+app.use("/account", sessionInfo, checkLogin, accountRouter);
+app.use("/trackOrder", sessionInfo, checkLogin, trackOrderRouter);
+app.use("/checkout", sessionInfo, checkLogin, checkoutRouter);
+app.use("/cart", sessionInfo, checkLogin, cartRouter);
+app.use("/order", sessionInfo, checkLogin, orderRouter);
 
 // Error handling
 app.use(notFoundHandler); // 404 page

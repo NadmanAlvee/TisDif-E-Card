@@ -7,7 +7,7 @@ const createError = require("http-errors");
 const User = require("../models/User");
 
 // get login page
-async function getLogin(req, res, next) {
+async function getLogin(req, res) {
 	const page_title = "TisDif e-Card | Login";
 	res.render("login_page.ejs", {
 		loggedInUser: {},
@@ -16,7 +16,7 @@ async function getLogin(req, res, next) {
 	});
 }
 
-async function login(req, res, next) {
+async function login(req, res) {
 	try {
 		// Find a user by email or mobile
 		const user = await User.findOne({

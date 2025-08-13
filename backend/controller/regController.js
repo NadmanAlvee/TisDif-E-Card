@@ -8,7 +8,7 @@ const Cart = require("../models/Cart");
 const User = require("../models/User");
 
 // Register User
-async function register(req, res, next) {
+async function register(req, res) {
 	try {
 		const { username, email, mobile, new_password, country_code } = req.body;
 

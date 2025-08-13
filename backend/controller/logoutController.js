@@ -1,4 +1,4 @@
-const logout = (req, res, next) => {
+const logout = (req, res) => {
 	res.clearCookie(process.env.COOKIE_NAME); // JWT cookie
 	res.redirect("/");
 };
