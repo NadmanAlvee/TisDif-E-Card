@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 				page_title,
 			});
 		} catch (error) {
+			console.log(error);
 			res.status(500).send("Internal Server Error");
 		}
 	} else {
@@ -31,6 +32,7 @@ router.get("/", async (req, res) => {
 				page_title,
 			});
 		} catch (error) {
+			console.log(error);
 			res.status(500).send("Internal Server Error");
 		}
 	}

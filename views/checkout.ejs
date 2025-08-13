@@ -1,34 +1,39 @@
 <%- include('./partials/header.ejs') %>
 <link rel="stylesheet" href="/css/checkout.css" />
-<link rel="stylesheet" href="/css/progressStepper.css">
+<link rel="stylesheet" href="/css/progressStepper.css" />
 
 <div class="stepper_wrapper">
-    <div class="stepper">
-        <!-- Step 1 -->
-        <div class="step done">
-        <div class="circle">1</div>
-        <div class="label">Order Cart</div>
-        </div>
+	<div class="stepper">
+		<!-- Step 1 -->
+		<div class="step done">
+			<div class="circle">1</div>
+			<div class="label">Order Cart</div>
+		</div>
 
-        <div class="line"></div>
+		<div class="line"></div>
 
-        <!-- Step 2 -->
-        <div class="step active">
-        <div class="circle">2</div>
-        <div class="label">Checkout</div>
-        </div>
+		<!-- Step 2 -->
+		<div class="step active">
+			<div class="circle">2</div>
+			<div class="label">Checkout</div>
+		</div>
 
-        <div class="line"></div>
+		<div class="line"></div>
 
-        <!-- Step 3 -->
-        <div class="step future">
-        <div class="circle">3</div>
-        <div class="label">Confirmation</div>
-        </div>
-    </div>
+		<!-- Step 3 -->
+		<div class="step future">
+			<div class="circle">3</div>
+			<div class="label">Confirmation</div>
+		</div>
+	</div>
 </div>
 
-<form id="checkout-form" action="/order/checkout" method="POST" enctype="multipart/form-data">
+<form
+	id="checkout-form"
+	action="/order/checkout"
+	method="POST"
+	enctype="multipart/form-data"
+>
 	<div class="container">
 		<h2 class="checkout-heading">Checkout</h2>
 		<div class="container-wrapper">
@@ -38,45 +43,21 @@
 				<div class="personal-info">
 					<div class="form-group">
 						<label for="order_fullName">Full Name</label>
-						<input
-							type="text"
-							name="order_fullName"
-							placeholder=" Name: "
-							spellcheck="false"
-							id="fullName"
-							required
-							<% if(user !== undefined){ %>
-								value="<%= user.username %>"
-							<% } %>
-						/>
+						<input type="text" name="order_fullName" placeholder=" Name: "
+						spellcheck="false" id="fullName" required <% if(user !== undefined){
+						%> value="<%= user.username %>" <% } %> />
 					</div>
 					<div class="form-group">
 						<label for="order_mobile">Mobile Number</label>
-						<input
-							type="text"
-							name="order_mobile"
-							spellcheck="false"
-							placeholder="delivery phone: "
-							id="mobile"
-							required
-							<% if(user !== undefined){ %>
-							value="<%= user.mobile %>"
-							<% } %>
-						/>
+						<input type="text" name="order_mobile" spellcheck="false"
+						placeholder="delivery phone: " id="mobile" required <% if(user !==
+						undefined){ %> value="<%= user.mobile %>" <% } %> />
 					</div>
 					<div class="form-group">
 						<label for="order_email">Email Address</label>
-						<input
-							type="email"
-							name="order_email"
-							spellcheck="false"
-							placeholder="delivery email: "
-							id="email"
-							required
-							<% if(user !== undefined){ %>
-							value="<%= user.email %>"
-							<% } %>
-						/>
+						<input type="email" name="order_email" spellcheck="false"
+						placeholder="delivery email: " id="email" required <% if(user !==
+						undefined){ %> value="<%= user.email %>" <% } %> />
 					</div>
 					<div class="form-group">
 						<label for="order_address">Delivery Address</label>
@@ -94,27 +75,51 @@
 					<h3 class="left-h3">PAYMENT DETAILS</h3>
 
 					<div class="checkout_notice">
-						<p>To confirm orders, outside Dhaka: send money 140Tk and send Transaction ID & Last 4 digit.</p>
-						<p>Inside Dhaka: send money 80Tk  and send Transaction ID & Last 4 digit.</p>
+						<p>
+							To confirm orders, outside Dhaka: send money 140Tk and send
+							Transaction ID & Last 4 digit.
+						</p>
+						<p>
+							Inside Dhaka: send money 80Tk and send Transaction ID & Last 4
+							digit.
+						</p>
 						<p>please make full payment for giftcard orders</p>
 					</div>
-					
+
 					<div class="payment-div">
 						<label>Select A Payment Method</label>
 						<div class="payment_process">
 							<!-- Online Payment Option -->
 							<div class="options">
 								<label for="online_payment">
-										<img src="/images/icons/online_payment.png" alt="online payment">
-									<input type="radio" id="online_payment" name="payment_method" value="online payment" required>
+									<img
+										src="/images/icons/online_payment.png"
+										alt="online payment"
+									/>
+									<input
+										type="radio"
+										id="online_payment"
+										name="payment_method"
+										value="online payment"
+										required
+									/>
 									<span>Online Payment</span>
 								</label>
 							</div>
 							<!-- Cash on Delivery Option -->
 							<div class="options">
 								<label for="cash_on_delivery">
-										<img src="/images/icons/cash_on_delivery.png" alt="cash on delivery">
-									<input type="radio" id="cash_on_delivery" name="payment_method" value="cash on delivery" required>
+									<img
+										src="/images/icons/cash_on_delivery.png"
+										alt="cash on delivery"
+									/>
+									<input
+										type="radio"
+										id="cash_on_delivery"
+										name="payment_method"
+										value="cash on delivery"
+										required
+									/>
 									<span>Cash on Delivery</span>
 								</label>
 							</div>
@@ -123,53 +128,87 @@
 						<div class="payment_process">
 							<div class="options">
 								<label for="bkash">
-										<img src="/images/icons/bkash.png" alt="bkash">
-									<input type="radio" id="bkash" name="billing_method" value="bkash" >
+									<img src="/images/icons/bkash.png" alt="bkash" />
+									<input
+										type="radio"
+										id="bkash"
+										name="billing_method"
+										value="bkash"
+									/>
 									<span>Bkash</span>
 								</label>
 							</div>
 							<div class="options">
 								<label for="nagad">
-										<img src="/images/icons/nagad.png" alt="nagad">
-									<input type="radio" id="nagad" name="billing_method" value="nagad" >
+									<img src="/images/icons/nagad.png" alt="nagad" />
+									<input
+										type="radio"
+										id="nagad"
+										name="billing_method"
+										value="nagad"
+									/>
 									<span>Nagad</span>
 								</label>
 							</div>
 							<div class="options">
 								<label for="city_bank">
-										<img src="/images/icons/city_bank.png" alt="city_bank">
-									<input type="radio" id="city_bank" name="billing_method" value="city_bank" >
+									<img src="/images/icons/city_bank.png" alt="city_bank" />
+									<input
+										type="radio"
+										id="city_bank"
+										name="billing_method"
+										value="city_bank"
+									/>
 									<span>City Bank</span>
 								</label>
 							</div>
 							<div class="options">
 								<label for="pubali_bank">
-										<img src="/images/icons/pubali_bank.png" alt="pubali_bank">
-									<input type="radio" id="pubali_bank" name="billing_method" value="pubali_bank" >
+									<img src="/images/icons/pubali_bank.png" alt="pubali_bank" />
+									<input
+										type="radio"
+										id="pubali_bank"
+										name="billing_method"
+										value="pubali_bank"
+									/>
 									<span>Pubali Bank</span>
 								</label>
 							</div>
 							<div class="options">
 								<label for="dbbl">
-										<img src="/images/icons/dbbl.png" alt="dbbl">
-									<input type="radio" id="dbbl" name="billing_method" value="dbbl" >
+									<img src="/images/icons/dbbl.png" alt="dbbl" />
+									<input
+										type="radio"
+										id="dbbl"
+										name="billing_method"
+										value="dbbl"
+									/>
 									<span>Dutch Bangla Bank Ltd</span>
 								</label>
 							</div>
 							<div class="options">
 								<label for="standard_chartered_bank">
-										<img src="/images/icons/standard_chartered_bank.png" alt="standard_chartered_bank">
-									<input type="radio" id="standard_chartered_bank" name="billing_method" value="standard_chartered_bank" >
+									<img
+										src="/images/icons/standard_chartered_bank.png"
+										alt="standard_chartered_bank"
+									/>
+									<input
+										type="radio"
+										id="standard_chartered_bank"
+										name="billing_method"
+										value="standard_chartered_bank"
+									/>
 									<span>Standard Chartered Bank</span>
 								</label>
 							</div>
 						</div>
 
-						<p class="note">*Cash on delivery is not applicable for GiftCard orders.</p>
+						<p class="note">
+							*Cash on delivery is not applicable for GiftCard orders.
+						</p>
 
 						<div class="payment-option">
-							<ul id="pay">
-							</ul>
+							<ul id="pay"></ul>
 						</div>
 					</div>
 
@@ -278,11 +317,15 @@
 						</li>
 						<li id="grandTotal-div">
 							<strong>Grand Total:</strong>
-							<strong name="grand_total"><%= grand_total.toLocaleString() %> BDT</strong>
+							<strong name="grand_total"
+								><%= grand_total.toLocaleString() %> BDT</strong
+							>
 						</li>
 						<li>
-							<input type="checkbox" name="use_Points" value="yes">
-							<div class="use_points">USE <%= user.points.toLocaleString() %> POINTS</div>
+							<input type="checkbox" name="use_Points" value="yes" />
+							<div class="use_points">
+								USE <%= user.points.toLocaleString() %> POINTS
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -295,7 +338,9 @@
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
 		// Update the grand total when the checkbox is checked/unchecked
-		const usePointsCheckbox = document.querySelector('input[name="use_Points"]');
+		const usePointsCheckbox = document.querySelector(
+			'input[name="use_Points"]'
+		);
 		const grandTotalElement = document.getElementById("grandTotal-div");
 		usePointsCheckbox.addEventListener("change", function () {
 			if (this.checked) {
@@ -326,54 +371,58 @@
 	});
 
 	document.querySelectorAll(`input[name="payment_method"]`).forEach((radio) => {
-		radio.addEventListener('change', () => {
-			document.querySelectorAll(`input[name="payment_method"]`).forEach((input) => {
-				input.closest('.options').classList.remove('selected');
-			});
-			radio.closest('.options').classList.add('selected');
+		radio.addEventListener("change", () => {
+			document
+				.querySelectorAll(`input[name="payment_method"]`)
+				.forEach((input) => {
+					input.closest(".options").classList.remove("selected");
+				});
+			radio.closest(".options").classList.add("selected");
 		});
 	});
-	
+
 	document.querySelectorAll(`input[name="billing_method"]`).forEach((radio) => {
-		radio.addEventListener('change', () => {
-			document.querySelectorAll(`input[name="billing_method"]`).forEach((input) => {
-				input.closest('.options').classList.remove('selected');
-			});
-			radio.closest('.options').classList.add('selected');
+		radio.addEventListener("change", () => {
+			document
+				.querySelectorAll(`input[name="billing_method"]`)
+				.forEach((input) => {
+					input.closest(".options").classList.remove("selected");
+				});
+			radio.closest(".options").classList.add("selected");
 			let ul = document.getElementById("pay");
 			ul.style.border = "1px solid rgb(255, 166, 0)";
-			let value = radio.closest('input').value;
-			if(value === "bkash"){
+			let value = radio.closest("input").value;
+			if (value === "bkash") {
 				ul.innerHTML = `<li>
 									bKash Send Money to 
 									01715506304 or 01571169254
-								</li>`
-			} else if(value === "nagad"){
+								</li>`;
+			} else if (value === "nagad") {
 				ul.innerHTML = `<li>
 									Send money to Nagad: 
 									01715506304
-								</li>`
-			} else if(value === "city_bank"){
+								</li>`;
+			} else if (value === "city_bank") {
 				ul.innerHTML = `<li>
 									The City Bank Current A/C: 
 									Account Number: 1453074816001
 									Account Name: TIS DIF E CARD 
 									Branch Name: Karwan Bazar Branch
-								</li>`
-			} else if(value === "pubali_bank"){
+								</li>`;
+			} else if (value === "pubali_bank") {
 				ul.innerHTML = `<li>
 									Pubali Bank PLC
 									Account Name: TIS DIF E CARD
 									Account Number: 2438901052620
 									Branch Name: Naya Paltan
-								</li>`
-			} else if(value === "dbbl"){
+								</li>`;
+			} else if (value === "dbbl") {
 				ul.innerHTML = `<li>
 									DBBL Current Account: 1261100044893
 									Account Name: TisDif e-Card
 									Branch Name: Elephant Road
-								</li>`
-			} else if(value === "standard_chartered_bank"){
+								</li>`;
+			} else if (value === "standard_chartered_bank") {
 				ul.innerHTML = `<li>
 									Bank Transfer to:
 									Standard Chartered Bank
@@ -382,10 +431,9 @@
 									Branch Name: Gulshan
 									SWIFT CODE: SCBLBDDX
 									Routing Number: 215261726
-								</li>`
+								</li>`;
 			}
 		});
 	});
-
 </script>
 <%- include('./partials/footer.ejs') %>

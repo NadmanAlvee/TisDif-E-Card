@@ -28,6 +28,10 @@ const checkoutDetails = async (req, res, userId) => {
 		const validItems = populatedItems.filter((item) => item !== null);
 		return {
 			user: {
+				username: "",
+				mobile: "",
+				email: "",
+				address: [""],
 				points: 0,
 			},
 			cartItems: validItems,
