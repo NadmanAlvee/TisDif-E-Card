@@ -5,7 +5,6 @@ const createError = require("http-errors");
 
 // internalimports
 const User = require("../models/User");
-const Cart = require("../models/Cart");
 
 // get login page
 async function getLogin(req, res, next) {
@@ -41,12 +40,12 @@ async function login(req, res, next) {
 				};
 
 				const token = jwt.sign(userObject, process.env.JWT_SECRET, {
-					expiresIn: process.env.JWT_EXPIRY || "1d", // Default to 1 day if JWT_EXPIRY is not set
+					expiresIn: "7d",
 				});
 
 				// Set cookie with the token
 				res.cookie(process.env.COOKIE_NAME, token, {
-					maxAge: 86400000,
+					maxAge: 7 * 24 * 60 * 60 * 1000,
 					httpOnly: true,
 					secure: process.env.NODE_ENV === "production", // enable in production
 					signed: true,

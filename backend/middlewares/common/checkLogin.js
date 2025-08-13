@@ -18,6 +18,7 @@ const checkLogin = async (req, res, next) => {
 		}
 	}
 	if (!cookies) {
+		res.locals.loggedInUser = {};
 		next();
 	}
 };

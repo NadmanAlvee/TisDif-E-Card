@@ -1,4 +1,3 @@
-const createHttpError = require("http-errors");
 const Cart = require("../../models/Cart");
 const app = {};
 

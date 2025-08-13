@@ -28,7 +28,7 @@
 			<div class="cats">
 				<a href="/search?searchQuery=">
 					<div class="inner-cats">
-						<img src="/images/icons/product.png" alt="product"/>
+						<img src="/images/icons/product.png" alt="product" />
 						<p>All Products</p>
 					</div>
 				</a>
@@ -36,7 +36,7 @@
 			<div class="cats">
 				<a href="/trackOrder">
 					<div class="inner-cats">
-						<img src="/images/icons/track_order.png" alt="track-order"/>
+						<img src="/images/icons/track_order.png" alt="track-order" />
 						<p>Track Orders</p>
 					</div>
 				</a>
@@ -44,7 +44,7 @@
 			<div class="cats">
 				<a href="/search?searchQuery=iphones">
 					<div class="inner-cats">
-						<img src="/images/icons/iphone.png" alt="iphone"/>
+						<img src="/images/icons/iphone.png" alt="iphone" />
 						<p>iPhones</p>
 					</div>
 				</a>
@@ -52,7 +52,7 @@
 			<div class="cats">
 				<a href="/search?searchQuery=giftcards">
 					<div class="inner-cats">
-						<img src="/images/icons/gift_card.png" alt="gift-card"/>
+						<img src="/images/icons/gift_card.png" alt="gift-card" />
 						<p>GiftCards</p>
 					</div>
 				</a>
@@ -60,7 +60,7 @@
 			<div class="cats">
 				<a href="/search?searchQuery=accessories">
 					<div class="inner-cats">
-						<img src="/images/icons/external_charger.png" alt="Accessories"/>
+						<img src="/images/icons/external_charger.png" alt="Accessories" />
 						<p>Accessories</p>
 					</div>
 				</a>
@@ -68,18 +68,17 @@
 			<div class="cats">
 				<a href="search?searchQuery=&offers=true">
 					<div class="inner-cats">
-						<img src="/images/icons/discount.png" alt="Offers"/>
+						<img src="/images/icons/discount.png" alt="Offers" />
 						<p>Offers</p>
 					</div>
 				</a>
-			</div>			
+			</div>
 		</div>
 	</div>
 
 	<!-- Products Sections -->
-	<% const categories = ["iphones", "giftcards", "accessories"]; %>
-	
-	<% categories.forEach((category) => { const categoryProducts =
+	<% const categories = ["iphones", "giftcards", "accessories"]; %> <%
+	categories.forEach((category) => { const categoryProducts =
 	products.filter(product => product.category === category); if
 	(categoryProducts.length > 0) { %>
 	<div class="sections" id="<%= category %>">
@@ -92,8 +91,8 @@
 			</p>
 		</div>
 		<div class="product-container">
-			<% categoryProducts.forEach(product => { %>
-			<%- include('partials/product-card', { product }) %> <% }) %>
+			<% categoryProducts.forEach(product => { %> <%-
+			include('partials/product-card', { product }) %> <% }) %>
 		</div>
 	</div>
 	<% } }) %>

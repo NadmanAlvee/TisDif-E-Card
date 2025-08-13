@@ -56,7 +56,7 @@ async function register(req, res, next) {
 
 		// set cookie
 		res.cookie(process.env.COOKIE_NAME, token, {
-			maxAge: 86400000,
+			maxAge: 7 * 24 * 60 * 60 * 1000,
 			httpOnly: true,
 			secure: process.env.NODE_ENV === "production", // enable in production
 			signed: true,
